@@ -36,6 +36,8 @@ func getMysqlConnectString()string{
 	pd:=viper.Get("mysql.password")
 	dbName:=viper.Get("mysql.databaseName")
 	connectString:=fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8&parseTime=True&loc=Local",un,pd,hostname,port,dbName)
+	fmt.Print("mysql connect string is -->")
+	fmt.Println(connectString)
 	return connectString
 }
 func main() {
@@ -48,7 +50,7 @@ func main() {
 		log.Println("read config error",err)
 	}
 
-	fmt.Println(viper.Get("mysql.username"))
+	//fmt.Println(viper.Get("mysql.username"))
 	
 	//db, err = gorm.Open("sqlite3", "./wizz-homepage-backend.db")
 	db, err = gorm.Open("mysql", getMysqlConnectString())
