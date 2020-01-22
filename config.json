@@ -1,0 +1,9 @@
+{
+  "mysql": {
+    "hostname": "like ali.117503445.top",
+    "port": 3306,
+    "username": "Your Database username",
+    "password": "Your Database password",
+    "databaseName": "wizzhomepage"
+  }
+}
