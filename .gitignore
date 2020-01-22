@@ -18,3 +18,4 @@
 *.db
 
 /out
+/config.json
