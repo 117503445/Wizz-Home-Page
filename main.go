@@ -1,6 +1,8 @@
 package main
 
 import (
+	"Wizz-homepage-go/Global"
+	story "Wizz-homepage-go/apis"
 	"Wizz-homepage-go/models"
 	"fmt"
 	jwt "github.com/appleboy/gin-jwt/v2"
@@ -12,9 +14,6 @@ import (
 	"log"
 	"time"
 )
-
-var db *gorm.DB
-
 
 type login struct {
 	Username string `form:"username" json:"username" binding:"required"`
@@ -29,13 +28,14 @@ type User struct {
 }
 
 var identityKey = "id"
-func getMysqlConnectString()string{
-	hostname:=viper.Get("mysql.hostname")
-	port:=viper.Get("mysql.port")
-	un:=viper.Get("mysql.username")
-	pd:=viper.Get("mysql.password")
-	dbName:=viper.Get("mysql.databaseName")
-	connectString:=fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8&parseTime=True&loc=Local",un,pd,hostname,port,dbName)
+
+func getMysqlConnectString() string {
+	hostname := viper.Get("mysql.hostname")
+	port := viper.Get("mysql.port")
+	un := viper.Get("mysql.username")
+	pd := viper.Get("mysql.password")
+	dbName := viper.Get("mysql.databaseName")
+	connectString := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8&parseTime=True&loc=Local", un, pd, hostname, port, dbName)
 	fmt.Print("mysql connect string is -->")
 	fmt.Println(connectString)
 	return connectString
@@ -45,22 +45,22 @@ func main() {
 
 	viper.SetConfigFile("config.json")
 
-	err=viper.ReadInConfig()
-	if err!=nil{
-		log.Println("read config error",err)
+	err = viper.ReadInConfig()
+	if err != nil {
+		log.Println("read config error", err)
 	}
 
 	//fmt.Println(viper.Get("mysql.username"))
-	
-	//db, err = gorm.Open("sqlite3", "./wizz-homepage-backend.db")
-	db, err = gorm.Open("mysql", getMysqlConnectString())
+
+	//Database, err = gorm.Open("sqlite3", "./wizz-homepage-backend.Database")
+	Global.Database, err = gorm.Open("mysql", getMysqlConnectString())
 	//todo: edit mysql string
 	if err != nil {
 		log.Println(err)
 		log.Fatal("Database connect error")
 	}
-	defer db.Close()
-	db.AutoMigrate(&models.Story{})
+	defer Global.Database.Close()
+	Global.Database.AutoMigrate(&models.Story{})
 
 	//create the jwt middleware
 	authMiddleware, err := jwt.New(&jwt.GinJWTMiddleware{
@@ -106,7 +106,7 @@ func main() {
 			if v, ok := data.(*User); ok && v.UserName == "admin" {
 				return true
 			}
-//todo:优化语句结构
+			//todo:优化语句结构
 			return false
 		},
 		Unauthorized: func(c *gin.Context, code int, message string) {
@@ -115,9 +115,9 @@ func main() {
 				"message": message,
 			})
 		},
-		TokenLookup: "header: Authorization, query: token, cookie: jwt",
+		TokenLookup:   "header: Authorization, query: token, cookie: jwt",
 		TokenHeadName: "Bearer",
-		TimeFunc: time.Now,
+		TimeFunc:      time.Now,
 	})
 
 	if err != nil {
@@ -128,67 +128,15 @@ func main() {
 
 	apiGroup := engine.Group("/api")
 
-	apiGroup.GET("/stories", readStories)
-	apiGroup.GET("/stories/:id", readStory)
-	apiGroup.POST("/stories", authMiddleware.MiddlewareFunc(), createStory)
-	apiGroup.PUT("/stories/:id", authMiddleware.MiddlewareFunc(), updateStory)
-	apiGroup.DELETE("/stories/:id", authMiddleware.MiddlewareFunc(), deleteStory)
+	apiGroup.GET("/stories", story.ReadStories)
+	apiGroup.GET("/stories/:id", story.ReadStory)
+	apiGroup.POST("/stories", authMiddleware.MiddlewareFunc(), story.CreateStory)
+	apiGroup.PUT("/stories/:id", authMiddleware.MiddlewareFunc(), story.UpdateStory)
+	apiGroup.DELETE("/stories/:id", authMiddleware.MiddlewareFunc(), story.DeleteStory)
 
 	auth := apiGroup.Group("/auth")
 	auth.POST("/login", authMiddleware.LoginHandler)
 
 	_ = engine.Run()
 
-}
-
-func readStories(c *gin.Context) {
-	var stories []models.Story
-	db.Find(&stories)
-	c.JSON(200, stories)
-}
-
-func readStory(c *gin.Context) {
-	id := c.Params.ByName("id")
-	var story models.Story
-	db.First(&story, id)
-	if story.ID == 0 {
-		c.JSON(404, gin.H{"message": "Story not found"})
-		return
-	}
-	c.JSON(200, story)
-}
-
-func createStory(c *gin.Context) {
-	var story models.Story
-	_ = c.BindJSON(&story) //绑定一个请求主体到一个类型
-	db.Create(&story)
-	c.JSON(200, story)
-}
-
-func updateStory(c *gin.Context) {
-	id := c.Params.ByName("id")
-	var story models.Story
-	db.First(&story, id)
-	if story.ID == 0 {
-		c.JSON(404, gin.H{"message": "Story not found"})
-		return
-	} else {
-		_ = c.BindJSON(&story)
-		db.Save(&story)
-		c.JSON(200, story)
-	}
-}
-
-func deleteStory(c *gin.Context) {
-	id := c.Params.ByName("id")
-	var story models.Story
-	db.First(&story, id)
-	if story.ID == 0 {
-		c.JSON(404, gin.H{"message": "Story not found"})
-		return
-	} else {
-		_ = c.BindJSON(&story)
-		db.Delete(&story)
-		c.JSON(200, gin.H{"message": "delete success"})
-	}
 }
