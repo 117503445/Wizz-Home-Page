@@ -5,5 +5,8 @@
     "username": "Your Database username",
     "password": "Your Database password",
     "databaseName": "wizzhomepage"
-  }
+  },
+  "account": [
+    {"admin": "admin"}
+  ]
 }

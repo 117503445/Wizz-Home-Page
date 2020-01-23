@@ -70,6 +70,7 @@ func main() {
 		MaxRefresh:  time.Hour * 24 * 7,
 		IdentityKey: identityKey,
 		PayloadFunc: func(data interface{}) jwt.MapClaims {
+			fmt.Println("PayloadFunc")
 			if v, ok := data.(*User); ok {
 				return jwt.MapClaims{
 					identityKey: v.UserName,
@@ -78,6 +79,7 @@ func main() {
 			return jwt.MapClaims{}
 		},
 		IdentityHandler: func(c *gin.Context) interface{} {
+			fmt.Println("IdentityHandler")
 			claims := jwt.ExtractClaims(c)
 			return &User{
 				UserName: claims[identityKey].(string),
@@ -103,6 +105,8 @@ func main() {
 			return nil, jwt.ErrFailedAuthentication
 		},
 		Authorizator: func(data interface{}, c *gin.Context) bool {
+			fmt.Print("Authorizator->")
+			fmt.Println(data)
 			if v, ok := data.(*User); ok && v.UserName == "admin" {
 				return true
 			}

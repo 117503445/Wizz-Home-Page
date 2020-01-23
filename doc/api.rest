@@ -1,5 +1,5 @@
-@HostName=ali.117503445.top
-#@HostName=localhost
+#@HostName=ali.117503445.top
+@HostName=localhost
 @port=8080
 @host={{HostName}}:{{port}}
 #身份认证使用的JWT，发出需要身份认证的请求时设置header中  Authorization: Bearer {{jwt}}
@@ -61,6 +61,14 @@ Authorization: Bearer {{jwt}}
     "storyDescribe": "i am storyDescribe"
 }
 
+### 添加 一个 历史事件，stories，不带jwt
+POST http://{{host}}/api/stories
+
+{
+    "time": 1579178477,
+    "name": "i am name",
+    "storyDescribe": "i am storyDescribe"
+}
 
 @updateOneStory_id=1
 ### 更新 某个 历史事件，stories
