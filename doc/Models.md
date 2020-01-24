@@ -2,21 +2,21 @@
 
 ## 历史事件，stories
 
-* 事件ID，id：int，每个事件的唯一序号，递增，删除后不改变后续事件ID
+* 事件ID，Id：int，每个事件的唯一序号，递增，删除后不改变后续事件ID
 * 发生时间，time：精准到秒的格林威治时间戳
 * 事件名，name：字符串
 * 描述，storyDescribe：字符串
 
 ## 产品，products
 
-* 项目ID：int，每个项目的唯一序号，递增，删除后不改变后续项目ID
-* 项目图标，url-avatar：字符串，图片链接
+* 项目ID，Id：int，每个项目的唯一序号，递增，删除后不改变后续项目ID
+* 项目图标，urlAvatar：字符串，图片链接
 * 一句话介绍，little-describe：字符串
-* 项目介绍，describe：字符串
-* 合作方，partner：字符串
+* 项目介绍,describe:字符串
+* 合作方,partner:字符串
 * 背景图，url-background：字符串，图片链接
 * 项目截图，url-screenshot：字符串，图片链接
-* 项目类型，type：int，枚举，0 - 校企合作，1 - 校园合作，2 - 校内自研
+* 项目类型，projectType：int，枚举，0 - 校企合作，1 - 校园合作，2 - 校内自研
 
 ## 成员，members
 

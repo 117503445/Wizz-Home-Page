@@ -130,6 +130,7 @@ func main() {
 
 	engine := gin.Default()
 
+
 	apiGroup := engine.Group("/api")
 
 	apiGroup.GET("/stories", story.ReadStories)
@@ -140,6 +141,8 @@ func main() {
 
 	auth := apiGroup.Group("/auth")
 	auth.POST("/login", authMiddleware.LoginHandler)
+
+	//engine.StaticFile("","./html")
 
 	_ = engine.Run()
 
