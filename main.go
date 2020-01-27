@@ -51,9 +51,11 @@ func main() {
 	}
 
 	//fmt.Println(viper.Get("mysql.username"))
-
-	//Database, err = gorm.Open("sqlite3", "./wizz-homepage-backend.Database")
-	Global.Database, err = gorm.Open("mysql", getMysqlConnectString())
+	if true {
+		Global.Database, err = gorm.Open("sqlite3", "./wizz-homepage-backend.Database")
+	}else{
+		Global.Database, err = gorm.Open("mysql", getMysqlConnectString())
+	}
 	//todo: edit mysql string
 	if err != nil {
 		log.Println(err)
@@ -142,8 +144,8 @@ func main() {
 	auth := apiGroup.Group("/auth")
 	auth.POST("/login", authMiddleware.LoginHandler)
 
-	//engine.StaticFile("","./html")
-
+	engine.StaticFile("","./html")
+	engine.Static("static","./html/static")
 	_ = engine.Run()
 
 }

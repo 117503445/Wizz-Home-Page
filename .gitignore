@@ -19,3 +19,5 @@
 
 /out
 /config.json
+
+*.Database
