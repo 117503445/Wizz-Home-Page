@@ -48,6 +48,7 @@ func main() {
 
 	Global.Database.AutoMigrate(&models.Story{})
 	Global.Database.AutoMigrate(&models.Product{})
+	Global.Database.AutoMigrate(&models.Member{})
 
 	route.ProcessRoute()
 

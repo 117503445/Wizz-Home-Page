@@ -92,7 +92,7 @@ Authorization: Bearer {{jwt}}
 
 ###
 
-GET http://{{host}}/api/products 
+GET http://{{host}}/api/products
 
 ###
 GET http://{{host}}/api/products/1
@@ -119,4 +119,37 @@ Authorization: Bearer {{jwt}}
 }
 ###
 DELETE http://{{host}}/api/products/1
+Authorization: Bearer {{jwt}}
+
+
+###
+
+GET http://{{host}}/api/members
+
+###
+GET http://{{host}}/api/members/1
+
+###
+
+POST http://{{host}}/api/members
+Authorization: Bearer {{jwt}}
+
+{
+  "Name": "滕野",
+  "SchoolYear": 2017,
+  "Describe": "i am Describe",
+  "MemberType": 0,
+  "TeacherInfo": ""
+}
+
+###
+
+PUT http://{{host}}/api/members/1
+Authorization: Bearer {{jwt}}
+
+{
+  "LittleDescribe": "i am new LittleDescribe"
+}
+###
+DELETE http://{{host}}/api/members/1
 Authorization: Bearer {{jwt}}

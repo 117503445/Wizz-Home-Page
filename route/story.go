@@ -91,7 +91,11 @@ func ProcessRoute() {
 		log.Fatal("JWT Error:" + err.Error())
 	}
 
+
 	apiGroup := Global.Engine.Group("/api")
+
+	auth := apiGroup.Group("/auth")
+	auth.POST("/login", authMiddleware.LoginHandler)
 
 	storyGroup := apiGroup.Group("/stories")
 	storyGroup.GET("", apis.ReadStories)
@@ -107,6 +111,12 @@ func ProcessRoute() {
 	productGroup.PUT("/:id", authMiddleware.MiddlewareFunc(), apis.UpdateProduct)
 	productGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), apis.DeleteProduct)
 
-	auth := apiGroup.Group("/auth")
-	auth.POST("/login", authMiddleware.LoginHandler)
+	memberGroup:=apiGroup.Group("/members")
+	memberGroup.GET("", apis.ReadMembers)
+	memberGroup.GET("/:id", apis.ReadMember)
+	memberGroup.POST("", authMiddleware.MiddlewareFunc(), apis.CreateMember)
+	memberGroup.PUT("/:id", authMiddleware.MiddlewareFunc(), apis.UpdateMember)
+	memberGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), apis.DeleteMember)
+
+
 }
