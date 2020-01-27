@@ -1,4 +1,4 @@
-package story
+package apis
 
 import (
 	"Wizz-homepage-go/Global"

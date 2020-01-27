@@ -2,7 +2,7 @@ package main
 
 import (
 	"Wizz-homepage-go/Global"
-	story "Wizz-homepage-go/apis"
+	"Wizz-homepage-go/apis"
 	"Wizz-homepage-go/models"
 	"fmt"
 	jwt "github.com/appleboy/gin-jwt/v2"
@@ -130,22 +130,21 @@ func main() {
 		log.Fatal("JWT Error:" + err.Error())
 	}
 
-	engine := gin.Default()
 
 
-	apiGroup := engine.Group("/api")
+	apiGroup := Global.Engine.Group("/api")
 
-	apiGroup.GET("/stories", story.ReadStories)
-	apiGroup.GET("/stories/:id", story.ReadStory)
-	apiGroup.POST("/stories", authMiddleware.MiddlewareFunc(), story.CreateStory)
-	apiGroup.PUT("/stories/:id", authMiddleware.MiddlewareFunc(), story.UpdateStory)
-	apiGroup.DELETE("/stories/:id", authMiddleware.MiddlewareFunc(), story.DeleteStory)
+	apiGroup.GET("/stories", apis.ReadStories)
+	apiGroup.GET("/stories/:id", apis.ReadStory)
+	apiGroup.POST("/stories", authMiddleware.MiddlewareFunc(), apis.CreateStory)
+	apiGroup.PUT("/stories/:id", authMiddleware.MiddlewareFunc(), apis.UpdateStory)
+	apiGroup.DELETE("/stories/:id", authMiddleware.MiddlewareFunc(), apis.DeleteStory)
 
 	auth := apiGroup.Group("/auth")
 	auth.POST("/login", authMiddleware.LoginHandler)
 
-	engine.StaticFile("","./html")
-	engine.Static("static","./html/static")
-	_ = engine.Run()
+	Global.Engine.StaticFile("","./html")
+	Global.Engine.Static("static","./html/static")
+	_ = Global.Engine.Run()
 
 }
