@@ -39,7 +39,6 @@ func main() {
 	} else {
 		Global.Database, err = gorm.Open("mysql", getMysqlConnectString())
 	}
-	//todo: edit mysql string
 	if err != nil {
 		log.Println(err)
 		log.Fatal("Database connect error")
