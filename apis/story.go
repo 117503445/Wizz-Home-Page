@@ -7,7 +7,6 @@ import (
 )
 
 func ReadStories(c *gin.Context) {
-
 	var stories []models.Story
 	Global.Database.Find(&stories)
 	c.JSON(200, stories)

@@ -3,7 +3,7 @@
 @port=8080
 @host={{HostName}}:{{port}}
 #身份认证使用的JWT，发出需要身份认证的请求时设置header中  Authorization: Bearer {{jwt}}
-@jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODA3MDcxMTcsImlkIjoiYWRtaW4iLCJvcmlnX2lhdCI6MTU4MDEwMjMxN30.GgawCasdti2758Kz-R7U5TK2fi48vlboiLdiUEvVAZE
+@jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODA3MTU1MzYsImlkIjoiYWRtaW4iLCJvcmlnX2lhdCI6MTU4MDExMDczNn0.vuFPFtGIzVZpo6LQQ4JRE3kG0APn4fCZtkLj1OEoZ6k
 
 @id=1
 
@@ -88,7 +88,35 @@ Authorization: Bearer {{jwt}}
 DELETE http://{{host}}/api/stories/{{deleteOneStory_id}}
 Authorization: Bearer {{jwt}}
 
+
+
 ###
 
-#无返回
+GET http://{{host}}/api/products 
 
+###
+GET http://{{host}}/api/products/1
+
+###
+
+POST http://{{host}}/api/products
+Authorization: Bearer {{jwt}}
+
+{
+  "LittleDescribe": "i am LittleDescribe",
+  "Describe": "i am Describe",
+  "Partner": "朱伟老师",
+  "ProjectType": "0"
+}
+
+###
+
+PUT http://{{host}}/api/products/1
+Authorization: Bearer {{jwt}}
+
+{
+  "LittleDescribe": "i am new LittleDescribe"
+}
+###
+DELETE http://{{host}}/api/products/1
+Authorization: Bearer {{jwt}}
