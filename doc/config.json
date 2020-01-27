@@ -1,4 +1,5 @@
 {
+  "database": "mysql or sqlite3",
   "mysql": {
     "hostname": "like ali.117503445.top",
     "port": 3306,

@@ -1,7 +1,7 @@
 package models
 
 type Member struct {
-	ID			uint
+	ID			uint   `json:"id"`
 	Name		string
 	UrlAvatar	string
 	SchoolYear	int

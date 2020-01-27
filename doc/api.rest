@@ -1,9 +1,9 @@
-#@HostName=ali.117503445.top
-@HostName=localhost
+@HostName=ali.117503445.top
+#@HostName=localhost
 @port=8080
 @host={{HostName}}:{{port}}
 #身份认证使用的JWT，发出需要身份认证的请求时设置header中  Authorization: Bearer {{jwt}}
-@jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODA3MTU1MzYsImlkIjoiYWRtaW4iLCJvcmlnX2lhdCI6MTU4MDExMDczNn0.vuFPFtGIzVZpo6LQQ4JRE3kG0APn4fCZtkLj1OEoZ6k
+@jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODA3NDQxOTIsImlkIjoiYWRtaW4iLCJvcmlnX2lhdCI6MTU4MDEzOTM5Mn0.LZZdp4wecImXkLXF9WJsWhzgvlflVWnw61VWFv-iY24
 
 @id=1
 
@@ -105,7 +105,7 @@ Authorization: Bearer {{jwt}}
 {
   "LittleDescribe": "i am LittleDescribe",
   "Describe": "i am Describe",
-  "Partner": "朱伟老师",
+  "Partner": "zhuwei",
   "ProjectType": "0"
 }
 
@@ -135,7 +135,7 @@ POST http://{{host}}/api/members
 Authorization: Bearer {{jwt}}
 
 {
-  "Name": "滕野",
+  "Name": "tengye",
   "SchoolYear": 2017,
   "Describe": "i am Describe",
   "MemberType": 0,

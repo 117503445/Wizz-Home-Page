@@ -1,7 +1,7 @@
 package models
 
 type Product struct {
-	ID    			uint
+	ID    			uint   `json:"id"`
 	UrlAvatar    	string
 	LittleDescribe 	string
 	Describe		string

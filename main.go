@@ -33,10 +33,12 @@ func main() {
 		log.Println("read config error", err)
 	}
 
-	//fmt.Println(viper.Get("mysql.username"))
-	if true {
+	db := viper.Get("database")
+	fmt.Printf("Using %v \n",db)
+
+	if db == "sqlite3" {
 		Global.Database, err = gorm.Open("sqlite3", "./wizz-homepage-backend.Database")
-	} else {
+	} else if db == "mysql" {
 		Global.Database, err = gorm.Open("mysql", getMysqlConnectString())
 	}
 	if err != nil {
