@@ -4,7 +4,7 @@ import (
 	"Wizz-homepage-go/Global"
 	"Wizz-homepage-go/apis"
 	"fmt"
-	jwt "github.com/appleboy/gin-jwt/v2"
+	"github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
 	"log"
 	"time"
