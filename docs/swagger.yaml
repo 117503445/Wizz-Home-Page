@@ -1,4 +1,4 @@
-basePath: /v1
+basePath: /api
 definitions:
   models.Story:
     properties:
@@ -11,17 +11,17 @@ definitions:
       time:
         type: integer
     type: object
-host: 127.0.0.1:8081
+host: 127.0.0.1:8080
 info:
   contact:
-    email: help@coolcat.io
-    name: coolcat
-    url: http://coolcat.io/support
-  description: This is a simple api server.
+    email: t117503445@gmail.com
+    name: "117503445"
+    url: https://github.com/117503445
+  description: Wizz's HomePage Backend
   license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: Apiserver API
+    name: GNU General Public License v3.0
+    url: https://github.com/TGclub/Wizz-Home-Page/blob/master/LICENSE
+  title: Wizz-Home-Page API
   version: "1.0"
 paths:
   /user/{id}:

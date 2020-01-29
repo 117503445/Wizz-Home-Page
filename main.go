@@ -23,19 +23,19 @@ func getMysqlConnectString() string {
 	fmt.Println(connectString)
 	return connectString
 }
-// @title Apiserver API
+// @title Wizz-Home-Page API
 // @version 1.0
-// @description This is a simple api server.
+// @description Wizz's HomePage Backend
 
-// @contact.name coolcat
-// @contact.url http://coolcat.io/support
-// @contact.email help@coolcat.io
+// @contact.name 117503445
+// @contact.url https://github.com/117503445
+// @contact.email t117503445@gmail.com
 
-// @license.name Apache 2.0
-// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+// @license.name GNU General Public License v3.0
+// @license.url https://github.com/TGclub/Wizz-Home-Page/blob/master/LICENSE
 
-// @host 127.0.0.1:8081
-// @BasePath /v1
+// @host 127.0.0.1:8080
+// @BasePath /api
 
 // @securityDefinitions.apikey ApiKeyAuth
 // @in header

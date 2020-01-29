@@ -14,3 +14,13 @@ require (
 	github.com/swaggo/gin-swagger v1.2.0
 	github.com/swaggo/swag v1.5.1
 )
+
+replace (
+    cloud.google.com/go => github.com/GoogleCloudPlatform/google-cloud-go latest
+    golang.org/x/crypto => github.com/golang/crypto latest
+    golang.org/x/net => github.com/golang/net latest
+    golang.org/x/sync => github.com/golang/sync latest
+    golang.org/x/sys => github.com/golang/sys latest
+    golang.org/x/text => github.com/golang/text latest
+    google.golang.org/appengine => github.com/golang/appengine latest
+)

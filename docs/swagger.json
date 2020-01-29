@@ -1,21 +1,21 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a simple api server.",
-        "title": "Apiserver API",
+        "description": "Wizz's HomePage Backend",
+        "title": "Wizz-Home-Page API",
         "contact": {
-            "name": "coolcat",
-            "url": "http://coolcat.io/support",
-            "email": "help@coolcat.io"
+            "name": "117503445",
+            "url": "https://github.com/117503445",
+            "email": "t117503445@gmail.com"
         },
         "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+            "name": "GNU General Public License v3.0",
+            "url": "https://github.com/TGclub/Wizz-Home-Page/blob/master/LICENSE"
         },
         "version": "1.0"
     },
-    "host": "127.0.0.1:8081",
-    "basePath": "/v1",
+    "host": "127.0.0.1:8080",
+    "basePath": "/api",
     "paths": {
         "/user/{id}": {
             "get": {
