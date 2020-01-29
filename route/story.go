@@ -1,9 +1,9 @@
 package route
 
 import (
-	"Wizz-homepage-go/Global"
-	"Wizz-homepage-go/apis"
-	_ "Wizz-homepage-go/docs"
+	"Wizz-Home-Page/Global"
+	"Wizz-Home-Page/apis"
+	_ "Wizz-Home-Page/docs"
 	"fmt"
 	"github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"

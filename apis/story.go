@@ -1,8 +1,8 @@
 package apis
 
 import (
-	"Wizz-homepage-go/Global"
-	"Wizz-homepage-go/models"
+	"Wizz-Home-Page/Global"
+	"Wizz-Home-Page/models"
 	"github.com/gin-gonic/gin"
 )
 // @Summary 获取用户

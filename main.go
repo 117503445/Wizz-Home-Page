@@ -1,9 +1,9 @@
 package main
 
 import (
-	"Wizz-homepage-go/Global"
-	"Wizz-homepage-go/models"
-	"Wizz-homepage-go/route"
+	"Wizz-Home-Page/Global"
+	"Wizz-Home-Page/models"
+	"Wizz-Home-Page/route"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
