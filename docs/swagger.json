@@ -1,0 +1,84 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a simple api server.",
+        "title": "Apiserver API",
+        "contact": {
+            "name": "coolcat",
+            "url": "http://coolcat.io/support",
+            "email": "help@coolcat.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "127.0.0.1:8081",
+    "basePath": "/v1",
+    "paths": {
+        "/user/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "从数据库中获取用户信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "获取用户",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "user id in database",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":0,\"message\":\"OK\",\"data\": {}}",
+                        "schema": {
+                            "$ref": "#/definitions/models.Story"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Story": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "storyDescribe": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "integer"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

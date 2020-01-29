@@ -1,0 +1,55 @@
+basePath: /v1
+definitions:
+  models.Story:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      storyDescribe:
+        type: string
+      time:
+        type: integer
+    type: object
+host: 127.0.0.1:8081
+info:
+  contact:
+    email: help@coolcat.io
+    name: coolcat
+    url: http://coolcat.io/support
+  description: This is a simple api server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Apiserver API
+  version: "1.0"
+paths:
+  /user/{id}:
+    get:
+      consumes:
+      - application/json
+      description: 从数据库中获取用户信息
+      parameters:
+      - description: user id in database
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":0,"message":"OK","data": {}}'
+          schema:
+            $ref: '#/definitions/models.Story'
+      security:
+      - ApiKeyAuth: []
+      summary: 获取用户
+      tags:
+      - user
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

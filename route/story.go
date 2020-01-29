@@ -3,9 +3,12 @@ package route
 import (
 	"Wizz-homepage-go/Global"
 	"Wizz-homepage-go/apis"
+	_ "Wizz-homepage-go/docs"
 	"fmt"
 	"github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
+	"github.com/swaggo/files"
+	"github.com/swaggo/gin-swagger"
 	"log"
 	"time"
 )
@@ -91,7 +94,6 @@ func ProcessRoute() {
 		log.Fatal("JWT Error:" + err.Error())
 	}
 
-
 	apiGroup := Global.Engine.Group("/api")
 
 	auth := apiGroup.Group("/auth")
@@ -111,7 +113,7 @@ func ProcessRoute() {
 	productGroup.PUT("/:id", authMiddleware.MiddlewareFunc(), apis.UpdateProduct)
 	productGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), apis.DeleteProduct)
 
-	memberGroup:=apiGroup.Group("/members")
+	memberGroup := apiGroup.Group("/members")
 	memberGroup.GET("", apis.ReadMembers)
 	memberGroup.GET("/:id", apis.ReadMember)
 	memberGroup.POST("", authMiddleware.MiddlewareFunc(), apis.CreateMember)
@@ -119,6 +121,8 @@ func ProcessRoute() {
 	memberGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), apis.DeleteMember)
 
 	Global.Engine.GET("/ver", func(c *gin.Context) {
-		c.JSON(200,"0129-1255")
+		c.JSON(200, "0129-1255")
 	})
+
+	Global.Engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 }

@@ -5,7 +5,15 @@ import (
 	"Wizz-homepage-go/models"
 	"github.com/gin-gonic/gin"
 )
-
+// @Summary 获取用户
+// @Description 从数据库中获取用户信息
+// @Tags user
+// @Accept  json
+// @Produce  json
+// @Security ApiKeyAuth
+// @Param id path uint64 true "user id in database"
+// @Success 200 {object} models.Story "{"code":0,"message":"OK","data": {}}"
+// @Router /user/{id} [get]
 func ReadStories(c *gin.Context) {
 	var stories []models.Story
 	Global.Database.Find(&stories)
