@@ -118,5 +118,7 @@ func ProcessRoute() {
 	memberGroup.PUT("/:id", authMiddleware.MiddlewareFunc(), apis.UpdateMember)
 	memberGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), apis.DeleteMember)
 
-
+	Global.Engine.GET("/ver", func(c *gin.Context) {
+		c.JSON(200,"0129-1255")
+	})
 }

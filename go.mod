@@ -9,5 +9,4 @@ require (
 	github.com/jinzhu/gorm v1.9.12
 	github.com/mattn/go-sqlite3 v2.0.1+incompatible
 	github.com/spf13/viper v1.6.2
-	gopkg.in/dgrijalva/jwt-go.v3 v3.2.0 // indirect
 )
