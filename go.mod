@@ -14,13 +14,3 @@ require (
 	github.com/swaggo/gin-swagger v1.2.0
 	github.com/swaggo/swag v1.5.1
 )
-
-replace (
-	cloud.google.com/go => github.com/GoogleCloudPlatform/google-cloud-go v0.52.0
-	golang.org/x/crypto => github.com/golang/crypto v0.0.0-20200128174031-69ecbb4d6d5d
-	golang.org/x/net => github.com/golang/net v0.0.0-20200114155413-6afb5195e5aa
-	golang.org/x/sync => github.com/golang/sync v0.0.0-20190911185100-cd5d95a43a6e
-	golang.org/x/sys => github.com/golang/sys v0.0.0-20200124204421-9fbb57f87de9
-	golang.org/x/text => github.com/golang/text v0.3.2
-	google.golang.org/appengine => github.com/golang/appengine v1.6.5
-)

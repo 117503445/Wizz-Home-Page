@@ -1,8 +1,8 @@
-FROM golang
+FROM golang:latest
 
-WORKDIR $GOPATH/src
+#WORKDIR $GOPATH/src
 
-# RUN go env -w GOPROXY=https://goproxy.cn,direct
+#RUN go env -w GOPROXY=https://goproxy.cn,direct
 
 RUN export GO111MODULE=on
 
@@ -26,9 +26,9 @@ WORKDIR $GOPATH/src/Wizz-Home-Page
 
 ADD . $GOPATH/src/Wizz-Home-Page
 
+#RUN go get -v github.com/gin-gonic/gin
+#RUN go get -v github.com/appleboy/gin-jwt/v2
 
-RUN go get github.com/appleboy/gin-jwt/v2
-
-RUN go build .
+RUN go mod download
 
 CMD [ "go","run","main.go" ]
