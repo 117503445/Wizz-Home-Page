@@ -85,7 +85,6 @@ func DeleteStory(c *gin.Context) {
 		c.JSON(404, gin.H{"message": "Story not found"})
 		return
 	} else {
-		_ = c.BindJSON(&story)
 		Global.Database.Delete(&story)
 		c.JSON(200, gin.H{"message": "delete success"})
 	}

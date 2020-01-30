@@ -52,7 +52,6 @@ func DeleteMember(c *gin.Context) {
 		c.JSON(404, gin.H{"message": "Member not found"})
 		return
 	} else {
-		_ = c.BindJSON(&member)
 		Global.Database.Delete(&member)
 		c.JSON(200, gin.H{"message": "delete success"})
 	}

@@ -52,7 +52,6 @@ func DeleteProduct(c *gin.Context) {
 		c.JSON(404, gin.H{"message": "Product not found"})
 		return
 	} else {
-		_ = c.BindJSON(&product)
 		Global.Database.Delete(&product)
 		c.JSON(200, gin.H{"message": "delete success"})
 	}
