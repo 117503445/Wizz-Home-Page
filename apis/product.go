@@ -5,7 +5,12 @@ import (
 	"Wizz-Home-Page/models"
 	"github.com/gin-gonic/gin"
 )
-
+// @Summary 获取所有产品
+// @Tags 产品
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.Product
+// @Router /Products [get]
 func ReadProducts(c *gin.Context){
 	var products []models.Product
 	Global.Database.Find(&products)

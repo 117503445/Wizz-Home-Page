@@ -45,7 +45,7 @@ func identityHandler(c *gin.Context) interface{} {
 }
 // @Summary 登录
 // @Description 更改请求中的 Username 和 Password 进行登录。登陆成功以后，返回json中token字段比如说是"token":"123"，就在右上角Authorize按钮点一下，输入Bearer 123，大小写、空格敏感。然后就能使用需要身份验证的接口啦。
-// @Tags auth
+// @Tags 身份验证
 // @Accept  json
 // @Produce  json
 // @Param   loginVals      body route.login true  "登录值" default({"password":"admin","username":"admin"})

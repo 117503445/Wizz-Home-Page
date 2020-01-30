@@ -6,10 +6,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 // @Summary 获取所有历史事件
-// @Tags stories
+// @Tags 历史事件
 // @Accept  json
 // @Produce  json
-// @Success 200 {object} models.Story
+// @Success 200 {array} models.Story
 // @Router /stories [get]
 func ReadStories(c *gin.Context) {
 	var stories []models.Story
@@ -17,11 +17,12 @@ func ReadStories(c *gin.Context) {
 	c.JSON(200, stories)
 }
 // @Summary 获取一个历史事件
-// @Tags stories
+// @Tags 历史事件
 // @Accept  json
 // @Produce  json
 // @Param   id      path int true  "历史事件id" default(1)
 // @Success 200 {object} models.Story
+// @Failure 404 {string} string "{"message":"Story not found"}"
 // @Router /stories/{id} [get]
 func ReadStory(c *gin.Context) {
 	id := c.Params.ByName("id")
@@ -34,7 +35,7 @@ func ReadStory(c *gin.Context) {
 	c.JSON(200, story)
 }
 // @Summary 添加一个历史事件
-// @Tags stories
+// @Tags 历史事件
 // @Accept  json
 // @Produce  json
 // @Param   story      body models.Story true  "历史事件"
@@ -48,7 +49,7 @@ func CreateStory(c *gin.Context) {
 	c.JSON(200, story)
 }
 // @Summary 更改一个历史事件
-// @Tags stories
+// @Tags 历史事件
 // @Accept  json
 // @Produce  json
 // @Param   id      path int true  "历史事件id" default(1)
@@ -70,7 +71,7 @@ func UpdateStory(c *gin.Context) {
 	}
 }
 // @Summary 删除一个历史事件
-// @Tags stories
+// @Tags 历史事件
 // @Accept  json
 // @Produce  json
 // @Param   id      path int true  "历史事件id" default(1)
