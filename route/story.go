@@ -3,7 +3,7 @@ package route
 import (
 	"Wizz-Home-Page/Global"
 	"Wizz-Home-Page/apis"
-	_ "Wizz-Home-Page/docs"
+	_ "Wizz-Home-Page/docs"//引入 swagger 必备
 	"fmt"
 	"github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
@@ -134,7 +134,7 @@ func ProcessRoute() {
 	memberGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), apis.DeleteMember)
 
 	Global.Engine.GET("/ver", func(c *gin.Context) {
-		c.JSON(200, "0129-1255")
+		c.JSON(200, "0130-1921")
 	})
 
 	Global.Engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

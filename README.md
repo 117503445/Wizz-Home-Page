@@ -75,6 +75,14 @@ tcp://ali.117503445.top:2375
 在项目根文件夹下,键入
 
 ```docker
+docker rm WizzHomePage -f
+```
+
+删除可能正在运行的 container
+
+在项目根文件夹下,键入
+
+```docker
 docker build -t wizz .
 ```
 
@@ -88,4 +96,4 @@ docker run --name WizzHomePage -d -p 8080:8080 wizz
 
 运行名为 WizzHomePage 的 CONTAINERS
 
-在 Windows 上,上面 2 步 也可以通过运行 docker.ps1 完成
+在 Windows 上,上面 3 步 也可以通过运行 docker.ps1 完成
