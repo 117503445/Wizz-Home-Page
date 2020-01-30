@@ -134,7 +134,7 @@ func ProcessRoute() {
 	memberGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), apis.DeleteMember)
 
 	Global.Engine.GET("/ver", func(c *gin.Context) {
-		c.JSON(200, "0130-1921")
+		c.JSON(200, "0130-2133")
 	})
 
 	Global.Engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

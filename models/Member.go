@@ -7,5 +7,5 @@ type Member struct {
 	SchoolYear	int
 	Describe	string
 	MemberType	int
-	TeacherInfo	string
+	TeacherInfo	[]string
 }

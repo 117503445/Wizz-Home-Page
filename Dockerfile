@@ -13,6 +13,6 @@ WORKDIR /go/release/Wizz-Home-Page
 
 ADD . /go/release/Wizz-Home-Page
 
-RUN go build -v -x main.go
+RUN go build -v -x -ldflags="-s -w" main.go
 
 CMD ["./main"]
