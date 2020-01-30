@@ -34,8 +34,9 @@ func getMysqlConnectString() string {
 // @license.name GNU General Public License v3.0
 // @license.url https://github.com/TGclub/Wizz-Home-Page/blob/master/LICENSE
 
-// @host 127.0.0.1:8080
+// @host ggtaiwan.117503445.top:8080
 // @BasePath /api
+// @schemes http
 
 // @securityDefinitions.apikey ApiKeyAuth
 // @in header

@@ -2,17 +2,13 @@ FROM golang
 
 WORKDIR $GOPATH/src
 
-RUN go env -w GOPROXY=https://goproxy.cn,direct
+# RUN go env -w GOPROXY=https://goproxy.cn,direct
 
 RUN export GO111MODULE=on
 
 EXPOSE 8080
 
 WORKDIR $GOPATH/src/Wizz-Home-Page
-
-COPY go.mod go.mod
-
-RUN go mod download
 
 #RUN go get -v github.com/appleboy/gin-jwt/v2
 #
@@ -29,6 +25,9 @@ RUN go mod download
 
 
 ADD . $GOPATH/src/Wizz-Home-Page
+
+
+RUN go get github.com/appleboy/gin-jwt/v2
 
 RUN go build .
 

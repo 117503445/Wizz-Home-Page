@@ -14,8 +14,8 @@ import (
 )
 
 type login struct {
-	Username string `form:"username" json:"username" binding:"required"`
-	Password string `form:"password" json:"password" binding:"required"`
+	Username string `example:"admin" form:"username" json:"username" binding:"required"`
+	Password string `example:"admin" form:"password" json:"password" binding:"required"`
 }
 
 var identityKey = "id"
@@ -27,67 +27,80 @@ type User struct {
 	LastName  string
 }
 
+func payloadFunc(data interface{}) jwt.MapClaims {
+	fmt.Println("PayloadFunc")
+	if v, ok := data.(*User); ok {
+		return jwt.MapClaims{
+			identityKey: v.UserName,
+		}
+	}
+	return jwt.MapClaims{}
+}
+func identityHandler(c *gin.Context) interface{} {
+	fmt.Println("IdentityHandler")
+	claims := jwt.ExtractClaims(c)
+	return &User{
+		UserName: claims[identityKey].(string),
+	}
+}
+// @Summary 登录
+// @Description 更改请求中的 Username 和 Password 进行登录。登陆成功以后，返回json中token字段比如说是"token":"123"，就在右上角Authorize按钮点一下，输入Bearer 123，大小写、空格敏感。然后就能使用需要身份验证的接口啦。
+// @Tags auth
+// @Accept  json
+// @Produce  json
+// @Param   loginVals      body route.login true  "登录值" default({"password":"admin","username":"admin"})
+// @Success 200 {string} string "{"code":200,"expire":"2020-02-05T23:11:41+08:00","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODA5MTU1MDEsImlkIjoiYWRtaW4iLCJvcmlnX2lhdCI6MTU4MDMxMDcwMX0.GWlmyTfCkXQYwgbtuTgVSTUSJXDcoDb_bptgRpt4HCU"}"
+// @Router /auth/login [POST]
+func authenticator(c *gin.Context) (interface{}, error) {
+	fmt.Println("Authenticator")
+	var loginVals login
+	if err := c.ShouldBindJSON(&loginVals); err != nil {
+		return "", jwt.ErrMissingLoginValues
+	}
+	userID := loginVals.Username
+	password := loginVals.Password
+
+	if userID == "admin" && password == "admin" { //todo:Edit password
+		return &User{
+			UserName:  userID,
+			LastName:  "Bo-Yi",
+			FirstName: "Wu",
+		}, nil
+	}
+
+	return nil, jwt.ErrFailedAuthentication
+}
+func authorizator(data interface{}, c *gin.Context) bool {
+	fmt.Print("Authorizator->")
+	fmt.Println(data)
+	if v, ok := data.(*User); ok && v.UserName == "admin" {
+		return true
+	}
+	//todo:优化语句结构
+	return false
+}
+func unauthorized(c *gin.Context, code int, message string) {
+	c.JSON(code, gin.H{
+		"code":    code,
+		"message": message,
+	})
+}
 func ProcessRoute() {
 	//create the jwt middleware
 	authMiddleware, err := jwt.New(&jwt.GinJWTMiddleware{
-		Realm:       "test zone",
-		Key:         []byte("secret key"), //todo:Edit secret key
-		Timeout:     time.Hour * 24 * 7,
-		MaxRefresh:  time.Hour * 24 * 7,
-		IdentityKey: identityKey,
-		PayloadFunc: func(data interface{}) jwt.MapClaims {
-			fmt.Println("PayloadFunc")
-			if v, ok := data.(*User); ok {
-				return jwt.MapClaims{
-					identityKey: v.UserName,
-				}
-			}
-			return jwt.MapClaims{}
-		},
-		IdentityHandler: func(c *gin.Context) interface{} {
-			fmt.Println("IdentityHandler")
-			claims := jwt.ExtractClaims(c)
-			return &User{
-				UserName: claims[identityKey].(string),
-			}
-		},
-		Authenticator: func(c *gin.Context) (interface{}, error) {
-			fmt.Println("Authenticator")
-			var loginVals login
-			if err := c.ShouldBindJSON(&loginVals); err != nil {
-				return "", jwt.ErrMissingLoginValues
-			}
-			userID := loginVals.Username
-			password := loginVals.Password
-
-			if userID == "admin" && password == "admin" { //todo:Edit password
-				return &User{
-					UserName:  userID,
-					LastName:  "Bo-Yi",
-					FirstName: "Wu",
-				}, nil
-			}
-
-			return nil, jwt.ErrFailedAuthentication
-		},
-		Authorizator: func(data interface{}, c *gin.Context) bool {
-			fmt.Print("Authorizator->")
-			fmt.Println(data)
-			if v, ok := data.(*User); ok && v.UserName == "admin" {
-				return true
-			}
-			//todo:优化语句结构
-			return false
-		},
-		Unauthorized: func(c *gin.Context, code int, message string) {
-			c.JSON(code, gin.H{
-				"code":    code,
-				"message": message,
-			})
-		},
-		TokenLookup:   "header: Authorization, query: token, cookie: jwt",
-		TokenHeadName: "Bearer",
-		TimeFunc:      time.Now,
+		Realm:           "test zone",
+		Key:             []byte("secret key"), //todo:Edit secret key
+		Timeout:         time.Hour * 24 * 7,
+		MaxRefresh:      time.Hour * 24 * 7,
+		IdentityKey:     identityKey,
+		PayloadFunc:     payloadFunc,
+		IdentityHandler: identityHandler,
+		Authenticator:   authenticator,
+		Authorizator:    authorizator,
+		Unauthorized:    unauthorized,
+		TokenLookup:     "header: Authorization, query: token, cookie: jwt",
+		TokenHeadName:   "Bearer",
+		TimeFunc:        time.Now,
 	})
 
 	if err != nil {

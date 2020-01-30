@@ -1,4 +1,7 @@
 {
+    "schemes": [
+        "http"
+    ],
     "swagger": "2.0",
     "info": {
         "description": "Wizz's HomePage Backend",
@@ -14,17 +17,12 @@
         },
         "version": "1.0"
     },
-    "host": "127.0.0.1:8080",
+    "host": "ggtaiwan.117503445.top:8080",
     "basePath": "/api",
     "paths": {
-        "/user/{id}": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "从数据库中获取用户信息",
+        "/auth/login": {
+            "post": {
+                "description": "更改请求中的 Username 和 Password 进行登录。登陆成功以后，返回json中token字段比如说是\"token\":\"123\"，就在右上角Authorize按钮点一下，输入Bearer 123，大小写、空格敏感。然后就能使用需要身份验证的接口啦。",
                 "consumes": [
                     "application/json"
                 ],
@@ -32,13 +30,105 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "auth"
                 ],
-                "summary": "获取用户",
+                "summary": "登录",
+                "parameters": [
+                    {
+                        "description": "登录值",
+                        "name": "loginVals",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/route.login"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":200,\"expire\":\"2020-02-05T23:11:41+08:00\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODA5MTU1MDEsImlkIjoiYWRtaW4iLCJvcmlnX2lhdCI6MTU4MDMxMDcwMX0.GWlmyTfCkXQYwgbtuTgVSTUSJXDcoDb_bptgRpt4HCU\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/stories": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "stories"
+                ],
+                "summary": "获取所有历史事件",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Story"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "stories"
+                ],
+                "summary": "添加一个历史事件",
+                "parameters": [
+                    {
+                        "description": "历史事件",
+                        "name": "story",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Story"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Story"
+                        }
+                    }
+                }
+            }
+        },
+        "/stories/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "stories"
+                ],
+                "summary": "获取一个历史事件",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "user id in database",
+                        "default": 1,
+                        "description": "历史事件id",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -46,7 +136,86 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"code\":0,\"message\":\"OK\",\"data\": {}}",
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Story"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "stories"
+                ],
+                "summary": "更改一个历史事件",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "历史事件id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "历史事件",
+                        "name": "story",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Story"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Story"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "stories"
+                ],
+                "summary": "删除一个历史事件",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "历史事件id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/models.Story"
                         }
@@ -60,7 +229,9 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "integer"
+                    "description": "ID this is userid",
+                    "type": "integer",
+                    "example": 1
                 },
                 "name": {
                     "type": "string"
@@ -70,6 +241,23 @@
                 },
                 "time": {
                     "type": "integer"
+                }
+            }
+        },
+        "route.login": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "example": "admin"
+                },
+                "username": {
+                    "type": "string",
+                    "example": "admin"
                 }
             }
         }

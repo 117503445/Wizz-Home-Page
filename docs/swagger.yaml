@@ -3,6 +3,8 @@ definitions:
   models.Story:
     properties:
       id:
+        description: ID this is userid
+        example: 1
         type: integer
       name:
         type: string
@@ -11,7 +13,19 @@ definitions:
       time:
         type: integer
     type: object
-host: 127.0.0.1:8080
+  route.login:
+    properties:
+      password:
+        example: admin
+        type: string
+      username:
+        example: admin
+        type: string
+    required:
+    - password
+    - username
+    type: object
+host: ggtaiwan.117503445.top:8080
 info:
   contact:
     email: t117503445@gmail.com
@@ -24,13 +38,72 @@ info:
   title: Wizz-Home-Page API
   version: "1.0"
 paths:
-  /user/{id}:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: 更改请求中的 Username 和 Password 进行登录。登陆成功以后，返回json中token字段比如说是"token":"123"，就在右上角Authorize按钮点一下，输入Bearer
+        123，大小写、空格敏感。然后就能使用需要身份验证的接口啦。
+      parameters:
+      - description: 登录值
+        in: body
+        name: loginVals
+        required: true
+        schema:
+          $ref: '#/definitions/route.login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"expire":"2020-02-05T23:11:41+08:00","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODA5MTU1MDEsImlkIjoiYWRtaW4iLCJvcmlnX2lhdCI6MTU4MDMxMDcwMX0.GWlmyTfCkXQYwgbtuTgVSTUSJXDcoDb_bptgRpt4HCU"}'
+          schema:
+            type: string
+      summary: 登录
+      tags:
+      - auth
+  /stories:
     get:
       consumes:
       - application/json
-      description: 从数据库中获取用户信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Story'
+      summary: 获取所有历史事件
+      tags:
+      - stories
+    post:
+      consumes:
+      - application/json
       parameters:
-      - description: user id in database
+      - description: 历史事件
+        in: body
+        name: story
+        required: true
+        schema:
+          $ref: '#/definitions/models.Story'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Story'
+      security:
+      - ApiKeyAuth: []
+      summary: 添加一个历史事件
+      tags:
+      - stories
+  /stories/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 历史事件id
         in: path
         name: id
         required: true
@@ -39,14 +112,64 @@ paths:
       - application/json
       responses:
         "200":
-          description: '{"code":0,"message":"OK","data": {}}'
+          description: OK
           schema:
             $ref: '#/definitions/models.Story'
       security:
       - ApiKeyAuth: []
-      summary: 获取用户
+      summary: 删除一个历史事件
       tags:
-      - user
+      - stories
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 历史事件id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Story'
+      summary: 获取一个历史事件
+      tags:
+      - stories
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 历史事件id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 历史事件
+        in: body
+        name: story
+        required: true
+        schema:
+          $ref: '#/definitions/models.Story'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Story'
+      security:
+      - ApiKeyAuth: []
+      summary: 更改一个历史事件
+      tags:
+      - stories
+schemes:
+- http
 securityDefinitions:
   ApiKeyAuth:
     in: header

@@ -5,21 +5,24 @@ import (
 	"Wizz-Home-Page/models"
 	"github.com/gin-gonic/gin"
 )
-// @Summary 获取用户
-// @Description 从数据库中获取用户信息
-// @Tags user
+// @Summary 获取所有历史事件
+// @Tags stories
 // @Accept  json
 // @Produce  json
-// @Security ApiKeyAuth
-// @Param id path uint64 true "user id in database"
-// @Success 200 {object} models.Story "{"code":0,"message":"OK","data": {}}"
-// @Router /user/{id} [get]
+// @Success 200 {object} models.Story
+// @Router /stories [get]
 func ReadStories(c *gin.Context) {
 	var stories []models.Story
 	Global.Database.Find(&stories)
 	c.JSON(200, stories)
 }
-
+// @Summary 获取一个历史事件
+// @Tags stories
+// @Accept  json
+// @Produce  json
+// @Param   id      path int true  "历史事件id" default(1)
+// @Success 200 {object} models.Story
+// @Router /stories/{id} [get]
 func ReadStory(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var story models.Story
@@ -30,14 +33,29 @@ func ReadStory(c *gin.Context) {
 	}
 	c.JSON(200, story)
 }
-
+// @Summary 添加一个历史事件
+// @Tags stories
+// @Accept  json
+// @Produce  json
+// @Param   story      body models.Story true  "历史事件"
+// @Success 200 {object} models.Story
+// @Router /stories [POST]
+// @Security ApiKeyAuth
 func CreateStory(c *gin.Context) {
 	var story models.Story
-	_ = c.BindJSON(&story) //绑定一个请求主体到一个类型
+	_ = c.BindJSON(&story)
 	Global.Database.Create(&story)
 	c.JSON(200, story)
 }
-
+// @Summary 更改一个历史事件
+// @Tags stories
+// @Accept  json
+// @Produce  json
+// @Param   id      path int true  "历史事件id" default(1)
+// @Param   story      body models.Story true  "历史事件"
+// @Success 200 {object} models.Story
+// @Router /stories/{id} [PUT]
+// @Security ApiKeyAuth
 func UpdateStory(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var story models.Story
@@ -51,7 +69,14 @@ func UpdateStory(c *gin.Context) {
 		c.JSON(200, story)
 	}
 }
-
+// @Summary 删除一个历史事件
+// @Tags stories
+// @Accept  json
+// @Produce  json
+// @Param   id      path int true  "历史事件id" default(1)
+// @Success 200 {object} models.Story
+// @Router /stories/{id} [DELETE]
+// @Security ApiKeyAuth
 func DeleteStory(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var story models.Story
