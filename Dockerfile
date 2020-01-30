@@ -1,34 +1,18 @@
-FROM golang:latest
+FROM golang as build
 
-#WORKDIR $GOPATH/src
+ENV GOPROXY https://goproxy.cn
+ENV GO111MODULE on
 
-#RUN go env -w GOPROXY=https://goproxy.cn,direct
+WORKDIR /go/cache
 
-RUN export GO111MODULE=on
-
-EXPOSE 8080
-
-WORKDIR $GOPATH/src/Wizz-Home-Page
-
-#RUN go get -v github.com/appleboy/gin-jwt/v2
-#
-#RUN go get -u -v github.com/gin-gonic/gin
-#
-#RUN go get -u github.com/go-sql-driver/mysql
-#
-#RUN go get -u github.com/jinzhu/gorm
-#
-#RUN go get -u github.com/mattn/go-sqlite3
-#
-#RUN go get -u github.com/spf13/viper
-
-
-
-ADD . $GOPATH/src/Wizz-Home-Page
-
-#RUN go get -v github.com/gin-gonic/gin
-#RUN go get -v github.com/appleboy/gin-jwt/v2
-
+ADD go.mod .
+ADD go.sum .
 RUN go mod download
 
-CMD [ "go","run","main.go" ]
+WORKDIR /go/release/Wizz-Home-Page
+
+ADD . /go/release/Wizz-Home-Page
+
+RUN go build -v -x main.go
+
+CMD ["./main"]

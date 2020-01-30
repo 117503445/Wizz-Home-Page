@@ -25,7 +25,7 @@ definitions:
     - password
     - username
     type: object
-host: ggtaiwan.117503445.top:8080
+host: ali.117503445.top:8080
 info:
   contact:
     email: t117503445@gmail.com
