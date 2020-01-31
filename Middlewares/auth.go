@@ -5,6 +5,9 @@ import (
 	"fmt"
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
+	"math/rand"
+	"os"
 	"time"
 )
 
@@ -20,6 +23,35 @@ type User struct {
 	UserName  string
 	FirstName string
 	LastName  string
+}
+
+func getRandomBytes(length int) []byte {
+	str := "0123456789abcdefghijklmnopqrstuvwxyz"
+	bytes := []byte(str)
+
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+
+	var result []byte
+
+	for i := 0; i < length; i++ {
+		result = append(result, bytes[r.Intn(len(bytes))])
+	}
+	return result
+}
+
+func getSecretKey() []byte {
+	pathKey := "./data/key.txt"
+	b, err := ioutil.ReadFile(pathKey)
+	if err == nil {
+		return b
+	} else {
+		b := getRandomBytes(256)
+		err = ioutil.WriteFile(pathKey, b, os.ModePerm)
+		if err != nil {
+			fmt.Println(err)
+		}
+		return b
+	}
 }
 
 func payloadFunc(data interface{}) jwt.MapClaims {
@@ -91,8 +123,8 @@ func unauthorized(c *gin.Context, code int, message string) {
 }
 func GetAuthMiddleware() *jwt.GinJWTMiddleware {
 	authMiddleware, err := jwt.New(&jwt.GinJWTMiddleware{
-		Realm:           "test zone",
-		Key:             []byte("secret key"), //todo:Edit secret key
+		Realm:           "wizz zone",
+		Key:             getSecretKey(),
 		Timeout:         time.Hour * 24 * 7,
 		MaxRefresh:      time.Hour * 24 * 7,
 		IdentityKey:     identityKey,
