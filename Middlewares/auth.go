@@ -76,7 +76,7 @@ func identityHandler(c *gin.Context) interface{} {
 // @Tags 身份验证
 // @Accept  json
 // @Produce  json
-// @Param   loginVals      body route.login true  "登录值"
+// @Param   loginVals      body Middlewares.login true  "登录值"
 // @Success 200 {string} string "{"code":200,"expire":"2020-02-05T23:11:41+08:00","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODA5MTU1MDEsImlkIjoiYWRtaW4iLCJvcmlnX2lhdCI6MTU4MDMxMDcwMX0.GWlmyTfCkXQYwgbtuTgVSTUSJXDcoDb_bptgRpt4HCU"}"
 // @Router /auth/login [POST]
 func authenticator(c *gin.Context) (interface{}, error) {

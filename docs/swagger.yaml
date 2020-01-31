@@ -1,5 +1,14 @@
 basePath: /api
 definitions:
+  Middlewares.login:
+    properties:
+      password:
+        example: admin
+        type: string
+      username:
+        example: admin
+        type: string
+    type: object
   httpModels.PostStory:
     properties:
       name:
@@ -126,16 +135,7 @@ definitions:
         example: 1580397149
         type: integer
     type: object
-  route.login:
-    properties:
-      password:
-        example: admin
-        type: string
-      username:
-        example: admin
-        type: string
-    type: object
-host: localhost:8080
+host: ali.117503445.top:8080
 info:
   contact:
     email: t117503445@gmail.com
@@ -160,7 +160,7 @@ paths:
         name: loginVals
         required: true
         schema:
-          $ref: '#/definitions/route.login'
+          $ref: '#/definitions/Middlewares.login'
       produces:
       - application/json
       responses:

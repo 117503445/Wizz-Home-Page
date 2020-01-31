@@ -17,7 +17,7 @@
         },
         "version": "1.0"
     },
-    "host": "localhost:8080",
+    "host": "ali.117503445.top:8080",
     "basePath": "/api",
     "paths": {
         "/auth/login": {
@@ -40,7 +40,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/route.login"
+                            "$ref": "#/definitions/Middlewares.login"
                         }
                     }
                 ],
@@ -296,6 +296,19 @@
         }
     },
     "definitions": {
+        "Middlewares.login": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "example": "admin"
+                },
+                "username": {
+                    "type": "string",
+                    "example": "admin"
+                }
+            }
+        },
         "httpModels.PostStory": {
             "type": "object",
             "properties": {
@@ -462,19 +475,6 @@
                 "timeStamp": {
                     "type": "integer",
                     "example": 1580397149
-                }
-            }
-        },
-        "route.login": {
-            "type": "object",
-            "properties": {
-                "password": {
-                    "type": "string",
-                    "example": "admin"
-                },
-                "username": {
-                    "type": "string",
-                    "example": "admin"
                 }
             }
         }
