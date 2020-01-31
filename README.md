@@ -99,3 +99,9 @@ docker run --name WizzHomePage -d -p 8080:8080 wizz
 运行名为 WizzHomePage 的 CONTAINERS
 
 在 Windows 上,上面 3 步 也可以通过运行 docker.ps1 完成
+
+## 运行时文件
+
+运行时产生的文件都在 ./data 下,包括数据库和图片日志等.
+
+日志在 ./data/logs 文件夹中,每次运行都会产生一个以运行时间命名的日志.

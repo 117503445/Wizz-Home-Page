@@ -95,14 +95,15 @@ func main() {
 		log.Println("read config error", err)
 	}
 
-	db := viper.Get("database")
-	fmt.Printf("Using %v \n", db)
-
-	if db == "sqlite3" {
-		Global.Database, err = gorm.Open("sqlite3", "./data/Wizz-Home-Page.Database")
-	} else if db == "mysql" {
-		Global.Database, err = gorm.Open("mysql", getMysqlConnectString())
-	}
+	//db := viper.Get("database")
+	//fmt.Printf("Using %v \n", db)
+	//
+	//if db == "sqlite3" {
+	//	Global.Database, err = gorm.Open("sqlite3", "./data/Wizz-Home-Page.Database")
+	//} else if db == "mysql" {
+	//	Global.Database, err = gorm.Open("mysql", getMysqlConnectString())
+	//}
+	Global.Database, err = gorm.Open("sqlite3", "./data/Wizz-Home-Page.Database")
 	if err != nil {
 		log.Println(err)
 		log.Fatal("Database connect error")
