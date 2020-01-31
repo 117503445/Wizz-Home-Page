@@ -7,4 +7,4 @@ import (
 
 var Database *gorm.DB
 
-var Engine = gin.Default()
+var Engine *gin.Engine

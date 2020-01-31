@@ -20,4 +20,4 @@
 /out
 /config.json
 
-*.Database
+/data
