@@ -63,7 +63,7 @@ func SafeMkdir(path string) {
 // @license.name GNU General Public License v3.0
 // @license.url https://github.com/TGclub/Wizz-Home-Page/blob/master/LICENSE
 
-// @host localhost:8080
+// @host ali.117503445.top:8080
 // @BasePath /api
 // @schemes http
 
@@ -91,7 +91,7 @@ func main() {
 
 	err = viper.ReadInConfig()
 	if err != nil {
-		log.Println("read config error", err)
+		log.Fatalln("read config error", err)
 	}
 
 	Global.NameAndPassword = viper.GetStringMapString("account")
@@ -115,9 +115,9 @@ func main() {
 	Global.Database.AutoMigrate(&models.Member{})
 
 	Global.Engine = gin.Default()
-	Global.Engine.Use(route.MyLogger())
 
-	route.ProcessRoute()
+
+	route.InitRoute()
 
 	//接入前端
 	Global.Engine.StaticFile("", "./html")
