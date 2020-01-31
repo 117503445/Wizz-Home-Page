@@ -48,6 +48,8 @@ go run main.go
 
 #### 可选:连接远程服务器的 Docker server
 
+先根据 <https://coreos.com/os/docs/latest/customizing-docker.html> 开启 Docker 远程访问
+
 在本地环境变量中,添加
 
 DOCKER_HOST
