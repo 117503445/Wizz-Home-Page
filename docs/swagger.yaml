@@ -1,5 +1,17 @@
 basePath: /api
 definitions:
+  httpModels.PostStory:
+    properties:
+      name:
+        example: 为之诞生
+        type: string
+      storyDescribe:
+        example: 11月,前身 TgClub 诞生
+        type: string
+      timeStamp:
+        example: 1580397149
+        type: integer
+    type: object
   models.Product:
     properties:
       describe:
@@ -87,9 +99,6 @@ definitions:
       username:
         example: admin
         type: string
-    required:
-    - password
-    - username
     type: object
 host: ali.117503445.top:8080
 info:
@@ -168,7 +177,7 @@ paths:
         name: story
         required: true
         schema:
-          $ref: '#/definitions/models.Story'
+          $ref: '#/definitions/httpModels.PostStory'
       produces:
       - application/json
       responses:
@@ -196,9 +205,13 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: '{"message": "delete success"}'
           schema:
-            $ref: '#/definitions/models.Story'
+            type: string
+        "404":
+          description: '{"message": "Story not found"}'
+          schema:
+            type: string
       security:
       - ApiKeyAuth: []
       summary: 删除一个历史事件
@@ -243,7 +256,7 @@ paths:
         name: story
         required: true
         schema:
-          $ref: '#/definitions/models.Story'
+          $ref: '#/definitions/httpModels.PostStory'
       produces:
       - application/json
       responses:
@@ -251,6 +264,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Story'
+        "404":
+          description: '{"message": "Story not found"}'
+          schema:
+            type: string
       security:
       - ApiKeyAuth: []
       summary: 更改一个历史事件

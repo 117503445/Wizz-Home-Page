@@ -126,7 +126,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Story"
+                            "$ref": "#/definitions/httpModels.PostStory"
                         }
                     }
                 ],
@@ -208,7 +208,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Story"
+                            "$ref": "#/definitions/httpModels.PostStory"
                         }
                     }
                 ],
@@ -217,6 +217,12 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/models.Story"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\": \"Story not found\"}",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
@@ -249,9 +255,15 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "{\"message\": \"delete success\"}",
                         "schema": {
-                            "$ref": "#/definitions/models.Story"
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\": \"Story not found\"}",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
@@ -259,6 +271,23 @@
         }
     },
     "definitions": {
+        "httpModels.PostStory": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "为之诞生"
+                },
+                "storyDescribe": {
+                    "type": "string",
+                    "example": "11月,前身 TgClub 诞生"
+                },
+                "timeStamp": {
+                    "type": "integer",
+                    "example": 1580397149
+                }
+            }
+        },
         "models.Product": {
             "type": "object",
             "properties": {
@@ -367,10 +396,6 @@
         },
         "route.login": {
             "type": "object",
-            "required": [
-                "password",
-                "username"
-            ],
             "properties": {
                 "password": {
                     "type": "string",

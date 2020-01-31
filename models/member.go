@@ -2,7 +2,7 @@ package models
 //成员
 type Member struct {
 	//member's id
-	ID			uint   `json:"id"`
+	ID			int   `json:"id"`
 	//成员姓名
 	Name		string
 	//成员头像图片的url

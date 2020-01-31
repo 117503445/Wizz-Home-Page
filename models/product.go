@@ -3,7 +3,7 @@ package models
 //产品
 type Product struct {
 	//product's id
-	ID uint `json:"id" example:"1"`
+	ID int `json:"id" example:"1"`
 	// 产品名称
 	Name string `example:"一起来开黑"`
 	//一句话介绍

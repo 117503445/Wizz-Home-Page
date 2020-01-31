@@ -14,8 +14,8 @@ import (
 )
 
 type login struct {
-	Username string `example:"admin" form:"username" json:"username" binding:"required"`
-	Password string `example:"admin" form:"password" json:"password" binding:"required"`
+	Username string `example:"admin" json:"username"`
+	Password string `example:"admin" json:"password"`
 }
 
 var identityKey = "id"
