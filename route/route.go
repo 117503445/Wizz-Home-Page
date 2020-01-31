@@ -147,4 +147,20 @@ func ProcessRoute() {
 	})
 
 	Global.Engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+
+}
+
+func MyLogger() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		log.Println("Using mid logger")
+		t := time.Now()
+		// before request
+		c.Next()
+		// after request
+		latency := time.Since(t)
+		log.Println(latency)
+		log.Println(c.Writer.Status())
+		log.Println(c.)
+	}
 }
