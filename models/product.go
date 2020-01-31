@@ -12,7 +12,7 @@ type Product struct {
 	Describe string `example:"大学生喜闻乐见的跨校交友平台，一键匹配聊天约游戏，一起来开黑帮你聊天&游戏两不误~"`
 	//合作方
 	Partner string `example:"腾讯"`
-	//项目类型
+	//项目类型,0 - 校企合作,1 - 校园合作,2 - 校内自研
 	ProjectType int `example:"" enums:"0,1"`
 
 	//项目图标的 Base64 字符串

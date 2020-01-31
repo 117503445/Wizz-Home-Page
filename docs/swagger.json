@@ -311,7 +311,7 @@
                     "example": "腾讯"
                 },
                 "projectType": {
-                    "description": "项目类型",
+                    "description": "项目类型,0 - 校企合作,1 - 校园合作,2 - 校内自研",
                     "type": "integer",
                     "enum": [
                         0,
@@ -378,7 +378,7 @@
                 },
                 "username": {
                     "type": "string",
-                    "example": "adminmodel"
+                    "example": "admin"
                 }
             }
         }
