@@ -1,5 +1,4 @@
 {
-  "database": "sqlite3",
   "account": {
     "admin": "admin"
   }

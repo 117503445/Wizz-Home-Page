@@ -12,6 +12,41 @@ definitions:
         example: 1580397149
         type: integer
     type: object
+  models.Member:
+    properties:
+      describe:
+        description: 个人简介
+        example: 超级帅的前端dalao
+        type: string
+      id:
+        description: member's id
+        example: 1
+        type: integer
+      memberType:
+        description: 成员类型,0 - 学生,1 - 导师
+        enum:
+        - 0
+        - 1
+        example: 0
+        type: integer
+      name:
+        description: 成员姓名
+        example: tengye
+        type: string
+      omitempty:
+        description: 如果是老师,则有若干头衔
+        items:
+          type: string
+        type: array
+      schoolYear:
+        description: 入学年份
+        example: 2017
+        type: integer
+      urlAvatar:
+        description: 成员头像图片的url
+        example: http://wuygewfuyd/weiug.jpg
+        type: string
+    type: object
   models.Product:
     properties:
       describe:
@@ -113,22 +148,6 @@ info:
   title: Wizz-Home-Page API
   version: "1.0"
 paths:
-  /Products:
-    get:
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/models.Product'
-            type: array
-      summary: 获取所有产品
-      tags:
-      - 产品
   /auth/login:
     post:
       consumes:
@@ -152,6 +171,38 @@ paths:
       summary: 登录
       tags:
       - 身份验证
+  /members:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Member'
+            type: array
+      summary: 获取所有成员
+      tags:
+      - 成员
+  /products:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Product'
+            type: array
+      summary: 获取所有产品
+      tags:
+      - 产品
   /stories:
     get:
       consumes:

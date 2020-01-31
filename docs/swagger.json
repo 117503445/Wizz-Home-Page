@@ -20,31 +20,6 @@
     "host": "ali.117503445.top:8080",
     "basePath": "/api",
     "paths": {
-        "/Products": {
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "产品"
-                ],
-                "summary": "获取所有产品",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/models.Product"
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/auth/login": {
             "post": {
                 "description": "更改请求中的 Username 和 Password 进行登录。登陆成功以后，返回json中token字段比如说是\"token\":\"123\"，就在右上角Authorize按钮点一下，输入Bearer 123，大小写、空格敏感。然后就能使用需要身份验证的接口啦。",
@@ -74,6 +49,56 @@
                         "description": "{\"code\":200,\"expire\":\"2020-02-05T23:11:41+08:00\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODA5MTU1MDEsImlkIjoiYWRtaW4iLCJvcmlnX2lhdCI6MTU4MDMxMDcwMX0.GWlmyTfCkXQYwgbtuTgVSTUSJXDcoDb_bptgRpt4HCU\"}",
                         "schema": {
                             "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/members": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "成员"
+                ],
+                "summary": "获取所有成员",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Member"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/products": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "产品"
+                ],
+                "summary": "获取所有产品",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Product"
+                            }
                         }
                     }
                 }
@@ -285,6 +310,52 @@
                 "timeStamp": {
                     "type": "integer",
                     "example": 1580397149
+                }
+            }
+        },
+        "models.Member": {
+            "type": "object",
+            "properties": {
+                "describe": {
+                    "description": "个人简介",
+                    "type": "string",
+                    "example": "超级帅的前端dalao"
+                },
+                "id": {
+                    "description": "member's id",
+                    "type": "integer",
+                    "example": 1
+                },
+                "memberType": {
+                    "description": "成员类型,0 - 学生,1 - 导师",
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1
+                    ],
+                    "example": 0
+                },
+                "name": {
+                    "description": "成员姓名",
+                    "type": "string",
+                    "example": "tengye"
+                },
+                "omitempty": {
+                    "description": "如果是老师,则有若干头衔",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "schoolYear": {
+                    "description": "入学年份",
+                    "type": "integer",
+                    "example": 2017
+                },
+                "urlAvatar": {
+                    "description": "成员头像图片的url",
+                    "type": "string",
+                    "example": "http://wuygewfuyd/weiug.jpg"
                 }
             }
         },

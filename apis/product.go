@@ -10,7 +10,7 @@ import (
 // @Accept  json
 // @Produce  json
 // @Success 200 {array} models.Product
-// @Router /Products [get]
+// @Router /products [get]
 func ReadProducts(c *gin.Context){
 	var products []models.Product
 	Global.Database.Find(&products)
