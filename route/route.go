@@ -3,7 +3,7 @@ package route
 import (
 	"Wizz-Home-Page/Global"
 	"Wizz-Home-Page/apis"
-	_ "Wizz-Home-Page/docs"//引入 swagger 必备
+	_ "Wizz-Home-Page/docs" //引入 swagger 必备
 	"fmt"
 	"github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
@@ -43,25 +43,34 @@ func identityHandler(c *gin.Context) interface{} {
 		UserName: claims[identityKey].(string),
 	}
 }
+
 // @Summary 登录
 // @Description 更改请求中的 Username 和 Password 进行登录。登陆成功以后，返回json中token字段比如说是"token":"123"，就在右上角Authorize按钮点一下，输入Bearer 123，大小写、空格敏感。然后就能使用需要身份验证的接口啦。
 // @Tags 身份验证
 // @Accept  json
 // @Produce  json
-// @Param   loginVals      body route.login true  "登录值" default({"password":"admin","username":"admin"})
+// @Param   loginVals      body route.login true  "登录值"
 // @Success 200 {string} string "{"code":200,"expire":"2020-02-05T23:11:41+08:00","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODA5MTU1MDEsImlkIjoiYWRtaW4iLCJvcmlnX2lhdCI6MTU4MDMxMDcwMX0.GWlmyTfCkXQYwgbtuTgVSTUSJXDcoDb_bptgRpt4HCU"}"
 // @Router /auth/login [POST]
 func authenticator(c *gin.Context) (interface{}, error) {
 	fmt.Println("Authenticator")
-	var loginVals login
-	if err := c.ShouldBindJSON(&loginVals); err != nil {
+	var loginVal login
+	if err := c.ShouldBindJSON(&loginVal); err != nil {
 		return "", jwt.ErrMissingLoginValues
 	}
-	userID := loginVals.Username
-	password := loginVals.Password
+	userID := loginVal.Username
+	password := loginVal.Password
 
-	if userID == "admin" && password == "admin" { //todo:Edit password
-		return &User{
+	//if userID == "admin" && password == "admin" {
+	//	return &User{
+	//		UserName:  userID,
+	//		LastName:  "Bo-Yi",
+	//		FirstName: "Wu",
+	//	}, nil
+	//}
+
+	if Global.NameAndPassword[userID] == password {
+		return &User{ //todo 修改User
 			UserName:  userID,
 			LastName:  "Bo-Yi",
 			FirstName: "Wu",

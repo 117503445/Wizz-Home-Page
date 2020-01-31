@@ -1,6 +1,6 @@
 {
   "database": "sqlite3",
-  "account": [
-    {"admin": "admin"}
-  ]
+  "account": {
+    "admin": "admin"
+  }
 }

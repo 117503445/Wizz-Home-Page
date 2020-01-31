@@ -85,7 +85,7 @@ definitions:
         example: admin
         type: string
       username:
-        example: admin
+        example: adminmodel
         type: string
     required:
     - password

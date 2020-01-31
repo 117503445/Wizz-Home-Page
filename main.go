@@ -16,17 +16,17 @@ import (
 	"time"
 )
 
-func getMysqlConnectString() string {
-	hostname := viper.Get("mysql.hostname")
-	port := viper.Get("mysql.port")
-	un := viper.Get("mysql.username")
-	pd := viper.Get("mysql.password")
-	dbName := viper.Get("mysql.databaseName")
-	connectString := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8&parseTime=True&loc=Local", un, pd, hostname, port, dbName)
-	fmt.Print("mysql connect string is -->")
-	fmt.Println(connectString)
-	return connectString
-}
+//func getMysqlConnectString() string {
+//	hostname := viper.Get("mysql.hostname")
+//	port := viper.Get("mysql.port")
+//	un := viper.Get("mysql.username")
+//	pd := viper.Get("mysql.password")
+//	dbName := viper.Get("mysql.databaseName")
+//	connectString := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8&parseTime=True&loc=Local", un, pd, hostname, port, dbName)
+//	fmt.Print("mysql connect string is -->")
+//	fmt.Println(connectString)
+//	return connectString
+//}
 
 //判断 文件or路径 是否存在
 func Exists(path string) bool {
@@ -95,6 +95,8 @@ func main() {
 		log.Println("read config error", err)
 	}
 
+	Global.NameAndPassword = viper.GetStringMapString("account")
+
 	//db := viper.Get("database")
 	//fmt.Printf("Using %v \n", db)
 	//
@@ -113,12 +115,10 @@ func main() {
 	Global.Database.AutoMigrate(&models.Product{})
 	Global.Database.AutoMigrate(&models.Member{})
 
-
-	Global.Engine=gin.Default()
+	Global.Engine = gin.Default()
 	route.ProcessRoute()
 
-
-
+	//接入前端
 	Global.Engine.StaticFile("", "./html")
 	Global.Engine.Static("static", "./html/static")
 
