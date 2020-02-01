@@ -54,6 +54,31 @@
                 }
             }
         },
+        "/logs": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "日志"
+                ],
+                "summary": "获取所有日志",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.ServerLog"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/members": {
             "get": {
                 "consumes": [
@@ -453,6 +478,40 @@
                     "items": {
                         "type": "string"
                     }
+                }
+            }
+        },
+        "models.ServerLog": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "log's id",
+                    "type": "integer",
+                    "example": 1
+                },
+                "modelName": {
+                    "description": "请求POST,PUT or DELETE 的Model中的name字段",
+                    "type": "string"
+                },
+                "requestMethod": {
+                    "description": "请求的HTTP方法",
+                    "type": "string"
+                },
+                "requestURI": {
+                    "description": "请求的URI",
+                    "type": "string"
+                },
+                "responseCode": {
+                    "description": "返回状态码",
+                    "type": "string"
+                },
+                "timeStamp": {
+                    "description": "收到请求的时间,精准到秒的格林威治时间戳",
+                    "type": "integer"
+                },
+                "username": {
+                    "description": "用户名,只有 POST,PUT 这些需要token的接口才非空",
+                    "type": "string"
                 }
             }
         },

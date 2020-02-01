@@ -95,7 +95,7 @@ func main() {
 		log.Fatalln("read config error", err)
 	}
 
-	Middlewares.NameAndPassword= viper.GetStringMapString("account")
+	Middlewares.NameAndPassword = viper.GetStringMapString("account")
 
 	//db := viper.Get("database")
 	//fmt.Printf("Using %v \n", db)
@@ -107,16 +107,15 @@ func main() {
 	//}
 	Global.Database, err = gorm.Open("sqlite3", "./data/Wizz-Home-Page.Database")
 	if err != nil {
-		log.Println(err)
-		log.Fatal("Database connect error")
+		log.Fatal(err)
 	}
 
 	Global.Database.AutoMigrate(&models.Story{})
 	Global.Database.AutoMigrate(&models.Product{})
 	Global.Database.AutoMigrate(&models.Member{})
+	Global.Database.AutoMigrate(&models.ServerLog{})
 
 	Global.Engine = gin.Default()
-
 
 	route.InitRoute()
 

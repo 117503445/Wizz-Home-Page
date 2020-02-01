@@ -119,6 +119,31 @@ definitions:
           type: string
         type: array
     type: object
+  models.ServerLog:
+    properties:
+      id:
+        description: log's id
+        example: 1
+        type: integer
+      modelName:
+        description: 请求POST,PUT or DELETE 的Model中的name字段
+        type: string
+      requestMethod:
+        description: 请求的HTTP方法
+        type: string
+      requestURI:
+        description: 请求的URI
+        type: string
+      responseCode:
+        description: 返回状态码
+        type: string
+      timeStamp:
+        description: 收到请求的时间,精准到秒的格林威治时间戳
+        type: integer
+      username:
+        description: 用户名,只有 POST,PUT 这些需要token的接口才非空
+        type: string
+    type: object
   models.Story:
     properties:
       id:
@@ -171,6 +196,22 @@ paths:
       summary: 登录
       tags:
       - 身份验证
+  /logs:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ServerLog'
+            type: array
+      summary: 获取所有日志
+      tags:
+      - 日志
   /members:
     get:
       consumes:

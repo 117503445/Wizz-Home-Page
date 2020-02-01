@@ -42,6 +42,9 @@ func InitRoute() {
 	memberGroup.PUT("/:id", authMiddleware.MiddlewareFunc(), apis.UpdateMember)
 	memberGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), apis.DeleteMember)
 
+	serverLogGroup:=apiGroup.Group("/logs")
+	serverLogGroup.GET("",apis.ReadServerLogs)
+
 	Global.Engine.GET("/ver", func(c *gin.Context) {
 		c.JSON(200, "0131-1253")
 	})
