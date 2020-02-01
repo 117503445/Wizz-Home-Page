@@ -2,6 +2,7 @@ package main
 
 import (
 	"Wizz-Home-Page/Global"
+	"Wizz-Home-Page/Middlewares"
 	"Wizz-Home-Page/models"
 	"Wizz-Home-Page/route"
 	"fmt"
@@ -63,7 +64,7 @@ func SafeMkdir(path string) {
 // @license.name GNU General Public License v3.0
 // @license.url https://github.com/TGclub/Wizz-Home-Page/blob/master/LICENSE
 
-// @host ali.117503445.top:8080
+// @host localhost:8080
 // @BasePath /api
 // @schemes http
 
@@ -94,7 +95,7 @@ func main() {
 		log.Fatalln("read config error", err)
 	}
 
-	Global.NameAndPassword = viper.GetStringMapString("account")
+	Middlewares.NameAndPassword= viper.GetStringMapString("account")
 
 	//db := viper.Get("database")
 	//fmt.Printf("Using %v \n", db)

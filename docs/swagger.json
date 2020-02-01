@@ -17,7 +17,7 @@
         },
         "version": "1.0"
     },
-    "host": "ali.117503445.top:8080",
+    "host": "localhost:8080",
     "basePath": "/api",
     "paths": {
         "/auth/login": {

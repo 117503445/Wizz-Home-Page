@@ -1,7 +1,6 @@
 package Middlewares
 
 import (
-	"Wizz-Home-Page/Global"
 	"fmt"
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
@@ -17,12 +16,11 @@ type login struct {
 }
 
 var identityKey = "id"
+var NameAndPassword map[string]string
 
 // User demo
 type User struct {
-	UserName  string
-	FirstName string
-	LastName  string
+	UserName string
 }
 
 func getRandomBytes(length int) []byte {
@@ -55,7 +53,6 @@ func getSecretKey() []byte {
 }
 
 func payloadFunc(data interface{}) jwt.MapClaims {
-	fmt.Println("PayloadFunc")
 	if v, ok := data.(*User); ok {
 		return jwt.MapClaims{
 			identityKey: v.UserName,
@@ -64,7 +61,6 @@ func payloadFunc(data interface{}) jwt.MapClaims {
 	return jwt.MapClaims{}
 }
 func identityHandler(c *gin.Context) interface{} {
-	fmt.Println("IdentityHandler")
 	claims := jwt.ExtractClaims(c)
 	return &User{
 		UserName: claims[identityKey].(string),
@@ -80,7 +76,6 @@ func identityHandler(c *gin.Context) interface{} {
 // @Success 200 {string} string "{"code":200,"expire":"2020-02-05T23:11:41+08:00","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODA5MTU1MDEsImlkIjoiYWRtaW4iLCJvcmlnX2lhdCI6MTU4MDMxMDcwMX0.GWlmyTfCkXQYwgbtuTgVSTUSJXDcoDb_bptgRpt4HCU"}"
 // @Router /auth/login [POST]
 func authenticator(c *gin.Context) (interface{}, error) {
-	fmt.Println("Authenticator")
 	var loginVal login
 	if err := c.ShouldBindJSON(&loginVal); err != nil {
 		return "", jwt.ErrMissingLoginValues
@@ -96,24 +91,17 @@ func authenticator(c *gin.Context) (interface{}, error) {
 	//	}, nil
 	//}
 
-	if Global.NameAndPassword[userID] == password {
-		return &User{ //todo 修改User
-			UserName:  userID,
-			LastName:  "Bo-Yi",
-			FirstName: "Wu",
+	if NameAndPassword[userID] == password {
+		return &User{
+			UserName: userID,
 		}, nil
 	}
 
 	return nil, jwt.ErrFailedAuthentication
 }
 func authorizator(data interface{}, c *gin.Context) bool {
-	fmt.Print("Authorizator->")
-	fmt.Println(data)
-	if v, ok := data.(*User); ok && v.UserName == "admin" {
-		return true
-	}
-	//todo:优化语句结构
-	return false
+	_, ok := data.(*User)
+	return ok
 }
 func unauthorized(c *gin.Context, code int, message string) {
 	c.JSON(code, gin.H{
