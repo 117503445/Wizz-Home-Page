@@ -4,7 +4,10 @@ import (
 	"Wizz-Home-Page/Global"
 	"Wizz-Home-Page/models"
 	"bytes"
+	"encoding/json"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
+	"log"
 	"strconv"
 	"strings"
 	"time"
@@ -29,18 +32,15 @@ func (r responseBodyWriter) Write(b []byte) (int, error) {
 }
 func GetLogMiddlewareFunc() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		w := &responseBodyWriter{body: &bytes.Buffer{}, ResponseWriter: c.Writer}
-		c.Writer = w
-		timestamp := time.Now().Unix()
+		//w := &responseBodyWriter{body: &bytes.Buffer{}, ResponseWriter: c.Writer}
+		//c.Writer = w
 
-		id := c.Params.ByName("id")
+		timestamp := time.Now().Unix()
 		method := c.Request.Method
 		name := "Can't find name"
 		uri := c.Request.RequestURI
-
 		if method == "PUT" || method == "DELETE" {
-
-
+			id := c.Params.ByName("id")
 			if strings.Contains(uri, "stories") {
 				var story models.Story
 				Global.Database.First(&story, id)
@@ -56,36 +56,40 @@ func GetLogMiddlewareFunc() gin.HandlerFunc {
 			}
 		} else if method == "POST" {
 			var nm nameModel
-			_ = c.ShouldBind(&nm)
+			var b []byte
+			b, err := ioutil.ReadAll(c.Request.Body)
+			if err != nil {
+				log.Println(err)
+			}
+
+			err=c.Request.Body.Close()
+			if err != nil {
+				log.Println(err)
+			}
+			c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(b))
+
+			err = json.Unmarshal(b, &nm)
+			if err != nil {
+				log.Println(err)
+			}
 			name = nm.Name
 		}
 
-		//t := time.Now()
-		// before request
 		c.Next()
-		// after request
-		//latency := time.Since(t)
-		//log.Println(c.ClientIP())
-		//log.Println(latency)
-		//log.Println(c.Request.Method)
-		//log.Println(c.Request.Header)
+
 		user, exists := c.Get(identityKey)
 		if exists {
-
+			code := strconv.Itoa(c.Writer.Status())
 			serverLog := models.ServerLog{
 				TimeStamp:     timestamp,
 				RequestMethod: c.Request.Method,
 				RequestURI:    uri,
-				ResponseCode:  strconv.Itoa(c.Writer.Status()),
+				ResponseCode:  code,
 				Username:      user.(*User).UserName,
 				ModelName:     name,
 			}
+
 			Global.Database.Create(&serverLog)
 		}
-		//log.Println(c.Request.RequestURI)
-		//log.Println(c.Request.Body)
-		//log.Println(c.Writer.Status())
-		//log.Println(w.body.String())
-
 	}
 }

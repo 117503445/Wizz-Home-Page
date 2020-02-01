@@ -64,7 +64,7 @@ func SafeMkdir(path string) {
 // @license.name GNU General Public License v3.0
 // @license.url https://github.com/TGclub/Wizz-Home-Page/blob/master/LICENSE
 
-// @host localhost:8080
+// @host ali.117503445.top:8080
 // @BasePath /api
 // @schemes http
 

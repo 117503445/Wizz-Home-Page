@@ -11,8 +11,7 @@ import (
 )
 
 func InitRoute() {
-	Global.Engine.Use(Middlewares.GetLogMiddlewareFunc())
-
+	logMiddleware := Middlewares.GetLogMiddlewareFunc()
 	authMiddleware := Middlewares.GetAuthMiddleware()
 
 	apiGroup := Global.Engine.Group("/api")
@@ -21,12 +20,13 @@ func InitRoute() {
 	auth.POST("/login", authMiddleware.LoginHandler)
 
 	storyGroup := apiGroup.Group("/stories")
+	//storyGroup.Use(logMiddleware)
 	storyGroup.GET("", apis.ReadStories)
 	storyGroup.GET("/:id", apis.ReadStory)
-	storyGroup.Use()
-	storyGroup.POST("", authMiddleware.MiddlewareFunc(), apis.CreateStory)
-	storyGroup.PUT("/:id", authMiddleware.MiddlewareFunc(), apis.UpdateStory)
-	storyGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), apis.DeleteStory)
+
+	storyGroup.POST("", authMiddleware.MiddlewareFunc(), logMiddleware, apis.CreateStory)
+	storyGroup.PUT("/:id", authMiddleware.MiddlewareFunc(), logMiddleware, apis.UpdateStory)
+	storyGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), logMiddleware, apis.DeleteStory)
 
 	productGroup := apiGroup.Group("/products")
 	productGroup.GET("", apis.ReadProducts)
@@ -42,8 +42,8 @@ func InitRoute() {
 	memberGroup.PUT("/:id", authMiddleware.MiddlewareFunc(), apis.UpdateMember)
 	memberGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), apis.DeleteMember)
 
-	serverLogGroup:=apiGroup.Group("/logs")
-	serverLogGroup.GET("",apis.ReadServerLogs)
+	serverLogGroup := apiGroup.Group("/logs")
+	serverLogGroup.GET("", apis.ReadServerLogs)
 
 	Global.Engine.GET("/ver", func(c *gin.Context) {
 		c.JSON(200, "0131-1253")
@@ -52,5 +52,3 @@ func InitRoute() {
 	Global.Engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 }
-
-

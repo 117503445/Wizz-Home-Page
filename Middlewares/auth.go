@@ -5,6 +5,7 @@ import (
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
+	"log"
 	"math/rand"
 	"os"
 	"time"
@@ -78,6 +79,7 @@ func identityHandler(c *gin.Context) interface{} {
 func authenticator(c *gin.Context) (interface{}, error) {
 	var loginVal login
 	if err := c.ShouldBindJSON(&loginVal); err != nil {
+		log.Println(err)
 		return "", jwt.ErrMissingLoginValues
 	}
 	userID := loginVal.Username
