@@ -1,5 +1,10 @@
 {
   "account": {
     "admin": "admin"
+  },
+  "qiniu": {
+    "ak": "",
+    "sk": "",
+    "bucket": ""
   }
 }

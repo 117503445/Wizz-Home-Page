@@ -3,6 +3,7 @@ package main
 import (
 	"Wizz-Home-Page/Global"
 	"Wizz-Home-Page/Middlewares"
+	"Wizz-Home-Page/apis"
 	"Wizz-Home-Page/models"
 	"Wizz-Home-Page/route"
 	"fmt"
@@ -97,6 +98,9 @@ func main() {
 
 	Middlewares.NameAndPassword = viper.GetStringMapString("account")
 
+	apis.Ak= viper.GetString("qiniu/ak")
+	apis.Sk=viper.GetString("qiniu/sk")
+	apis.Bucket=viper.GetString("qiniu/bucket")
 	//db := viper.Get("database")
 	//fmt.Printf("Using %v \n", db)
 	//

@@ -54,6 +54,37 @@
                 }
             }
         },
+        "/image/UpToken": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片"
+                ],
+                "summary": "获取一个上传文件的upToken",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "要上传的文件名,如 abc.png",
+                        "name": "fileName",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "upToken",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/logs": {
             "get": {
                 "consumes": [

@@ -9,6 +9,7 @@ require (
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/jinzhu/gorm v1.9.12
 	github.com/mattn/go-sqlite3 v2.0.1+incompatible
+	github.com/qiniu/api.v7/v7 v7.4.1
 	github.com/spf13/viper v1.6.2
 	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14
 	github.com/swaggo/gin-swagger v1.2.0
