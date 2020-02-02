@@ -1,10 +1,14 @@
 # Wizz-Home-Page
 
-Wizz's Home Page
+为之工作室 Wizz 的主页
 
 ## 加载配置
 
 将 doc/config.json 复制到 项目根文件夹(和 main.go 同级),然后根据需要修改具体的配置项
+
+account 为账号密码, 可以填写 {"admin": "admin","hello":"world"} 创建多个账号.因为偷懒所以都用了明文储存账号,请勿填写自己的常用密码!!!哪天有空再优化身份认证功能 :D
+
+其中 图片 接口 需要填写 "qiniu" 有关字段.(因为七牛云有免费的 10 GB 空间) bucket 为空间名
 
 ## 接口文档
 
@@ -12,7 +16,11 @@ Wizz's Home Page
 
 <http://ali.117503445.top:8080/swagger/index.html>
 
-默认 host 是 ali.117503445.top:8080,如果要修改的话请修改 main.go 中的
+默认 host 是 ali.117503445.top:8080
+
+### 修改方法
+
+修改的话请修改 main.go 中的
 
 ```go
 // @host ali.117503445.top:8080
@@ -40,6 +48,18 @@ go run main.go
 
 可能对内存有要求.本项目在 1.7G 的 Google Cloud 服务器上编译时出现内存不够用的错误,但是在 2G 的阿里云学生机上可以正常编译.
 
+#### 网络要求
+
+已启用国内镜像代理,如果服务器在国内就不用动
+
+如果服务器在国外就编辑 Dockerfile 文件,删去
+
+``` docker
+ ENV GOPROXY https://goproxy.cn
+```
+
+这一行,取消代理
+
 #### 准备本机 docker 环境
 
 不管怎么样,需要在本地配置 docker 命令行工具
@@ -60,19 +80,11 @@ tcp://ali.117503445.top:2375
 
 配置完成后,本地 docker 工具默认就是对远程 docker 进行操作
 
-#### 编辑 Dockerfile 文件
-
-如果服务器在国内就不用动
-
-如果服务器在国外就删去
-
-``` docker
- ENV GOPROXY https://goproxy.cn
-```
-
-这一行,取消代理
-
 #### 构建镜像
+
+- 下面 3 步 也可以通过运行 BuildScripts/DeployDocker.py 完成
+
+- 在 Windows 上 ,下面 3 步 也可以通过运行 BuildScripts/DeployDocker.ps1 完成
 
 在项目根文件夹下,键入
 
@@ -98,10 +110,12 @@ docker run --name WizzHomePage -d -p 8080:8080 wizz
 
 运行名为 WizzHomePage 的 CONTAINERS
 
-在 Windows 上,上面 3 步 也可以通过运行 docker.ps1 完成
-
 ## 运行时文件
 
-运行时产生的文件都在 ./data 下,包括数据库和图片日志等.
+运行时产生的文件都在 ./data 下
+
+数据库文件为 Wizz-Home-Page.Database,采用 SQLite 3
 
 日志在 ./data/logs 文件夹中,每次运行都会产生一个以运行时间命名的日志.
+
+认证系统内部密码储存在 key.txt
