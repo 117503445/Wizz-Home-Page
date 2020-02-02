@@ -6,7 +6,6 @@ import (
 	"Wizz-Home-Page/apis"
 	"Wizz-Home-Page/models"
 	"Wizz-Home-Page/route"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
