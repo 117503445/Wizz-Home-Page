@@ -372,7 +372,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/httpModels.PostStory"
+                            "$ref": "#/definitions/httpModels.NoIdStory"
                         }
                     }
                 ],
@@ -454,7 +454,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/httpModels.PostStory"
+                            "$ref": "#/definitions/httpModels.NoIdStory"
                         }
                     }
                 ],
@@ -569,7 +569,7 @@
                 }
             }
         },
-        "httpModels.PostStory": {
+        "httpModels.NoIdStory": {
             "type": "object",
             "properties": {
                 "name": {

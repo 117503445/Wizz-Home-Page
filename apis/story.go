@@ -43,7 +43,7 @@ func ReadStory(c *gin.Context) {
 // @Tags 历史事件
 // @Accept  json
 // @Produce  json
-// @Param   story      body httpModels.PostStory true  "历史事件"
+// @Param   story      body httpModels.NoIdStory true  "历史事件"
 // @Success 200 {object} models.Story
 // @Router /stories [POST]
 // @Security ApiKeyAuth
@@ -63,7 +63,7 @@ func CreateStory(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param   id      path int true  "历史事件id" default(1)
-// @Param   story      body httpModels.PostStory true  "历史事件"
+// @Param   story      body httpModels.NoIdStory true  "历史事件"
 // @Success 200 {object} models.Story
 // @Failure 404 {string} string "{"message": "Story not found"}"
 // @Router /stories/{id} [PUT]

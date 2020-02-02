@@ -41,7 +41,7 @@ definitions:
         example: http://wuygewfuyd/weiug.jpg
         type: string
     type: object
-  httpModels.PostStory:
+  httpModels.NoIdStory:
     properties:
       name:
         example: 为之诞生
@@ -411,7 +411,7 @@ paths:
         name: story
         required: true
         schema:
-          $ref: '#/definitions/httpModels.PostStory'
+          $ref: '#/definitions/httpModels.NoIdStory'
       produces:
       - application/json
       responses:
@@ -490,7 +490,7 @@ paths:
         name: story
         required: true
         schema:
-          $ref: '#/definitions/httpModels.PostStory'
+          $ref: '#/definitions/httpModels.NoIdStory'
       produces:
       - application/json
       responses:
