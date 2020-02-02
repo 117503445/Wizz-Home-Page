@@ -1,15 +1,12 @@
 import os
 import subprocess
 import sys
+import call_cmd
+
 
 def init_swag():
-    p=os.path.split(sys.path[0])[0]
-    print(p)
-    cmd = 'swag i'
-    s=subprocess.run(cmd,cwd=str(p))
-    print(s)
-   
-    
+    call_cmd.call('swag i')
+
 
 if __name__ == "__main__":
     init_swag()

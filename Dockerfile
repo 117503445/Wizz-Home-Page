@@ -1,7 +1,6 @@
 FROM golang as build
 
-ENV GOPROXY https://goproxy.cn
-ENV GO111MODULE on
+ENV GOPROXY=https://goproxy.cn GO111MODULE=on GIN_MODE=release PORT=8080
 
 WORKDIR /go/cache
 

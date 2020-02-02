@@ -45,7 +45,6 @@ func Exists(path string) bool {
 //如果path文件夹不存在才创建
 func SafeMkdir(path string) {
 	var err error
-	fmt.Println(!Exists(path))
 	if !Exists(path) {
 		err = os.Mkdir(path, os.ModePerm)
 		if err != nil {
