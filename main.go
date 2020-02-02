@@ -99,6 +99,8 @@ func main() {
 	apis.Ak= viper.GetString("qiniu/ak")
 	apis.Sk=viper.GetString("qiniu/sk")
 	apis.Bucket=viper.GetString("qiniu/bucket")
+
+	apis.BackGroundImageUrls=viper.GetStringSlice("backgroundImageUrls")
 	//db := viper.Get("database")
 	//fmt.Printf("Using %v \n", db)
 	//

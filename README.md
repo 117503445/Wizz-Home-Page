@@ -10,6 +10,8 @@ account 为账号密码, 可以填写 {"admin": "admin","hello":"world"} 创建�
 
 其中 图片 接口 需要填写 "qiniu" 有关字段.(因为七牛云有免费的 10 GB 空间) bucket 为空间名
 
+事先向空间上传好 背景图片,然后把链接设置到 backgroundImageUrls 中
+
 ## 接口文档
 
 本项目借助 swagger 进行接口文档托管

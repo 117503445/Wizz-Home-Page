@@ -54,6 +54,28 @@
                 }
             }
         },
+        "/image/BackGroundImageUrls": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片"
+                ],
+                "summary": "获取所有背景图片的url",
+                "responses": {
+                    "200": {
+                        "description": "[\"http://q52qkptnh.bkt.clouddn.com/1.png\",\"http://q52qkptnh.bkt.clouddn.com/2.png\",\"http://q52qkptnh.bkt.clouddn.com/3.png\"]",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/image/UpToken": {
             "get": {
                 "consumes": [
