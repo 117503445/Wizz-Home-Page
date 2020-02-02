@@ -96,15 +96,30 @@
                 "tags": [
                     "日志"
                 ],
-                "summary": "获取所有日志",
+                "summary": "分页获取日志",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 5,
+                        "description": "一页含有的log数量",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "第几页",
+                        "name": "pageIndex",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "{\"LogTotalNum\":10,\"logs\":[{\"id\":2,\"TimeStamp\":1580620678,\"RequestMethod\":\"PUT\",\"Username\":\"admin\",\"RequestURI\":\"/api/products/1\",\"ResponseCode\":\"200\",\"ModelName\":\"一起来开黑\"}],\"pageTotalNum\":10}",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/models.ServerLog"
-                            }
+                            "type": "string"
                         }
                     }
                 }
@@ -913,40 +928,6 @@
                     "description": "项目截图的 Url",
                     "type": "string",
                     "example": "http://qiniu.com/UrlScreenshot.png"
-                }
-            }
-        },
-        "models.ServerLog": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "description": "log's id",
-                    "type": "integer",
-                    "example": 1
-                },
-                "modelName": {
-                    "description": "请求POST,PUT or DELETE 的Model中的name字段",
-                    "type": "string"
-                },
-                "requestMethod": {
-                    "description": "请求的HTTP方法",
-                    "type": "string"
-                },
-                "requestURI": {
-                    "description": "请求的URI",
-                    "type": "string"
-                },
-                "responseCode": {
-                    "description": "返回状态码",
-                    "type": "string"
-                },
-                "timeStamp": {
-                    "description": "收到请求的时间,精准到秒的格林威治时间戳",
-                    "type": "integer"
-                },
-                "username": {
-                    "description": "用户名,只有 POST,PUT 这些需要token的接口才非空",
-                    "type": "string"
                 }
             }
         },

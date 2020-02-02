@@ -183,31 +183,6 @@ definitions:
         example: http://qiniu.com/UrlScreenshot.png
         type: string
     type: object
-  models.ServerLog:
-    properties:
-      id:
-        description: log's id
-        example: 1
-        type: integer
-      modelName:
-        description: 请求POST,PUT or DELETE 的Model中的name字段
-        type: string
-      requestMethod:
-        description: 请求的HTTP方法
-        type: string
-      requestURI:
-        description: 请求的URI
-        type: string
-      responseCode:
-        description: 返回状态码
-        type: string
-      timeStamp:
-        description: 收到请求的时间,精准到秒的格林威治时间戳
-        type: integer
-      username:
-        description: 用户名,只有 POST,PUT 这些需要token的接口才非空
-        type: string
-    type: object
   models.Story:
     properties:
       id:
@@ -284,16 +259,27 @@ paths:
     get:
       consumes:
       - application/json
+      parameters:
+      - default: 5
+        description: 一页含有的log数量
+        in: query
+        name: pageSize
+        required: true
+        type: integer
+      - default: 1
+        description: 第几页
+        in: query
+        name: pageIndex
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
         "200":
-          description: OK
+          description: '{"LogTotalNum":10,"logs":[{"id":2,"TimeStamp":1580620678,"RequestMethod":"PUT","Username":"admin","RequestURI":"/api/products/1","ResponseCode":"200","ModelName":"一起来开黑"}],"pageTotalNum":10}'
           schema:
-            items:
-              $ref: '#/definitions/models.ServerLog'
-            type: array
-      summary: 获取所有日志
+            type: string
+      summary: 分页获取日志
       tags:
       - 日志
   /members:
