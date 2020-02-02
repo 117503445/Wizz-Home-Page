@@ -1,5 +1,5 @@
 package httpModels
-
+//没有 ID 的 Story
 type NoIdStory struct {
 	TimeStamp     uint   `example:"1580397149"`
 	Name          string `example:"为之诞生"`

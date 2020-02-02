@@ -50,7 +50,7 @@ func ReadStory(c *gin.Context) {
 func CreateStory(c *gin.Context) {
 	var story models.Story
 	_ = c.BindJSON(&story)
-	if story.ID!=0{
+	if story.ID != 0 {
 		c.JSON(400, gin.H{"message": "Pass id in body is not allowed"})
 		return
 	}
@@ -71,7 +71,7 @@ func CreateStory(c *gin.Context) {
 func UpdateStory(c *gin.Context) {
 	id, err := strconv.Atoi(c.Params.ByName("id"))
 	if err != nil {
-		c.JSON(400,gin.H{"message": "your id is not a number"})
+		c.JSON(400, gin.H{"message": "your id is not a number"})
 		return
 	}
 	var story models.Story
@@ -79,18 +79,18 @@ func UpdateStory(c *gin.Context) {
 	if story.ID == 0 {
 		c.JSON(404, gin.H{"message": "Story not found"})
 		return
-	} else {
-		err := c.ShouldBindJSON(&story)
-		if err != nil {
-			log.Println(err)
-		}
-		if story.ID != id{
-			c.JSON(400, gin.H{"message": "Pass id in body is not allowed"})
-			return
-		}
-		Global.Database.Save(&story)
-		c.JSON(200, story)
 	}
+	err = c.ShouldBindJSON(&story)
+	if err != nil {
+		log.Println(err)
+	}
+	if story.ID != id {
+		c.JSON(400, gin.H{"message": "Pass id in body is not allowed"})
+		return
+	}
+	Global.Database.Save(&story)
+	c.JSON(200, story)
+
 }
 
 // @Summary 删除一个历史事件
@@ -105,7 +105,7 @@ func UpdateStory(c *gin.Context) {
 func DeleteStory(c *gin.Context) {
 	id, err := strconv.Atoi(c.Params.ByName("id"))
 	if err != nil {
-		c.JSON(400,gin.H{"message": "your id is not a number"})
+		c.JSON(400, gin.H{"message": "your id is not a number"})
 		return
 	}
 	var story models.Story
@@ -113,8 +113,8 @@ func DeleteStory(c *gin.Context) {
 	if story.ID == 0 {
 		c.JSON(404, gin.H{"message": "Story not found"})
 		return
-	} else {
-		Global.Database.Delete(&story)
-		c.JSON(200, gin.H{"message": "delete success"})
 	}
+	Global.Database.Delete(&story)
+	c.JSON(200, gin.H{"message": "delete success"})
+
 }

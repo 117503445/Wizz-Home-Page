@@ -1,6 +1,6 @@
 package httpModels
 
-//成员
+//没有 ID 的 Member
 type NoIdMember struct {
 	//成员姓名
 	Name string `example:"tengye"`

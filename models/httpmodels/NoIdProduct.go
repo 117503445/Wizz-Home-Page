@@ -1,9 +1,6 @@
-package models
-
-//产品
-type Product struct {
-	//product's id
-	ID int `json:"id" example:"1"`
+package httpModels
+//没有 ID 的 Product
+type NoIdProduct struct {
 	// 产品名称
 	Name string `example:"一起来开黑"`
 	//一句话介绍
