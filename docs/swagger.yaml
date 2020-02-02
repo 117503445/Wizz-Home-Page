@@ -9,6 +9,38 @@ definitions:
         example: admin
         type: string
     type: object
+  httpModels.NoIdMember:
+    properties:
+      describe:
+        description: 个人简介
+        example: 超级帅的前端dalao
+        type: string
+      memberType:
+        description: 成员类型,0 - 学生,1 - 导师
+        enum:
+        - 0
+        - 1
+        example: 0
+        type: integer
+      name:
+        description: 成员姓名
+        example: tengye
+        type: string
+      schoolYear:
+        description: 入学年份
+        example: 2017
+        type: integer
+      teacherInfo:
+        description: 如果是老师,则有若干头衔
+        example: |-
+          创新校长
+          制霸西电
+        type: string
+      urlAvatar:
+        description: 成员头像图片的url
+        example: http://wuygewfuyd/weiug.jpg
+        type: string
+    type: object
   httpModels.PostStory:
     properties:
       name:
@@ -42,15 +74,16 @@ definitions:
         description: 成员姓名
         example: tengye
         type: string
-      omitempty:
-        description: 如果是老师,则有若干头衔
-        items:
-          type: string
-        type: array
       schoolYear:
         description: 入学年份
         example: 2017
         type: integer
+      teacherInfo:
+        description: 如果是老师,则有若干头衔
+        example: |-
+          创新校长
+          制霸西电
+        type: string
       urlAvatar:
         description: 成员头像图片的url
         example: http://wuygewfuyd/weiug.jpg
@@ -69,20 +102,6 @@ definitions:
       idBackGroundImg:
         description: 项目背景图片的 Id
         type: integer
-      imgAvatar:
-        description: 项目图标的 Base64 字符串
-        type: string
-      imgPartnerLogo:
-        description: 合作方Logo的 Base64 字符串
-        type: string
-      imgProCode:
-        description: 二维码的 Base64 字符串
-        type: string
-      imgScreenshot:
-        description: 项目截图的 Base64 字符串
-        items:
-          type: string
-        type: array
       littleDescribe:
         description: 一句话介绍
         example: 一键约游戏
@@ -115,9 +134,7 @@ definitions:
         type: string
       urlScreenshot:
         description: 项目截图的 Url
-        items:
-          type: string
-        type: array
+        type: string
     type: object
   models.ServerLog:
     properties:
@@ -246,6 +263,111 @@ paths:
               $ref: '#/definitions/models.Member'
             type: array
       summary: 获取所有成员
+      tags:
+      - 成员
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 成员
+        in: body
+        name: member
+        required: true
+        schema:
+          $ref: '#/definitions/httpModels.NoIdMember'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Member'
+      security:
+      - ApiKeyAuth: []
+      summary: 添加一个成员
+      tags:
+      - 成员
+  /members/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 成员id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"message": "delete success"}'
+          schema:
+            type: string
+        "404":
+          description: '{"message": "Member not found"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 删除一个成员
+      tags:
+      - 成员
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 成员id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Member'
+        "404":
+          description: '{"message":"Member not found"}'
+          schema:
+            type: string
+      summary: 获取一个成员
+      tags:
+      - 成员
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 成员id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 成员
+        in: body
+        name: member
+        required: true
+        schema:
+          $ref: '#/definitions/httpModels.NoIdMember'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Member'
+        "404":
+          description: '{"message": "Member not found"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 更改一个成员
       tags:
       - 成员
   /products:

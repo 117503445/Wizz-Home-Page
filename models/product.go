@@ -27,7 +27,7 @@ type Product struct {
 	UrlBackground string `example:""`
 
 	//项目截图的 Url
-	UrlScreenshot []string `gorm:"type:string[]" example:""`
+	UrlScreenshot string `example:""`
 
 	//二维码的 Url
 	UrlProCode string `example:""`

@@ -1,9 +1,7 @@
-package models
+package httpModels
 
 //成员
-type Member struct {
-	//member's id
-	ID int `json:"id" example:"1"`
+type NoIdMember struct {
 	//成员姓名
 	Name string `example:"tengye"`
 	//成员头像图片的url
