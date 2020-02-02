@@ -43,7 +43,7 @@ func InitRoute() {
 	memberGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), logMiddleware, apis.DeleteMember)
 
 	imageGroup := apiGroup.Group("/image")
-	imageGroup.GET("/UpToken", apis.GetUpToken)
+	imageGroup.GET("/UpToken", apis.GetUpToken)//todo 加上 Auth
 	imageGroup.GET("/BackGroundImageUrls", apis.GetBackGroundImageUrls)
 
 	serverLogGroup := apiGroup.Group("/logs")

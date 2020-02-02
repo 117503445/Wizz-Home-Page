@@ -15,13 +15,18 @@ var Bucket string
 // @Tags 图片
 // @Accept  json
 // @Produce  json
-// @Param   fileName      path string true  "要上传的文件名,如 abc.png"
+// @Param   fileName      query string true  "要上传的文件名,如 abc.png"
 // @Success 200 {string} string "upToken"
 // @Router /image/UpToken [get]
 func GetUpToken(c *gin.Context) {
-	keyToOverwrite := c.Params.ByName("fileName")
+	keyToOverwrite := c.Query("fileName")
+	//log.Println(keyToOverwrite)
+	//log.Println(Ak)
+	//log.Println(Sk)
+	//log.Println(Bucket)
 	putPolicy := storage.PutPolicy{
-		Scope: fmt.Sprintf("%s:%s", Bucket, keyToOverwrite),
+		Scope:      fmt.Sprintf("%s:%s", Bucket, keyToOverwrite),
+		ReturnBody: `{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket  )","name":"$(x:name)"}`,
 	}
 	mac := qbox.NewMac(Ak, Sk)
 	upToken := putPolicy.UploadToken(mac)

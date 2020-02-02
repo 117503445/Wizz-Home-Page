@@ -255,7 +255,7 @@ paths:
       - application/json
       parameters:
       - description: 要上传的文件名,如 abc.png
-        in: path
+        in: query
         name: fileName
         required: true
         type: string

@@ -96,9 +96,9 @@ func main() {
 
 	Middlewares.NameAndPassword = viper.GetStringMapString("account")
 
-	apis.Ak= viper.GetString("qiniu/ak")
-	apis.Sk=viper.GetString("qiniu/sk")
-	apis.Bucket=viper.GetString("qiniu/bucket")
+	apis.Ak= viper.GetString("qiniu.ak")
+	apis.Sk=viper.GetString("qiniu.sk")
+	apis.Bucket=viper.GetString("qiniu.bucket")
 
 	apis.BackGroundImageUrls=viper.GetStringSlice("backgroundImageUrls")
 	//db := viper.Get("database")

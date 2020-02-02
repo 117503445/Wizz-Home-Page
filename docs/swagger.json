@@ -93,7 +93,7 @@
                         "type": "string",
                         "description": "要上传的文件名,如 abc.png",
                         "name": "fileName",
-                        "in": "path",
+                        "in": "query",
                         "required": true
                     }
                 ],
