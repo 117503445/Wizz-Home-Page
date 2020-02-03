@@ -49,7 +49,11 @@ func ReadProduct(c *gin.Context) {
 // @Security ApiKeyAuth
 func CreateProduct(c *gin.Context) {
 	var product models.Product
-	_ = c.BindJSON(&product)
+	if err := c.BindJSON(&product);err!=nil{
+		log.Println(err)
+		c.JSON(400, "Not a Product")
+		return
+	}
 	if product.ID != 0 {
 		c.JSON(400, gin.H{"message": "Pass id in body is not allowed"})
 		return

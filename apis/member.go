@@ -49,7 +49,12 @@ func ReadMember(c *gin.Context) {
 // @Security ApiKeyAuth
 func CreateMember(c *gin.Context) {
 	var member models.Member
-	_ = c.BindJSON(&member)
+	if err := c.BindJSON(&member); err != nil {
+		log.Println(err)
+		c.JSON(400, "Not a Member")
+		return
+	}
+
 	if member.ID != 0 {
 		c.JSON(400, gin.H{"message": "Pass id in body is not allowed"})
 		return

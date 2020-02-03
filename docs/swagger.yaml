@@ -266,6 +266,8 @@ paths:
           description: upToken
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: 获取一个上传文件的upToken
       tags:
       - 图片

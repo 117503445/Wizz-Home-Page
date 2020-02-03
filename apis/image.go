@@ -18,6 +18,7 @@ var Bucket string
 // @Param   fileName      query string true  "要上传的文件名,如 abc.png"
 // @Success 200 {string} string "upToken"
 // @Router /image/UpToken [get]
+// @Security ApiKeyAuth
 func GetUpToken(c *gin.Context) {
 	keyToOverwrite := c.Query("fileName")
 	//log.Println(keyToOverwrite)

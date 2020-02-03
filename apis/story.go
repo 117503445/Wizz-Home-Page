@@ -49,7 +49,13 @@ func ReadStory(c *gin.Context) {
 // @Security ApiKeyAuth
 func CreateStory(c *gin.Context) {
 	var story models.Story
-	_ = c.BindJSON(&story)
+
+	if err := c.BindJSON(&story); err != nil {
+		log.Println(err)
+		c.JSON(400, "Not a Story")
+		return
+	}
+
 	if story.ID != 0 {
 		c.JSON(400, gin.H{"message": "Pass id in body is not allowed"})
 		return
