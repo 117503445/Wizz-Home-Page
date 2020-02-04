@@ -22,6 +22,8 @@ account 为账号密码, 可以填写 {"admin": "admin","hello":"world"} 创建�
 
 ### 修改方法
 
+获得 swag 命令行工具 <https://www.117503445.top/2020/02/04/2020-02-04-golang-swagger-api%20%E6%96%87%E6%A1%A3%E5%B7%A5%E5%85%B7%20swag%20%E5%9C%A8%20Windows%20%E4%B8%8B%E7%9A%84%E5%AE%89%E8%A3%85/>
+
 修改的话请修改 main.go 中的
 
 ```go
@@ -29,8 +31,6 @@ account 为账号密码, 可以填写 {"admin": "admin","hello":"world"} 创建�
 ```
 
 然后执行 swag init,进行文档的更新
-
-其中 swag 命令行工具如何获得我有空再写
 
 ## 部署方法
 
@@ -44,7 +44,19 @@ account 为账号密码, 可以填写 {"admin": "admin","hello":"world"} 创建�
 go run main.go
 ```
 
+### 使用 docker pull
+
+输入
+
+```sh
+docker pull 117503445/wizz-home-page
+```
+
+还未完成
+
 ### 使用 Docker 本地/远程 部署 (无需 Go 编译环境)
+
+针对开发人员，因为经常需要修改代码观察结果，所以此方法需要先把代码下载到本地，然后 dockerfile 会将硬盘上的代码上传到容器中编译运行。
 
 #### 网络要求
 
