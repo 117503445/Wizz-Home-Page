@@ -107,7 +107,7 @@ docker rm WizzHomePage -f
 在项目根文件夹下,键入
 
 ```docker
-docker build -t wizz .
+docker build -t wizz-home-page .
 ```
 
 构建名为 wizz 的 image
@@ -115,14 +115,14 @@ docker build -t wizz .
 然后键入
 
 ```docker
-docker run --name WizzHomePage -d -p 8080:8080 wizz
+docker run --name WizzHomePage -d -p 8080:8080 -v /var/www/data:/go/release/Wizz-Home-Page/data wizz-home-page
 ```
 
 运行名为 WizzHomePage 的 CONTAINERS
 
 ## 运行时文件
 
-运行时产生的文件都在 ./data 下
+通过宿主机挂载,运行时产生的文件都在 /var/www/data 下
 
 数据库文件为 Wizz-Home-Page.Database,采用 SQLite 3
 

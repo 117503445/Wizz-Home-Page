@@ -50,7 +50,7 @@ func InitRoute() {
 	serverLogGroup.GET("", apis.ReadServerLogs)
 
 	Global.Engine.GET("/ver", func(c *gin.Context) {
-		c.JSON(200, "0202-1510")
+		c.JSON(200, "0205-1320")
 	})
 
 	Global.Engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
