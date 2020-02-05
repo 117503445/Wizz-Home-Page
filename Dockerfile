@@ -14,4 +14,6 @@ ADD . /go/release/Wizz-Home-Page
 
 RUN go build -v -x -ldflags="-s -w" main.go
 
+ADD ./html /go/release/Wizz-Home-Page/html
+
 CMD ["./main"]
