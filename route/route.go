@@ -50,6 +50,9 @@ func InitRoute() {
 	serverLogGroup := apiGroup.Group("/logs")
 	serverLogGroup.GET("", apis.ReadServerLogs)
 
+	backupGroup:=apiGroup.Group("/backup")
+	backupGroup.GET("",apis.ExportData)
+
 	Global.Engine.GET("/ver", func(c *gin.Context) {
 		c.JSON(200, "0205-1320")
 	})

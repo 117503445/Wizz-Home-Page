@@ -235,6 +235,15 @@ paths:
       summary: 登录
       tags:
       - 身份验证
+  /backup:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      summary: 下载数据库
+      tags:
+      - 备份
   /image/BackGroundImageUrls:
     get:
       consumes:

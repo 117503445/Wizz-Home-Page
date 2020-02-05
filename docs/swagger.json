@@ -54,6 +54,20 @@
                 }
             }
         },
+        "/backup": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "备份"
+                ],
+                "summary": "下载数据库"
+            }
+        },
         "/image/BackGroundImageUrls": {
             "get": {
                 "consumes": [
