@@ -22,3 +22,6 @@
 
 /data
 /BuildScripts/__pycache__
+
+/test/data
+/test/config.json
