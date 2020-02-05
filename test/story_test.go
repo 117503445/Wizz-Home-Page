@@ -3,20 +3,32 @@ package test
 import (
 	"Wizz-Home-Page/Global"
 	"Wizz-Home-Page/Init"
-	"github.com/stretchr/testify/assert"
+	"github.com/gavv/httpexpect/v2"
+	"log"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 )
 
 func TestIndexGetRouter(t *testing.T) {
+
+	if err := os.RemoveAll("./data"); err != nil {
+		log.Println(err)
+	}
+
 	Init.Init()
 
-	w := httptest.NewRecorder()
+	server := httptest.NewServer(Global.Engine)
 
-	req, _ := http.NewRequest(http.MethodGet, "/api/stories", nil)
-	Global.Engine.ServeHTTP(w, req)
+	e := httpexpect.New(t, server.URL)
 
-	assert.Equal(t, http.StatusOK, w.Code)
-	assert.Equal(t, "[]\n", w.Body.String())
+	e.GET("/api/stories").
+		Expect().
+		Status(http.StatusOK).JSON().Array().Empty()
+
+	e.POST("/api/login/auth").WithText(`{
+  "password": "admin",
+  "username": "admin"
+}`).Expect().Status(200)
 }
