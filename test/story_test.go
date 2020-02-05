@@ -10,7 +10,7 @@ import (
 )
 
 func TestIndexGetRouter(t *testing.T) {
-	Init.InitEngineAndDatabase()
+	Init.Init()
 
 	w := httptest.NewRecorder()
 

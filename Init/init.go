@@ -39,8 +39,7 @@ func SafeMkdir(path string) {
 		}
 	}
 }
-func InitEngineAndDatabase() {
-	var err error
+func Init() {
 
 	SafeMkdir("./data")
 	SafeMkdir("./data/logs")
@@ -67,16 +66,12 @@ func InitEngineAndDatabase() {
 	apis.Ak = viper.GetString("qiniu.ak")
 	apis.Sk = viper.GetString("qiniu.sk")
 	apis.Bucket = viper.GetString("qiniu.bucket")
-
+	apis.Place=viper.GetString("qiniu.place")
+	apis.Domain=viper.GetString("qiniu.domain")
 	apis.BackGroundImageUrls = viper.GetStringSlice("backgroundImageUrls")
-	//db := viper.Get("database")
-	//fmt.Printf("Using %v \n", db)
-	//
-	//if db == "sqlite3" {
-	//	Global.Database, err = gorm.Open("sqlite3", "./data/Wizz-Home-Page.Database")
-	//} else if db == "mysql" {
-	//	Global.Database, err = gorm.Open("mysql", getMysqlConnectString())
-	//}
+
+
+
 	Global.Database, err = gorm.Open("sqlite3", "./data/Wizz-Home-Page.Database")
 	if err != nil {
 		log.Fatal(err)

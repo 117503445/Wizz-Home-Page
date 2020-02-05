@@ -37,7 +37,7 @@ import (
 // @in header
 // @name Authorization
 func main() {
-	Init.InitEngineAndDatabase()
+	Init.Init()
 
 	err := Global.Engine.Run()
 	if err != nil {

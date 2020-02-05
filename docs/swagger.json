@@ -76,6 +76,28 @@
                 }
             }
         },
+        "/image/PlaceAndDomain": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片"
+                ],
+                "summary": "获取七牛云空间的地区和域名",
+                "responses": {
+                    "200": {
+                        "description": "{\"domain\":\"q52qkptnh.bkt.clouddn.com\",\"place\": \"华东}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/image/UpToken": {
             "get": {
                 "security": [

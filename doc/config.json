@@ -5,7 +5,9 @@
   "qiniu": {
     "ak": "",
     "sk": "",
-    "bucket": ""
+    "bucket": "",
+    "place": "华东/华南/华北",
+    "domain": "q52qkptnh.bkt.clouddn.com"
   },
   "backgroundImageUrls": [
     "http://q52qkptnh.bkt.clouddn.com/1.png",

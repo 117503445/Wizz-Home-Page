@@ -94,8 +94,6 @@ tcp://ali.117503445.top:2375
 
 - 下面 3 步 也可以通过运行 BuildScripts/DeployDocker.py 完成
 
-- 在 Windows 上 ,下面 3 步 也可以通过运行 BuildScripts/DeployDocker.ps1 完成
-
 在项目根文件夹下,键入
 
 ```docker

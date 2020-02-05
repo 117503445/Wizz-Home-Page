@@ -45,3 +45,16 @@ var BackGroundImageUrls []string
 func GetBackGroundImageUrls(c *gin.Context) {
 	c.JSON(200, BackGroundImageUrls)
 }
+
+var Place string
+var Domain string
+
+// @Summary 获取七牛云空间的地区和域名
+// @Tags 图片
+// @Accept  json
+// @Produce  json
+// @Success 200 {string} string "{"domain":"q52qkptnh.bkt.clouddn.com","place": "华东}"
+// @Router /image/PlaceAndDomain [get]
+func GetPlaceAndDomain(c *gin.Context) {
+	c.JSON(200,gin.H{"place":Place,"domain":Domain})
+}

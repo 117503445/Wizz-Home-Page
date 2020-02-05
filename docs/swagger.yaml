@@ -249,6 +249,20 @@ paths:
       summary: 获取所有背景图片的url
       tags:
       - 图片
+  /image/PlaceAndDomain:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"domain":"q52qkptnh.bkt.clouddn.com","place": "华东}'
+          schema:
+            type: string
+      summary: 获取七牛云空间的地区和域名
+      tags:
+      - 图片
   /image/UpToken:
     get:
       consumes:
