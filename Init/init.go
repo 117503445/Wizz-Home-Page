@@ -7,7 +7,7 @@ import (
 	"Wizz-Home-Page/models"
 	"Wizz-Home-Page/route"
 	"github.com/gin-gonic/gin"
-	_ "github.com/go-sql-driver/mysql"
+	//_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/viper"
