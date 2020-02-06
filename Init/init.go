@@ -84,6 +84,10 @@ func Init() {
 
 	Global.Engine = gin.Default()
 
+	Global.Engine.NoRoute(func(context *gin.Context) {
+		context.File("./html/index.html")
+	})
+
 	route.InitRoute()
 
 	//接入前端
