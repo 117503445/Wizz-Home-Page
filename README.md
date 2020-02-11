@@ -12,6 +12,20 @@ account 为账号密码, 可以填写 {"admin": "admin","hello":"world"} 创建�
 
 事先向空间上传好 背景图片,然后把链接设置到 backgroundImageUrls 中
 
+useHttps 为 true,则使用 https,运行在443端口上,并且需要下载证书 *.pem 和 *.key ,重命名为 ssl.pem 和 ssl.key,复制到 项目根文件夹(和 main.go 同级)
+
+useHttps 为 false,则使用 http,运行在80端口上.若要使用 docker 进行部署,则参考下文后,需要把其中的
+
+```sh
+docker run --name WizzHomePage -d -p 443:443 -v /var/www/data:/go/release/Wizz-Home-Page/data wizz-home-page
+```
+
+改成
+
+```sh
+docker run --name WizzHomePage -d -p 80:80 -v /var/www/data:/go/release/Wizz-Home-Page/data wizz-home-page
+```
+
 ## 接口文档
 
 本项目借助 swagger 进行接口文档托管
@@ -113,7 +127,7 @@ docker build -t wizz-home-page .
 然后键入
 
 ```docker
-docker run --name WizzHomePage -d -p 8080:8080 -v /var/www/data:/go/release/Wizz-Home-Page/data wizz-home-page
+docker run --name WizzHomePage -d -p 443:443 -v /var/www/data:/go/release/Wizz-Home-Page/data wizz-home-page
 ```
 
 运行名为 WizzHomePage 的 CONTAINERS

@@ -3,6 +3,7 @@ package main
 import (
 	"Wizz-Home-Page/Global"
 	"Wizz-Home-Page/Init"
+	"github.com/spf13/viper"
 	"log"
 )
 
@@ -29,17 +30,22 @@ import (
 // @license.name GNU General Public License v3.0
 // @license.url https://github.com/TGclub/Wizz-Home-Page/blob/master/LICENSE
 
-// @host ali.117503445.top:8080
+// @host wizzstudio.com
 // @BasePath /api
-// @schemes http
+// @schemes https
 
 // @securityDefinitions.apikey ApiKeyAuth
 // @in header
 // @name Authorization
 func main() {
 	Init.Init()
-
-	err := Global.Engine.Run()
+	useHttps := viper.GetBool("useHttps")
+	var err error
+	if useHttps {
+		err = Global.Engine.RunTLS(":443", "ssl.pem", "ssl.key")
+	} else {
+		err = Global.Engine.Run(":80")
+	}
 	if err != nil {
 		log.Println(err)
 	}

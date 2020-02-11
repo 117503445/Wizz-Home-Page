@@ -21,12 +21,14 @@ def write_all_texts(path: str, content: list):
 if __name__ == "__main__":
 
     c = input(
-        'Input 0 -> Change to localhost:8080\nInput 1 -> Change to ali.117503445.top:8080\n')
+        'Input 0 -> Change to localhost:8080\nInput 1 -> Change to ali.117503445.top:8080\nInput 2 -> other\n')
 
     if c == '0':
         s = '// @host localhost:8080'
     elif c == '1':
         s = '// @host ali.117503445.top:8080'
+    elif c == '2':
+        s = '// @host ' + input()
 
     with open('../main.go', 'r', encoding='utf-8') as f:
         lines = f.readlines()

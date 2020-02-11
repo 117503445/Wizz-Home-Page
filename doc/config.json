@@ -13,5 +13,6 @@
     "http://q52qkptnh.bkt.clouddn.com/1.png",
     "http://q52qkptnh.bkt.clouddn.com/2.png",
     "http://q52qkptnh.bkt.clouddn.com/3.png"
-  ]
+  ],
+  "useHttps": true
 }

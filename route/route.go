@@ -6,6 +6,7 @@ import (
 	"Wizz-Home-Page/apis"
 	_ "Wizz-Home-Page/docs" //引入 swagger 必备
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 	"github.com/swaggo/files"
 	"github.com/swaggo/gin-swagger"
 )
@@ -13,6 +14,11 @@ import (
 func InitRoute() {
 	logMiddleware := Middlewares.GetLogMiddlewareFunc()
 	authMiddleware := Middlewares.GetAuthMiddleware()
+
+	useHttps := viper.GetBool("useHttps")
+	if useHttps {
+		Global.Engine.Use(Middlewares.TlsHandler())
+	}
 
 	apiGroup := Global.Engine.Group("/api")
 
@@ -45,13 +51,13 @@ func InitRoute() {
 	imageGroup := apiGroup.Group("/image")
 	imageGroup.GET("/UpToken", authMiddleware.MiddlewareFunc(), apis.GetUpToken)
 	imageGroup.GET("/BackGroundImageUrls", apis.GetBackGroundImageUrls)
-	imageGroup.GET("/PlaceAndDomain",apis.GetPlaceAndDomain)
+	imageGroup.GET("/PlaceAndDomain", apis.GetPlaceAndDomain)
 
 	serverLogGroup := apiGroup.Group("/logs")
 	serverLogGroup.GET("", apis.ReadServerLogs)
 
-	backupGroup:=apiGroup.Group("/backup")
-	backupGroup.GET("",apis.ExportData)
+	backupGroup := apiGroup.Group("/backup")
+	backupGroup.GET("", apis.ExportData)
 
 	Global.Engine.GET("/ver", func(c *gin.Context) {
 		c.JSON(200, "0205-1320")
