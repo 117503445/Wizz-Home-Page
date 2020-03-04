@@ -90,7 +90,7 @@ func Init() {
 
 	route.InitRoute()
 
-	//接入前端
-	Global.Engine.StaticFile("", "./html")
-	Global.Engine.Static("static", "./html/static")
+
+	//Global.Engine.StaticFile("", "./html")
+	//Global.Engine.Static("static", "./html/static")
 }
