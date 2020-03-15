@@ -12,6 +12,9 @@ import (
 )
 
 func InitRoute() {
+
+	Global.Engine.Use(Middlewares.CORSMiddleware())
+
 	logMiddleware := Middlewares.GetLogMiddlewareFunc()
 	authMiddleware := Middlewares.GetAuthMiddleware()
 

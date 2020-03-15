@@ -17,7 +17,7 @@
         },
         "version": "1.0"
     },
-    "host": "wizzstudio.com",
+    "host": "homepage.backend.wizzstudio.com",
     "basePath": "/api",
     "paths": {
         "/auth/login": {

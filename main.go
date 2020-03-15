@@ -30,7 +30,7 @@ import (
 // @license.name GNU General Public License v3.0
 // @license.url https://github.com/TGclub/Wizz-Home-Page/blob/master/LICENSE
 
-// @host wizzstudio.com
+// @host homepage.backend.wizzstudio.com
 // @BasePath /api
 // @schemes https
 
