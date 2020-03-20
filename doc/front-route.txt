@@ -1,0 +1,12 @@
+/homepage
+/production
+/corporation
+/member
+/connection
+/management
+/management/login
+/management/detail
+/management/detail/story
+/management/detail/member
+/management/detail/product
+/management/detail/log
