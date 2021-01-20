@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 	//_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
-	_ "github.com/mattn/go-sqlite3"
+	 _ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/viper"
 	"io"
 	"log"
@@ -54,7 +54,7 @@ func Init() {
 	}
 
 	//从 config.json 读取配置
-	viper.SetConfigFile("./config.json")
+	viper.SetConfigFile("./data/config.json")
 
 	err = viper.ReadInConfig()
 	if err != nil {
