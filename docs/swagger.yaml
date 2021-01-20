@@ -330,6 +330,32 @@ paths:
       tags:
       - 图片
   /image/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 图片id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"message": "delete success"}'
+          schema:
+            type: string
+        "404":
+          description: '{"message": "Image not found"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 删除一个图片
+      tags:
+      - 图片
     put:
       consumes:
       - application/json
