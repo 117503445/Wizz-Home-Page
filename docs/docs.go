@@ -391,6 +391,26 @@ var doc = `{
             }
         },
         "/passage": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "介绍"
+                ],
+                "summary": "获取介绍",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Passage"
+                        }
+                    }
+                }
+            },
             "post": {
                 "security": [
                     {

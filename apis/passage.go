@@ -32,3 +32,15 @@ func CreatePassage(c *gin.Context) {
 	Global.Database.Create(&passage)
 	c.JSON(200, passage)
 }
+
+// @Summary 获取介绍
+// @Tags 介绍
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} models.Passage
+// @Router /passage [get]
+func ReadPassage(c *gin.Context) {
+	var passage models.Passage
+	Global.Database.First(&passage)
+	c.JSON(200, passage)
+}

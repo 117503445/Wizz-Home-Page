@@ -458,6 +458,19 @@ paths:
       tags:
       - 成员
   /passage:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Passage'
+      summary: 获取介绍
+      tags:
+      - 介绍
     post:
       consumes:
       - application/json
