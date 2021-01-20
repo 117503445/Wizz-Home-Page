@@ -57,9 +57,11 @@ func InitRoute() {
 	memberGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), logMiddleware, apis.DeleteMember)
 
 	imageGroup := apiGroup.Group("/image")
+	imageGroup.GET("/read/:id", apis.ReadImage)
 	imageGroup.GET("/UpToken", authMiddleware.MiddlewareFunc(), apis.GetUpToken)
 	imageGroup.POST("", authMiddleware.MiddlewareFunc(), logMiddleware, apis.CreateImage)
 	imageGroup.GET("/PlaceAndDomain", apis.GetPlaceAndDomain)
+	imageGroup.GET("", apis.GetBackGroundImageUrls)
 
 	serverLogGroup := apiGroup.Group("/logs")
 	serverLogGroup.GET("", apis.ReadServerLogs)

@@ -294,6 +294,19 @@ paths:
       tags:
       - 备份
   /image:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '["http://q52qkptnh.bkt.clouddn.com/1.png","http://q52qkptnh.bkt.clouddn.com/2.png","http://q52qkptnh.bkt.clouddn.com/3.png"]'
+          schema:
+            type: string
+      summary: 获取所有图片的url
+      tags:
+      - 图片
     post:
       consumes:
       - application/json
@@ -314,20 +327,6 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 添加一个图片
-      tags:
-      - 图片
-  /image/BackGroundImageUrls:
-    get:
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: '["http://q52qkptnh.bkt.clouddn.com/1.png","http://q52qkptnh.bkt.clouddn.com/2.png","http://q52qkptnh.bkt.clouddn.com/3.png"]'
-          schema:
-            type: string
-      summary: 获取所有图片的url
       tags:
       - 图片
   /image/PlaceAndDomain:
@@ -364,6 +363,31 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 获取一个上传文件的upToken
+      tags:
+      - 图片
+  /image/read/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 图片id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Image'
+        "404":
+          description: '{"message":"Image not found"}'
+          schema:
+            type: string
+      summary: 获取一个图片
       tags:
       - 图片
   /logs:

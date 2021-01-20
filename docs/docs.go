@@ -81,6 +81,26 @@ var doc = `{
             }
         },
         "/image": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片"
+                ],
+                "summary": "获取所有图片的url",
+                "responses": {
+                    "200": {
+                        "description": "[\"http://q52qkptnh.bkt.clouddn.com/1.png\",\"http://q52qkptnh.bkt.clouddn.com/2.png\",\"http://q52qkptnh.bkt.clouddn.com/3.png\"]",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
             "post": {
                 "security": [
                     {
@@ -113,28 +133,6 @@ var doc = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/models.Image"
-                        }
-                    }
-                }
-            }
-        },
-        "/image/BackGroundImageUrls": {
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "图片"
-                ],
-                "summary": "获取所有图片的url",
-                "responses": {
-                    "200": {
-                        "description": "[\"http://q52qkptnh.bkt.clouddn.com/1.png\",\"http://q52qkptnh.bkt.clouddn.com/2.png\",\"http://q52qkptnh.bkt.clouddn.com/3.png\"]",
-                        "schema": {
-                            "type": "string"
                         }
                     }
                 }
@@ -191,6 +189,44 @@ var doc = `{
                 "responses": {
                     "200": {
                         "description": "upToken",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/image/read/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片"
+                ],
+                "summary": "获取一个图片",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "图片id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Image"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\":\"Image not found\"}",
                         "schema": {
                             "type": "string"
                         }

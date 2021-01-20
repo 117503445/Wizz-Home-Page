@@ -42,11 +42,30 @@ func GetUpToken(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Success 200 {string} string "["http://q52qkptnh.bkt.clouddn.com/1.png","http://q52qkptnh.bkt.clouddn.com/2.png","http://q52qkptnh.bkt.clouddn.com/3.png"]"
-// @Router /image/BackGroundImageUrls [get]
+// @Router /image [get]
 func GetBackGroundImageUrls(c *gin.Context) {
 	var BackGroundImageUrls []models.Image
-
+	Global.Database.Find(&BackGroundImageUrls)
 	c.JSON(200, BackGroundImageUrls)
+}
+
+// @Summary 获取一个图片
+// @Tags 图片
+// @Accept  json
+// @Produce  json
+// @Param   id      path int true  "图片id" default(1)
+// @Success 200 {object} models.Image
+// @Failure 404 {string} string "{"message":"Image not found"}"
+// @Router /image/read/{id} [get]
+func ReadImage(c *gin.Context) {
+	id := c.Params.ByName("id")
+	var image models.Image
+	Global.Database.First(&image, id)
+	if image.ID == 0 {
+		c.JSON(404, gin.H{"message": "Image not found"})
+		return
+	}
+	c.JSON(200, image)
 }
 
 // @Summary 添加一个图片
