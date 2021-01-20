@@ -329,6 +329,39 @@ paths:
       summary: 添加一个图片
       tags:
       - 图片
+  /image/{id}:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 图片id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 图片
+        in: body
+        name: image
+        required: true
+        schema:
+          $ref: '#/definitions/httpModels.NoIdImage'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Image'
+        "404":
+          description: '{"message": "Image not found"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 更改一个图片
+      tags:
+      - 图片
   /image/PlaceAndDomain:
     get:
       consumes:

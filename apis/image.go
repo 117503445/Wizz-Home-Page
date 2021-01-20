@@ -8,6 +8,7 @@ import (
 	"github.com/qiniu/api.v7/v7/auth/qbox"
 	"github.com/qiniu/api.v7/v7/storage"
 	"log"
+	"strconv"
 )
 
 var Ak string
@@ -47,6 +48,45 @@ func GetBackGroundImageUrls(c *gin.Context) {
 	var BackGroundImageUrls []models.Image
 	Global.Database.Find(&BackGroundImageUrls)
 	c.JSON(200, BackGroundImageUrls)
+}
+
+// @Summary 更改一个图片
+// @Tags 图片
+// @Accept  json
+// @Produce  json
+// @Param   id      path int true  "图片id" default(1)
+// @Param   image      body httpModels.NoIdImage true  "图片"
+// @Success 200 {object} models.Image
+// @Failure 404 {string} string "{"message": "Image not found"}"
+// @Router /image/{id} [PUT]
+// @Security ApiKeyAuth
+func UpdateImage(c *gin.Context) {
+	id, err := strconv.Atoi(c.Params.ByName("id"))
+	if err != nil {
+		c.JSON(400, gin.H{"message": "your id is not a number"})
+		return
+	}
+	var image models.Image
+	Global.Database.First(&image, id)
+	if image.ID == 0 {
+		c.JSON(404, gin.H{"message": "image not found"})
+		return
+	}
+	err = c.ShouldBindJSON(&image)
+	if err != nil {
+		log.Println(err)
+	}
+	if image.ID != id {
+		c.JSON(400, gin.H{"message": "Pass id in body is not allowed"})
+		return
+	}
+	if image.ImageType != 0 && image.ImageType != 1 && image.ImageType != 2 {
+		c.JSON(400, gin.H{"message": "imagetype is not correct"})
+		return
+	}
+	Global.Database.Save(&image)
+	c.JSON(200, image)
+
 }
 
 // @Summary 获取一个图片
