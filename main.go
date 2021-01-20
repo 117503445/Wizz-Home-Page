@@ -7,17 +7,7 @@ import (
 	"log"
 )
 
-//func getMysqlConnectString() string {
-//	hostname := viper.Get("mysql.hostname")
-//	port := viper.Get("mysql.port")
-//	un := viper.Get("mysql.username")
-//	pd := viper.Get("mysql.password")
-//	dbName := viper.Get("mysql.databaseName")
-//	connectString := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8&parseTime=True&loc=Local", un, pd, hostname, port, dbName)
-//	fmt.Print("mysql connect string is -->")
-//	fmt.Println(connectString)
-//	return connectString
-//}
+
 
 // @title Wizz-Home-Page API
 // @version 1.0

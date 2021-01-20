@@ -6,10 +6,11 @@ import (
 	"Wizz-Home-Page/apis"
 	"Wizz-Home-Page/models"
 	"Wizz-Home-Page/route"
+	"fmt"
 	"github.com/gin-gonic/gin"
-	//_ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
-	 _ "github.com/mattn/go-sqlite3"
+	 //_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/viper"
 	"io"
 	"log"
@@ -39,6 +40,19 @@ func SafeMkdir(path string) {
 		}
 	}
 }
+
+func getMysqlConnectString() string {
+	hostname := viper.Get("mysql.hostname")
+	port := viper.Get("mysql.port")
+	un := viper.Get("mysql.username")
+	pd := viper.Get("mysql.password")
+	dbName := viper.Get("mysql.databaseName")
+	connectString := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8&parseTime=True&loc=Local", un, pd, hostname, port, dbName)
+	fmt.Print("mysql connect string is --> ")
+	fmt.Println(connectString)
+	return connectString
+}
+
 func Init() {
 
 	SafeMkdir("./data")
@@ -69,7 +83,7 @@ func Init() {
 	apis.Place = viper.GetString("qiniu.place")
 	apis.Domain = viper.GetString("qiniu.domain")
 
-	Global.Database, err = gorm.Open("sqlite3", "./data/Wizz-Home-Page.Database")
+	Global.Database, err = gorm.Open("mysql", getMysqlConnectString())
 	if err != nil {
 		log.Fatal(err)
 	}
