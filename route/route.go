@@ -58,7 +58,7 @@ func InitRoute() {
 
 	imageGroup := apiGroup.Group("/image")
 	imageGroup.GET("/UpToken", authMiddleware.MiddlewareFunc(), apis.GetUpToken)
-	imageGroup.GET("/BackGroundImageUrls", apis.GetBackGroundImageUrls)
+	imageGroup.POST("", authMiddleware.MiddlewareFunc(), logMiddleware, apis.CreateImage)
 	imageGroup.GET("/PlaceAndDomain", apis.GetPlaceAndDomain)
 
 	serverLogGroup := apiGroup.Group("/logs")

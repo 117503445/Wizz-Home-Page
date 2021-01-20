@@ -80,6 +80,44 @@ var doc = `{
                 "summary": "下载数据库"
             }
         },
+        "/image": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片"
+                ],
+                "summary": "添加一个图片",
+                "parameters": [
+                    {
+                        "description": "图片",
+                        "name": "image",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/httpModels.NoIdImage"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Image"
+                        }
+                    }
+                }
+            }
+        },
         "/image/BackGroundImageUrls": {
             "get": {
                 "consumes": [
@@ -91,7 +129,7 @@ var doc = `{
                 "tags": [
                     "图片"
                 ],
-                "summary": "获取所有背景图片的url",
+                "summary": "获取所有图片的url",
                 "responses": {
                     "200": {
                         "description": "[\"http://q52qkptnh.bkt.clouddn.com/1.png\",\"http://q52qkptnh.bkt.clouddn.com/2.png\",\"http://q52qkptnh.bkt.clouddn.com/3.png\"]",
@@ -891,6 +929,26 @@ var doc = `{
                 }
             }
         },
+        "httpModels.NoIdImage": {
+            "type": "object",
+            "properties": {
+                "imageType": {
+                    "description": "成员类型,0 - Vread,1 - Vtalk，2-轮播图",
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1,
+                        2
+                    ],
+                    "example": 0
+                },
+                "imageUrl": {
+                    "description": "图片的url",
+                    "type": "string",
+                    "example": "http://wuygewfuyd/weiug.jpg"
+                }
+            }
+        },
         "httpModels.NoIdMember": {
             "type": "object",
             "properties": {
@@ -1011,6 +1069,31 @@ var doc = `{
                 "timeStamp": {
                     "type": "integer",
                     "example": 1580397149
+                }
+            }
+        },
+        "models.Image": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "image's id",
+                    "type": "integer",
+                    "example": 1
+                },
+                "imageType": {
+                    "description": "成员类型,0 - Vread,1 - Vtalk，2 - 轮播图",
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1,
+                        2
+                    ],
+                    "example": 0
+                },
+                "imageUrl": {
+                    "description": "图片的url",
+                    "type": "string",
+                    "example": "http://wuygewfuyd/weiug.jpg"
                 }
             }
         },

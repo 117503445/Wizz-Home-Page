@@ -9,6 +9,21 @@ definitions:
         example: admin
         type: string
     type: object
+  httpModels.NoIdImage:
+    properties:
+      imageType:
+        description: 成员类型,0 - Vread,1 - Vtalk，2-轮播图
+        enum:
+        - 0
+        - 1
+        - 2
+        example: 0
+        type: integer
+      imageUrl:
+        description: 图片的url
+        example: http://wuygewfuyd/weiug.jpg
+        type: string
+    type: object
   httpModels.NoIdMember:
     properties:
       describe:
@@ -103,6 +118,25 @@ definitions:
       timeStamp:
         example: 1580397149
         type: integer
+    type: object
+  models.Image:
+    properties:
+      id:
+        description: image's id
+        example: 1
+        type: integer
+      imageType:
+        description: 成员类型,0 - Vread,1 - Vtalk，2 - 轮播图
+        enum:
+        - 0
+        - 1
+        - 2
+        example: 0
+        type: integer
+      imageUrl:
+        description: 图片的url
+        example: http://wuygewfuyd/weiug.jpg
+        type: string
     type: object
   models.Member:
     properties:
@@ -259,6 +293,29 @@ paths:
       summary: 下载数据库
       tags:
       - 备份
+  /image:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 图片
+        in: body
+        name: image
+        required: true
+        schema:
+          $ref: '#/definitions/httpModels.NoIdImage'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Image'
+      security:
+      - ApiKeyAuth: []
+      summary: 添加一个图片
+      tags:
+      - 图片
   /image/BackGroundImageUrls:
     get:
       consumes:
@@ -270,7 +327,7 @@ paths:
           description: '["http://q52qkptnh.bkt.clouddn.com/1.png","http://q52qkptnh.bkt.clouddn.com/2.png","http://q52qkptnh.bkt.clouddn.com/3.png"]'
           schema:
             type: string
-      summary: 获取所有背景图片的url
+      summary: 获取所有图片的url
       tags:
       - 图片
   /image/PlaceAndDomain:
