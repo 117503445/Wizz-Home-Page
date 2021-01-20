@@ -396,6 +396,54 @@
                         "schema": {
                             "$ref": "#/definitions/models.Passage"
                         }
+                    },
+                    "404": {
+                        "description": "{\"message\": \"Passage not exist\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAut": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "介绍"
+                ],
+                "summary": "更改介绍",
+                "parameters": [
+                    {
+                        "description": "介绍",
+                        "name": "passage",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/httpModels.NoIdPassage"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Passage"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\": \"Passage not exist\"}",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             },

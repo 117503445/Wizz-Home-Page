@@ -468,6 +468,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Passage'
+        "404":
+          description: '{"message": "Passage not exist"}'
+          schema:
+            type: string
       summary: 获取介绍
       tags:
       - 介绍
@@ -491,6 +495,32 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 添加一个介绍
+      tags:
+      - 介绍
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: 介绍
+        in: body
+        name: passage
+        required: true
+        schema:
+          $ref: '#/definitions/httpModels.NoIdPassage'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Passage'
+        "404":
+          description: '{"message": "Passage not exist"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAut: []
+      summary: 更改介绍
       tags:
       - 介绍
   /products:

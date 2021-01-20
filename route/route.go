@@ -40,6 +40,7 @@ func InitRoute() {
 	PassageGroup := apiGroup.Group("/passage")
 	PassageGroup.POST("", authMiddleware.MiddlewareFunc(), logMiddleware, apis.CreatePassage)
 	PassageGroup.GET("", apis.ReadPassage)
+	PassageGroup.PUT("", authMiddleware.MiddlewareFunc(), logMiddleware, apis.UpdatePassage)
 
 	productGroup := apiGroup.Group("/products")
 	productGroup.GET("", apis.ReadProducts)
