@@ -63,6 +63,7 @@ func InitRoute() {
 	imageGroup.GET("/PlaceAndDomain", apis.GetPlaceAndDomain)
 	imageGroup.GET("", apis.GetBackGroundImageUrls)
 	imageGroup.PUT("/:id", authMiddleware.MiddlewareFunc(), logMiddleware, apis.UpdateImage)
+	imageGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), logMiddleware, apis.DeleteImage)
 
 	serverLogGroup := apiGroup.Group("/logs")
 	serverLogGroup.GET("", apis.ReadServerLogs)

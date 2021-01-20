@@ -137,6 +137,32 @@ func CreateImage(c *gin.Context) {
 	c.JSON(200, image)
 }
 
+// @Summary 删除一个图片
+// @Tags 图片
+// @Accept  json
+// @Produce  json
+// @Param   id      path int true  "图片id" default(1)
+// @Success 200 {string} string "{"message": "delete success"}"
+// @Failure 404 {string} string "{"message": "Image not found"}"
+// @Router /image/{id} [DELETE]
+// @Security ApiKeyAuth
+func DeleteImage(c *gin.Context) {
+	id, err := strconv.Atoi(c.Params.ByName("id"))
+	if err != nil {
+		c.JSON(400, gin.H{"message": "your id is not a number"})
+		return
+	}
+	var image models.Image
+	Global.Database.First(&image, id)
+	if image.ID == 0 {
+		c.JSON(404, gin.H{"message": "image not found"})
+		return
+	}
+	Global.Database.Delete(&image)
+	c.JSON(200, gin.H{"message": "delete success"})
+
+}
+
 var Place string
 var Domain string
 
