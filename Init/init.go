@@ -66,11 +66,9 @@ func Init() {
 	apis.Ak = viper.GetString("qiniu.ak")
 	apis.Sk = viper.GetString("qiniu.sk")
 	apis.Bucket = viper.GetString("qiniu.bucket")
-	apis.Place=viper.GetString("qiniu.place")
-	apis.Domain=viper.GetString("qiniu.domain")
+	apis.Place = viper.GetString("qiniu.place")
+	apis.Domain = viper.GetString("qiniu.domain")
 	apis.BackGroundImageUrls = viper.GetStringSlice("backgroundImageUrls")
-
-
 
 	Global.Database, err = gorm.Open("sqlite3", "./data/Wizz-Home-Page.Database")
 	if err != nil {
@@ -81,7 +79,7 @@ func Init() {
 	Global.Database.AutoMigrate(&models.Product{})
 	Global.Database.AutoMigrate(&models.Member{})
 	Global.Database.AutoMigrate(&models.ServerLog{})
-
+	Global.Database.AutoMigrate(&models.Passage{})
 	Global.Engine = gin.Default()
 
 	Global.Engine.NoRoute(func(context *gin.Context) {
@@ -89,7 +87,6 @@ func Init() {
 	})
 
 	route.InitRoute()
-
 
 	//Global.Engine.StaticFile("", "./html")
 	//Global.Engine.Static("static", "./html/static")

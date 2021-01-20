@@ -37,6 +37,9 @@ func InitRoute() {
 	storyGroup.PUT("/:id", authMiddleware.MiddlewareFunc(), logMiddleware, apis.UpdateStory)
 	storyGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), logMiddleware, apis.DeleteStory)
 
+	PassageGroup := apiGroup.Group("/passage")
+	PassageGroup.POST("", authMiddleware.MiddlewareFunc(), logMiddleware, apis.CreatePassage)
+
 	productGroup := apiGroup.Group("/products")
 	productGroup.GET("", apis.ReadProducts)
 	productGroup.GET("/:id", apis.ReadProduct)

@@ -378,6 +378,44 @@
                 }
             }
         },
+        "/passage": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "介绍"
+                ],
+                "summary": "添加一个介绍",
+                "parameters": [
+                    {
+                        "description": "介绍",
+                        "name": "passage",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/httpModels.NoIdPassage"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Passage"
+                        }
+                    }
+                }
+            }
+        },
         "/products": {
             "get": {
                 "consumes": [
@@ -812,6 +850,15 @@
                 }
             }
         },
+        "httpModels.NoIdPassage": {
+            "type": "object",
+            "properties": {
+                "passage": {
+                    "type": "string",
+                    "example": "这是为之介绍"
+                }
+            }
+        },
         "httpModels.NoIdProduct": {
             "type": "object",
             "properties": {
@@ -928,6 +975,20 @@
                     "description": "成员头像图片的url",
                     "type": "string",
                     "example": "http://wuygewfuyd/weiug.jpg"
+                }
+            }
+        },
+        "models.Passage": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "ID is passage's id",
+                    "type": "integer",
+                    "example": 1
+                },
+                "passage": {
+                    "type": "string",
+                    "example": "这是为之介绍"
                 }
             }
         },

@@ -28,3 +28,6 @@
 
 ssl.key
 ssl.pem
+*.Database
+httpscript/rest.http
+/restscript/

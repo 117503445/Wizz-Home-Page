@@ -41,6 +41,12 @@ definitions:
         example: http://wuygewfuyd/weiug.jpg
         type: string
     type: object
+  httpModels.NoIdPassage:
+    properties:
+      passage:
+        example: 这是为之介绍
+        type: string
+    type: object
   httpModels.NoIdProduct:
     properties:
       describe:
@@ -134,6 +140,16 @@ definitions:
         example: http://wuygewfuyd/weiug.jpg
         type: string
     type: object
+  models.Passage:
+    properties:
+      id:
+        description: ID is passage's id
+        example: 1
+        type: integer
+      passage:
+        example: 这是为之介绍
+        type: string
+    type: object
   models.Product:
     properties:
       describe:
@@ -216,8 +232,7 @@ paths:
     post:
       consumes:
       - application/json
-      description: 更改请求中的 Username 和 Password 进行登录。登陆成功以后，返回json中token字段比如说是"token":"123"，就在右上角Authorize按钮点一下，输入Bearer
-        123，大小写、空格敏感。然后就能使用需要身份验证的接口啦。
+      description: 更改请求中的 Username 和 Password 进行登录。登陆成功以后，返回json中token字段比如说是"token":"123"，就在右上角Authorize按钮点一下，输入Bearer 123，大小写、空格敏感。然后就能使用需要身份验证的接口啦。
       parameters:
       - description: 登录值
         in: body
@@ -442,6 +457,29 @@ paths:
       summary: 更改一个成员
       tags:
       - 成员
+  /passage:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 介绍
+        in: body
+        name: passage
+        required: true
+        schema:
+          $ref: '#/definitions/httpModels.NoIdPassage'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Passage'
+      security:
+      - ApiKeyAuth: []
+      summary: 添加一个介绍
+      tags:
+      - 介绍
   /products:
     get:
       consumes:
