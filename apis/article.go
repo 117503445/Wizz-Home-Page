@@ -5,9 +5,10 @@ import (
 	"Wizz-Home-Page/models"
 	"github.com/gin-gonic/gin"
 	"log"
+	"strconv"
 )
 
-// @Summary 添加一个文章
+// @Summary 添加一篇文章
 // @Tags 文章
 // @Accept  json
 // @Produce  json
@@ -30,4 +31,30 @@ func CreateArticle(c *gin.Context) {
 	}
 	Global.Database.Create(&article)
 	c.JSON(200, article)
+}
+
+// @Summary 删除一篇文章
+// @Tags 文章
+// @Accept  json
+// @Produce  json
+// @Param   id      path int true  "文章id" default(1)
+// @Success 200 {string} string "{"message": "delete success"}"
+// @Failure 404 {string} string "{"message": "Image not found"}"
+// @Router /articles/{id} [DELETE]
+// @Security ApiKeyAuth
+func DeleteArticle(c *gin.Context) {
+	id, err := strconv.Atoi(c.Params.ByName("id"))
+	if err != nil {
+		c.JSON(400, gin.H{"message": "your id is not a number"})
+		return
+	}
+	var article models.Article
+	Global.Database.First(&article, id)
+	if article.ID == 0 {
+		c.JSON(404, gin.H{"message": "article not found"})
+		return
+	}
+	Global.Database.Delete(&article)
+	c.JSON(200, gin.H{"message": "delete success"})
+
 }

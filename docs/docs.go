@@ -48,7 +48,7 @@ var doc = `{
                 "tags": [
                     "文章"
                 ],
-                "summary": "添加一个文章",
+                "summary": "添加一篇文章",
                 "parameters": [
                     {
                         "description": "文章",
@@ -65,6 +65,49 @@ var doc = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/models.Article"
+                        }
+                    }
+                }
+            }
+        },
+        "/articles/{id}": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "文章"
+                ],
+                "summary": "删除一篇文章",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "文章id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"message\": \"delete success\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\": \"Image not found\"}",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
