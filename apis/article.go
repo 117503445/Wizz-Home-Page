@@ -93,3 +93,15 @@ func UpdateArticle(c *gin.Context) {
 	c.JSON(200, article)
 
 }
+
+// @Summary 获取所有文章
+// @Tags 文章
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} models.Article
+// @Router /articles [get]
+func ReadArticles(c *gin.Context) {
+	var articles []models.Article
+	Global.Database.Find(&articles)
+	c.JSON(200, articles)
+}

@@ -71,7 +71,7 @@ func InitRoute() {
 	articleGroup.POST("", authMiddleware.MiddlewareFunc(), logMiddleware, apis.CreateArticle)
 	articleGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), logMiddleware, apis.DeleteArticle)
 	articleGroup.PUT("/:id", authMiddleware.MiddlewareFunc(), logMiddleware, apis.UpdateArticle)
-
+	articleGroup.GET("", apis.ReadArticles)
 	serverLogGroup := apiGroup.Group("/logs")
 	serverLogGroup.GET("", apis.ReadServerLogs)
 

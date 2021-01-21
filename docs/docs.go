@@ -33,6 +33,29 @@ var doc = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/articles": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "文章"
+                ],
+                "summary": "获取所有文章",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Article"
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "security": [
                     {

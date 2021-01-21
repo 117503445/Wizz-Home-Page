@@ -287,6 +287,21 @@ info:
   version: 1.1.1
 paths:
   /articles:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Article'
+            type: array
+      summary: 获取所有文章
+      tags:
+      - 文章
     post:
       consumes:
       - application/json
