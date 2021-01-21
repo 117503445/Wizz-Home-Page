@@ -18,7 +18,6 @@
 *.db
 
 /out
-/config.json
 
 /data
 /BuildScripts/__pycache__

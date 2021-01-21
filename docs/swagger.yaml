@@ -149,10 +149,13 @@ definitions:
         example: 1
         type: integer
       memberType:
-        description: 成员类型,0 - 学生,1 - 导师
+        description: 成员类型,老师 - 0;前端 - 1;产品 - 2;后端 - 3;运营 - 4;
         enum:
         - 0
         - 1
+        - 2
+        - 3
+        - 4
         example: 0
         type: integer
       name:
@@ -565,6 +568,41 @@ paths:
       summary: 获取一个成员
       tags:
       - 成员
+  /members/up/{id}:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 成员id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 成员类型
+        in: query
+        name: type
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Member'
+            type: array
+        "404":
+          description: '{"message": "Member not found"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 上移一个成员
+      tags:
+      - 成员
+  /members/update/{id}:
     put:
       consumes:
       - application/json
