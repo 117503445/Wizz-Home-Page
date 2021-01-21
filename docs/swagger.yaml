@@ -336,6 +336,38 @@ paths:
       summary: 删除一篇文章
       tags:
       - 文章
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 文章id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 历史事件
+        in: body
+        name: article
+        required: true
+        schema:
+          $ref: '#/definitions/httpModels.NoIdArticle'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Article'
+        "404":
+          description: '{"message": "Article not found"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 更改一篇文章
+      tags:
+      - 文章
   /auth/login:
     post:
       consumes:

@@ -58,3 +58,38 @@ func DeleteArticle(c *gin.Context) {
 	c.JSON(200, gin.H{"message": "delete success"})
 
 }
+
+// @Summary 更改一篇文章
+// @Tags 文章
+// @Accept  json
+// @Produce  json
+// @Param   id      path int true  "文章id" default(1)
+// @Param   article      body httpModels.NoIdArticle true  "历史事件"
+// @Success 200 {object} models.Article
+// @Failure 404 {string} string "{"message": "Article not found"}"
+// @Router /articles/{id} [PUT]
+// @Security ApiKeyAuth
+func UpdateArticle(c *gin.Context) {
+	id, err := strconv.Atoi(c.Params.ByName("id"))
+	if err != nil {
+		c.JSON(400, gin.H{"message": "your article is not a number"})
+		return
+	}
+	var article models.Article
+	Global.Database.First(&article, id)
+	if article.ID == 0 {
+		c.JSON(404, gin.H{"message": "Article not found"})
+		return
+	}
+	err = c.ShouldBindJSON(&article)
+	if err != nil {
+		log.Println(err)
+	}
+	if article.ID != id {
+		c.JSON(400, gin.H{"message": "Pass id in body is not allowed"})
+		return
+	}
+	Global.Database.Save(&article)
+	c.JSON(200, article)
+
+}
