@@ -32,6 +32,44 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/articles": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "文章"
+                ],
+                "summary": "添加一个文章",
+                "parameters": [
+                    {
+                        "description": "文章",
+                        "name": "article",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/httpModels.NoIdArticle"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Article"
+                        }
+                    }
+                }
+            }
+        },
         "/auth/login": {
             "post": {
                 "description": "更改请求中的 Username 和 Password 进行登录。登陆成功以后，返回json中token字段比如说是\"token\":\"123\"，就在右上角Authorize按钮点一下，输入Bearer 123，大小写、空格敏感。然后就能使用需要身份验证的接口啦。",
@@ -1166,6 +1204,19 @@ var doc = `{
                 }
             }
         },
+        "httpModels.NoIdArticle": {
+            "type": "object",
+            "properties": {
+                "articleUrl": {
+                    "type": "string",
+                    "example": "http://weixin.com/wizzpassage"
+                },
+                "title": {
+                    "type": "string",
+                    "example": "为之的历程"
+                }
+            }
+        },
         "httpModels.NoIdImage": {
             "type": "object",
             "properties": {
@@ -1306,6 +1357,23 @@ var doc = `{
                 "timeStamp": {
                     "type": "integer",
                     "example": 1580397149
+                }
+            }
+        },
+        "models.Article": {
+            "type": "object",
+            "properties": {
+                "articleUrl": {
+                    "type": "string",
+                    "example": "http://weixin.com/wizzpassage"
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "title": {
+                    "type": "string",
+                    "example": "为之的历程"
                 }
             }
         },

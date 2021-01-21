@@ -9,6 +9,15 @@ definitions:
         example: admin
         type: string
     type: object
+  httpModels.NoIdArticle:
+    properties:
+      articleUrl:
+        example: http://weixin.com/wizzpassage
+        type: string
+      title:
+        example: 为之的历程
+        type: string
+    type: object
   httpModels.NoIdImage:
     properties:
       imageType:
@@ -118,6 +127,18 @@ definitions:
       timeStamp:
         example: 1580397149
         type: integer
+    type: object
+  models.Article:
+    properties:
+      articleUrl:
+        example: http://weixin.com/wizzpassage
+        type: string
+      id:
+        example: 1
+        type: integer
+      title:
+        example: 为之的历程
+        type: string
     type: object
   models.Image:
     properties:
@@ -265,6 +286,29 @@ info:
   title: Wizz-Home-Page API
   version: 1.1.1
 paths:
+  /articles:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 文章
+        in: body
+        name: article
+        required: true
+        schema:
+          $ref: '#/definitions/httpModels.NoIdArticle'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Article'
+      security:
+      - ApiKeyAuth: []
+      summary: 添加一个文章
+      tags:
+      - 文章
   /auth/login:
     post:
       consumes:
