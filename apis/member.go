@@ -151,7 +151,7 @@ func UpMember(c *gin.Context) {
 	if err != nil {
 		c.JSON(400, gin.H{"message": "your type is not a number"})
 		return
-	} else if membertype < 0 && membertype > 4 {
+	} else if membertype <= 0 && membertype > 4 {
 		c.JSON(400, gin.H{"message": "your type is not correct"})
 		return
 	} else if member.MemberType != membertype {
@@ -167,14 +167,74 @@ func UpMember(c *gin.Context) {
 		c.JSON(400, gin.H{"message": " the first member can not up"})
 		return
 	}
+	i := 1
+	var m1 models.Member
+	var m2 models.Member
+	for members[i].ID != id {
+		i++
+		m1 = members[i]
+	}
+	m2 = members[i-1]
+	m1, m2 = m2, m1
+	m1.ID, m2.ID = m2.ID, m1.ID
+	Global.Database.Save(&m1)
+	Global.Database.Save(&m2)
+	Global.Database.Where("member_type = ?", membertype).Find(&members)
+	c.JSON(200, members)
+
+}
+
+// @Summary 下移一个成员
+// @Tags 成员
+// @Accept  json
+// @Produce  json
+// @Param   id      path int true  "成员id" default(1)
+// @Param   type	query	int true  "成员类型"
+// @Success 200 {array} models.Member
+// @Failure 404 {string} string "{"message": "Member not found"}"
+// @Router /members/down/{id} [PUT]
+// @Security ApiKeyAuth
+func DownMember(c *gin.Context) {
+	id, err := strconv.Atoi(c.Params.ByName("id"))
+	if err != nil {
+		c.JSON(400, gin.H{"message": "your id is not a number"})
+		return
+	}
+	var member models.Member
+	Global.Database.First(&member, id)
+	if member.ID == 0 {
+		c.JSON(404, gin.H{"message": "Member not found"})
+		return
+	}
+
+	membertype, err := strconv.Atoi(c.Query("type"))
+	if err != nil {
+		c.JSON(400, gin.H{"message": "your type is not a number"})
+		return
+	} else if membertype <= 0 && membertype > 4 {
+		c.JSON(400, gin.H{"message": "your type is not correct"})
+		return
+	} else if member.MemberType != membertype {
+		c.JSON(400, gin.H{"message": "your type do not match your id"})
+		return
+	}
+	var members []models.Member
+	Global.Database.Where("member_type = ?", membertype).Find(&members)
+	if len(members) == 0 || len(members) == 1 {
+		c.JSON(400, gin.H{"message": " the number of member is 0 or 1"})
+		return
+	} else if members[len(members)-1].ID == id {
+		c.JSON(400, gin.H{"message": " the last member can not up"})
+		return
+	}
 	i := 0
 	var m1 models.Member
 	var m2 models.Member
 	for members[i].ID != id {
-		m1 = members[i]
 		i++
-		m2 = members[i]
+		m1 = members[i]
 	}
+	m2 = members[i+1]
 	m1, m2 = m2, m1
 	m1.ID, m2.ID = m2.ID, m1.ID
 	Global.Database.Save(&m1)

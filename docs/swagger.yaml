@@ -568,6 +568,40 @@ paths:
       summary: 获取一个成员
       tags:
       - 成员
+  /members/down/{id}:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 成员id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 成员类型
+        in: query
+        name: type
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Member'
+            type: array
+        "404":
+          description: '{"message": "Member not found"}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 下移一个成员
+      tags:
+      - 成员
   /members/up/{id}:
     put:
       consumes:
