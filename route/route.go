@@ -53,8 +53,10 @@ func InitRoute() {
 	memberGroup.GET("", apis.ReadMembers)
 	memberGroup.GET("/:id", apis.ReadMember)
 	memberGroup.POST("", authMiddleware.MiddlewareFunc(), logMiddleware, apis.CreateMember)
-	memberGroup.PUT("/:id", authMiddleware.MiddlewareFunc(), logMiddleware, apis.UpdateMember)
+	memberGroup.PUT("/update/:id", authMiddleware.MiddlewareFunc(), logMiddleware, apis.UpdateMember)
 	memberGroup.DELETE("/:id", authMiddleware.MiddlewareFunc(), logMiddleware, apis.DeleteMember)
+	memberGroup.PUT("/up/:id", authMiddleware.MiddlewareFunc(), logMiddleware, apis.UpMember)
+	memberGroup.PUT("/down/:id", authMiddleware.MiddlewareFunc(), logMiddleware, apis.DownMember)
 
 	imageGroup := apiGroup.Group("/image")
 	imageGroup.GET("/read/:id", apis.ReadImage)

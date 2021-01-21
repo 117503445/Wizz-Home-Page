@@ -428,8 +428,13 @@ var doc = `{
                 }
             }
         },
-        "/members/{id}": {
-            "get": {
+        "/members/down/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "consumes": [
                     "application/json"
                 ],
@@ -439,7 +444,7 @@ var doc = `{
                 "tags": [
                     "成员"
                 ],
-                "summary": "获取一个成员",
+                "summary": "下移一个成员",
                 "parameters": [
                     {
                         "type": "integer",
@@ -448,23 +453,88 @@ var doc = `{
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "成员类型",
+                        "name": "type",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.Member"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Member"
+                            }
                         }
                     },
                     "404": {
-                        "description": "{\"message\":\"Member not found\"}",
+                        "description": "{\"message\": \"Member not found\"}",
                         "schema": {
                             "type": "string"
                         }
                     }
                 }
-            },
+            }
+        },
+        "/members/up/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "成员"
+                ],
+                "summary": "上移一个成员",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "成员id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "成员类型",
+                        "name": "type",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Member"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\": \"Member not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/members/update/{id}": {
             "put": {
                 "security": [
                     {
@@ -509,6 +579,44 @@ var doc = `{
                     },
                     "404": {
                         "description": "{\"message\": \"Member not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/members/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "成员"
+                ],
+                "summary": "获取一个成员",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "成员id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Member"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\":\"Member not found\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -1240,11 +1348,14 @@ var doc = `{
                     "example": 1
                 },
                 "memberType": {
-                    "description": "成员类型,0 - 学生,1 - 导师",
+                    "description": "成员类型,老师 - 0;前端 - 1;产品 - 2;后端 - 3;运营 - 4;",
                     "type": "integer",
                     "enum": [
                         0,
-                        1
+                        1,
+                        2,
+                        3,
+                        4
                     ],
                     "example": 0
                 },
