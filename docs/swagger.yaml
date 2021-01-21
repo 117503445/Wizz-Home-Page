@@ -351,6 +351,30 @@ paths:
       summary: 删除一篇文章
       tags:
       - 文章
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: 文章id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Article'
+        "404":
+          description: '{"message":"Article not found"}'
+          schema:
+            type: string
+      summary: 获取一篇文章
+      tags:
+      - 文章
     put:
       consumes:
       - application/json

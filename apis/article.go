@@ -105,3 +105,22 @@ func ReadArticles(c *gin.Context) {
 	Global.Database.Find(&articles)
 	c.JSON(200, articles)
 }
+
+// @Summary 获取一篇文章
+// @Tags 文章
+// @Accept  json
+// @Produce  json
+// @Param   id      path int true  "文章id" default(1)
+// @Success 200 {object} models.Article
+// @Failure 404 {string} string "{"message":"Article not found"}"
+// @Router /articles/{id} [get]
+func ReadArticle(c *gin.Context) {
+	id := c.Params.ByName("id")
+	var article models.Article
+	Global.Database.First(&article, id)
+	if article.ID == 0 {
+		c.JSON(404, gin.H{"message": "Story not found"})
+		return
+	}
+	c.JSON(200, article)
+}
