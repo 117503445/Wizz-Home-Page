@@ -7,10 +7,8 @@ import (
 	"log"
 )
 
-
-
 // @title Wizz-Home-Page API
-// @version 1.0
+// @version 1.1.1
 // @description Wizz's HomePage Backend
 
 // @contact.name 117503445

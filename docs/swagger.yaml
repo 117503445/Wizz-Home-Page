@@ -263,7 +263,7 @@ info:
     name: GNU General Public License v3.0
     url: https://github.com/TGclub/Wizz-Home-Page/blob/master/LICENSE
   title: Wizz-Home-Page API
-  version: "1.0"
+  version: 1.1.1
 paths:
   /auth/login:
     post:

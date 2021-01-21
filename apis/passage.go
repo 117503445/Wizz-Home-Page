@@ -17,18 +17,20 @@ import (
 // @Security ApiKeyAuth
 func CreatePassage(c *gin.Context) {
 	var passage models.Passage
-
+	Global.Database.First(&passage)
+	if passage.ID != 0 {
+		c.JSON(400, gin.H{"message": "Passage has been existed"})
+		return
+	}
 	if err := c.BindJSON(&passage); err != nil {
 		log.Println(err)
 		c.JSON(400, "Not a Passage")
 		return
 	}
-
 	if passage.ID != 0 {
 		c.JSON(400, gin.H{"message": "Pass id in body is not allowed"})
 		return
 	}
-
 	Global.Database.Create(&passage)
 	c.JSON(200, passage)
 }
@@ -66,11 +68,12 @@ func UpdatePassage(c *gin.Context) {
 		c.JSON(404, gin.H{"message": "passage not exit"})
 		return
 	}
+	t := passage.ID
 	err := c.ShouldBindJSON(&passage)
 	if err != nil {
 		log.Println(err)
 	}
-	if passage.ID != 1 {
+	if passage.ID != t {
 		c.JSON(400, gin.H{"message": "Pass id in body is not allowed"})
 		return
 	}
