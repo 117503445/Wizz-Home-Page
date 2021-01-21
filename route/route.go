@@ -14,7 +14,7 @@ import (
 func InitRoute() {
 
 	Global.Engine.Use(Middlewares.CORSMiddleware())
-
+	Global.Engine.Use(gin.Recovery())
 	logMiddleware := Middlewares.GetLogMiddlewareFunc()
 	authMiddleware := Middlewares.GetAuthMiddleware()
 
