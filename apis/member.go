@@ -151,9 +151,6 @@ func UpMember(c *gin.Context) {
 	if err != nil {
 		c.JSON(400, gin.H{"message": "your type is not a number"})
 		return
-	} else if membertype <= 0 && membertype > 4 {
-		c.JSON(400, gin.H{"message": "your type is not correct"})
-		return
 	} else if member.MemberType != membertype {
 		c.JSON(400, gin.H{"message": "your type do not match your id"})
 		return
@@ -211,9 +208,6 @@ func DownMember(c *gin.Context) {
 	membertype, err := strconv.Atoi(c.Query("type"))
 	if err != nil {
 		c.JSON(400, gin.H{"message": "your type is not a number"})
-		return
-	} else if membertype <= 0 && membertype > 4 {
-		c.JSON(400, gin.H{"message": "your type is not correct"})
 		return
 	} else if member.MemberType != membertype {
 		c.JSON(400, gin.H{"message": "your type do not match your id"})
