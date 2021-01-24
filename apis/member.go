@@ -170,7 +170,8 @@ func UpMember(c *gin.Context) {
 	i := 1
 	var m1 models.Member
 	var m2 models.Member
-	for members[i].ID != id {
+	m1 = members[i]
+	for m1.ID != id {
 		i++
 		m1 = members[i]
 	}
@@ -230,7 +231,8 @@ func DownMember(c *gin.Context) {
 	i := 0
 	var m1 models.Member
 	var m2 models.Member
-	for members[i].ID != id {
+	m1 = members[i]
+	for m1.ID != id {
 		i++
 		m1 = members[i]
 	}

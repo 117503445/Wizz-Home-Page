@@ -8,7 +8,7 @@ import (
 )
 
 // @title Wizz-Home-Page API
-// @version 1.2
+// @version 1.2.1
 // @description Wizz's HomePage Backend
 
 // @contact.name 117503445
