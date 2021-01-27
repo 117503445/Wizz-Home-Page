@@ -8,7 +8,7 @@ import (
 )
 
 // @title       wizz-home-page API
-// @version     1.0.0
+// @version     1.1.0
 // @description `wizz-home-page` 企业官网
 // @schemes     http
 

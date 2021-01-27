@@ -14,7 +14,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.0.0"
+        "version": "1.1.0"
     },
     "paths": {
         "/": {
@@ -31,6 +31,196 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/response.JsonResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/stories": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "历史事件"
+                ],
+                "summary": "获取所有历史事件",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Stories"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "历史事件"
+                ],
+                "summary": "添加一个历史事件",
+                "parameters": [
+                    {
+                        "description": "历史事件",
+                        "name": "story",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Stories"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Stories"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/stories/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "历史事件"
+                ],
+                "summary": "获取一个历史事件",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "历史事件id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Stories"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\":\"Story not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "历史事件"
+                ],
+                "summary": "更改一个历史事件",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "历史事件id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "历史事件",
+                        "name": "story",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Stories"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Stories"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\": \"Story not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "历史事件"
+                ],
+                "summary": "删除一个历史事件",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "历史事件id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"message\": \"delete success\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\": \"Story not found\"}",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
@@ -129,6 +319,23 @@
         }
     },
     "definitions": {
+        "model.Stories": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "storyDescribe": {
+                    "type": "string"
+                },
+                "timeStamp": {
+                    "type": "integer"
+                }
+            }
+        },
         "model.UserApiLoginReq": {
             "type": "object",
             "properties": {

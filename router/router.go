@@ -17,7 +17,17 @@ func init() {
 	s := g.Server()
 	s.Group("/", func(group *ghttp.RouterGroup) {
 		group.ALL("/", api.Hello)
+
 		group.Group("/api", func(group *ghttp.RouterGroup) {
+
+			group.Group("/stories", func(group *ghttp.RouterGroup) {
+				group.GET("/", api.Story.ReadAll)
+				group.GET("/{id}", api.Story.ReadOne)
+				group.POST("/", api.Story.Create)
+				group.DELETE("/{id}", api.Story.Delete)
+				group.PUT("/{id}", api.Story.Update)
+			})
+
 			group.Group("/user", func(group *ghttp.RouterGroup) {
 				group.POST("/login", middleware.Auth.LoginHandler)
 				group.POST("/", api.User.SignUp)
