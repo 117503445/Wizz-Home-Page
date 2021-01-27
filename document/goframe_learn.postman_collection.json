@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "7a585498-4a26-4a9c-be1f-97488686bad4",
+		"name": "wizz-home-page",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "hello",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"user1\",\r\n    \"password\":\"pass1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}/api/user",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"user1\",\r\n    \"password\":\"pass1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}/api/user/login",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userInfo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTIxMDkxOTQsIm9yaWdfaWF0IjoxNjExNTA0Mzk0LCJ1c2VyIjp7ImlkIjoyLCJjcmVhdGVkQXQiOiIyMDIxLTAxLTI1IDAwOjA2OjIxIiwidXBkYXRlZEF0IjoiMjAyMS0wMS0yNSAwMDowNjoyMSIsImRlbGV0ZWRBdCI6bnVsbCwidXNlcm5hbWUiOiJ1c2VyMSIsInBhc3N3b3JkIjoiJDJhJDEyJG5JM2xENDJHbm5pRmJMN0djNExJeU8uNVRtWUV4OTlVRVF0dENoWmFYZXlCUGU5a2ZxbFZxIiwiYXZhdGFyIjoiIn19.0JXnlBS7hnUOdbCEytFoVj6S4WgrpQ-2wJLC3retnMs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}/api/user",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,37 @@
+# HTTP Server
+[server]
+Address = ":80"
+ServerAgent = "gf-app"
+LogPath = "./tmp/log/gf-app/server"
+
+# Logger.
+[logger]
+Path = "./tmp/log/gf-app"
+Level = "all"
+Stdout = true
+
+# Database.
+[database]
+link = "mysql:${user}:${pass}@tcp(localhost:3306)/wizz_home_page"
+debug = true
+forceCreate = true # 强制创建,启用后强制删除旧数据库后再创建新的,常用于开发
+
+# Database logger.
+[database.logger]
+Path = "./tmp/log/gf-app/sql"
+Level = "all"
+Stdout = false
+
+# GF-CLI工具配置
+[gfcli]
+
+# 自定义DAO生成配置(默认是读取database配置)
+[[gfcli.gen.dao]]
+link = "mysql:${user}:${pass}@tcp(localhost:3306)/wizz_home_page"
+tables = "role,user,user_role"
+
+[elasticsearch]
+enabled = false # 是否启用 log 发送至 elasticsearch
+username = "elastic"
+password = "changeme"
+index = "wizz-home-page"
