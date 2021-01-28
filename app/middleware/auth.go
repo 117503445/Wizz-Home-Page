@@ -87,9 +87,10 @@ func Unauthorized(r *ghttp.Request, code int, message string) {
 
 // LoginResponse is used to define customized login-successful callback function.
 func LoginResponse(r *ghttp.Request, code int, token string, expire time.Time) {
-	response.Json(r, response.Success, "", g.Map{
+	response.JsonOld(r, 200, g.Map{
 		"token":  token,
 		"expire": expire.Format(time.RFC3339),
+		"code":   code,
 	})
 }
 
@@ -114,7 +115,7 @@ func LogoutResponse(r *ghttp.Request, code int) {
 // @accept json
 // @produce json
 // @Param b body model.UserApiLoginReq true "UserApiLoginReq"
-// @router  /api/user/login [POST]
+// @router  /api/auth/login [POST]
 // @success 200 {object} response.JsonResponse
 func Authenticator(r *ghttp.Request) (interface{}, error) {
 	var (

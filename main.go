@@ -8,9 +8,8 @@ import (
 )
 
 // @title       wizz-home-page API
-// @version     1.1.0
+// @version     1.1.1
 // @description `wizz-home-page` 企业官网
-// @schemes     http
 
 // @contact.name 117503445
 // @contact.url http://www.117503445.top

@@ -28,8 +28,9 @@ func init() {
 				group.PUT("/{id}", api.Story.Update)
 			})
 
+			group.POST("/auth/login", middleware.Auth.LoginHandler)
+
 			group.Group("/user", func(group *ghttp.RouterGroup) {
-				group.POST("/login", middleware.Auth.LoginHandler)
 				group.POST("/", api.User.SignUp)
 
 				group.Group("/", func(group *ghttp.RouterGroup) {
