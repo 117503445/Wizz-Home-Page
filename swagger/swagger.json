@@ -11,7 +11,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.1.4"
+        "version": "1.1.5"
     },
     "paths": {
         "/": {
@@ -93,7 +93,7 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "JWT": []
                     }
                 ],
                 "consumes": [
@@ -167,7 +167,7 @@
             "put": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "JWT": []
                     }
                 ],
                 "consumes": [
@@ -217,7 +217,7 @@
             "delete": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "JWT": []
                     }
                 ],
                 "consumes": [

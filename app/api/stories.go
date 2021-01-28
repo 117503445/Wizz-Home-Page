@@ -59,7 +59,7 @@ func (*storyApi) ReadOne(r *ghttp.Request) {
 // @Param   story      body model.Stories true  "历史事件"
 // @Success 200 {object} model.Stories
 // @Router /api/stories [POST]
-// @Security ApiKeyAuth
+// @Security JWT
 func (*storyApi) Create(r *ghttp.Request) {
 	var (
 		apiReq *model.StoryApiCreateReq
@@ -85,7 +85,7 @@ func (*storyApi) Create(r *ghttp.Request) {
 // @Success 200 {string} string "{"message": "delete success"}"
 // @Failure 404 {string} string "{"message": "Story not found"}"
 // @Router /api/stories/{id} [DELETE]
-// @Security ApiKeyAuth
+// @Security JWT
 func (*storyApi) Delete(r *ghttp.Request) {
 	id := r.GetInt("id")
 	if _, err := dao.Stories.Where("id", id).Delete(); err != nil {
@@ -103,7 +103,7 @@ func (*storyApi) Delete(r *ghttp.Request) {
 // @Success 200 {object} model.Stories
 // @Failure 404 {string} string "{"message": "Story not found"}"
 // @Router /api/stories/{id} [PUT]
-// @Security ApiKeyAuth
+// @Security JWT
 func (*storyApi) Update(r *ghttp.Request) {
 	id := r.GetInt("id")
 	var story model.Stories

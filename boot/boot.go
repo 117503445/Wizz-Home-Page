@@ -1,6 +1,7 @@
 package boot
 
 import (
+	"wizz-home-page/app/middleware"
 	_ "wizz-home-page/packed"
 
 	"github.com/gogf/gf/frame/g"
@@ -8,6 +9,7 @@ import (
 )
 
 func init() {
+	middleware.NeedRole("123")
 	LogBindEs()
 
 	s := g.Server()

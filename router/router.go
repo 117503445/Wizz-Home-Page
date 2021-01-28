@@ -8,11 +8,6 @@ import (
 	"github.com/gogf/gf/net/ghttp"
 )
 
-func middlewareAuth(r *ghttp.Request) {
-	middleware.Auth.MiddlewareFunc()(r)
-	r.Middleware.Next()
-}
-
 func init() {
 	s := g.Server()
 	s.Group("/", func(group *ghttp.RouterGroup) {
@@ -24,9 +19,12 @@ func init() {
 			group.Group("/stories", func(group *ghttp.RouterGroup) {
 				group.GET("/", api.Story.ReadAll)
 				group.GET("/{id}", api.Story.ReadOne)
-				group.POST("/", api.Story.Create)
-				group.DELETE("/{id}", api.Story.Delete)
-				group.PUT("/{id}", api.Story.Update)
+				group.Group("/", func(group *ghttp.RouterGroup) {
+					group.Middleware(middleware.JWTLogin, middleware.NeedRole("admin"))
+					group.POST("/", api.Story.Create)
+					group.DELETE("/{id}", api.Story.Delete)
+					group.PUT("/{id}", api.Story.Update)
+				})
 			})
 
 			group.POST("/auth/login", middleware.Auth.LoginHandler)
@@ -35,7 +33,7 @@ func init() {
 				group.POST("/", api.User.SignUp)
 
 				group.Group("/", func(group *ghttp.RouterGroup) {
-					group.Middleware(middlewareAuth)
+					group.Middleware(middleware.JWTLogin)
 					group.GET("/", api.User.GetInfo)
 				})
 			})
