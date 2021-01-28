@@ -27,6 +27,7 @@ func (*storyApi) ReadAll(r *ghttp.Request) {
 	}
 	if len(stories) == 0 {
 		r.Response.Write("[]")
+		r.Exit()
 	} else {
 		response.JsonOld(r, 200, stories)
 	}

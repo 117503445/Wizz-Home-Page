@@ -16,6 +16,7 @@ func middlewareAuth(r *ghttp.Request) {
 func init() {
 	s := g.Server()
 	s.Group("/", func(group *ghttp.RouterGroup) {
+		group.Middleware(middleware.CORS)
 		group.ALL("/", api.Hello)
 
 		group.Group("/api", func(group *ghttp.RouterGroup) {
