@@ -66,8 +66,8 @@ func LogBindEs() {
 	if g.Cfg().GetBool("elasticsearch.enabled") {
 		g.Log().Line().Debug("LogBindEs")
 		g.Log().SetWriter(&EsLogWriter{logger: glog.DefaultLogger()})
-		g.Log().Debug("test log")
-		g.Log().Line().Debug("test log")
+		// g.Log().Debug("test log")
+		// g.Log().Line().Debug("test log")
 	}
 
 }
