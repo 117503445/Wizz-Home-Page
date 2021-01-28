@@ -35,3 +35,7 @@ enabled = false # 是否启用 log 发送至 elasticsearch
 username = "elastic"
 password = "changeme"
 index = "wizz-home-page"
+
+[wjx]
+SojumpSurvey = ""
+activity = "105939446"
