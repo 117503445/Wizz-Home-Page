@@ -12,3 +12,12 @@ import (
 type Members internal.Members
 
 // Fill with you ideas below.
+
+type MemberApiCreateReq struct {
+	Name        string `orm:"name"         json:"name"`        //
+	UrlAvatar   string `orm:"url_avatar"   json:"urlAvatar"`   //
+	SchoolYear  int    `orm:"school_year"  json:"schoolYear"`  //
+	Describe    string `orm:"describe"     json:"describe"`    //
+	MemberType  int    `orm:"member_type"  json:"memberType"`  //
+	TeacherInfo string `orm:"teacher_info" json:"teacherInfo"` //
+}

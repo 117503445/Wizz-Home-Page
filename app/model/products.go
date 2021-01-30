@@ -12,3 +12,16 @@ import (
 type Products internal.Products
 
 // Fill with you ideas below.
+
+type ProductApiCreateReq struct {
+	Name           string `orm:"name"             json:"name"`           //
+	LittleDescribe string `orm:"little_describe"  json:"littleDescribe"` //
+	Describe       string `orm:"describe"         json:"describe"`       //
+	Partner        string `orm:"partner"          json:"partner"`        //
+	ProjectType    int    `orm:"project_type"     json:"projectType"`    //
+	UrlAvatar      string `orm:"url_avatar"       json:"urlAvatar"`      //
+	UrlPartnerLogo string `orm:"url_partner_logo" json:"urlPartnerLogo"` //
+	UrlBackground  string `orm:"url_background"   json:"urlBackground"`  //
+	UrlScreenshot  string `orm:"url_screenshot"   json:"urlScreenshot"`  //
+	UrlProCode     string `orm:"url_pro_code"     json:"urlProCode"`     //
+}

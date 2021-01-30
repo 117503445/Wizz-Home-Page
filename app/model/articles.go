@@ -12,3 +12,7 @@ import (
 type Articles internal.Articles
 
 // Fill with you ideas below.
+type ArticleApiCreateReq struct {
+	Title      string `orm:"title"       json:"title"`      //
+	ArticleUrl string `orm:"article_url" json:"articleUrl"` //
+}

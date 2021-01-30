@@ -12,3 +12,7 @@ import (
 type Passages internal.Passages
 
 // Fill with you ideas below.
+
+type PassageApiCreateReq struct {
+	Passage string `orm:"passage"    json:"passage"` //
+}

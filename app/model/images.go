@@ -12,3 +12,8 @@ import (
 type Images internal.Images
 
 // Fill with you ideas below.
+
+type ImageApiCreateReq struct {
+	ImageType int    `orm:"image_type" json:"imageType"` //
+	ImageUrl  string `orm:"image_url"  json:"imageUrl"`  //
+}
