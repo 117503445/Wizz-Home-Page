@@ -14,7 +14,7 @@ func Download() {
 
 	activity := g.Cfg().GetString("wjx.activity")
 
-	url := fmt.Sprintf("https://www.wjx.cn/wjx/activitystat/viewstatsummary.aspx?activity=%v&reportid=-1&dw=1&dt=2", activity)
+	url := fmt.Sprintf("https://www.wjx.cn/wjx/activitystat/viewstatsummary.aspx?activity=%v&reportid=-1&dw=1&dt=0", activity)
 
 	if r, err := g.Client().Cookie(cookie).Header(header).Get(url); err != nil {
 		g.Log().Line().Error(err)
