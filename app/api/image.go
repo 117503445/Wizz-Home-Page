@@ -18,7 +18,7 @@ type imagesApi struct{}
 // @Accept  json
 // @Produce  json
 // @Success 200 {array} model.Images
-// @Router /api/images [get]
+// @Router /api/image [get]
 func (*imagesApi) ReadAll(r *ghttp.Request) {
 	g.Log().Debug("GetAll")
 	var images []model.Images
@@ -40,7 +40,7 @@ func (*imagesApi) ReadAll(r *ghttp.Request) {
 // @Param   id      path int true  "图片id" default(1)
 // @Success 200 {object} model.Images
 // @Failure 404 {string} string "{"message":"Image not found"}"
-// @Router /api/images/{id} [get]
+// @Router /api/read/image/{id} [get]
 func (*imagesApi) ReadOne(r *ghttp.Request) {
 	id := r.GetInt("id")
 	//g.Log().Line().Debug("GetOne")
@@ -58,7 +58,7 @@ func (*imagesApi) ReadOne(r *ghttp.Request) {
 // @Produce  json
 // @Param   images      body model.Images true  "图片"
 // @Success 200 {object} model.Images
-// @Router /api/images [POST]
+// @Router /api/image [POST]
 // @Security JWT
 func (*imagesApi) Create(r *ghttp.Request) {
 	var (
@@ -84,7 +84,7 @@ func (*imagesApi) Create(r *ghttp.Request) {
 // @Param   id      path int true  "图片id" default(1)
 // @Success 200 {string} string "{"message": "delete success"}"
 // @Failure 404 {string} string "{"message": "Image not found"}"
-// @Router /api/images/{id} [DELETE]
+// @Router /api/image/{id} [DELETE]
 // @Security JWT
 func (*imagesApi) Delete(r *ghttp.Request) {
 	id := r.GetInt("id")
@@ -102,7 +102,7 @@ func (*imagesApi) Delete(r *ghttp.Request) {
 // @Param   images      body model.Images true  "图片"
 // @Success 200 {object} model.Images
 // @Failure 404 {string} string "{"message": "Image not found"}"
-// @Router /api/images/{id} [PUT]
+// @Router /api/image/{id} [PUT]
 // @Security JWT
 func (*imagesApi) Update(r *ghttp.Request) {
 	id := r.GetInt("id")

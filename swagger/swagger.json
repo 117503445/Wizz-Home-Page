@@ -11,7 +11,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.2.0"
+        "version": "1.2.1"
     },
     "paths": {
         "/": {
@@ -256,7 +256,7 @@
                 }
             }
         },
-        "/api/images": {
+        "/api/image": {
             "get": {
                 "consumes": [
                     "application/json"
@@ -317,43 +317,7 @@
                 }
             }
         },
-        "/api/images/{id}": {
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "图片"
-                ],
-                "summary": "获取一个图片",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "default": 1,
-                        "description": "图片id",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/model.Images"
-                        }
-                    },
-                    "404": {
-                        "description": "{\"message\":\"Image not found\"}",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            },
+        "/api/image/{id}": {
             "put": {
                 "security": [
                     {
@@ -1009,6 +973,44 @@
                     },
                     "404": {
                         "description": "{\"message\": \"Product not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/read/image/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片"
+                ],
+                "summary": "获取一个图片",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "图片id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Images"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\":\"Image not found\"}",
                         "schema": {
                             "type": "string"
                         }

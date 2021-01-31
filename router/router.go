@@ -26,9 +26,9 @@ func init() {
 					group.PUT("/{id}", api.Article.Update)
 				})
 			})
-			group.Group("/images", func(group *ghttp.RouterGroup) {
+			group.Group("/image", func(group *ghttp.RouterGroup) {
 				group.GET("/", api.Image.ReadAll)
-				group.GET("/{id}", api.Image.ReadOne)
+				group.GET("/read/{id}", api.Image.ReadOne)
 				group.Group("/", func(group *ghttp.RouterGroup) {
 					group.Middleware(middleware.JWTLogin, middleware.NeedRole("admin"))
 					group.POST("/", api.Image.Create)
