@@ -6,6 +6,7 @@ import (
 	"github.com/gogf/gf/util/gconv"
 	"wizz-home-page/app/dao"
 	"wizz-home-page/app/model"
+	"wizz-home-page/app/service/qiniu"
 	"wizz-home-page/library/response"
 )
 
@@ -63,7 +64,7 @@ func (*imagesApi) ReadOne(r *ghttp.Request) {
 func (*imagesApi) Create(r *ghttp.Request) {
 	var (
 		apiReq *model.ImageApiCreateReq
-		images  *model.Images
+		images *model.Images
 	)
 	if err := r.Parse(&apiReq); err != nil {
 		response.JsonOld(r, 400, "not a images")
@@ -122,4 +123,31 @@ func (*imagesApi) Update(r *ghttp.Request) {
 	}
 
 	response.JsonOld(r, 200, images)
+}
+
+// @Summary 获取七牛云空间的地区和域名
+// @Tags 图片
+// @Accept  json
+// @Produce  json
+// @Success 200 {string} string "{"domain":"q52qkptnh.bkt.clouddn.com","place": "华东}"
+// @Router /api/image/PlaceAndDomain [get]
+func (*imagesApi) GetPlaceAndDomain(r *ghttp.Request) {
+	place := g.Cfg().GetString("qiniu.place")
+	domain := g.Cfg().GetString("qiniu.domain")
+
+	response.JsonOld(r, 200, g.Map{"place": place, "domain": domain})
+}
+
+// @Summary 获取一个上传文件的upToken
+// @Tags 图片
+// @Accept  json
+// @Produce  json
+// @Param   fileName      query string true  "要上传的文件名,如 abc.png"
+// @Success 200 {string} string "upToken"
+// @Router /api/image/UpToken [get]
+// @Security JWT
+func (*imagesApi) GetUpToken(r *ghttp.Request) {
+	fileName := r.GetQueryString("fileName")
+	upToken := qiniu.GetUpToken(fileName)
+	response.JsonOld(r, 200, "\""+upToken+"\"")
 }

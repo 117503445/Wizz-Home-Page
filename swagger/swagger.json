@@ -11,7 +11,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.2.1"
+        "version": "1.2.2"
     },
     "paths": {
         "/": {
@@ -312,6 +312,64 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/model.Images"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/image/PlaceAndDomain": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片"
+                ],
+                "summary": "获取七牛云空间的地区和域名",
+                "responses": {
+                    "200": {
+                        "description": "{\"domain\":\"q52qkptnh.bkt.clouddn.com\",\"place\": \"华东}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/image/UpToken": {
+            "get": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片"
+                ],
+                "summary": "获取一个上传文件的upToken",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "要上传的文件名,如 abc.png",
+                        "name": "fileName",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "upToken",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }

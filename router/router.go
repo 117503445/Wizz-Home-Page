@@ -29,11 +29,14 @@ func init() {
 			group.Group("/image", func(group *ghttp.RouterGroup) {
 				group.GET("/", api.Image.ReadAll)
 				group.GET("/read/{id}", api.Image.ReadOne)
+				group.GET("/PlaceAndDomain", api.Image.GetPlaceAndDomain)
+
 				group.Group("/", func(group *ghttp.RouterGroup) {
 					group.Middleware(middleware.JWTLogin, middleware.NeedRole("admin"))
 					group.POST("/", api.Image.Create)
 					group.DELETE("/{id}", api.Image.Delete)
 					group.PUT("/{id}", api.Image.Update)
+					group.GET("/UpToken", api.Image.GetUpToken)
 				})
 			})
 			group.Group("/members", func(group *ghttp.RouterGroup) {

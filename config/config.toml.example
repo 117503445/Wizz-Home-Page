@@ -39,3 +39,10 @@ index = "wizz-home-page"
 [wjx]
 SojumpSurvey = ""
 activity = "105939446"
+
+[qiniu]
+ak = ""
+sk = ""
+bucket =  "wizzhomepage"
+place = "华东"
+domain = "https://qiniu.wizzstudio.com"
