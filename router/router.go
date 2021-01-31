@@ -30,6 +30,7 @@ func init() {
 				group.GET("/", api.Image.ReadAll)
 				group.GET("/read/{id}", api.Image.ReadOne)
 				group.GET("/PlaceAndDomain", api.Image.GetPlaceAndDomain)
+				group.GET("/BackGroundImageUrls", api.Image.GetBackGroundImageUrls)
 
 				group.Group("/", func(group *ghttp.RouterGroup) {
 					group.Middleware(middleware.JWTLogin, middleware.NeedRole("admin"))

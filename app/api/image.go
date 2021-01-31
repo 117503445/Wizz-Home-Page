@@ -151,3 +151,15 @@ func (*imagesApi) GetUpToken(r *ghttp.Request) {
 	upToken := qiniu.GetUpToken(fileName)
 	response.JsonOld(r, 200, "\""+upToken+"\"")
 }
+
+// @Summary 获取所有背景图片的url
+// @Tags 图片
+// @Accept  json
+// @Produce  json
+// @Success 200 {string} string "["http://q52qkptnh.bkt.clouddn.com/1.png","http://q52qkptnh.bkt.clouddn.com/2.png","http://q52qkptnh.bkt.clouddn.com/3.png"]"
+// @Router /api/image/BackGroundImageUrls [get]
+func (*imagesApi) GetBackGroundImageUrls(r *ghttp.Request) {
+	urls := g.Cfg().GetArray("background.backgroundImageUrls")
+	// g.Log().Line().Debug(urls)
+	response.JsonOld(r, 200, urls)
+}
