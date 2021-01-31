@@ -21,3 +21,13 @@ type MemberApiCreateReq struct {
 	MemberType  int    `orm:"member_type"  json:"memberType"`  //
 	TeacherInfo string `orm:"teacher_info" json:"teacherInfo"` //
 }
+
+type MemberApiRep struct {
+	Id          int    `orm:"id,primary"   json:"id"`          //
+	Name        string `orm:"name"         json:"Name"`        //
+	UrlAvatar   string `orm:"url_avatar"   json:"UrlAvatar"`   //
+	SchoolYear  int    `orm:"school_year"  json:"SchoolYear"`  //
+	Describe    string `orm:"describe"     json:"Describe"`    //
+	MemberType  int    `orm:"member_type"  json:"MemberType"`  //
+	TeacherInfo string `orm:"teacher_info" json:"TeacherInfo"` //
+}

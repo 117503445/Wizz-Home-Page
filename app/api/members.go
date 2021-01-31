@@ -29,7 +29,16 @@ func (*membersApi) ReadAll(r *ghttp.Request) {
 		r.Response.Write("[]")
 		r.Exit()
 	} else {
-		response.JsonOld(r, 200, members)
+		var membersRsp []model.MemberApiRep
+		if err := gconv.Structs(members, &membersRsp); err != nil {
+			g.Log().Line().Error(err)
+		}
+
+		//for m := range members{
+		//	var mRsp model.MemberApiRep
+		//	gconv.Structs()
+		//}
+		response.JsonOld(r, 200, membersRsp)
 	}
 }
 
@@ -62,8 +71,8 @@ func (*membersApi) ReadOne(r *ghttp.Request) {
 // @Security JWT
 func (*membersApi) Create(r *ghttp.Request) {
 	var (
-		apiReq *model.MemberApiCreateReq
-		members  *model.Members
+		apiReq  *model.MemberApiCreateReq
+		members *model.Members
 	)
 	if err := r.Parse(&apiReq); err != nil {
 		response.JsonOld(r, 400, "not a members")
