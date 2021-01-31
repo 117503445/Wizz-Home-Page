@@ -87,7 +87,7 @@ func IdentityHandler(r *ghttp.Request) interface{} {
 
 // Unauthorized is used to define customized Unauthorized callback function.
 func Unauthorized(r *ghttp.Request, code int, message string) {
-	response.Json(r, response.Unauthorized, message, nil)
+	response.JsonOld(r, code, message)
 }
 
 // LoginResponse is used to define customized login-successful callback function.
