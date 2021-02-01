@@ -786,68 +786,7 @@
                 }
             }
         },
-        "/api/passages": {
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "介绍"
-                ],
-                "summary": "获取所有介绍",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/model.Passages"
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "security": [
-                    {
-                        "JWT": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "介绍"
-                ],
-                "summary": "添加一个介绍",
-                "parameters": [
-                    {
-                        "description": "介绍",
-                        "name": "passages",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/model.Passages"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/model.Passages"
-                        }
-                    }
-                }
-            }
-        },
-        "/api/passages/{id}": {
+        "/api/passage": {
             "get": {
                 "consumes": [
                     "application/json"
@@ -934,7 +873,7 @@
                     }
                 }
             },
-            "delete": {
+            "post": {
                 "security": [
                     {
                         "JWT": []
@@ -949,28 +888,23 @@
                 "tags": [
                     "介绍"
                 ],
-                "summary": "删除一个介绍",
+                "summary": "添加一个介绍",
                 "parameters": [
                     {
-                        "type": "integer",
-                        "default": 1,
-                        "description": "介绍id",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
+                        "description": "介绍",
+                        "name": "passages",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Passages"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"message\": \"delete success\"}",
+                        "description": "OK",
                         "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "404": {
-                        "description": "{\"message\": \"Passage not found\"}",
-                        "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/model.Passages"
                         }
                     }
                 }

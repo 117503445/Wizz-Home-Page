@@ -52,14 +52,14 @@ func init() {
 					group.PUT("/down/{id}", api.Member.DownMember)
 				})
 			})
-			group.Group("/passages", func(group *ghttp.RouterGroup) {
-				group.GET("/", api.Passage.ReadAll)
-				group.GET("/{id}", api.Passage.ReadOne)
+			group.Group("/passage", func(group *ghttp.RouterGroup) {
+				//group.GET("/", api.Passage.ReadAll)
+				group.GET("/", api.Passage.ReadOne)
 				group.Group("/", func(group *ghttp.RouterGroup) {
 					group.Middleware(middleware.JWTLogin, middleware.NeedRole("admin"))
 					group.POST("/", api.Passage.Create)
-					group.DELETE("/{id}", api.Passage.Delete)
-					group.PUT("/{id}", api.Passage.Update)
+					//group.DELETE("/", api.Passage.Delete)
+					group.PUT("/", api.Passage.Update)
 				})
 			})
 			group.Group("/products", func(group *ghttp.RouterGroup) {
