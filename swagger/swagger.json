@@ -11,7 +11,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.2.6"
+        "version": "1.2.7"
     },
     "paths": {
         "/": {
@@ -797,17 +797,7 @@
                 "tags": [
                     "介绍"
                 ],
-                "summary": "获取一个介绍",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "default": 1,
-                        "description": "介绍id",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
+                "summary": "获取介绍",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -816,7 +806,7 @@
                         }
                     },
                     "404": {
-                        "description": "{\"message\":\"Passage not found\"}",
+                        "description": "{\"message\": \"Passage not exist\"}",
                         "schema": {
                             "type": "string"
                         }

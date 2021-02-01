@@ -12,13 +12,12 @@ var Passage = new(passagesApi)
 
 type passagesApi struct{}
 
-// @Summary 获取一个介绍
+// @Summary 获取介绍
 // @Tags 介绍
 // @Accept  json
 // @Produce  json
-// @Param   id      path int true  "介绍id" default(1)
 // @Success 200 {object} model.Passages
-// @Failure 404 {string} string "{"message":"Passage not found"}"
+// @Failure 404 {string} string "{"message": "Passage not exist"}"
 // @Router /api/passage [get]
 func (*passagesApi) ReadOne(r *ghttp.Request) {
 	//id := r.GetInt("id")
