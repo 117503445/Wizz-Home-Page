@@ -53,12 +53,10 @@ func init() {
 				})
 			})
 			group.Group("/passage", func(group *ghttp.RouterGroup) {
-				//group.GET("/", api.Passage.ReadAll)
 				group.GET("/", api.Passage.ReadOne)
 				group.Group("/", func(group *ghttp.RouterGroup) {
 					group.Middleware(middleware.JWTLogin, middleware.NeedRole("admin"))
 					group.POST("/", api.Passage.Create)
-					//group.DELETE("/", api.Passage.Delete)
 					group.PUT("/", api.Passage.Update)
 				})
 			})
