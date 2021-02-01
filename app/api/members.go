@@ -194,7 +194,13 @@ func (*membersApi) UpMember(r *ghttp.Request) {
 	dao.Members.Data(m1).Where("id", m1.Id).Update()
 	dao.Members.Data(m2).Where("id", m2.Id).Update()
 	dao.Members.Where("member_type", membertype).Structs(&members)
-	response.JsonOld(r, 200, members)
+
+	var memberRsp model.MemberApiRep
+	if err := gconv.Struct(members, &memberRsp); err != nil {
+		g.Log().Line().Error(err)
+	}
+
+	response.JsonOld(r, 200, memberRsp)
 }
 
 // @Summary 下移一个成员
@@ -245,5 +251,11 @@ func (*membersApi) DownMember(r *ghttp.Request) {
 	dao.Members.Data(m1).Where("id", m1.Id).Update()
 	dao.Members.Data(m2).Where("id", m2.Id).Update()
 	dao.Members.Where("member_type", membertype).Structs(&members)
-	response.JsonOld(r, 200, members)
+
+	var memberRsp model.MemberApiRep
+	if err := gconv.Struct(members, &memberRsp); err != nil {
+		g.Log().Line().Error(err)
+	}
+
+	response.JsonOld(r, 200, memberRsp)
 }
