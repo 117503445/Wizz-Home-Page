@@ -11,7 +11,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.2.15"
+        "version": "1.2.16"
     },
     "paths": {
         "/": {
@@ -508,7 +508,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/model.Members"
+                                "$ref": "#/definitions/model.MemberApiRep"
                             }
                         }
                     }
@@ -537,7 +537,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.Members"
+                            "$ref": "#/definitions/model.MemberApiCreateReq"
                         }
                     }
                 ],
@@ -545,7 +545,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Members"
+                            "$ref": "#/definitions/model.MemberApiRep"
                         }
                     }
                 }
@@ -591,7 +591,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/model.Members"
+                                "$ref": "#/definitions/model.MemberApiRep"
                             }
                         }
                     },
@@ -644,7 +644,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/model.Members"
+                                "$ref": "#/definitions/model.MemberApiRep"
                             }
                         }
                     },
@@ -689,7 +689,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.Members"
+                            "$ref": "#/definitions/model.MemberApiCreateReq"
                         }
                     }
                 ],
@@ -697,7 +697,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Members"
+                            "$ref": "#/definitions/model.MemberApiRep"
                         }
                     },
                     "404": {
@@ -735,7 +735,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Members"
+                            "$ref": "#/definitions/model.MemberApiRep"
                         }
                     },
                     "404": {
@@ -1408,14 +1408,11 @@
                 }
             }
         },
-        "model.Members": {
+        "model.MemberApiCreateReq": {
             "type": "object",
             "properties": {
                 "describe": {
                     "type": "string"
-                },
-                "id": {
-                    "type": "integer"
                 },
                 "memberType": {
                     "type": "integer"
@@ -1431,6 +1428,32 @@
                 },
                 "urlAvatar": {
                     "type": "string"
+                }
+            }
+        },
+        "model.MemberApiRep": {
+            "type": "object",
+            "properties": {
+                "Describe": {
+                    "type": "string"
+                },
+                "MemberType": {
+                    "type": "integer"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "SchoolYear": {
+                    "type": "integer"
+                },
+                "TeacherInfo": {
+                    "type": "string"
+                },
+                "UrlAvatar": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
                 }
             }
         },

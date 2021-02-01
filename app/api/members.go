@@ -17,7 +17,7 @@ type membersApi struct{}
 // @Tags 成员
 // @Accept  json
 // @Produce  json
-// @Success 200 {array} model.Members
+// @Success 200 {array} model.MemberApiRep
 // @Router /api/members [get]
 func (*membersApi) ReadAll(r *ghttp.Request) {
 	g.Log().Debug("GetAll")
@@ -42,7 +42,7 @@ func (*membersApi) ReadAll(r *ghttp.Request) {
 // @Accept  json
 // @Produce  json
 // @Param   id      path int true  "成员id" default(1)
-// @Success 200 {object} model.Members
+// @Success 200 {object} model.MemberApiRep
 // @Failure 404 {string} string "{"message":"Member not found"}"
 // @Router /api/members/{id} [get]
 func (*membersApi) ReadOne(r *ghttp.Request) {
@@ -64,8 +64,8 @@ func (*membersApi) ReadOne(r *ghttp.Request) {
 // @Tags 成员
 // @Accept  json
 // @Produce  json
-// @Param   members      body model.Members true  "成员"
-// @Success 200 {object} model.Members
+// @Param   members      body model.MemberApiCreateReq true  "成员"
+// @Success 200 {object} model.MemberApiRep
 // @Router /api/members [POST]
 // @Security JWT
 func (*membersApi) Create(r *ghttp.Request) {
@@ -115,8 +115,8 @@ func (*membersApi) Delete(r *ghttp.Request) {
 // @Accept  json
 // @Produce  json
 // @Param   id      path int true  "成员id" default(1)
-// @Param   members      body model.Members true  "成员"
-// @Success 200 {object} model.Members
+// @Param   members      body model.MemberApiCreateReq true  "成员"
+// @Success 200 {object} model.MemberApiRep
 // @Failure 404 {string} string "{"message": "Member not found"}"
 // @Router /api/members/update/{id} [PUT]
 // @Security JWT
@@ -152,7 +152,7 @@ func (*membersApi) Update(r *ghttp.Request) {
 // @Produce  json
 // @Param   id      path int true  "成员id" default(1)
 // @Param   type	query	int true  "成员类型"
-// @Success 200 {array} model.Members
+// @Success 200 {array} model.MemberApiRep
 // @Failure 404 {string} string "{"message": "Member not found"}"
 // @Router /api/members/up/{id} [PUT]
 // @Security JWT
@@ -209,7 +209,7 @@ func (*membersApi) UpMember(r *ghttp.Request) {
 // @Produce  json
 // @Param   id      path int true  "成员id" default(1)
 // @Param   type	query	int true  "成员类型"
-// @Success 200 {array} model.Members
+// @Success 200 {array} model.MemberApiRep
 // @Failure 404 {string} string "{"message": "Member not found"}"
 // @Router /api/members/down/{id} [PUT]
 // @Security JWT
