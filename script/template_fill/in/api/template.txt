@@ -1,0 +1,136 @@
+package api
+
+import (
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
+	"github.com/gogf/gf/util/gconv"
+	"wizz-home-page/app/dao"
+	"wizz-home-page/app/model"
+	"wizz-home-page/library/response"
+)
+
+var ${单数大写} = new(${复数小写}Api)
+
+type ${复数小写}Api struct{}
+
+// @Summary 获取所有${chinese}
+// @Tags ${chinese}
+// @Accept  json
+// @Produce  json
+// @Success 200 {array} model.${复数大写}
+// @Router /api/${复数小写} [get]
+func (*${复数小写}Api) ReadAll(r *ghttp.Request) {
+	g.Log().Debug("GetAll")
+	var ${复数小写} []model.${复数大写}
+	if err := dao.${复数大写}.Structs(&${复数小写}); err != nil {
+		response.JsonOld(r, 500, "")
+	}
+	if len(${复数小写}) == 0 {
+		r.Response.Write("[]")
+		r.Exit()
+	} else {
+		var ${复数小写}Rsp []model.${单数大写}ApiRep
+		if err := gconv.Structs(${复数小写}, &${复数小写}Rsp); err != nil {
+			g.Log().Line().Error(err)
+		}
+		response.JsonOld(r, 200, ${复数小写}Rsp)
+	}
+}
+
+// @Summary 获取一个${chinese}
+// @Tags ${chinese}
+// @Accept  json
+// @Produce  json
+// @Param   id      path int true  "${chinese}id" default(1)
+// @Success 200 {object} model.${复数大写}
+// @Failure 404 {string} string "{"message":"${单数大写} not found"}"
+// @Router /api/${复数小写}/{id} [get]
+func (*${复数小写}Api) ReadOne(r *ghttp.Request) {
+	id := r.GetInt("id")
+	//g.Log().Line().Debug("GetOne")
+	//g.Log().Line().Debug(id)
+	var ${复数小写} model.${复数大写}
+	if err := dao.${复数大写}.Where("id = ", id).Struct(&${复数小写}); err != nil {
+		response.JsonOld(r, 404, "")
+	}
+	var ${单数小写}Rsp model.${单数大写}ApiRep
+	if err := gconv.Struct(${复数小写}, &${单数小写}Rsp); err != nil {
+		g.Log().Line().Error(err)
+	}
+	response.JsonOld(r, 200, ${单数小写}Rsp)
+}
+
+// @Summary 添加一个${chinese}
+// @Tags ${chinese}
+// @Accept  json
+// @Produce  json
+// @Param   ${复数小写}      body model.${复数大写} true  "${chinese}"
+// @Success 200 {object} model.${复数大写}
+// @Router /api/${复数小写} [POST]
+// @Security JWT
+func (*${复数小写}Api) Create(r *ghttp.Request) {
+	var (
+		apiReq *model.${单数大写}ApiCreateReq
+		${复数小写}  *model.${复数大写}
+	)
+	if err := r.Parse(&apiReq); err != nil {
+		response.JsonOld(r, 400, "not a ${复数小写}")
+	}
+	if err := gconv.Struct(apiReq, &${复数小写}); err != nil {
+		response.JsonOld(r, 400, "not a ${复数小写}")
+	}
+	if result, err := dao.${复数大写}.Insert(${复数小写}); err != nil {
+		response.JsonOld(r, 500, "")
+	} else {
+		id, _ := result.LastInsertId()
+		${复数小写}.Id = gconv.Int(id)
+		response.JsonOld(r, 200, ${复数小写})
+	}
+}
+
+// @Summary 删除一个${chinese}
+// @Tags ${chinese}
+// @Accept  json
+// @Produce  json
+// @Param   id      path int true  "${chinese}id" default(1)
+// @Success 200 {string} string "{"message": "delete success"}"
+// @Failure 404 {string} string "{"message": "${单数大写} not found"}"
+// @Router /api/${复数小写}/{id} [DELETE]
+// @Security JWT
+func (*${复数小写}Api) Delete(r *ghttp.Request) {
+	id := r.GetInt("id")
+	if _, err := dao.${复数大写}.Where("id", id).Delete(); err != nil {
+		response.JsonOld(r, 404, "")
+	}
+	response.JsonOld(r, 200, g.Map{"message": "delete success"})
+}
+
+// @Summary 更改一个${chinese}
+// @Tags ${chinese}
+// @Accept  json
+// @Produce  json
+// @Param   id      path int true  "${chinese}id" default(1)
+// @Param   ${复数小写}      body model.${复数大写} true  "${chinese}"
+// @Success 200 {object} model.${复数大写}
+// @Failure 404 {string} string "{"message": "${单数大写} not found"}"
+// @Router /api/${复数小写}/{id} [PUT]
+// @Security JWT
+func (*${复数小写}Api) Update(r *ghttp.Request) {
+	id := r.GetInt("id")
+	var ${复数小写} model.${复数大写}
+
+	var (
+		apiReq *model.${单数大写}ApiCreateReq
+	)
+	if err := r.Parse(&apiReq); err != nil {
+		response.JsonOld(r, 400, "not a ${复数小写}")
+	}
+	if err := gconv.Struct(apiReq, &${复数小写}); err != nil {
+		response.JsonOld(r, 400, "not a ${复数小写}")
+	}
+	if _, err := dao.${复数大写}.Data(${复数小写}).Where("id", id).Update(); err != nil {
+		response.JsonOld(r, 404, err.Error())
+	}
+
+	response.JsonOld(r, 200, ${复数小写})
+}

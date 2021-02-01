@@ -1,0 +1,10 @@
+			group.Group("/${复数小写}", func(group *ghttp.RouterGroup) {
+				group.GET("/", api.${单数大写}.ReadAll)
+				group.GET("/{id}", api.${单数大写}.ReadOne)
+				group.Group("/", func(group *ghttp.RouterGroup) {
+					group.Middleware(middleware.JWTLogin, middleware.NeedRole("admin"))
+					group.POST("/", api.${单数大写}.Create)
+					group.DELETE("/{id}", api.${单数大写}.Delete)
+					group.PUT("/{id}", api.${单数大写}.Update)
+				})
+			})

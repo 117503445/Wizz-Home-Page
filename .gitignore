@@ -20,3 +20,5 @@ config/config.toml
 tmp/
 app/service/serverchan/chanid.txt
 config/config.toml.example
+script/template_fill/out/
+script/template_fill/config.toml
