@@ -47,7 +47,7 @@ func init() {
 					group.Middleware(middleware.JWTLogin, middleware.NeedRole("admin"))
 					group.POST("/", api.Member.Create)
 					group.DELETE("/{id}", api.Member.Delete)
-					group.PUT("/{id}", api.Member.Update)
+					group.PUT("/update/{id}", api.Member.Update)
 					group.PUT("/up/{id}", api.Member.UpMember)
 					group.PUT("/down/{id}", api.Member.DownMember)
 				})

@@ -33,11 +33,6 @@ func (*membersApi) ReadAll(r *ghttp.Request) {
 		if err := gconv.Structs(members, &membersRsp); err != nil {
 			g.Log().Line().Error(err)
 		}
-
-		//for m := range members{
-		//	var mRsp model.MemberApiRep
-		//	gconv.Structs()
-		//}
 		response.JsonOld(r, 200, membersRsp)
 	}
 }
@@ -123,7 +118,7 @@ func (*membersApi) Delete(r *ghttp.Request) {
 // @Param   members      body model.Members true  "成员"
 // @Success 200 {object} model.Members
 // @Failure 404 {string} string "{"message": "Member not found"}"
-// @Router /api/members/{id} [PUT]
+// @Router /api/members/update/{id} [PUT]
 // @Security JWT
 func (*membersApi) Update(r *ghttp.Request) {
 	id := r.GetInt("id")
