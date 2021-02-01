@@ -24,7 +24,7 @@ func (*passagesApi) ReadOne(r *ghttp.Request) {
 	//g.Log().Line().Debug("GetOne")
 	//g.Log().Line().Debug(id)
 	var passages model.Passages
-	if err := dao.Passages.Where("id = ", 1).Struct(&passages); err != nil {
+	if err := dao.Passages.Where("id = 1").Struct(&passages); err != nil {
 		response.JsonOld(r, 404, "")
 	}
 	response.JsonOld(r, 200, passages)
@@ -49,7 +49,8 @@ func (*passagesApi) Create(r *ghttp.Request) {
 	if err := gconv.Struct(apiReq, &passages); err != nil {
 		response.JsonOld(r, 400, "not a passages")
 	}
-	if result, err := dao.Passages.Insert(passages); err != nil {
+	passages.Id = 1
+	if result, err := dao.Passages.Replace(passages); err != nil {
 		response.JsonOld(r, 500, "")
 	} else {
 		id, _ := result.LastInsertId()
@@ -69,11 +70,9 @@ func (*passagesApi) Create(r *ghttp.Request) {
 // @Router /api/passage [PUT]
 // @Security JWT
 func (*passagesApi) Update(r *ghttp.Request) {
-	//id := r.GetInt("id")
-	var passages model.Passages
-
 	var (
-		apiReq *model.PassageApiCreateReq
+		apiReq   *model.PassageApiCreateReq
+		passages *model.Passages
 	)
 	if err := r.Parse(&apiReq); err != nil {
 		response.JsonOld(r, 400, "not a passages")
@@ -81,9 +80,12 @@ func (*passagesApi) Update(r *ghttp.Request) {
 	if err := gconv.Struct(apiReq, &passages); err != nil {
 		response.JsonOld(r, 400, "not a passages")
 	}
-	if _, err := dao.Passages.Data(passages).Where("id", 1).Update(); err != nil {
-		response.JsonOld(r, 404, err.Error())
+	passages.Id = 1
+	if result, err := dao.Passages.Replace(passages); err != nil {
+		response.JsonOld(r, 500, "")
+	} else {
+		id, _ := result.LastInsertId()
+		passages.Id = gconv.Int(id)
+		response.JsonOld(r, 200, passages)
 	}
-
-	response.JsonOld(r, 200, passages)
 }
