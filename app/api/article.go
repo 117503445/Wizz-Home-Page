@@ -17,7 +17,7 @@ type articlesApi struct{}
 // @Tags 文章
 // @Accept  json
 // @Produce  json
-// @Success 200 {array} model.Articles
+// @Success 200 {array} model.ArticlesApiRep
 // @Router /api/articles [get]
 func (*articlesApi) ReadAll(r *ghttp.Request) {
 	g.Log().Debug("GetAll")
@@ -29,7 +29,11 @@ func (*articlesApi) ReadAll(r *ghttp.Request) {
 		r.Response.Write("[]")
 		r.Exit()
 	} else {
-		response.JsonOld(r, 200, articles)
+		var articlesRsp []model.ArticlesApiRep
+		if err := gconv.Structs(articles, &articlesRsp); err != nil {
+			g.Log().Line().Error(err)
+		}
+		response.JsonOld(r, 200, articlesRsp)
 	}
 }
 
@@ -38,7 +42,7 @@ func (*articlesApi) ReadAll(r *ghttp.Request) {
 // @Accept  json
 // @Produce  json
 // @Param   id      path int true  "文章id" default(1)
-// @Success 200 {object} model.Articles
+// @Success 200 {object} model.ArticlesApiRep
 // @Failure 404 {string} string "{"message":"Article not found"}"
 // @Router /api/articles/{id} [get]
 func (*articlesApi) ReadOne(r *ghttp.Request) {
@@ -49,20 +53,24 @@ func (*articlesApi) ReadOne(r *ghttp.Request) {
 	if err := dao.Articles.Where("id = ", id).Struct(&articles); err != nil {
 		response.JsonOld(r, 404, "")
 	}
-	response.JsonOld(r, 200, articles)
+	var articleRsp model.ArticlesApiRep
+	if err := gconv.Struct(articles, &articleRsp); err != nil {
+		g.Log().Line().Error(err)
+	}
+	response.JsonOld(r, 200, articleRsp)
 }
 
 // @Summary 添加一个文章
 // @Tags 文章
 // @Accept  json
 // @Produce  json
-// @Param   articles      body model.Articles true  "文章"
-// @Success 200 {object} model.Articles
+// @Param   articles      body model.ArticleApiCreateReq true  "文章"
+// @Success 200 {object} model.ArticlesApiRep
 // @Router /api/articles [POST]
 // @Security JWT
 func (*articlesApi) Create(r *ghttp.Request) {
 	var (
-		apiReq   *model.ArticleApiCreateReq
+		apiReq  *model.ArticleApiCreateReq
 		articles *model.Articles
 	)
 	if err := r.Parse(&apiReq); err != nil {
@@ -76,7 +84,12 @@ func (*articlesApi) Create(r *ghttp.Request) {
 	} else {
 		id, _ := result.LastInsertId()
 		articles.Id = gconv.Int(id)
-		response.JsonOld(r, 200, articles)
+
+		var articleRsp model.ArticlesApiRep
+		if err := gconv.Struct(articles, &articleRsp); err != nil {
+			g.Log().Line().Error(err)
+		}
+		response.JsonOld(r, 200, articleRsp)
 	}
 }
 
@@ -102,27 +115,33 @@ func (*articlesApi) Delete(r *ghttp.Request) {
 // @Accept  json
 // @Produce  json
 // @Param   id      path int true  "文章id" default(1)
-// @Param   articles      body model.Articles true  "文章"
-// @Success 200 {object} model.Articles
+// @Param   articles      body model.ArticleApiCreateReq true  "文章"
+// @Success 200 {object} model.ArticlesApiRep
 // @Failure 404 {string} string "{"message": "Article not found"}"
 // @Router /api/articles/{id} [PUT]
 // @Security JWT
 func (*articlesApi) Update(r *ghttp.Request) {
 	id := r.GetInt("id")
-	var articles model.Articles
+	var article model.Articles
 
 	var (
 		apiReq *model.ArticleApiCreateReq
 	)
 	if err := r.Parse(&apiReq); err != nil {
-		response.JsonOld(r, 400, "not a articles")
+		response.JsonOld(r, 400, "not a article")
 	}
-	if err := gconv.Struct(apiReq, &articles); err != nil {
-		response.JsonOld(r, 400, "not a articles")
-	}
-	if _, err := dao.Articles.Data(articles).Where("id", id).Update(); err != nil {
-		response.JsonOld(r, 404, err.Error())
+	if err := gconv.Struct(apiReq, &article); err != nil {
+		response.JsonOld(r, 400, "not a article")
 	}
 
-	response.JsonOld(r, 200, articles)
+	article.Id = id
+	if _, err := dao.Articles.Data(article).Where("id", id).Update(); err != nil {
+		response.JsonOld(r, 404, err.Error())
+	} else {
+		var articleRsp model.ArticlesApiRep
+		if err := gconv.Struct(article, &articleRsp); err != nil {
+			g.Log().Line().Error(err)
+		}
+		response.JsonOld(r, 200, articleRsp)
+	}
 }

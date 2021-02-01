@@ -11,7 +11,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.2.16"
+        "version": "1.3.0"
     },
     "paths": {
         "/": {
@@ -51,7 +51,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/model.Articles"
+                                "$ref": "#/definitions/model.ArticlesApiRep"
                             }
                         }
                     }
@@ -80,7 +80,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.Articles"
+                            "$ref": "#/definitions/model.ArticleApiCreateReq"
                         }
                     }
                 ],
@@ -88,7 +88,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Articles"
+                            "$ref": "#/definitions/model.ArticlesApiRep"
                         }
                     }
                 }
@@ -120,7 +120,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Articles"
+                            "$ref": "#/definitions/model.ArticlesApiRep"
                         }
                     },
                     "404": {
@@ -162,7 +162,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.Articles"
+                            "$ref": "#/definitions/model.ArticleApiCreateReq"
                         }
                     }
                 ],
@@ -170,7 +170,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Articles"
+                            "$ref": "#/definitions/model.ArticlesApiRep"
                         }
                     },
                     "404": {
@@ -256,67 +256,6 @@
                 }
             }
         },
-        "/api/image": {
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "图片"
-                ],
-                "summary": "获取所有图片",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/model.Images"
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "security": [
-                    {
-                        "JWT": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "图片"
-                ],
-                "summary": "添加一个图片",
-                "parameters": [
-                    {
-                        "description": "图片",
-                        "name": "images",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/model.Images"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/model.Images"
-                        }
-                    }
-                }
-            }
-        },
         "/api/image/BackGroundImageUrls": {
             "get": {
                 "consumes": [
@@ -397,7 +336,104 @@
                 }
             }
         },
-        "/api/image/{id}": {
+        "/api/images": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片"
+                ],
+                "summary": "获取所有图片",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.ImagesApiRep"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片"
+                ],
+                "summary": "添加一个图片",
+                "parameters": [
+                    {
+                        "description": "图片",
+                        "name": "images",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.ImageApiCreateReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ImagesApiRep"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/images/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片"
+                ],
+                "summary": "获取一个图片",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "图片id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ImagesApiRep"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\":\"Image not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
             "put": {
                 "security": [
                     {
@@ -429,7 +465,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.Images"
+                            "$ref": "#/definitions/model.ImageApiCreateReq"
                         }
                     }
                 ],
@@ -437,7 +473,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Images"
+                            "$ref": "#/definitions/model.ImagesApiRep"
                         }
                     },
                     "404": {
@@ -508,7 +544,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/model.MemberApiRep"
+                                "$ref": "#/definitions/model.MembersApiRep"
                             }
                         }
                     }
@@ -545,7 +581,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.MemberApiRep"
+                            "$ref": "#/definitions/model.MembersApiRep"
                         }
                     }
                 }
@@ -591,7 +627,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/model.MemberApiRep"
+                                "$ref": "#/definitions/model.MembersApiRep"
                             }
                         }
                     },
@@ -644,7 +680,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/model.MemberApiRep"
+                                "$ref": "#/definitions/model.MembersApiRep"
                             }
                         }
                     },
@@ -697,7 +733,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.MemberApiRep"
+                            "$ref": "#/definitions/model.MembersApiRep"
                         }
                     },
                     "404": {
@@ -735,7 +771,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.MemberApiRep"
+                            "$ref": "#/definitions/model.MembersApiRep"
                         }
                     },
                     "404": {
@@ -920,7 +956,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/model.Products"
+                                "$ref": "#/definitions/model.ProductsApiRep"
                             }
                         }
                     }
@@ -949,7 +985,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.Products"
+                            "$ref": "#/definitions/model.ProductApiCreateReq"
                         }
                     }
                 ],
@@ -957,7 +993,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Products"
+                            "$ref": "#/definitions/model.ProductsApiRep"
                         }
                     }
                 }
@@ -989,7 +1025,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Products"
+                            "$ref": "#/definitions/model.ProductsApiRep"
                         }
                     },
                     "404": {
@@ -1031,7 +1067,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.Products"
+                            "$ref": "#/definitions/model.ProductApiCreateReq"
                         }
                     }
                 ],
@@ -1039,7 +1075,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Products"
+                            "$ref": "#/definitions/model.ProductsApiRep"
                         }
                     },
                     "404": {
@@ -1092,44 +1128,6 @@
                 }
             }
         },
-        "/api/read/image/{id}": {
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "图片"
-                ],
-                "summary": "获取一个图片",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "default": 1,
-                        "description": "图片id",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/model.Images"
-                        }
-                    },
-                    "404": {
-                        "description": "{\"message\":\"Image not found\"}",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/api/stories": {
             "get": {
                 "consumes": [
@@ -1148,7 +1146,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/model.Stories"
+                                "$ref": "#/definitions/model.StoriesApiRep"
                             }
                         }
                     }
@@ -1173,11 +1171,11 @@
                 "parameters": [
                     {
                         "description": "历史事件",
-                        "name": "story",
+                        "name": "stories",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.Stories"
+                            "$ref": "#/definitions/model.StoryApiCreateReq"
                         }
                     }
                 ],
@@ -1185,7 +1183,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Stories"
+                            "$ref": "#/definitions/model.StoriesApiRep"
                         }
                     }
                 }
@@ -1217,7 +1215,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Stories"
+                            "$ref": "#/definitions/model.StoriesApiRep"
                         }
                     },
                     "404": {
@@ -1255,11 +1253,11 @@
                     },
                     {
                         "description": "历史事件",
-                        "name": "story",
+                        "name": "stories",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.Stories"
+                            "$ref": "#/definitions/model.StoryApiCreateReq"
                         }
                     }
                 ],
@@ -1267,7 +1265,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Stories"
+                            "$ref": "#/definitions/model.StoriesApiRep"
                         }
                     },
                     "404": {
@@ -1380,31 +1378,53 @@
         }
     },
     "definitions": {
-        "model.Articles": {
+        "model.ArticleApiCreateReq": {
             "type": "object",
             "properties": {
                 "articleUrl": {
                     "type": "string"
-                },
-                "id": {
-                    "type": "integer"
                 },
                 "title": {
                     "type": "string"
                 }
             }
         },
-        "model.Images": {
+        "model.ArticlesApiRep": {
             "type": "object",
             "properties": {
+                "ArticleUrl": {
+                    "type": "string"
+                },
+                "Title": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "integer"
-                },
+                }
+            }
+        },
+        "model.ImageApiCreateReq": {
+            "type": "object",
+            "properties": {
                 "imageType": {
                     "type": "integer"
                 },
                 "imageUrl": {
                     "type": "string"
+                }
+            }
+        },
+        "model.ImagesApiRep": {
+            "type": "object",
+            "properties": {
+                "ImageType": {
+                    "type": "integer"
+                },
+                "ImageUrl": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
                 }
             }
         },
@@ -1431,7 +1451,7 @@
                 }
             }
         },
-        "model.MemberApiRep": {
+        "model.MembersApiRep": {
             "type": "object",
             "properties": {
                 "Describe": {
@@ -1468,14 +1488,11 @@
                 }
             }
         },
-        "model.Products": {
+        "model.ProductApiCreateReq": {
             "type": "object",
             "properties": {
                 "describe": {
                     "type": "string"
-                },
-                "id": {
-                    "type": "integer"
                 },
                 "littleDescribe": {
                     "type": "string"
@@ -1506,12 +1523,64 @@
                 }
             }
         },
-        "model.Stories": {
+        "model.ProductsApiRep": {
             "type": "object",
             "properties": {
-                "id": {
+                "Describe": {
+                    "type": "string"
+                },
+                "LittleDescribe": {
+                    "type": "string"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "Partner": {
+                    "type": "string"
+                },
+                "ProjectType": {
                     "type": "integer"
                 },
+                "UrlAvatar": {
+                    "type": "string"
+                },
+                "UrlBackground": {
+                    "type": "string"
+                },
+                "UrlPartnerLogo": {
+                    "type": "string"
+                },
+                "UrlProCode": {
+                    "type": "string"
+                },
+                "UrlScreenshot": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.StoriesApiRep": {
+            "type": "object",
+            "properties": {
+                "Name": {
+                    "type": "string"
+                },
+                "StoryDescribe": {
+                    "type": "string"
+                },
+                "TimeStamp": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.StoryApiCreateReq": {
+            "type": "object",
+            "properties": {
                 "name": {
                     "type": "string"
                 },

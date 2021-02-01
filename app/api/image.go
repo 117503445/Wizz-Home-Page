@@ -18,8 +18,8 @@ type imagesApi struct{}
 // @Tags 图片
 // @Accept  json
 // @Produce  json
-// @Success 200 {array} model.Images
-// @Router /api/image [get]
+// @Success 200 {array} model.ImagesApiRep
+// @Router /api/images [get]
 func (*imagesApi) ReadAll(r *ghttp.Request) {
 	g.Log().Debug("GetAll")
 	var images []model.Images
@@ -30,7 +30,11 @@ func (*imagesApi) ReadAll(r *ghttp.Request) {
 		r.Response.Write("[]")
 		r.Exit()
 	} else {
-		response.JsonOld(r, 200, images)
+		var imagesRsp []model.ImagesApiRep
+		if err := gconv.Structs(images, &imagesRsp); err != nil {
+			g.Log().Line().Error(err)
+		}
+		response.JsonOld(r, 200, imagesRsp)
 	}
 }
 
@@ -39,9 +43,9 @@ func (*imagesApi) ReadAll(r *ghttp.Request) {
 // @Accept  json
 // @Produce  json
 // @Param   id      path int true  "图片id" default(1)
-// @Success 200 {object} model.Images
+// @Success 200 {object} model.ImagesApiRep
 // @Failure 404 {string} string "{"message":"Image not found"}"
-// @Router /api/read/image/{id} [get]
+// @Router /api/images/{id} [get]
 func (*imagesApi) ReadOne(r *ghttp.Request) {
 	id := r.GetInt("id")
 	//g.Log().Line().Debug("GetOne")
@@ -50,20 +54,24 @@ func (*imagesApi) ReadOne(r *ghttp.Request) {
 	if err := dao.Images.Where("id = ", id).Struct(&images); err != nil {
 		response.JsonOld(r, 404, "")
 	}
-	response.JsonOld(r, 200, images)
+	var imageRsp model.ImagesApiRep
+	if err := gconv.Struct(images, &imageRsp); err != nil {
+		g.Log().Line().Error(err)
+	}
+	response.JsonOld(r, 200, imageRsp)
 }
 
 // @Summary 添加一个图片
 // @Tags 图片
 // @Accept  json
 // @Produce  json
-// @Param   images      body model.Images true  "图片"
-// @Success 200 {object} model.Images
-// @Router /api/image [POST]
+// @Param   images      body model.ImageApiCreateReq true  "图片"
+// @Success 200 {object} model.ImagesApiRep
+// @Router /api/images [POST]
 // @Security JWT
 func (*imagesApi) Create(r *ghttp.Request) {
 	var (
-		apiReq *model.ImageApiCreateReq
+		apiReq  *model.ImageApiCreateReq
 		images *model.Images
 	)
 	if err := r.Parse(&apiReq); err != nil {
@@ -77,7 +85,12 @@ func (*imagesApi) Create(r *ghttp.Request) {
 	} else {
 		id, _ := result.LastInsertId()
 		images.Id = gconv.Int(id)
-		response.JsonOld(r, 200, images)
+
+		var imageRsp model.ImagesApiRep
+		if err := gconv.Struct(images, &imageRsp); err != nil {
+			g.Log().Line().Error(err)
+		}
+		response.JsonOld(r, 200, imageRsp)
 	}
 }
 
@@ -88,7 +101,7 @@ func (*imagesApi) Create(r *ghttp.Request) {
 // @Param   id      path int true  "图片id" default(1)
 // @Success 200 {string} string "{"message": "delete success"}"
 // @Failure 404 {string} string "{"message": "Image not found"}"
-// @Router /api/image/{id} [DELETE]
+// @Router /api/images/{id} [DELETE]
 // @Security JWT
 func (*imagesApi) Delete(r *ghttp.Request) {
 	id := r.GetInt("id")
@@ -103,29 +116,35 @@ func (*imagesApi) Delete(r *ghttp.Request) {
 // @Accept  json
 // @Produce  json
 // @Param   id      path int true  "图片id" default(1)
-// @Param   images      body model.Images true  "图片"
-// @Success 200 {object} model.Images
+// @Param   images      body model.ImageApiCreateReq true  "图片"
+// @Success 200 {object} model.ImagesApiRep
 // @Failure 404 {string} string "{"message": "Image not found"}"
-// @Router /api/image/{id} [PUT]
+// @Router /api/images/{id} [PUT]
 // @Security JWT
 func (*imagesApi) Update(r *ghttp.Request) {
 	id := r.GetInt("id")
-	var images model.Images
+	var image model.Images
 
 	var (
 		apiReq *model.ImageApiCreateReq
 	)
 	if err := r.Parse(&apiReq); err != nil {
-		response.JsonOld(r, 400, "not a images")
+		response.JsonOld(r, 400, "not a image")
 	}
-	if err := gconv.Struct(apiReq, &images); err != nil {
-		response.JsonOld(r, 400, "not a images")
-	}
-	if _, err := dao.Images.Data(images).Where("id", id).Update(); err != nil {
-		response.JsonOld(r, 404, err.Error())
+	if err := gconv.Struct(apiReq, &image); err != nil {
+		response.JsonOld(r, 400, "not a image")
 	}
 
-	response.JsonOld(r, 200, images)
+	image.Id = id
+	if _, err := dao.Images.Data(image).Where("id", id).Update(); err != nil {
+		response.JsonOld(r, 404, err.Error())
+	} else {
+		var imageRsp model.ImagesApiRep
+		if err := gconv.Struct(image, &imageRsp); err != nil {
+			g.Log().Line().Error(err)
+		}
+		response.JsonOld(r, 200, imageRsp)
+	}
 }
 
 // @Summary 获取七牛云空间的地区和域名

@@ -25,3 +25,17 @@ type ProductApiCreateReq struct {
 	UrlScreenshot  string `orm:"url_screenshot"   json:"urlScreenshot"`  //
 	UrlProCode     string `orm:"url_pro_code"     json:"urlProCode"`     //
 }
+
+type ProductsApiRep struct {
+	Id             int    `orm:"id,primary"       json:"id"`             //
+	Name           string `orm:"name"             json:"Name"`           //
+	LittleDescribe string `orm:"little_describe"  json:"LittleDescribe"` //
+	Describe       string `orm:"describe"         json:"Describe"`       //
+	Partner        string `orm:"partner"          json:"Partner"`        //
+	ProjectType    int    `orm:"project_type"     json:"ProjectType"`    //
+	UrlAvatar      string `orm:"url_avatar"       json:"UrlAvatar"`      //
+	UrlPartnerLogo string `orm:"url_partner_logo" json:"UrlPartnerLogo"` //
+	UrlBackground  string `orm:"url_background"   json:"UrlBackground"`  //
+	UrlScreenshot  string `orm:"url_screenshot"   json:"UrlScreenshot"`  //
+	UrlProCode     string `orm:"url_pro_code"     json:"UrlProCode"`     //
+}

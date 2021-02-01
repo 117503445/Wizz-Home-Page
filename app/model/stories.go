@@ -18,3 +18,10 @@ type StoryApiCreateReq struct {
 	Name          string `json:"name"`
 	StoryDescribe string `json:"storyDescribe"`
 }
+
+type StoriesApiRep struct {
+    Id            int    `orm:"id,primary"     json:"id"`            //
+    TimeStamp     int64  `orm:"time_stamp"     json:"TimeStamp"`     //
+    Name          string `orm:"name"           json:"Name"`          //
+    StoryDescribe string `orm:"story_describe" json:"StoryDescribe"` //
+}

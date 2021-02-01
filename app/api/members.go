@@ -17,7 +17,7 @@ type membersApi struct{}
 // @Tags 成员
 // @Accept  json
 // @Produce  json
-// @Success 200 {array} model.MemberApiRep
+// @Success 200 {array} model.MembersApiRep
 // @Router /api/members [get]
 func (*membersApi) ReadAll(r *ghttp.Request) {
 	g.Log().Debug("GetAll")
@@ -29,7 +29,7 @@ func (*membersApi) ReadAll(r *ghttp.Request) {
 		r.Response.Write("[]")
 		r.Exit()
 	} else {
-		var membersRsp []model.MemberApiRep
+		var membersRsp []model.MembersApiRep
 		if err := gconv.Structs(members, &membersRsp); err != nil {
 			g.Log().Line().Error(err)
 		}
@@ -42,7 +42,7 @@ func (*membersApi) ReadAll(r *ghttp.Request) {
 // @Accept  json
 // @Produce  json
 // @Param   id      path int true  "成员id" default(1)
-// @Success 200 {object} model.MemberApiRep
+// @Success 200 {object} model.MembersApiRep
 // @Failure 404 {string} string "{"message":"Member not found"}"
 // @Router /api/members/{id} [get]
 func (*membersApi) ReadOne(r *ghttp.Request) {
@@ -53,7 +53,7 @@ func (*membersApi) ReadOne(r *ghttp.Request) {
 	if err := dao.Members.Where("id = ", id).Struct(&members); err != nil {
 		response.JsonOld(r, 404, "")
 	}
-	var memberRsp model.MemberApiRep
+	var memberRsp model.MembersApiRep
 	if err := gconv.Struct(members, &memberRsp); err != nil {
 		g.Log().Line().Error(err)
 	}
@@ -65,7 +65,7 @@ func (*membersApi) ReadOne(r *ghttp.Request) {
 // @Accept  json
 // @Produce  json
 // @Param   members      body model.MemberApiCreateReq true  "成员"
-// @Success 200 {object} model.MemberApiRep
+// @Success 200 {object} model.MembersApiRep
 // @Router /api/members [POST]
 // @Security JWT
 func (*membersApi) Create(r *ghttp.Request) {
@@ -85,7 +85,7 @@ func (*membersApi) Create(r *ghttp.Request) {
 		id, _ := result.LastInsertId()
 		members.Id = gconv.Int(id)
 
-		var memberRsp model.MemberApiRep
+		var memberRsp model.MembersApiRep
 		if err := gconv.Struct(members, &memberRsp); err != nil {
 			g.Log().Line().Error(err)
 		}
@@ -116,7 +116,7 @@ func (*membersApi) Delete(r *ghttp.Request) {
 // @Produce  json
 // @Param   id      path int true  "成员id" default(1)
 // @Param   members      body model.MemberApiCreateReq true  "成员"
-// @Success 200 {object} model.MemberApiRep
+// @Success 200 {object} model.MembersApiRep
 // @Failure 404 {string} string "{"message": "Member not found"}"
 // @Router /api/members/update/{id} [PUT]
 // @Security JWT
@@ -138,7 +138,7 @@ func (*membersApi) Update(r *ghttp.Request) {
 	if _, err := dao.Members.Data(member).Where("id", id).Update(); err != nil {
 		response.JsonOld(r, 404, err.Error())
 	} else {
-		var memberRsp model.MemberApiRep
+		var memberRsp model.MembersApiRep
 		if err := gconv.Struct(member, &memberRsp); err != nil {
 			g.Log().Line().Error(err)
 		}
@@ -152,7 +152,7 @@ func (*membersApi) Update(r *ghttp.Request) {
 // @Produce  json
 // @Param   id      path int true  "成员id" default(1)
 // @Param   type	query	int true  "成员类型"
-// @Success 200 {array} model.MemberApiRep
+// @Success 200 {array} model.MembersApiRep
 // @Failure 404 {string} string "{"message": "Member not found"}"
 // @Router /api/members/up/{id} [PUT]
 // @Security JWT
@@ -195,7 +195,7 @@ func (*membersApi) UpMember(r *ghttp.Request) {
 	dao.Members.Data(m2).Where("id", m2.Id).Update()
 	dao.Members.Where("member_type", membertype).Structs(&members)
 
-	var membersRsp []model.MemberApiRep
+	var membersRsp []model.MembersApiRep
 	if err := gconv.Structs(members, &membersRsp); err != nil {
 		g.Log().Line().Error(err)
 	}
@@ -209,7 +209,7 @@ func (*membersApi) UpMember(r *ghttp.Request) {
 // @Produce  json
 // @Param   id      path int true  "成员id" default(1)
 // @Param   type	query	int true  "成员类型"
-// @Success 200 {array} model.MemberApiRep
+// @Success 200 {array} model.MembersApiRep
 // @Failure 404 {string} string "{"message": "Member not found"}"
 // @Router /api/members/down/{id} [PUT]
 // @Security JWT
@@ -252,7 +252,7 @@ func (*membersApi) DownMember(r *ghttp.Request) {
 	dao.Members.Data(m2).Where("id", m2.Id).Update()
 	dao.Members.Where("member_type", membertype).Structs(&members)
 
-	var membersRsp []model.MemberApiRep
+	var membersRsp []model.MembersApiRep
 	if err := gconv.Structs(members, &membersRsp); err != nil {
 		g.Log().Line().Error(err)
 	}

@@ -17,7 +17,7 @@ type productsApi struct{}
 // @Tags 产品
 // @Accept  json
 // @Produce  json
-// @Success 200 {array} model.Products
+// @Success 200 {array} model.ProductsApiRep
 // @Router /api/products [get]
 func (*productsApi) ReadAll(r *ghttp.Request) {
 	g.Log().Debug("GetAll")
@@ -29,7 +29,11 @@ func (*productsApi) ReadAll(r *ghttp.Request) {
 		r.Response.Write("[]")
 		r.Exit()
 	} else {
-		response.JsonOld(r, 200, products)
+		var productsRsp []model.ProductsApiRep
+		if err := gconv.Structs(products, &productsRsp); err != nil {
+			g.Log().Line().Error(err)
+		}
+		response.JsonOld(r, 200, productsRsp)
 	}
 }
 
@@ -38,7 +42,7 @@ func (*productsApi) ReadAll(r *ghttp.Request) {
 // @Accept  json
 // @Produce  json
 // @Param   id      path int true  "产品id" default(1)
-// @Success 200 {object} model.Products
+// @Success 200 {object} model.ProductsApiRep
 // @Failure 404 {string} string "{"message":"Product not found"}"
 // @Router /api/products/{id} [get]
 func (*productsApi) ReadOne(r *ghttp.Request) {
@@ -49,21 +53,25 @@ func (*productsApi) ReadOne(r *ghttp.Request) {
 	if err := dao.Products.Where("id = ", id).Struct(&products); err != nil {
 		response.JsonOld(r, 404, "")
 	}
-	response.JsonOld(r, 200, products)
+	var productRsp model.ProductsApiRep
+	if err := gconv.Struct(products, &productRsp); err != nil {
+		g.Log().Line().Error(err)
+	}
+	response.JsonOld(r, 200, productRsp)
 }
 
 // @Summary 添加一个产品
 // @Tags 产品
 // @Accept  json
 // @Produce  json
-// @Param   products      body model.Products true  "产品"
-// @Success 200 {object} model.Products
+// @Param   products      body model.ProductApiCreateReq true  "产品"
+// @Success 200 {object} model.ProductsApiRep
 // @Router /api/products [POST]
 // @Security JWT
 func (*productsApi) Create(r *ghttp.Request) {
 	var (
-		apiReq *model.ProductApiCreateReq
-		products  *model.Products
+		apiReq  *model.ProductApiCreateReq
+		products *model.Products
 	)
 	if err := r.Parse(&apiReq); err != nil {
 		response.JsonOld(r, 400, "not a products")
@@ -76,7 +84,12 @@ func (*productsApi) Create(r *ghttp.Request) {
 	} else {
 		id, _ := result.LastInsertId()
 		products.Id = gconv.Int(id)
-		response.JsonOld(r, 200, products)
+
+		var productRsp model.ProductsApiRep
+		if err := gconv.Struct(products, &productRsp); err != nil {
+			g.Log().Line().Error(err)
+		}
+		response.JsonOld(r, 200, productRsp)
 	}
 }
 
@@ -102,27 +115,33 @@ func (*productsApi) Delete(r *ghttp.Request) {
 // @Accept  json
 // @Produce  json
 // @Param   id      path int true  "产品id" default(1)
-// @Param   products      body model.Products true  "产品"
-// @Success 200 {object} model.Products
+// @Param   products      body model.ProductApiCreateReq true  "产品"
+// @Success 200 {object} model.ProductsApiRep
 // @Failure 404 {string} string "{"message": "Product not found"}"
 // @Router /api/products/{id} [PUT]
 // @Security JWT
 func (*productsApi) Update(r *ghttp.Request) {
 	id := r.GetInt("id")
-	var products model.Products
+	var product model.Products
 
 	var (
 		apiReq *model.ProductApiCreateReq
 	)
 	if err := r.Parse(&apiReq); err != nil {
-		response.JsonOld(r, 400, "not a products")
+		response.JsonOld(r, 400, "not a product")
 	}
-	if err := gconv.Struct(apiReq, &products); err != nil {
-		response.JsonOld(r, 400, "not a products")
-	}
-	if _, err := dao.Products.Data(products).Where("id", id).Update(); err != nil {
-		response.JsonOld(r, 404, err.Error())
+	if err := gconv.Struct(apiReq, &product); err != nil {
+		response.JsonOld(r, 400, "not a product")
 	}
 
-	response.JsonOld(r, 200, products)
+	product.Id = id
+	if _, err := dao.Products.Data(product).Where("id", id).Update(); err != nil {
+		response.JsonOld(r, 404, err.Error())
+	} else {
+		var productRsp model.ProductsApiRep
+		if err := gconv.Struct(product, &productRsp); err != nil {
+			g.Log().Line().Error(err)
+		}
+		response.JsonOld(r, 200, productRsp)
+	}
 }

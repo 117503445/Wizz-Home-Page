@@ -16,3 +16,8 @@ type Passages internal.Passages
 type PassageApiCreateReq struct {
 	Passage string `orm:"passage"    json:"passage"` //
 }
+
+type PassagesApiRep struct {
+	Id      int    `orm:"id,primary" json:"id"`      //
+	Passage string `orm:"passage"    json:"Passage"` //
+}

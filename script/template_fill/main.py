@@ -21,7 +21,7 @@ def main():
     for p in path_in.glob('*.json'):
         in_value = json.loads(file.read_all_text(p))
         result = make_template(template, in_value)
-        print(result)
+        # print(result)
         file.write_all_text(
             path_out / ('.'.join(p.name.split('.')[:-1]) + '.txt'), result)
 

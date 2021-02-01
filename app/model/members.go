@@ -22,7 +22,7 @@ type MemberApiCreateReq struct {
 	TeacherInfo string `orm:"teacher_info" json:"teacherInfo"` //
 }
 
-type MemberApiRep struct {
+type MembersApiRep struct {
 	Id          int    `orm:"id,primary"   json:"id"`          //
 	Name        string `orm:"name"         json:"Name"`        //
 	UrlAvatar   string `orm:"url_avatar"   json:"UrlAvatar"`   //

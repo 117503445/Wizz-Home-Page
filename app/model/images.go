@@ -17,3 +17,9 @@ type ImageApiCreateReq struct {
 	ImageType int    `orm:"image_type" json:"imageType"` //
 	ImageUrl  string `orm:"image_url"  json:"imageUrl"`  //
 }
+
+type ImagesApiRep struct {
+	Id        int    `orm:"id,primary" json:"id"`        //
+	ImageType int    `orm:"image_type" json:"ImageType"` //
+	ImageUrl  string `orm:"image_url"  json:"ImageUrl"`  //
+}
