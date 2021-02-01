@@ -196,7 +196,7 @@ func (*membersApi) UpMember(r *ghttp.Request) {
 	dao.Members.Where("member_type", membertype).Structs(&members)
 
 	var membersRsp []model.MemberApiRep
-	if err := gconv.Struct(members, &membersRsp); err != nil {
+	if err := gconv.Structs(members, &membersRsp); err != nil {
 		g.Log().Line().Error(err)
 	}
 
@@ -253,7 +253,7 @@ func (*membersApi) DownMember(r *ghttp.Request) {
 	dao.Members.Where("member_type", membertype).Structs(&members)
 
 	var membersRsp []model.MemberApiRep
-	if err := gconv.Struct(members, &membersRsp); err != nil {
+	if err := gconv.Structs(members, &membersRsp); err != nil {
 		g.Log().Line().Error(err)
 	}
 
