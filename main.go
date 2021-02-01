@@ -8,7 +8,7 @@ import (
 )
 
 // @title       wizz-home-page API
-// @version     1.2.9
+// @version     1.2.10
 // @description `wizz-home-page` 企业官网
 
 // @contact.name 117503445

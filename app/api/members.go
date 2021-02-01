@@ -58,7 +58,11 @@ func (*membersApi) ReadOne(r *ghttp.Request) {
 	if err := dao.Members.Where("id = ", id).Struct(&members); err != nil {
 		response.JsonOld(r, 404, "")
 	}
-	response.JsonOld(r, 200, members)
+	var memberRsp model.MemberApiRep
+	if err := gconv.Struct(members, &memberRsp); err != nil {
+		g.Log().Line().Error(err)
+	}
+	response.JsonOld(r, 200, memberRsp)
 }
 
 // @Summary 添加一个成员
@@ -85,7 +89,12 @@ func (*membersApi) Create(r *ghttp.Request) {
 	} else {
 		id, _ := result.LastInsertId()
 		members.Id = gconv.Int(id)
-		response.JsonOld(r, 200, members)
+
+		var memberRsp model.MemberApiRep
+		if err := gconv.Struct(members, &memberRsp); err != nil {
+			g.Log().Line().Error(err)
+		}
+		response.JsonOld(r, 200, memberRsp)
 	}
 }
 
