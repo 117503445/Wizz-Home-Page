@@ -26,10 +26,10 @@ type StoriesDao struct {
 
 // StoriesColumns defines and stores column names for table stories.
 type storiesColumns struct {
-	Id            string //
-	TimeStamp     string //
-	Name          string //
-	StoryDescribe string //
+	Id             string //   
+    TimeStamp      string //   
+    Name           string //   
+    StoryDescribe  string //
 }
 
 var (
@@ -39,10 +39,10 @@ var (
 		DB:    g.DB("default"),
 		Table: "stories",
 		Columns: storiesColumns{
-			Id:            "id",
-			TimeStamp:     "time_stamp",
-			Name:          "name",
-			StoryDescribe: "story_describe",
+			Id:            "id",              
+            TimeStamp:     "time_stamp",      
+            Name:          "name",            
+            StoryDescribe: "story_describe",
 		},
 	}
 )
@@ -78,7 +78,7 @@ func (d *StoriesDao) Slave() *StoriesDao {
 
 // Args sets custom arguments for model operation.
 func (d *StoriesDao) Args(args ...interface{}) *StoriesDao {
-	return &StoriesDao{M: d.M.Args(args...)}
+	return &StoriesDao{M: d.M.Args(args ...)}
 }
 
 // LeftJoin does "LEFT JOIN ... ON ..." statement on the model.

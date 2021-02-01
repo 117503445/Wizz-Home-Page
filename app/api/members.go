@@ -80,10 +80,13 @@ func (*membersApi) Create(r *ghttp.Request) {
 	if err := gconv.Struct(apiReq, &members); err != nil {
 		response.JsonOld(r, 400, "not a members")
 	}
-	if _, err := dao.Members.Insert(members); err != nil {
-		response.JsonOld(r, 404, "")
+	if result, err := dao.Members.Insert(members); err != nil {
+		response.JsonOld(r, 500, "")
+	} else {
+		id, _ := result.LastInsertId()
+		members.Id = gconv.Int(id)
+		response.JsonOld(r, 200, members)
 	}
-	response.JsonOld(r, 200, members)
 }
 
 // @Summary 删除一个成员

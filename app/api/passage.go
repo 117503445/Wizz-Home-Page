@@ -50,10 +50,13 @@ func (*passagesApi) Create(r *ghttp.Request) {
 	if err := gconv.Struct(apiReq, &passages); err != nil {
 		response.JsonOld(r, 400, "not a passages")
 	}
-	if _, err := dao.Passages.Insert(passages); err != nil {
-		response.JsonOld(r, 404, "")
+	if result, err := dao.Passages.Insert(passages); err != nil {
+		response.JsonOld(r, 500, "")
+	} else {
+		id, _ := result.LastInsertId()
+		passages.Id = gconv.Int(id)
+		response.JsonOld(r, 200, passages)
 	}
-	response.JsonOld(r, 200, passages)
 }
 
 // @Summary 更改一个介绍

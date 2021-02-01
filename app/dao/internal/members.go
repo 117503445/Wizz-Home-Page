@@ -26,13 +26,13 @@ type MembersDao struct {
 
 // MembersColumns defines and stores column names for table members.
 type membersColumns struct {
-	Id          string //
-	Name        string //
-	UrlAvatar   string //
-	SchoolYear  string //
-	Describe    string //
-	MemberType  string //
-	TeacherInfo string //
+	Id           string //   
+    Name         string //   
+    UrlAvatar    string //   
+    SchoolYear   string //   
+    Describe     string //   
+    MemberType   string //   
+    TeacherInfo  string //
 }
 
 var (
@@ -42,13 +42,13 @@ var (
 		DB:    g.DB("default"),
 		Table: "members",
 		Columns: membersColumns{
-			Id:          "id",
-			Name:        "name",
-			UrlAvatar:   "url_avatar",
-			SchoolYear:  "school_year",
-			Describe:    "describe",
-			MemberType:  "member_type",
-			TeacherInfo: "teacher_info",
+			Id:          "id",            
+            Name:        "name",          
+            UrlAvatar:   "url_avatar",    
+            SchoolYear:  "school_year",   
+            Describe:    "describe",      
+            MemberType:  "member_type",   
+            TeacherInfo: "teacher_info",
 		},
 	}
 )
@@ -84,7 +84,7 @@ func (d *MembersDao) Slave() *MembersDao {
 
 // Args sets custom arguments for model operation.
 func (d *MembersDao) Args(args ...interface{}) *MembersDao {
-	return &MembersDao{M: d.M.Args(args...)}
+	return &MembersDao{M: d.M.Args(args ...)}
 }
 
 // LeftJoin does "LEFT JOIN ... ON ..." statement on the model.

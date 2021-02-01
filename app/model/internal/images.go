@@ -4,9 +4,11 @@
 
 package internal
 
+
+
 // Images is the golang structure for table images.
 type Images struct {
-	Id        int    `orm:"id,primary" json:"id"`        //
-	ImageType int    `orm:"image_type" json:"imageType"` //
-	ImageUrl  string `orm:"image_url"  json:"imageUrl"`  //
+    Id        int    `orm:"id,primary" json:"id"`        //   
+    ImageType int    `orm:"image_type" json:"imageType"` //   
+    ImageUrl  string `orm:"image_url"  json:"imageUrl"`  //   
 }

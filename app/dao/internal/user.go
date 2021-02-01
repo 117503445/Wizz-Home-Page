@@ -26,13 +26,13 @@ type UserDao struct {
 
 // UserColumns defines and stores column names for table user.
 type userColumns struct {
-	Id        string //
-	CreatedAt string //
-	UpdatedAt string //
-	DeletedAt string //
-	Username  string //
-	Password  string //
-	Avatar    string //
+	Id         string //   
+    CreatedAt  string //   
+    UpdatedAt  string //   
+    DeletedAt  string //   
+    Username   string //   
+    Password   string //   
+    Avatar     string //
 }
 
 var (
@@ -42,13 +42,13 @@ var (
 		DB:    g.DB("default"),
 		Table: "user",
 		Columns: userColumns{
-			Id:        "id",
-			CreatedAt: "created_at",
-			UpdatedAt: "updated_at",
-			DeletedAt: "deleted_at",
-			Username:  "username",
-			Password:  "password",
-			Avatar:    "avatar",
+			Id:        "id",          
+            CreatedAt: "created_at",  
+            UpdatedAt: "updated_at",  
+            DeletedAt: "deleted_at",  
+            Username:  "username",    
+            Password:  "password",    
+            Avatar:    "avatar",
 		},
 	}
 )
@@ -84,7 +84,7 @@ func (d *UserDao) Slave() *UserDao {
 
 // Args sets custom arguments for model operation.
 func (d *UserDao) Args(args ...interface{}) *UserDao {
-	return &UserDao{M: d.M.Args(args...)}
+	return &UserDao{M: d.M.Args(args ...)}
 }
 
 // LeftJoin does "LEFT JOIN ... ON ..." statement on the model.

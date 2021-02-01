@@ -26,9 +26,9 @@ type ImagesDao struct {
 
 // ImagesColumns defines and stores column names for table images.
 type imagesColumns struct {
-	Id        string //
-	ImageType string //
-	ImageUrl  string //
+	Id         string //   
+    ImageType  string //   
+    ImageUrl   string //
 }
 
 var (
@@ -38,9 +38,9 @@ var (
 		DB:    g.DB("default"),
 		Table: "images",
 		Columns: imagesColumns{
-			Id:        "id",
-			ImageType: "image_type",
-			ImageUrl:  "image_url",
+			Id:        "id",          
+            ImageType: "image_type",  
+            ImageUrl:  "image_url",
 		},
 	}
 )
@@ -76,7 +76,7 @@ func (d *ImagesDao) Slave() *ImagesDao {
 
 // Args sets custom arguments for model operation.
 func (d *ImagesDao) Args(args ...interface{}) *ImagesDao {
-	return &ImagesDao{M: d.M.Args(args...)}
+	return &ImagesDao{M: d.M.Args(args ...)}
 }
 
 // LeftJoin does "LEFT JOIN ... ON ..." statement on the model.

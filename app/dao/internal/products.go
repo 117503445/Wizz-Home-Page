@@ -26,17 +26,17 @@ type ProductsDao struct {
 
 // ProductsColumns defines and stores column names for table products.
 type productsColumns struct {
-	Id             string //
-	Name           string //
-	LittleDescribe string //
-	Describe       string //
-	Partner        string //
-	ProjectType    string //
-	UrlAvatar      string //
-	UrlPartnerLogo string //
-	UrlBackground  string //
-	UrlScreenshot  string //
-	UrlProCode     string //
+	Id              string //   
+    Name            string //   
+    LittleDescribe  string //   
+    Describe        string //   
+    Partner         string //   
+    ProjectType     string //   
+    UrlAvatar       string //   
+    UrlPartnerLogo  string //   
+    UrlBackground   string //   
+    UrlScreenshot   string //   
+    UrlProCode      string //
 }
 
 var (
@@ -46,17 +46,17 @@ var (
 		DB:    g.DB("default"),
 		Table: "products",
 		Columns: productsColumns{
-			Id:             "id",
-			Name:           "name",
-			LittleDescribe: "little_describe",
-			Describe:       "describe",
-			Partner:        "partner",
-			ProjectType:    "project_type",
-			UrlAvatar:      "url_avatar",
-			UrlPartnerLogo: "url_partner_logo",
-			UrlBackground:  "url_background",
-			UrlScreenshot:  "url_screenshot",
-			UrlProCode:     "url_pro_code",
+			Id:             "id",                
+            Name:           "name",              
+            LittleDescribe: "little_describe",   
+            Describe:       "describe",          
+            Partner:        "partner",           
+            ProjectType:    "project_type",      
+            UrlAvatar:      "url_avatar",        
+            UrlPartnerLogo: "url_partner_logo",  
+            UrlBackground:  "url_background",    
+            UrlScreenshot:  "url_screenshot",    
+            UrlProCode:     "url_pro_code",
 		},
 	}
 )
@@ -92,7 +92,7 @@ func (d *ProductsDao) Slave() *ProductsDao {
 
 // Args sets custom arguments for model operation.
 func (d *ProductsDao) Args(args ...interface{}) *ProductsDao {
-	return &ProductsDao{M: d.M.Args(args...)}
+	return &ProductsDao{M: d.M.Args(args ...)}
 }
 
 // LeftJoin does "LEFT JOIN ... ON ..." statement on the model.

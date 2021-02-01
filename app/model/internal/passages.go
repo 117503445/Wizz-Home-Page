@@ -4,8 +4,10 @@
 
 package internal
 
+
+
 // Passages is the golang structure for table passages.
 type Passages struct {
-	Id      int    `orm:"id,primary" json:"id"`      //
-	Passage string `orm:"passage"    json:"passage"` //
+    Id      int    `orm:"id,primary" json:"id"`      //   
+    Passage string `orm:"passage"    json:"passage"` //   
 }

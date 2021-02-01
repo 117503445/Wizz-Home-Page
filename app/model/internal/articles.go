@@ -4,9 +4,11 @@
 
 package internal
 
+
+
 // Articles is the golang structure for table articles.
 type Articles struct {
-	Id         int    `orm:"id,primary"  json:"id"`         //
-	Title      string `orm:"title"       json:"title"`      //
-	ArticleUrl string `orm:"article_url" json:"articleUrl"` //
+    Id         int    `orm:"id,primary"  json:"id"`         //   
+    Title      string `orm:"title"       json:"title"`      //   
+    ArticleUrl string `orm:"article_url" json:"articleUrl"` //   
 }

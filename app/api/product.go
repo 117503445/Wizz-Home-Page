@@ -71,10 +71,13 @@ func (*productsApi) Create(r *ghttp.Request) {
 	if err := gconv.Struct(apiReq, &products); err != nil {
 		response.JsonOld(r, 400, "not a products")
 	}
-	if _, err := dao.Products.Insert(products); err != nil {
-		response.JsonOld(r, 404, "")
+	if result, err := dao.Products.Insert(products); err != nil {
+		response.JsonOld(r, 500, "")
+	} else {
+		id, _ := result.LastInsertId()
+		products.Id = gconv.Int(id)
+		response.JsonOld(r, 200, products)
 	}
-	response.JsonOld(r, 200, products)
 }
 
 // @Summary 删除一个产品

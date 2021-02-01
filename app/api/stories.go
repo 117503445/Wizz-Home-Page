@@ -71,10 +71,13 @@ func (*storyApi) Create(r *ghttp.Request) {
 	if err := gconv.Struct(apiReq, &story); err != nil {
 		response.JsonOld(r, 400, "not a story")
 	}
-	if _, err := dao.Stories.Insert(story); err != nil {
+	if result, err := dao.Stories.Insert(story); err != nil {
 		response.JsonOld(r, 404, "")
+	}else{
+		id, _ := result.LastInsertId()
+		story.Id = gconv.Int(id)
+		response.JsonOld(r, 200, story)
 	}
-	response.JsonOld(r, 200, story)
 }
 
 // @Summary 删除一个历史事件

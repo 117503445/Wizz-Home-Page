@@ -72,10 +72,13 @@ func (*imagesApi) Create(r *ghttp.Request) {
 	if err := gconv.Struct(apiReq, &images); err != nil {
 		response.JsonOld(r, 400, "not a images")
 	}
-	if _, err := dao.Images.Insert(images); err != nil {
-		response.JsonOld(r, 404, "")
+	if result, err := dao.Images.Insert(images); err != nil {
+		response.JsonOld(r, 500, "")
+	} else {
+		id, _ := result.LastInsertId()
+		images.Id = gconv.Int(id)
+		response.JsonOld(r, 200, images)
 	}
-	response.JsonOld(r, 200, images)
 }
 
 // @Summary 删除一个图片

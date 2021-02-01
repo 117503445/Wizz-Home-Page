@@ -4,13 +4,15 @@
 
 package internal
 
+
+
 // Members is the golang structure for table members.
 type Members struct {
-	Id          int    `orm:"id,primary"   json:"id"`          //
-	Name        string `orm:"name"         json:"name"`        //
-	UrlAvatar   string `orm:"url_avatar"   json:"urlAvatar"`   //
-	SchoolYear  int    `orm:"school_year"  json:"schoolYear"`  //
-	Describe    string `orm:"describe"     json:"describe"`    //
-	MemberType  int    `orm:"member_type"  json:"memberType"`  //
-	TeacherInfo string `orm:"teacher_info" json:"teacherInfo"` //
+    Id          int    `orm:"id,primary"   json:"id"`          //   
+    Name        string `orm:"name"         json:"name"`        //   
+    UrlAvatar   string `orm:"url_avatar"   json:"urlAvatar"`   //   
+    SchoolYear  int    `orm:"school_year"  json:"schoolYear"`  //   
+    Describe    string `orm:"describe"     json:"describe"`    //   
+    MemberType  int    `orm:"member_type"  json:"memberType"`  //   
+    TeacherInfo string `orm:"teacher_info" json:"teacherInfo"` //   
 }

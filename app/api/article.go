@@ -62,8 +62,8 @@ func (*articlesApi) ReadOne(r *ghttp.Request) {
 // @Security JWT
 func (*articlesApi) Create(r *ghttp.Request) {
 	var (
-		apiReq *model.ArticleApiCreateReq
-		articles  *model.Articles
+		apiReq   *model.ArticleApiCreateReq
+		articles *model.Articles
 	)
 	if err := r.Parse(&apiReq); err != nil {
 		response.JsonOld(r, 400, "not a articles")
@@ -71,10 +71,13 @@ func (*articlesApi) Create(r *ghttp.Request) {
 	if err := gconv.Struct(apiReq, &articles); err != nil {
 		response.JsonOld(r, 400, "not a articles")
 	}
-	if _, err := dao.Articles.Insert(articles); err != nil {
-		response.JsonOld(r, 404, "")
+	if result, err := dao.Articles.Insert(articles); err != nil {
+		response.JsonOld(r, 500, "")
+	} else {
+		id, _ := result.LastInsertId()
+		articles.Id = gconv.Int(id)
+		response.JsonOld(r, 200, articles)
 	}
-	response.JsonOld(r, 200, articles)
 }
 
 // @Summary 删除一个文章

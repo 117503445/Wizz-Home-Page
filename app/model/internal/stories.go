@@ -4,10 +4,12 @@
 
 package internal
 
+
+
 // Stories is the golang structure for table stories.
 type Stories struct {
-	Id            int    `orm:"id,primary"     json:"id"`            //
-	TimeStamp     int64  `orm:"time_stamp"     json:"timeStamp"`     //
-	Name          string `orm:"name"           json:"name"`          //
-	StoryDescribe string `orm:"story_describe" json:"storyDescribe"` //
+    Id            int    `orm:"id,primary"     json:"id"`            //   
+    TimeStamp     int64  `orm:"time_stamp"     json:"timeStamp"`     //   
+    Name          string `orm:"name"           json:"name"`          //   
+    StoryDescribe string `orm:"story_describe" json:"storyDescribe"` //   
 }
