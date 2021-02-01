@@ -148,7 +148,7 @@ func (*membersApi) UpMember(r *ghttp.Request) {
 	membertype := r.GetQueryInt("type")
 	var member model.Members
 
-	if _, err := dao.Members.Data(member).Where("id", id).One(); err != nil {
+	if err := dao.Members.Where("id = ", id).Struct(&member); err != nil {
 		response.JsonOld(r, 404, err.Error())
 	}
 
@@ -199,7 +199,7 @@ func (*membersApi) DownMember(r *ghttp.Request) {
 	membertype := r.GetQueryInt("type")
 	var member model.Members
 
-	if _, err := dao.Members.Data(member).Where("id", id).One(); err != nil {
+	if err := dao.Members.Where("id = ", id).Struct(&member); err != nil {
 		response.JsonOld(r, 404, err.Error())
 	}
 
