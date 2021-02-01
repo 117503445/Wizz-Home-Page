@@ -122,22 +122,28 @@ func (*membersApi) Delete(r *ghttp.Request) {
 // @Security JWT
 func (*membersApi) Update(r *ghttp.Request) {
 	id := r.GetInt("id")
-	var members model.Members
+	var member model.Members
 
 	var (
 		apiReq *model.MemberApiCreateReq
 	)
 	if err := r.Parse(&apiReq); err != nil {
-		response.JsonOld(r, 400, "not a members")
+		response.JsonOld(r, 400, "not a member")
 	}
-	if err := gconv.Struct(apiReq, &members); err != nil {
-		response.JsonOld(r, 400, "not a members")
-	}
-	if _, err := dao.Members.Data(members).Where("id", id).Update(); err != nil {
-		response.JsonOld(r, 404, err.Error())
+	if err := gconv.Struct(apiReq, &member); err != nil {
+		response.JsonOld(r, 400, "not a member")
 	}
 
-	response.JsonOld(r, 200, members)
+	member.Id = id
+	if _, err := dao.Members.Data(member).Where("id", id).Update(); err != nil {
+		response.JsonOld(r, 404, err.Error())
+	} else {
+		var memberRsp model.MemberApiRep
+		if err := gconv.Struct(member, &memberRsp); err != nil {
+			g.Log().Line().Error(err)
+		}
+		response.JsonOld(r, 200, memberRsp)
+	}
 }
 
 // @Summary 上移一个成员
