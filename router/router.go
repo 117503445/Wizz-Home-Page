@@ -49,6 +49,7 @@ func init() {
 					group.DELETE("/{id}", api.Member.Delete)
 					group.PUT("/{id}", api.Member.Update)
 					group.PUT("/up/{id}", api.Member.UpMember)
+					group.PUT("/down/{id}", api.Member.DownMember)
 				})
 			})
 			group.Group("/passages", func(group *ghttp.RouterGroup) {

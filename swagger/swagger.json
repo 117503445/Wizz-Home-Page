@@ -551,6 +551,112 @@
                 }
             }
         },
+        "/api/members/down/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "成员"
+                ],
+                "summary": "下移一个成员",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "成员id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "成员类型",
+                        "name": "type",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Members"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\": \"Member not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/members/up/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "成员"
+                ],
+                "summary": "上移一个成员",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "成员id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "成员类型",
+                        "name": "type",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Members"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\": \"Member not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/api/members/{id}": {
             "get": {
                 "consumes": [
@@ -1341,59 +1447,6 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/response.JsonResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/members/up/{id}": {
-            "put": {
-                "security": [
-                    {
-                        "JWT": []
-                    }
-                ],
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "成员"
-                ],
-                "summary": "上移一个成员",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "default": 1,
-                        "description": "成员id",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "成员类型",
-                        "name": "type",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/model.Members"
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "{\"message\": \"Member not found\"}",
-                        "schema": {
-                            "type": "string"
                         }
                     }
                 }

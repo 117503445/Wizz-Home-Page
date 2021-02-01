@@ -19,3 +19,4 @@ main
 config/config.toml
 tmp/
 app/service/serverchan/chanid.txt
+config/config.toml.example
