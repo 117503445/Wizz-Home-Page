@@ -21,7 +21,7 @@ type StoryApiCreateReq struct {
 
 type StoriesApiRep struct {
     Id            int    `orm:"id,primary"     json:"id"`            //
-    TimeStamp     int64  `orm:"time_stamp"     json:"TimeStamp"`     //
-    Name          string `orm:"name"           json:"Name"`          //
-    StoryDescribe string `orm:"story_describe" json:"StoryDescribe"` //
+    TimeStamp     int64  `orm:"time_stamp"     json:"timeStamp"`     //
+    Name          string `orm:"name"           json:"name"`          //
+    StoryDescribe string `orm:"story_describe" json:"storyDescribe"` //
 }
