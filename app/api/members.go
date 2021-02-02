@@ -6,6 +6,7 @@ import (
 	"github.com/gogf/gf/util/gconv"
 	"wizz-home-page/app/dao"
 	"wizz-home-page/app/model"
+	"wizz-home-page/app/service"
 	"wizz-home-page/library/response"
 )
 
@@ -157,50 +158,7 @@ func (*membersApi) Update(r *ghttp.Request) {
 // @Router /api/members/up/{id} [PUT]
 // @Security JWT
 func (*membersApi) UpMember(r *ghttp.Request) {
-	id := r.GetInt("id")
-	membertype := r.GetQueryInt("type")
-	var member model.Members
-
-	if err := dao.Members.Where("id = ", id).Struct(&member); err != nil {
-		response.JsonOld(r, 404, err.Error())
-	}
-
-	if membertype <= 0 && membertype > 4 {
-		response.JsonOld(r, 404, "your type is not correct")
-	} else if member.MemberType != membertype {
-		response.JsonOld(r, 400, "your type do not match your id")
-		return
-	}
-	var members []model.Members
-	if err := dao.Members.Where("member_type = ", membertype).Structs(&members); err != nil {
-		response.JsonOld(r, 404, err.Error())
-	}
-	if len(members) == 0 || len(members) == 1 {
-		response.JsonOld(r, 400, "the number of member is 0 or 1")
-	} else if members[0].Id == id {
-		response.JsonOld(r, 400, "the first member can not up")
-	}
-	i := 1
-	var m1 model.Members
-	var m2 model.Members
-	m1 = members[i]
-	for m1.Id != id {
-		i++
-		m1 = members[i]
-	}
-	m2 = members[i-1]
-	m1, m2 = m2, m1
-	m1.Id, m2.Id = m2.Id, m1.Id
-	dao.Members.Data(m1).Where("id", m1.Id).Update()
-	dao.Members.Data(m2).Where("id", m2.Id).Update()
-	dao.Members.Where("member_type", membertype).Structs(&members)
-
-	var membersRsp []model.MembersApiRep
-	if err := gconv.Structs(members, &membersRsp); err != nil {
-		g.Log().Line().Error(err)
-	}
-
-	response.JsonOld(r, 200, membersRsp)
+	service.MembersChangePosition(r, false)
 }
 
 // @Summary 下移一个成员
@@ -214,48 +172,5 @@ func (*membersApi) UpMember(r *ghttp.Request) {
 // @Router /api/members/down/{id} [PUT]
 // @Security JWT
 func (*membersApi) DownMember(r *ghttp.Request) {
-	id := r.GetInt("id")
-	membertype := r.GetQueryInt("type")
-	var member model.Members
-
-	if err := dao.Members.Where("id = ", id).Struct(&member); err != nil {
-		response.JsonOld(r, 404, err.Error())
-	}
-
-	if membertype <= 0 && membertype > 4 {
-		response.JsonOld(r, 404, "your type is not correct")
-	} else if member.MemberType != membertype {
-		response.JsonOld(r, 400, "your type do not match your id")
-		return
-	}
-	var members []model.Members
-	if err := dao.Members.Where("member_type = ", membertype).Structs(&members); err != nil {
-		response.JsonOld(r, 404, err.Error())
-	}
-	if len(members) == 0 || len(members) == 1 {
-		response.JsonOld(r, 400, "the number of member is 0 or 1")
-	} else if members[len(members)-1].Id == id {
-		response.JsonOld(r, 400, "the last member can not up")
-	}
-	i := 0
-	var m1 model.Members
-	var m2 model.Members
-	m1 = members[i]
-	for m1.Id != id {
-		i++
-		m1 = members[i]
-	}
-	m2 = members[i+1]
-	m1, m2 = m2, m1
-	m1.Id, m2.Id = m2.Id, m1.Id
-	dao.Members.Data(m1).Where("id", m1.Id).Update()
-	dao.Members.Data(m2).Where("id", m2.Id).Update()
-	dao.Members.Where("member_type", membertype).Structs(&members)
-
-	var membersRsp []model.MembersApiRep
-	if err := gconv.Structs(members, &membersRsp); err != nil {
-		g.Log().Line().Error(err)
-	}
-
-	response.JsonOld(r, 200, membersRsp)
+	service.MembersChangePosition(r, false)
 }
