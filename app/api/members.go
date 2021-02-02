@@ -158,7 +158,7 @@ func (*membersApi) Update(r *ghttp.Request) {
 // @Router /api/members/up/{id} [PUT]
 // @Security JWT
 func (*membersApi) UpMember(r *ghttp.Request) {
-	service.MembersChangePosition(r, false)
+	service.MembersChangePosition(r, true)
 }
 
 // @Summary 下移一个成员
