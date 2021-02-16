@@ -124,6 +124,17 @@ func init() {
 					group.PUT("/{id}", api.Resume.Update)
 				})
 			})
+
+			group.Group("/messages", func(group *ghttp.RouterGroup) {
+				group.GET("/", api.Message.ReadAll)
+				group.GET("/{id}", api.Message.ReadOne)
+				group.Group("/", func(group *ghttp.RouterGroup) {
+					group.Middleware(middleware.JWTLogin, middleware.NeedRole("admin"))
+					group.POST("/", api.Message.Create)
+					group.DELETE("/{id}", api.Message.Delete)
+					group.PUT("/{id}", api.Message.Update)
+				})
+			})
 		})
 	})
 }
