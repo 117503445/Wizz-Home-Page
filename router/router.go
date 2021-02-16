@@ -91,6 +91,39 @@ func init() {
 					group.GET("/", api.User.GetInfo)
 				})
 			})
+
+			group.Group("/interviews", func(group *ghttp.RouterGroup) {
+				group.GET("/", api.Interview.ReadAll)
+				group.GET("/{id}", api.Interview.ReadOne)
+				group.Group("/", func(group *ghttp.RouterGroup) {
+					group.Middleware(middleware.JWTLogin, middleware.NeedRole("admin"))
+					group.POST("/", api.Interview.Create)
+					group.DELETE("/{id}", api.Interview.Delete)
+					group.PUT("/{id}", api.Interview.Update)
+				})
+			})
+
+			group.Group("/interviewers", func(group *ghttp.RouterGroup) {
+				group.GET("/", api.Interviewer.ReadAll)
+				group.GET("/{id}", api.Interviewer.ReadOne)
+				group.Group("/", func(group *ghttp.RouterGroup) {
+					group.Middleware(middleware.JWTLogin, middleware.NeedRole("admin"))
+					group.POST("/", api.Interviewer.Create)
+					group.DELETE("/{id}", api.Interviewer.Delete)
+					group.PUT("/{id}", api.Interviewer.Update)
+				})
+			})
+
+			group.Group("/resumes", func(group *ghttp.RouterGroup) {
+				group.GET("/", api.Resume.ReadAll)
+				group.GET("/{id}", api.Resume.ReadOne)
+				group.Group("/", func(group *ghttp.RouterGroup) {
+					group.Middleware(middleware.JWTLogin, middleware.NeedRole("admin"))
+					group.POST("/", api.Resume.Create)
+					group.DELETE("/{id}", api.Resume.Delete)
+					group.PUT("/{id}", api.Resume.Update)
+				})
+			})
 		})
 	})
 }

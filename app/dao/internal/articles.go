@@ -26,9 +26,9 @@ type ArticlesDao struct {
 
 // ArticlesColumns defines and stores column names for table articles.
 type articlesColumns struct {
-	Id          string //   
-    Title       string //   
-    ArticleUrl  string //
+	Id         string //
+	Title      string //
+	ArticleUrl string //
 }
 
 var (
@@ -38,9 +38,9 @@ var (
 		DB:    g.DB("default"),
 		Table: "articles",
 		Columns: articlesColumns{
-			Id:         "id",           
-            Title:      "title",        
-            ArticleUrl: "article_url",
+			Id:         "id",
+			Title:      "title",
+			ArticleUrl: "article_url",
 		},
 	}
 )
@@ -76,7 +76,7 @@ func (d *ArticlesDao) Slave() *ArticlesDao {
 
 // Args sets custom arguments for model operation.
 func (d *ArticlesDao) Args(args ...interface{}) *ArticlesDao {
-	return &ArticlesDao{M: d.M.Args(args ...)}
+	return &ArticlesDao{M: d.M.Args(args...)}
 }
 
 // LeftJoin does "LEFT JOIN ... ON ..." statement on the model.

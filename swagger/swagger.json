@@ -526,6 +526,386 @@
                 }
             }
         },
+        "/api/interviewers": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "面试官"
+                ],
+                "summary": "获取所有面试官",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.InterviewersApiRep"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "面试官"
+                ],
+                "summary": "添加一个面试官",
+                "parameters": [
+                    {
+                        "description": "面试官",
+                        "name": "interviewers",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.InterviewerApiCreateReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.InterviewersApiRep"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/interviewers/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "面试官"
+                ],
+                "summary": "获取一个面试官",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "面试官id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.InterviewersApiRep"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\":\"Interviewer not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "面试官"
+                ],
+                "summary": "更改一个面试官",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "面试官id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "面试官",
+                        "name": "interviewers",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.InterviewerApiCreateReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.InterviewersApiRep"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\": \"Interviewer not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "面试官"
+                ],
+                "summary": "删除一个面试官",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "面试官id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"message\": \"delete success\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\": \"Interviewer not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/interviews": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "面试项目"
+                ],
+                "summary": "获取所有面试项目",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.InterviewsApiRep"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "面试项目"
+                ],
+                "summary": "添加一个面试项目",
+                "parameters": [
+                    {
+                        "description": "面试项目",
+                        "name": "interviews",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.InterviewApiCreateReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.InterviewsApiRep"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/interviews/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "面试项目"
+                ],
+                "summary": "获取一个面试项目",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "面试项目id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.InterviewsApiRep"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\":\"Interview not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "面试项目"
+                ],
+                "summary": "更改一个面试项目",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "面试项目id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "面试项目",
+                        "name": "interviews",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.InterviewApiCreateReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.InterviewsApiRep"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\": \"Interview not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "面试项目"
+                ],
+                "summary": "删除一个面试项目",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "面试项目id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"message\": \"delete success\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\": \"Interview not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/api/members": {
             "get": {
                 "consumes": [
@@ -1128,6 +1508,196 @@
                 }
             }
         },
+        "/api/resumes": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "简历"
+                ],
+                "summary": "获取所有简历",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.ResumesApiRep"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "简历"
+                ],
+                "summary": "添加一个简历",
+                "parameters": [
+                    {
+                        "description": "简历",
+                        "name": "resumes",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.ResumeApiCreateReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResumesApiRep"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/resumes/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "简历"
+                ],
+                "summary": "获取一个简历",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "简历id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResumesApiRep"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\":\"Resume not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "简历"
+                ],
+                "summary": "更改一个简历",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "简历id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "简历",
+                        "name": "resumes",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.ResumeApiCreateReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResumesApiRep"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\": \"Resume not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "简历"
+                ],
+                "summary": "删除一个简历",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "简历id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"message\": \"delete success\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "{\"message\": \"Resume not found\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/api/stories": {
             "get": {
                 "consumes": [
@@ -1428,6 +1998,80 @@
                 }
             }
         },
+        "model.InterviewApiCreateReq": {
+            "type": "object",
+            "properties": {
+                "CreateTime": {
+                    "type": "integer"
+                },
+                "Name": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.InterviewerApiCreateReq": {
+            "type": "object",
+            "properties": {
+                "DepartmentType": {
+                    "type": "integer"
+                },
+                "InterviewId": {
+                    "type": "integer"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "ServerchanId": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "integer"
+                },
+                "WebhookUrl": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.InterviewersApiRep": {
+            "type": "object",
+            "properties": {
+                "DepartmentType": {
+                    "type": "integer"
+                },
+                "InterviewId": {
+                    "type": "integer"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "ServerchanId": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "integer"
+                },
+                "WebhookUrl": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.InterviewsApiRep": {
+            "type": "object",
+            "properties": {
+                "CreateTime": {
+                    "type": "integer"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
         "model.MemberApiCreateReq": {
             "type": "object",
             "properties": {
@@ -1554,6 +2198,79 @@
                     "type": "string"
                 },
                 "UrlScreenshot": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.ResumeApiCreateReq": {
+            "type": "object",
+            "properties": {
+                "FileUrl": {
+                    "type": "string"
+                },
+                "InitialScreeningResult": {
+                    "type": "integer"
+                },
+                "InitialScreeningTime": {
+                    "type": "string"
+                },
+                "InterviewEvaluation": {
+                    "type": "string"
+                },
+                "InterviewId": {
+                    "type": "integer"
+                },
+                "InterviewResult": {
+                    "type": "integer"
+                },
+                "InterviewTime": {
+                    "type": "string"
+                },
+                "InterviewerId": {
+                    "type": "integer"
+                },
+                "ProjectDescribe": {
+                    "type": "string"
+                },
+                "SentAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.ResumesApiRep": {
+            "type": "object",
+            "properties": {
+                "FileUrl": {
+                    "type": "string"
+                },
+                "InitialScreeningResult": {
+                    "type": "integer"
+                },
+                "InitialScreeningTime": {
+                    "type": "integer"
+                },
+                "InterviewEvaluation": {
+                    "type": "string"
+                },
+                "InterviewId": {
+                    "type": "integer"
+                },
+                "InterviewResult": {
+                    "type": "integer"
+                },
+                "InterviewTime": {
+                    "type": "integer"
+                },
+                "InterviewerId": {
+                    "type": "integer"
+                },
+                "ProjectDescribe": {
+                    "type": "string"
+                },
+                "SentAt": {
                     "type": "string"
                 },
                 "id": {

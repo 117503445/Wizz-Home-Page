@@ -26,8 +26,8 @@ type PassagesDao struct {
 
 // PassagesColumns defines and stores column names for table passages.
 type passagesColumns struct {
-	Id       string //   
-    Passage  string //
+	Id      string //
+	Passage string //
 }
 
 var (
@@ -37,8 +37,8 @@ var (
 		DB:    g.DB("default"),
 		Table: "passages",
 		Columns: passagesColumns{
-			Id:      "id",       
-            Passage: "passage",
+			Id:      "id",
+			Passage: "passage",
 		},
 	}
 )
@@ -74,7 +74,7 @@ func (d *PassagesDao) Slave() *PassagesDao {
 
 // Args sets custom arguments for model operation.
 func (d *PassagesDao) Args(args ...interface{}) *PassagesDao {
-	return &PassagesDao{M: d.M.Args(args ...)}
+	return &PassagesDao{M: d.M.Args(args...)}
 }
 
 // LeftJoin does "LEFT JOIN ... ON ..." statement on the model.

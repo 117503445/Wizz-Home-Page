@@ -123,5 +123,49 @@ CREATE TABLE `products`  (
                              PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
+-- ----------------------------
+-- Table structure for interviews
+-- ----------------------------
+DROP TABLE IF EXISTS `interviews`;
+CREATE TABLE `interviews`  (
+                               `id` int NOT NULL AUTO_INCREMENT,
+                               `name` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+                               `create_time` bigint NULL DEFAULT NULL,
+                               PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for interviewers
+-- ----------------------------
+DROP TABLE IF EXISTS `interviewers`;
+CREATE TABLE `interviewers`  (
+                                 `id` int NOT NULL AUTO_INCREMENT,
+                                 `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+                                 `interview_id` int NULL DEFAULT NULL,
+                                 `serverchan_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+                                 `webhook_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+                                 `department_type` int NULL DEFAULT NULL,
+                                 `status` int NULL DEFAULT NULL,
+                                 PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for resumes
+-- ----------------------------
+DROP TABLE IF EXISTS `resumes`;
+CREATE TABLE `resumes`  (
+                            `id` int NOT NULL AUTO_INCREMENT,
+                            `project_describe` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+                            `file_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+                            `interview_id`int NULL DEFAULT NULL,
+                            `interviewer_id` int NULL DEFAULT NULL,
+                            `send_time` bigint NULL DEFAULT NULL,
+                            `initial_screening_result` int NULL DEFAULT NULL,
+                            `initial_screening_time` bigint NULL DEFAULT NULL,
+                            `interview_result` int NULL DEFAULT NULL,
+                            `interview_evaluation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+                            `interview_time` bigint NULL DEFAULT NULL,
+                            PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
