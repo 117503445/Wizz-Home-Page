@@ -104,7 +104,7 @@ func init() {
 			})
 
 			group.Group("/interviewers", func(group *ghttp.RouterGroup) {
-				group.GET("/", api.Interviewer.ReadAll)
+				group.GET("/all/{id}", api.Interviewer.ReadAll)
 				group.GET("/{id}", api.Interviewer.ReadOne)
 				group.Group("/", func(group *ghttp.RouterGroup) {
 					group.Middleware(middleware.JWTLogin, middleware.NeedRole("admin"))

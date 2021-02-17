@@ -13,16 +13,18 @@ var Interviewer = new(interviewersApi)
 
 type interviewersApi struct{}
 
-// @Summary 获取所有面试官
+// @Summary 获取指定面试的所有面试官
 // @Tags 面试官
 // @Accept  json
 // @Produce  json
+// @Param   id      path int true  "面试项目id" default(1)
 // @Success 200 {array} model.InterviewersApiRep
-// @Router /api/interviewers [get]
+// @Router /api/interviewers/all/{id} [get]
 func (*interviewersApi) ReadAll(r *ghttp.Request) {
 	g.Log().Debug("GetAll")
+	id := r.GetInt("id")
 	var interviewers []model.Interviewers
-	if err := dao.Interviewers.Structs(&interviewers); err != nil {
+	if err := dao.Interviewers.Where("interview_id = ", id).Structs(&interviewers); err != nil {
 		response.JsonOld(r, 500, "")
 	}
 	if len(interviewers) == 0 {

@@ -26,3 +26,9 @@ script/template_make/out/
 script/template_make/config.toml
 restscript/api.http
 restscript/interview.http
+data/config.json
+data/key.txt
+data/Wizz-Home-Page.Database
+httpscript/rest.http
+test/data/logs/2021-01-17-23-34-51.log
+data/main.exe

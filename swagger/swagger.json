@@ -11,7 +11,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.3.5"
+        "version": "1.3.6"
     },
     "paths": {
         "/": {
@@ -527,29 +527,6 @@
             }
         },
         "/api/interviewers": {
-            "get": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "面试官"
-                ],
-                "summary": "获取所有面试官",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/model.InterviewersApiRep"
-                            }
-                        }
-                    }
-                }
-            },
             "post": {
                 "security": [
                     {
@@ -582,6 +559,41 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/model.InterviewersApiRep"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/interviewers/all/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "面试官"
+                ],
+                "summary": "获取指定面试的所有面试官",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "面试项目id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.InterviewersApiRep"
+                            }
                         }
                     }
                 }
