@@ -29,6 +29,7 @@ type resumesColumns struct {
 	Id                     string //
 	ProjectDescribe        string //
 	FileUrl                string //
+	DepartmentType         string //
 	InterviewId            string //
 	InterviewerId          string //
 	SendTime               string //
@@ -49,6 +50,7 @@ var (
 			Id:                     "id",
 			ProjectDescribe:        "project_describe",
 			FileUrl:                "file_url",
+			DepartmentType:         "department_type",
 			InterviewId:            "interview_id",
 			InterviewerId:          "interviewer_id",
 			SendTime:               "send_time",

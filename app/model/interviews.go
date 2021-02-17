@@ -21,4 +21,7 @@ type InterviewsApiRep struct {
 	Id         int    `orm:"id,primary"  json:"id"`         //
 	Name       string `orm:"name"        json:"Name"`       //
 	CreateTime int64  `orm:"create_time" json:"CreateTime"` //
+	SendNumber int    `json:"SentNumber"`                   //
+	PassNumber int    `json:"PassNumber"`                   //
+	FailNumber int    `json:"FailNumber"`                   //
 }

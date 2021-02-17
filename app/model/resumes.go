@@ -15,6 +15,7 @@ type Resumes internal.Resumes
 type ResumeApiCreateReq struct {
 	ProjectDescribe        string `orm:"project_describe"         json:"ProjectDescribe"`        //
 	FileUrl                string `orm:"file_url"                 json:"FileUrl"`                //
+	DepartmentType         int    `orm:"department_type"          json:"DepartmentType"`         //
 	InterviewId            int    `orm:"interview_id"             json:"InterviewId"`            //
 	InterviewerId          int    `orm:"interviewer_id"           json:"InterviewerId"`          //
 	SendTime               int64  `orm:"send_time"                json:"SendTime"`               //
@@ -29,6 +30,7 @@ type ResumesApiRep struct {
 	Id                     int    `orm:"id,primary"               json:"id"`                     //
 	ProjectDescribe        string `orm:"project_describe"         json:"ProjectDescribe"`        //
 	FileUrl                string `orm:"file_url"                 json:"FileUrl"`                //
+	DepartmentType         int    `orm:"department_type"          json:"DepartmentType"`         //
 	InterviewId            int    `orm:"interview_id"             json:"InterviewId"`            //
 	InterviewerId          int    `orm:"interviewer_id"           json:"InterviewerId"`          //
 	SendTime               int64  `orm:"send_time"                json:"SendTime"`               //

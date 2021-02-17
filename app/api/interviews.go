@@ -6,6 +6,7 @@ import (
 	"github.com/gogf/gf/util/gconv"
 	"wizz-home-page/app/dao"
 	"wizz-home-page/app/model"
+	"wizz-home-page/app/service"
 	"wizz-home-page/library/response"
 )
 
@@ -33,6 +34,9 @@ func (*interviewsApi) ReadAll(r *ghttp.Request) {
 		if err := gconv.Structs(interviews, &interviewsRsp); err != nil {
 			g.Log().Line().Error(err)
 		}
+		for i, interview := range interviews {
+			interviewsRsp[i].SendNumber, interviewsRsp[i].PassNumber, interviewsRsp[i].FailNumber = service.Count(interview)
+		}
 		response.JsonOld(r, 200, interviewsRsp)
 	}
 }
@@ -57,6 +61,7 @@ func (*interviewsApi) ReadOne(r *ghttp.Request) {
 	if err := gconv.Struct(interviews, &interviewRsp); err != nil {
 		g.Log().Line().Error(err)
 	}
+	interviewRsp.SendNumber, interviewRsp.PassNumber, interviewRsp.FailNumber = service.Count(interviews)
 	response.JsonOld(r, 200, interviewRsp)
 }
 
@@ -142,6 +147,7 @@ func (*interviewsApi) Update(r *ghttp.Request) {
 		if err := gconv.Struct(interview, &interviewRsp); err != nil {
 			g.Log().Line().Error(err)
 		}
+		interviewRsp.SendNumber, interviewRsp.PassNumber, interviewRsp.FailNumber = service.Count(interview)
 		response.JsonOld(r, 200, interviewRsp)
 	}
 }

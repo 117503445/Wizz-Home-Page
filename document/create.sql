@@ -157,6 +157,7 @@ CREATE TABLE `resumes`  (
                             `id` int NOT NULL AUTO_INCREMENT,
                             `project_describe` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
                             `file_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+                            `department_type` int NULL DEFAULT NULL,
                             `interview_id`int NULL DEFAULT NULL,
                             `interviewer_id` int NULL DEFAULT NULL,
                             `send_time` bigint NULL DEFAULT NULL,
