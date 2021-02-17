@@ -70,7 +70,7 @@ func (*articlesApi) ReadOne(r *ghttp.Request) {
 // @Security JWT
 func (*articlesApi) Create(r *ghttp.Request) {
 	var (
-		apiReq  *model.ArticleApiCreateReq
+		apiReq   *model.ArticleApiCreateReq
 		articles *model.Articles
 	)
 	if err := r.Parse(&apiReq); err != nil {

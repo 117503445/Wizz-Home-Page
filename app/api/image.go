@@ -71,7 +71,7 @@ func (*imagesApi) ReadOne(r *ghttp.Request) {
 // @Security JWT
 func (*imagesApi) Create(r *ghttp.Request) {
 	var (
-		apiReq  *model.ImageApiCreateReq
+		apiReq *model.ImageApiCreateReq
 		images *model.Images
 	)
 	if err := r.Parse(&apiReq); err != nil {

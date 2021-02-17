@@ -7,7 +7,7 @@ import (
 
 func CORS(r *ghttp.Request) {
 	corsOptions := r.Response.DefaultCORSOptions()
-	corsOptions.AllowDomain = []string{"wizzstudio.com", "homepage.backend.wizzstudio.com","localhost"}
+	corsOptions.AllowDomain = []string{"wizzstudio.com", "homepage.backend.wizzstudio.com", "localhost"}
 	r.Response.CORS(corsOptions)
 	if !r.Response.CORSAllowedOrigin(corsOptions) {
 		r.Response.WriteStatus(http.StatusForbidden)

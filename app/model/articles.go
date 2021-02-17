@@ -18,7 +18,7 @@ type ArticleApiCreateReq struct {
 }
 
 type ArticlesApiRep struct {
-    Id         int    `orm:"id,primary"  json:"id"`         //
-    Title      string `orm:"title"       json:"title"`      //
-    ArticleUrl string `orm:"article_url" json:"articleUrl"` //
+	Id         int    `orm:"id,primary"  json:"id"`         //
+	Title      string `orm:"title"       json:"title"`      //
+	ArticleUrl string `orm:"article_url" json:"articleUrl"` //
 }

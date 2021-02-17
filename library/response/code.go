@@ -1,7 +1,7 @@
 package response
 
 const (
-	Success                 = 0   // 请求成功
+	Success                 = 0     // 请求成功
 	Fail                    = 400   // 请求失败
 	Error                   = 500   // 服务器内部错误
 	Unauthorized            = 401   // 身份未授权
