@@ -58,7 +58,7 @@ func InitDatabase() {
 		}
 
 		createSQL := string(gres.Get("create.sql./create.sql").Content())
-		// g.Log().Line().Debug(createSQL)
+		//g.Log().Line().Debug(createSQL)
 		sqlMyDB, err := sql.Open("mysql", linkWithoutDbName+dbName+"?multiStatements=true")
 		if err != nil {
 			g.Log().Line().Panic(err)
@@ -69,7 +69,6 @@ func InitDatabase() {
 		}
 
 		adminPassword := library.RandStringRunes(12)
-
 		if cipher, err := model.EncryptPassword(adminPassword); err != nil {
 			g.Log().Line().Panic(err)
 		} else {
@@ -82,6 +81,16 @@ func InitDatabase() {
 			_, _ = g.DB().Table("user").Data(g.List{{"username": "admin", "password": cipher}}).Save()
 
 			_, _ = g.DB().Table("user_role").Data(g.List{{"user_id": "1", "role_id": "1"}, {"user_id": "1", "role_id": "2"}}).Save()
+		}
+
+		if isForceCreate && g.Cfg().GetBool("database.runTestSql") {
+			g.Log().Line().Info("run test sql")
+			// gres.Dump()
+			testSQL := string(gres.Get("test.sql./test.sql").Content())
+			// g.Log().Line().Debug(testSQL)
+			if _, err = sqlMyDB.Exec(testSQL); err != nil {
+				g.Log().Line().Panic(err)
+			}
 		}
 
 	}

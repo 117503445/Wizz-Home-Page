@@ -15,6 +15,7 @@ Stdout = true
 link = "mysql:${user}:${pass}@tcp(localhost:3306)/wizz_home_page"
 debug = true
 forceCreate = true # 强制创建,启用后强制删除旧数据库后再创建新的,常用于开发
+runTestSql = true # only enabled when forceCreate == true
 
 # Database logger.
 [database.logger]

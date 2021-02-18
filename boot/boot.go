@@ -1,7 +1,7 @@
 package boot
 
 import (
-	"wizz-home-page/app/middleware"
+	"wizz-home-page/app/model"
 	_ "wizz-home-page/packed"
 
 	"github.com/gogf/gf/frame/g"
@@ -9,7 +9,9 @@ import (
 )
 
 func init() {
-	middleware.NeedRole("123")
+	str, _ := model.EncryptPassword("admin")
+	g.Log().Line().Debug(str)
+	//middleware.NeedRole("123")
 	LogBindEs()
 
 	s := g.Server()
