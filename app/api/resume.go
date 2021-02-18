@@ -1,13 +1,14 @@
 package api
 
 import (
-	"github.com/gogf/gf/frame/g"
-	"github.com/gogf/gf/net/ghttp"
-	"github.com/gogf/gf/util/gconv"
 	"wizz-home-page/app/dao"
 	"wizz-home-page/app/model"
 	"wizz-home-page/app/service"
 	"wizz-home-page/library/response"
+
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
+	"github.com/gogf/gf/util/gconv"
 )
 
 var Resume = new(resumesApi)
@@ -33,17 +34,18 @@ func (*resumesApi) ReadAll(r *ghttp.Request) {
 	resumes, err := service.SortResumes(Page, InterviewId, DepartmentType, InterviewResult)
 	if err != nil {
 		g.Log().Line().Error(err)
-		response.JsonOld(r, 500, "")
+		response.Json(r, response.Error, "", nil)
 	}
 	if resumes == nil {
-		response.JsonOld(r, 500, "Do not find page")
+		response.Json(r, response.ErrorNotExist, "", nil)
 	}
 	var resumesRsp []model.ResumesApiRep
-	err = gconv.Structs(resumes, &resumesRsp)
+	err = gconv.Structs(resumes.Content, &resumesRsp)
 	if err != nil {
 		g.Log().Line().Error(err)
 	}
-	response.JsonOld(r, 200, resumesRsp)
+	resumes.Content = resumesRsp
+	response.Json(r, response.Success, "", resumes)
 }
 
 // @Summary 获取一个简历
