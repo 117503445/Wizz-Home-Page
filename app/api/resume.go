@@ -35,6 +35,9 @@ func (*resumesApi) ReadAll(r *ghttp.Request) {
 		g.Log().Line().Error(err)
 		response.JsonOld(r, 500, "")
 	}
+	if resumes == nil {
+		response.JsonOld(r, 500, "Do not find page")
+	}
 	var resumesRsp []model.ResumesApiRep
 	err = gconv.Structs(resumes, &resumesRsp)
 	if err != nil {
