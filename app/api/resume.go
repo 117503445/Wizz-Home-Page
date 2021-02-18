@@ -6,6 +6,7 @@ import (
 	"github.com/gogf/gf/util/gconv"
 	"wizz-home-page/app/dao"
 	"wizz-home-page/app/model"
+	"wizz-home-page/app/service"
 	"wizz-home-page/library/response"
 )
 
@@ -13,28 +14,33 @@ var Resume = new(resumesApi)
 
 type resumesApi struct{}
 
-// @Summary 获取所有简历
+// @Summary 获取搜索的分页简历
 // @Tags 简历
 // @Accept  json
 // @Produce  json
+// @Param   DepartmentType	query	int true  "面试部门"
+// @Param   InterviewId	query	int true  "面试项目"
+// @Param   InterviewResult	query	int true  "面试结果"
+// @Param   Page	query	int true  "页数"
 // @Success 200 {array} model.ResumesApiRep
 // @Router /api/resumes [get]
 func (*resumesApi) ReadAll(r *ghttp.Request) {
 	g.Log().Debug("GetAll")
-	var resumes []model.Resumes
-	if err := dao.Resumes.Structs(&resumes); err != nil {
+	DepartmentType := r.GetInt("DepartmentType")
+	InterviewId := r.GetInt("InterviewId")
+	InterviewResult := r.GetInt("InterviewResult")
+	Page := r.GetInt("Page")
+	resumes, err := service.SortResumes(Page, InterviewId, DepartmentType, InterviewResult)
+	if err != nil {
+		g.Log().Line().Error(err)
 		response.JsonOld(r, 500, "")
 	}
-	if len(resumes) == 0 {
-		r.Response.Write("[]")
-		r.Exit()
-	} else {
-		var resumesRsp []model.ResumesApiRep
-		if err := gconv.Structs(resumes, &resumesRsp); err != nil {
-			g.Log().Line().Error(err)
-		}
-		response.JsonOld(r, 200, resumesRsp)
+	var resumesRsp []model.ResumesApiRep
+	err = gconv.Structs(resumes, &resumesRsp)
+	if err != nil {
+		g.Log().Line().Error(err)
 	}
+	response.JsonOld(r, 200, resumesRsp)
 }
 
 // @Summary 获取一个简历

@@ -31,24 +31,65 @@ INSERT INTO `members` VALUES (37, '谭老师', 'https://qiniu.wizzstudio.com/mem
 INSERT INTO `members` VALUES (38, '李老师', 'https://qiniu.wizzstudio.com/member-1582076433968.jpg', 2018, '深圳海鲸教育基金会创始人、理事', 0, '西安电子科技大学创业导师/ 海鲸创新创业奖学金主要捐赠人/助力为之领航计划，提供大量经验指导');
 INSERT INTO `members` VALUES (39, '朱老师', 'https://qiniu.wizzstudio.com/member-1582076373896.jpg', 2018, '创新创业学院副院长', 0, '创新创业学院骨干指导老师，多次指导项目合作');
 
-INSERT INTO `passages` VALUES (1, 'EXAMPLE passages');
+INSERT INTO `passages`
+VALUES (1, 'EXAMPLE passages');
 
-INSERT INTO `products` VALUES (1, 'HelloWorld Rank', '编程语言排行榜', '可在⼩程序⾥了解当下最 热⻔、最赚钱的编程语⾔。同时提供免费的精选⼊⻔课程，帮助学习编程语⾔。', NULL, 2, 'https://qiniu.wizzstudio.com/product-1582076239314.png', NULL, 'https://qiniu.wizzstudio.com/back1.jpg', 'https://qiniu.wizzstudio.com/product-1582076243836.png*https://qiniu.wizzstudio.com/product-1582076246263.jpg*', NULL);
-INSERT INTO `products` VALUES (2, '一起来开黑', '一键约游戏', '大学生喜闻乐见的跨校交友平台，一键匹配聊天约游戏，一起来开黑帮你聊天&游戏两不误~', NULL, 2, 'https://qiniu.wizzstudio.com/product-1582076300207.png', NULL, 'https://qiniu.wizzstudio.com/back3.jpg', NULL, NULL);
+INSERT INTO `products`
+VALUES (1, 'HelloWorld Rank', '编程语言排行榜', '可在⼩程序⾥了解当下最 热⻔、最赚钱的编程语⾔。同时提供免费的精选⼊⻔课程，帮助学习编程语⾔。', NULL, 2,
+        'https://qiniu.wizzstudio.com/product-1582076239314.png', NULL, 'https://qiniu.wizzstudio.com/back1.jpg',
+        'https://qiniu.wizzstudio.com/product-1582076243836.png*https://qiniu.wizzstudio.com/product-1582076246263.jpg*',
+        NULL);
+INSERT INTO `products`
+VALUES (2, '一起来开黑', '一键约游戏', '大学生喜闻乐见的跨校交友平台，一键匹配聊天约游戏，一起来开黑帮你聊天&游戏两不误~', NULL, 2,
+        'https://qiniu.wizzstudio.com/product-1582076300207.png', NULL, 'https://qiniu.wizzstudio.com/back3.jpg', NULL,
+        NULL);
 
-INSERT INTO `interviews` VALUES (1, '2020 1月面试',1579317866);
-INSERT INTO `interviews` VALUES (2, '2020 7月面试',1595042666);
-INSERT INTO `interviews` VALUES (3, '2021 2月面试',1613618632);
+INSERT INTO `interviews`
+VALUES (1, '2020 1月面试', 1579317866);
+INSERT INTO `interviews`
+VALUES (2, '2020 7月面试', 1595042666);
+INSERT INTO `interviews`
+VALUES (3, '2021 2月面试', 1613618632);
 
-INSERT INTO `interviewers` VALUES (1, '前端面试官1',3,'serverchan_id','webhook_url',1,1);
-INSERT INTO `interviewers` VALUES (2, '前端面试官2',3,'serverchan_id','webhook_url',1,1);
-INSERT INTO `interviewers` VALUES (3, '后端面试官1',3,'serverchan_id','webhook_url',2,1);
-INSERT INTO `interviewers` VALUES (4, '后端面试官2',3,'serverchan_id','webhook_url',2,1);
-INSERT INTO `interviewers` VALUES (5, '产品面试官1',3,'serverchan_id','webhook_url',3,1);
-INSERT INTO `interviewers` VALUES (6, '产品面试官2',3,'serverchan_id','webhook_url',3,1);
-INSERT INTO `interviewers` VALUES (7, '运营面试官1',3,'serverchan_id','webhook_url',4,1);
-INSERT INTO `interviewers` VALUES (8, '运营面试官2',3,'serverchan_id','webhook_url',4,1);
+INSERT INTO `interviewers`
+VALUES (1, '前端面试官1', 3, 'serverchan_id', 'webhook_url', 1, 1);
+INSERT INTO `interviewers`
+VALUES (2, '前端面试官2', 3, 'serverchan_id', 'webhook_url', 1, 1);
+INSERT INTO `interviewers`
+VALUES (3, '后端面试官1', 3, 'serverchan_id', 'webhook_url', 2, 1);
+INSERT INTO `interviewers`
+VALUES (4, '后端面试官2', 3, 'serverchan_id', 'webhook_url', 2, 1);
+INSERT INTO `interviewers`
+VALUES (5, '产品面试官1', 3, 'serverchan_id', 'webhook_url', 3, 1);
+INSERT INTO `interviewers`
+VALUES (6, '产品面试官2', 3, 'serverchan_id', 'webhook_url', 3, 1);
+INSERT INTO `interviewers`
+VALUES (7, '运营面试官1', 3, 'serverchan_id', 'webhook_url', 4, 1);
+INSERT INTO `interviewers`
+VALUES (8, '运营面试官2', 3, 'serverchan_id', 'webhook_url', 4, 1);
 
-INSERT INTO `resumes` VALUES (1, '简历内容1','https://qiniu.wizzstudio.com/back3.jpg',1,3,1,1613618632,0,0,0,'',0);
+INSERT INTO `resumes`
+VALUES (1, '简历内容1', 'https://qiniu.wizzstudio.com/back1.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+INSERT INTO `resumes`
+VALUES (2, '简历内容2', 'https://qiniu.wizzstudio.com/back2.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+INSERT INTO `resumes`
+VALUES (3, '简历内容3', 'https://qiniu.wizzstudio.com/back3.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+INSERT INTO `resumes`
+VALUES (4, '简历内容4', 'https://qiniu.wizzstudio.com/back4.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+INSERT INTO `resumes`
+VALUES (5, '简历内容5', 'https://qiniu.wizzstudio.com/back5.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+INSERT INTO `resumes`
+VALUES (6, '简历内容6', 'https://qiniu.wizzstudio.com/back6.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+INSERT INTO `resumes`
+VALUES (7, '简历内容7', 'https://qiniu.wizzstudio.com/back7.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+INSERT INTO `resumes`
+VALUES (8, '简历内容8', 'https://qiniu.wizzstudio.com/back8.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+INSERT INTO `resumes`
+VALUES (9, '简历内容9', 'https://qiniu.wizzstudio.com/back9.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+INSERT INTO `resumes`
+VALUES (10, '简历内容10', 'https://qiniu.wizzstudio.com/back10.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+INSERT INTO `resumes`
+VALUES (11, '简历内容11', 'https://qiniu.wizzstudio.com/back11.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
 
-INSERT INTO `messages` VALUES (1, 'Content',0,1613618632);
+INSERT INTO `messages`
+VALUES (1, 'Content', 0, 1613618632);

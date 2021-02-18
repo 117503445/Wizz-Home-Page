@@ -11,7 +11,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.4.0"
+        "version": "1.4.1"
     },
     "paths": {
         "/": {
@@ -1721,7 +1721,37 @@
                 "tags": [
                     "简历"
                 ],
-                "summary": "获取所有简历",
+                "summary": "获取搜索的分页简历",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "面试部门",
+                        "name": "DepartmentType",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "面试项目",
+                        "name": "InterviewId",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "面试结果",
+                        "name": "InterviewResult",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "页数",
+                        "name": "Page",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
