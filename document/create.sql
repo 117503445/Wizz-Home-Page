@@ -153,20 +153,23 @@ CREATE TABLE `interviewers`  (
 -- Table structure for resumes
 -- ----------------------------
 DROP TABLE IF EXISTS `resumes`;
-CREATE TABLE `resumes`  (
-                            `id` int NOT NULL AUTO_INCREMENT,
-                            `project_describe` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL, -- 简历内容文字
-                            `file_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL, -- 附件url
-                            `department_type` int NULL DEFAULT NULL, -- 部门类型
-                            `interview_id`int NULL DEFAULT NULL, -- 面试项目id
-                            `interviewer_id` int NULL DEFAULT NULL, -- 面试官id
-                            `send_time` bigint NULL DEFAULT NULL, -- 上传简历时间
-                            `initial_screening_result` int NULL DEFAULT NULL, -- 初筛结果
-                            `initial_screening_time` bigint NULL DEFAULT NULL,-- 初筛结果提交时间
-                            `interview_result` int NULL DEFAULT NULL, -- 面试结果
-                            `interview_evaluation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL, -- 面试评价
-                            `interview_time` bigint NULL DEFAULT NULL, -- 面试时间
-                            PRIMARY KEY (`id`) USING BTREE
+CREATE TABLE `resumes`(
+                          `id`                       int                                                           NOT NULL AUTO_INCREMENT,
+                          `project_describe`         longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci     NULL,              -- 简历内容文字
+                          `file_url`                 varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL, -- 附件url
+                          `name`                     varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL, -- 面试者姓名
+                          `age`                      int                                                           NULL DEFAULT NULL, -- 面试者年纪
+                          `grade`                    int                                                           NULL DEFAULT NULL, -- 面试者姓名
+                          `department_type`          int                                                           NULL DEFAULT NULL, -- 部门类型
+                          `interview_id`             int                                                           NULL DEFAULT NULL, -- 面试项目id
+                          `interviewer_id`           int                                                           NULL DEFAULT NULL, -- 面试官id
+                          `send_time`                bigint                                                        NULL DEFAULT NULL, -- 上传简历时间
+                          `initial_screening_result` int                                                           NULL DEFAULT NULL, -- 初筛结果
+                          `initial_screening_time`   bigint                                                        NULL DEFAULT NULL,-- 初筛结果提交时间
+                          `interview_result`         int                                                           NULL DEFAULT NULL, -- 面试结果
+                          `interview_evaluation`     varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL, -- 面试评价
+                          `interview_time`           bigint                                                        NULL DEFAULT NULL, -- 面试时间
+                          PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------

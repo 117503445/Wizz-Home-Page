@@ -11,7 +11,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.4.4"
+        "version": "1.4.5"
     },
     "paths": {
         "/": {
@@ -2480,11 +2480,17 @@
         "model.ResumeApiCreateReq": {
             "type": "object",
             "properties": {
+                "Age": {
+                    "type": "integer"
+                },
                 "DepartmentType": {
                     "type": "integer"
                 },
                 "FileUrl": {
                     "type": "string"
+                },
+                "Grade": {
+                    "type": "integer"
                 },
                 "InitialScreeningResult": {
                     "type": "integer"
@@ -2507,31 +2513,31 @@
                 "InterviewerId": {
                     "type": "integer"
                 },
+                "Name": {
+                    "type": "string"
+                },
                 "ProjectDescribe": {
                     "type": "string"
                 },
                 "SendTime": {
                     "type": "integer"
-                },
-                "age": {
-                    "type": "integer"
-                },
-                "grade": {
-                    "type": "integer"
-                },
-                "name": {
-                    "type": "string"
                 }
             }
         },
         "model.ResumesApiRep": {
             "type": "object",
             "properties": {
+                "Age": {
+                    "type": "integer"
+                },
                 "DepartmentType": {
                     "type": "integer"
                 },
                 "FileUrl": {
                     "type": "string"
+                },
+                "Grade": {
+                    "type": "integer"
                 },
                 "InitialScreeningResult": {
                     "type": "integer"
@@ -2554,23 +2560,17 @@
                 "InterviewerId": {
                     "type": "integer"
                 },
+                "Name": {
+                    "type": "string"
+                },
                 "ProjectDescribe": {
                     "type": "string"
                 },
                 "SendTime": {
                     "type": "integer"
                 },
-                "age": {
-                    "type": "integer"
-                },
-                "grade": {
-                    "type": "integer"
-                },
                 "id": {
                     "type": "integer"
-                },
-                "name": {
-                    "type": "string"
                 }
             }
         },

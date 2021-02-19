@@ -69,27 +69,29 @@ INSERT INTO `interviewers`
 VALUES (8, '运营面试官2', 3, 'serverchan_id', 'webhook_url', 4, 1);
 
 INSERT INTO `resumes`
-VALUES (1, '简历内容1', 'https://qiniu.wizzstudio.com/back1.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+VALUES (1, '简历内容1', 'https://qiniu.wizzstudio.com/back1.jpg', 'name1', 2019, 19, 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (2, '简历内容2', 'https://qiniu.wizzstudio.com/back2.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+VALUES (2, '简历内容2', 'https://qiniu.wizzstudio.com/back2.jpg', 'name2', 2019, 19, 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (3, '简历内容3', 'https://qiniu.wizzstudio.com/back3.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+VALUES (3, '简历内容3', 'https://qiniu.wizzstudio.com/back3.jpg', 'name3', 2019, 19, 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (4, '简历内容4', 'https://qiniu.wizzstudio.com/back4.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+VALUES (4, '简历内容4', 'https://qiniu.wizzstudio.com/back4.jpg', 'name4', 2019, 19, 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (5, '简历内容5', 'https://qiniu.wizzstudio.com/back5.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+VALUES (5, '简历内容5', 'https://qiniu.wizzstudio.com/back5.jpg', 'name5', 2019, 19, 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (6, '简历内容6', 'https://qiniu.wizzstudio.com/back6.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+VALUES (6, '简历内容6', 'https://qiniu.wizzstudio.com/back6.jpg', 'name6', 2019, 19, 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (7, '简历内容7', 'https://qiniu.wizzstudio.com/back7.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+VALUES (7, '简历内容7', 'https://qiniu.wizzstudio.com/back7.jpg', 'name7', 2019, 19, 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (8, '简历内容8', 'https://qiniu.wizzstudio.com/back8.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+VALUES (8, '简历内容8', 'https://qiniu.wizzstudio.com/back8.jpg', 'name8', 2019, 19, 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (9, '简历内容9', 'https://qiniu.wizzstudio.com/back9.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+VALUES (9, '简历内容9', 'https://qiniu.wizzstudio.com/back9.jpg', 'name9', 2019, 19, 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (10, '简历内容10', 'https://qiniu.wizzstudio.com/back10.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+VALUES (10, '简历内容10', 'https://qiniu.wizzstudio.com/back10.jpg', 'name10', 2019, 19, 1, 3, 1, 1613618632, 0, 0, 0, '',
+        0);
 INSERT INTO `resumes`
-VALUES (11, '简历内容11', 'https://qiniu.wizzstudio.com/back11.jpg', 1, 3, 1, 1613618632, 0, 0, 0, '', 0);
+VALUES (11, '简历内容11', 'https://qiniu.wizzstudio.com/back11.jpg', 'name11', 2019, 19, 1, 3, 1, 1613618632, 0, 0, 0, '',
+        0);
 
 INSERT INTO `messages`
 VALUES (1, 'Content', 0, 1613618632);
