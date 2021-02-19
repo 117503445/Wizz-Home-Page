@@ -29,6 +29,9 @@ type resumesColumns struct {
 	Id                     string //
 	ProjectDescribe        string //
 	FileUrl                string //
+	Name                   string //
+	Age                    string //
+	Grade                  string //
 	DepartmentType         string //
 	InterviewId            string //
 	InterviewerId          string //
@@ -50,6 +53,9 @@ var (
 			Id:                     "id",
 			ProjectDescribe:        "project_describe",
 			FileUrl:                "file_url",
+			Name:                   "name",
+			Age:                    "age",
+			Grade:                  "grade",
 			DepartmentType:         "department_type",
 			InterviewId:            "interview_id",
 			InterviewerId:          "interviewer_id",

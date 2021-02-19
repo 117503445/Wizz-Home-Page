@@ -9,6 +9,9 @@ type Resumes struct {
 	Id                     int    `orm:"id,primary"               json:"id"`                     //
 	ProjectDescribe        string `orm:"project_describe"         json:"projectDescribe"`        //
 	FileUrl                string `orm:"file_url"                 json:"fileUrl"`                //
+	Name                   string `orm:"name"                     json:"name"`                   //
+	Age                    int    `orm:"age"                      json:"age"`                    //
+	Grade                  int    `orm:"grade"                    json:"grade"`                  //
 	DepartmentType         int    `orm:"department_type"          json:"departmentType"`         //
 	InterviewId            int    `orm:"interview_id"             json:"interviewId"`            //
 	InterviewerId          int    `orm:"interviewer_id"           json:"interviewerId"`          //
