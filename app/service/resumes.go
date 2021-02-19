@@ -32,3 +32,12 @@ func SortResumes(Page int, InterviewId int, DepartmentType int, InterviewResult 
 	}
 	return &p, nil
 }
+
+func GetInterviewerName(id int) (string, error) {
+	value, err := dao.Interviewers.Where("id", id).Value("name", "id", id)
+	if err != nil {
+		return "", err
+	}
+	name := value.String()
+	return name, nil
+}

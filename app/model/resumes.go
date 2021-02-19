@@ -30,15 +30,16 @@ type ResumeApiCreateReq struct {
 }
 
 type ResumesApiRep struct {
-	Id                     int    `orm:"id,primary"               json:"id"`                     //
-	ProjectDescribe        string `orm:"project_describe"         json:"ProjectDescribe"`        //
-	FileUrl                string `orm:"file_url"                 json:"FileUrl"`                //
-	Name                   string `orm:"name"                     json:"Name"`                   //
-	Grade                  int    `orm:"grade"                    json:"Grade"`                  //
-	Age                    int    `orm:"age"                      json:"Age"`                    //
-	DepartmentType         int    `orm:"department_type"          json:"DepartmentType"`         //
-	InterviewId            int    `orm:"interview_id"             json:"InterviewId"`            //
-	InterviewerId          int    `orm:"interviewer_id"           json:"InterviewerId"`          //
+	Id                     int    `orm:"id,primary"               json:"id"`              //
+	ProjectDescribe        string `orm:"project_describe"         json:"ProjectDescribe"` //
+	FileUrl                string `orm:"file_url"                 json:"FileUrl"`         //
+	Name                   string `orm:"name"                     json:"Name"`            //
+	Grade                  int    `orm:"grade"                    json:"Grade"`           //
+	Age                    int    `orm:"age"                      json:"Age"`             //
+	DepartmentType         int    `orm:"department_type"          json:"DepartmentType"`  //
+	InterviewId            int    `orm:"interview_id"             json:"InterviewId"`     //
+	InterviewerId          int    `orm:"interviewer_id"           json:"InterviewerId"`   //
+	InterviewerName        string `json:"InterviewerName"`
 	SendTime               int64  `orm:"send_time"                json:"SendTime"`               //
 	InitialScreeningResult int    `orm:"initial_screening_result" json:"InitialScreeningResult"` //
 	InitialScreeningTime   int64  `orm:"initial_screening_time"   json:"InitialScreeningTime"`   //

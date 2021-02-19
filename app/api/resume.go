@@ -44,7 +44,14 @@ func (*resumesApi) ReadAll(r *ghttp.Request) {
 	if err != nil {
 		g.Log().Line().Error(err)
 	}
+	for i, resumeRsp := range resumesRsp {
+		resumesRsp[i].InterviewerName, err = service.GetInterviewerName(resumeRsp.InterviewerId)
+		if err != nil {
+			g.Log().Line().Error(err)
+		}
+	}
 	resumes.Content = resumesRsp
+
 	response.Json(r, response.Success, "", resumes)
 }
 
@@ -66,6 +73,10 @@ func (*resumesApi) ReadOne(r *ghttp.Request) {
 	}
 	var resumeRsp model.ResumesApiRep
 	if err := gconv.Struct(resumes, &resumeRsp); err != nil {
+		g.Log().Line().Error(err)
+	}
+	var err error
+	if resumeRsp.InterviewerName, err = service.GetInterviewerName(resumeRsp.InterviewerId); err != nil {
 		g.Log().Line().Error(err)
 	}
 	response.JsonOld(r, 200, resumeRsp)
@@ -98,6 +109,9 @@ func (*resumesApi) Create(r *ghttp.Request) {
 
 		var resumeRsp model.ResumesApiRep
 		if err := gconv.Struct(resumes, &resumeRsp); err != nil {
+			g.Log().Line().Error(err)
+		}
+		if resumeRsp.InterviewerName, err = service.GetInterviewerName(resumeRsp.InterviewerId); err != nil {
 			g.Log().Line().Error(err)
 		}
 		response.JsonOld(r, 200, resumeRsp)
@@ -151,6 +165,9 @@ func (*resumesApi) Update(r *ghttp.Request) {
 	} else {
 		var resumeRsp model.ResumesApiRep
 		if err := gconv.Struct(resume, &resumeRsp); err != nil {
+			g.Log().Line().Error(err)
+		}
+		if resumeRsp.InterviewerName, err = service.GetInterviewerName(resumeRsp.InterviewerId); err != nil {
 			g.Log().Line().Error(err)
 		}
 		response.JsonOld(r, 200, resumeRsp)
