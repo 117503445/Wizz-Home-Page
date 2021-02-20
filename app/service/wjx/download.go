@@ -61,7 +61,7 @@ func Download() bool {
 	}
 }
 
-// ParseExcel 解析简历,根据姓名确定简历,如果简历不在数据库中,就创建简历
+// ParseExcel 解析简历,根据姓名确定简历,如果简历不在数据库中,就插入简历
 func ParseExcel() {
 	f, err := excelize.OpenFile("./tmp/wjx.xlsx")
 	if err != nil {
@@ -74,8 +74,18 @@ func ParseExcel() {
 		mapPropertyIndex[Property] = index
 	}
 	for _, row := range rows[1:] {
-		name := row[mapPropertyIndex["姓名："]]
 		id, _ := strconv.Atoi(row[mapPropertyIndex["序号"]])
+
+		if count, err := dao.Resumes.Where("id", id).Count(); err != nil {
+			g.Log().Line().Debug(err)
+		} else {
+			//g.Log().Line().Debug(count)
+			if count > 0 {
+				continue // id 存在,不插入
+			}
+		}
+
+		name := row[mapPropertyIndex["姓名："]]
 
 		sendTime, err := dateparse.ParseAny(row[mapPropertyIndex["提交答卷时间"]])
 		if err != nil {
