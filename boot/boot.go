@@ -2,6 +2,7 @@ package boot
 
 import (
 	"wizz-home-page/app/model"
+	_ "wizz-home-page/library/cron"
 	_ "wizz-home-page/packed"
 
 	"github.com/gogf/gf/frame/g"

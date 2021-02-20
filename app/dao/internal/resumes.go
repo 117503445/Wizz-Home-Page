@@ -35,9 +35,6 @@ type resumesColumns struct {
 	Grade                  string //
 	DepartmentType         string //
 	Experience             string //
-	TelephoneNumber        string //
-	QqNumber               string //
-	WechatNumber           string //
 	InterviewId            string //
 	InterviewerId          string //
 	SendTime               string //
@@ -64,9 +61,6 @@ var (
 			Grade:                  "grade",
 			DepartmentType:         "department_type",
 			Experience:             "experience",
-			TelephoneNumber:        "telephone_number",
-			QqNumber:               "qq_number",
-			WechatNumber:           "wechat_number",
 			InterviewId:            "interview_id",
 			InterviewerId:          "interviewer_id",
 			SendTime:               "send_time",

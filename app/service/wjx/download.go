@@ -3,10 +3,23 @@ package wjx
 import (
 	"bytes"
 	"fmt"
+	"strconv"
+	"time"
+	"wizz-home-page/app/dao"
+	"wizz-home-page/app/model"
+
 	"github.com/360EntSecGroup-Skylar/excelize/v2"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gfile"
 )
+
+// PullResume 拉起简历
+func PullResume() {
+	isNew := Download() // 下载 Excel
+	if isNew {          // 如果有新简历
+		ParseExcel() // 解析简历,放入数据库
+	}
+}
 
 // Download 从问卷星下载 Excel 后与磁盘文件比较，如果有更新则写入磁盘并返回 True
 func Download() bool {
@@ -48,17 +61,48 @@ func Download() bool {
 	}
 }
 
+// ParseExcel 解析简历,根据姓名确定简历,如果简历不在数据库中,就创建简历
 func ParseExcel() {
 	f, err := excelize.OpenFile("./tmp/wjx.xlsx")
 	if err != nil {
-		g.Log().Line().Error(err)
 		return
 	}
 	rows, err := f.GetRows("Sheet1")
-	for _, row := range rows {
-		for _, colCell := range row {
-			fmt.Print(colCell, "\t")
+	titleRow := rows[0]
+	mapPropertyIndex := g.MapStrInt{}
+	for index, Property := range titleRow {
+		g.Log().Line().Debug(Property, index)
+		mapPropertyIndex[Property] = index
+	}
+	for _, row := range rows[1:] {
+		name := row[mapPropertyIndex["姓名："]]
+		id, _ := strconv.Atoi(row[mapPropertyIndex["序号"]])
+		sendTime, _ := time.Parse("2006/01/02 03:04:05", row[mapPropertyIndex["提交答卷时间"]])
+		sendTimeStamp := sendTime.Unix()
+		//experience := row[mapPropertyIndex["是否有开发项目的经历？"]]
+		//todo
+
+		resume := &model.Resumes{
+			Id:                     id,
+			Describe:               "",
+			FileUrl:                "",
+			CollegeMajor:           "",
+			Name:                   name,
+			Gender:                 0,
+			Grade:                  0,
+			DepartmentType:         0,
+			Experience:             0,
+			InterviewId:            -1,
+			InterviewerId:          -1,
+			SendTime:               sendTimeStamp,
+			InitialScreeningResult: 0,
+			InitialScreeningTime:   0,
+			InterviewResult:        0,
+			InterviewEvaluation:    "",
+			InterviewTime:          0,
 		}
-		fmt.Println()
+		if _, err := dao.Resumes.Insert(resume); err != nil {
+			g.Log().Line().Debug(err)
+		}
 	}
 }
