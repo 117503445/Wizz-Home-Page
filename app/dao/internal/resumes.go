@@ -27,14 +27,14 @@ type ResumesDao struct {
 // ResumesColumns defines and stores column names for table resumes.
 type resumesColumns struct {
 	Id                     string //
-	ProjectDescribe        string //
+	Describe               string //
 	FileUrl                string //
-	College                string //
+	CollegeMajor           string //
 	Name                   string //
-	Major                  string //
 	Gender                 string //
 	Grade                  string //
 	DepartmentType         string //
+	Experience             string //
 	InterviewId            string //
 	InterviewerId          string //
 	SendTime               string //
@@ -53,14 +53,14 @@ var (
 		Table: "resumes",
 		Columns: resumesColumns{
 			Id:                     "id",
-			ProjectDescribe:        "project_describe",
+			Describe:               "describe",
 			FileUrl:                "file_url",
-			College:                "college",
+			CollegeMajor:           "college_major",
 			Name:                   "name",
-			Major:                  "major",
 			Gender:                 "gender",
 			Grade:                  "grade",
 			DepartmentType:         "department_type",
+			Experience:             "experience",
 			InterviewId:            "interview_id",
 			InterviewerId:          "interviewer_id",
 			SendTime:               "send_time",

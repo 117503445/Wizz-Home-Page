@@ -7,14 +7,14 @@ package internal
 // Resumes is the golang structure for table resumes.
 type Resumes struct {
 	Id                     int    `orm:"id,primary"               json:"id"`                     //
-	ProjectDescribe        string `orm:"project_describe"         json:"projectDescribe"`        //
+	Describe               string `orm:"describe"                 json:"describe"`               //
 	FileUrl                string `orm:"file_url"                 json:"fileUrl"`                //
-	College                string `orm:"college"                  json:"college"`                //
+	CollegeMajor           string `orm:"college_major"            json:"collegeMajor"`           //
 	Name                   string `orm:"name"                     json:"name"`                   //
-	Major                  string `orm:"major"                    json:"major"`                  //
 	Gender                 int    `orm:"gender"                   json:"gender"`                 //
 	Grade                  int    `orm:"grade"                    json:"grade"`                  //
 	DepartmentType         int    `orm:"department_type"          json:"departmentType"`         //
+	Experience             int    `orm:"experience"               json:"experience"`             //
 	InterviewId            int    `orm:"interview_id"             json:"interviewId"`            //
 	InterviewerId          int    `orm:"interviewer_id"           json:"interviewerId"`          //
 	SendTime               int64  `orm:"send_time"                json:"sendTime"`               //

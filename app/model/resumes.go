@@ -13,14 +13,14 @@ type Resumes internal.Resumes
 
 // Fill with you ideas below.
 type ResumeApiCreateReq struct {
-	ProjectDescribe        string `orm:"project_describe"         json:"ProjectDescribe"`        //
+	Describe               string `orm:"describe"                 json:"Describe"`               //
 	FileUrl                string `orm:"file_url"                 json:"FileUrl"`                //
-	College                string `orm:"college"                  json:"College"`                //
-	Name                   string `orm:"name"                     json:"Came"`                   //
-	Major                  string `orm:"major"                    json:"Major"`                  //
+	CollegeMajor           string `orm:"college_major"            json:"CollegeMajor"`           //
+	Name                   string `orm:"name"                     json:"Name"`                   //
 	Gender                 int    `orm:"gender"                   json:"Gender"`                 //
 	Grade                  int    `orm:"grade"                    json:"Grade"`                  //
 	DepartmentType         int    `orm:"department_type"          json:"DepartmentType"`         //
+	Experience             int    `orm:"experience"               json:"Experience"`             //
 	InterviewId            int    `orm:"interview_id"             json:"InterviewId"`            //
 	InterviewerId          int    `orm:"interviewer_id"           json:"InterviewerId"`          //
 	SendTime               int64  `orm:"send_time"                json:"SendTime"`               //
@@ -32,17 +32,17 @@ type ResumeApiCreateReq struct {
 }
 
 type ResumesApiRep struct {
-	Id                     int    `orm:"id,primary"               json:"id"`              //
-	ProjectDescribe        string `orm:"project_describe"         json:"ProjectDescribe"` //
-	FileUrl                string `orm:"file_url"                 json:"FileUrl"`         //
-	College                string `orm:"college"                  json:"College"`         //
-	Name                   string `orm:"name"                     json:"Came"`            //
-	Major                  string `orm:"major"                    json:"Major"`           //
-	Gender                 int    `orm:"gender"                   json:"Gender"`          //
-	Grade                  int    `orm:"grade"                    json:"Grade"`           //
-	DepartmentType         int    `orm:"department_type"          json:"DepartmentType"`  //
-	InterviewId            int    `orm:"interview_id"             json:"InterviewId"`     //
-	InterviewerId          int    `orm:"interviewer_id"           json:"InterviewerId"`   //
+	Id                     int    `orm:"id,primary"               json:"id"`             //
+	Describe               string `orm:"describe"                 json:"Describe"`       //
+	FileUrl                string `orm:"file_url"                 json:"FileUrl"`        //
+	CollegeMajor           string `orm:"college_major"            json:"CollegeMajor"`   //
+	Name                   string `orm:"name"                     json:"Name"`           //
+	Gender                 int    `orm:"gender"                   json:"Gender"`         //
+	Grade                  int    `orm:"grade"                    json:"Grade"`          //
+	DepartmentType         int    `orm:"department_type"          json:"DepartmentType"` //
+	Experience             int    `orm:"experience"               json:"Experience"`     //
+	InterviewId            int    `orm:"interview_id"             json:"InterviewId"`    //
+	InterviewerId          int    `orm:"interviewer_id"           json:"InterviewerId"`  //
 	InterviewerName        string `json:"InterviewerName"`
 	SendTime               int64  `orm:"send_time"                json:"SendTime"`               //
 	InitialScreeningResult int    `orm:"initial_screening_result" json:"InitialScreeningResult"` //

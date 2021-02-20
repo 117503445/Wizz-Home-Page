@@ -11,7 +11,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.4.8"
+        "version": "1.4.9"
     },
     "paths": {
         "/": {
@@ -2480,13 +2480,13 @@
         "model.ResumeApiCreateReq": {
             "type": "object",
             "properties": {
-                "Came": {
-                    "type": "string"
-                },
-                "College": {
+                "CollegeMajor": {
                     "type": "string"
                 },
                 "DepartmentType": {
+                    "type": "integer"
+                },
+                "Experience": {
                     "type": "integer"
                 },
                 "FileUrl": {
@@ -2519,7 +2519,7 @@
                 "InterviewerId": {
                     "type": "integer"
                 },
-                "Major": {
+                "Name": {
                     "type": "string"
                 },
                 "ProjectDescribe": {
@@ -2533,13 +2533,13 @@
         "model.ResumesApiRep": {
             "type": "object",
             "properties": {
-                "Came": {
-                    "type": "string"
-                },
-                "College": {
+                "CollegeMajor": {
                     "type": "string"
                 },
                 "DepartmentType": {
+                    "type": "integer"
+                },
+                "Experience": {
                     "type": "integer"
                 },
                 "FileUrl": {
@@ -2575,7 +2575,7 @@
                 "InterviewerName": {
                     "type": "string"
                 },
-                "Major": {
+                "Name": {
                     "type": "string"
                 },
                 "ProjectDescribe": {
