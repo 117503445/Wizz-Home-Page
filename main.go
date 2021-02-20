@@ -8,7 +8,7 @@ import (
 )
 
 // @title       wizz-home-page API
-// @version     1.5.3
+// @version     1.5.4
 // @description `wizz-home-page` 企业官网
 
 // @contact.name 117503445
@@ -22,5 +22,7 @@ import (
 // @name Authorization
 
 func main() {
-	g.Server().Run()
+	s := g.Server()
+	s.SetDumpRouterMap(false)
+	s.Run()
 }
