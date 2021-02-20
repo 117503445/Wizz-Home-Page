@@ -163,6 +163,9 @@ CREATE TABLE `resumes`(
                           `grade`                    int                                                           NULL DEFAULT NULL, -- 面试者年级
                           `department_type`          int                                                           NULL DEFAULT NULL, -- 部门类型
                           `experience`               boolean                                                       NULL default null, -- 面试者有无项目经历
+                          `telephone_number`         varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL, -- 面试者电话号码
+                          `qq_number`                varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL, -- 面试者QQ号
+                          `wechat_number`            varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL, -- 面试者微信联系方式
                           `interview_id`             int                                                           NULL DEFAULT NULL, -- 面试项目id
                           `interviewer_id`           int                                                           NULL DEFAULT NULL, -- 面试官id
                           `send_time`                bigint                                                        NULL DEFAULT NULL, -- 上传简历时间

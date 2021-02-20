@@ -23,7 +23,7 @@ type resumesApi struct{}
 // @Param   InterviewId	query	int true  "面试项目"
 // @Param   InterviewResult	query	int true  "面试结果"
 // @Param   Page	query	int true  "页数"
-// @Success 200 {array} model.ResumesApiRep
+// @Success 200 {object} response.Page
 // @Router /api/resumes [get]
 func (*resumesApi) ReadAll(r *ghttp.Request) {
 	g.Log().Debug("GetAll")

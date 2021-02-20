@@ -11,7 +11,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.4.9"
+        "version": "1.5.0"
     },
     "paths": {
         "/": {
@@ -1756,10 +1756,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/model.ResumesApiRep"
-                            }
+                            "$ref": "#/definitions/response.Page"
                         }
                     }
                 }
@@ -2486,6 +2483,9 @@
                 "DepartmentType": {
                     "type": "integer"
                 },
+                "Describe": {
+                    "type": "string"
+                },
                 "Experience": {
                     "type": "integer"
                 },
@@ -2522,11 +2522,17 @@
                 "Name": {
                     "type": "string"
                 },
-                "ProjectDescribe": {
+                "QQNumber": {
                     "type": "string"
                 },
                 "SendTime": {
                     "type": "integer"
+                },
+                "TelephoneNumber": {
+                    "type": "string"
+                },
+                "WechatNumber": {
+                    "type": "string"
                 }
             }
         },
@@ -2538,6 +2544,9 @@
                 },
                 "DepartmentType": {
                     "type": "integer"
+                },
+                "Describe": {
+                    "type": "string"
                 },
                 "Experience": {
                     "type": "integer"
@@ -2578,11 +2587,17 @@
                 "Name": {
                     "type": "string"
                 },
-                "ProjectDescribe": {
+                "QQNumber": {
                     "type": "string"
                 },
                 "SendTime": {
                     "type": "integer"
+                },
+                "TelephoneNumber": {
+                    "type": "string"
+                },
+                "WechatNumber": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "integer"
@@ -2656,6 +2671,31 @@
                 "msg": {
                     "description": "提示信息",
                     "type": "string"
+                }
+            }
+        },
+        "response.Page": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "description": "这页的对象数组",
+                    "type": "object"
+                },
+                "pageNum": {
+                    "description": "现在是第几页",
+                    "type": "integer"
+                },
+                "pageSize": {
+                    "description": "满的一页有几个对象",
+                    "type": "integer"
+                },
+                "totalPages": {
+                    "description": "总共有几页",
+                    "type": "integer"
+                },
+                "totalSize": {
+                    "description": "总共有几个对象",
+                    "type": "integer"
                 }
             }
         }

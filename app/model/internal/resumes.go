@@ -15,6 +15,9 @@ type Resumes struct {
 	Grade                  int    `orm:"grade"                    json:"grade"`                  //
 	DepartmentType         int    `orm:"department_type"          json:"departmentType"`         //
 	Experience             int    `orm:"experience"               json:"experience"`             //
+	TelephoneNumber        string `orm:"telephone_number"         json:"telephoneNumber"`        //
+	QqNumber               string `orm:"qq_number"                json:"qqNumber"`               //
+	WechatNumber           string `orm:"wechat_number"            json:"wechatNumber"`           //
 	InterviewId            int    `orm:"interview_id"             json:"interviewId"`            //
 	InterviewerId          int    `orm:"interviewer_id"           json:"interviewerId"`          //
 	SendTime               int64  `orm:"send_time"                json:"sendTime"`               //

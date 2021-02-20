@@ -69,41 +69,52 @@ INSERT INTO `interviewers`
 VALUES (8, '运营面试官2', 3, 'serverchan_id', 'webhook_url', 4, 1);
 
 INSERT INTO `resumes`
-VALUES (1, '简历内容1', 'https://qiniu.wizzstudio.com/back1.jpg', '计科院计算机', 'name1', false, 2019, 1, true, 3, 1, 1613618632,
+VALUES (1, '简历内容1', 'https://qiniu.wizzstudio.com/back1.jpg', '计科院计算机', 'name1', false, 2019, 1, true, '110', '120',
+        '12306', 3, 1, 1613618632,
         0, 0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (2, '简历内容2', 'https://qiniu.wizzstudio.com/back2.jpg', '计科院物联网', 'name2', true, 2019, 1, true, 3, 1, 1613618632,
+VALUES (2, '简历内容2', 'https://qiniu.wizzstudio.com/back2.jpg', '计科院物联网', 'name2', true, 2019, 1, true, '110', '120',
+        '12306', 3, 1, 1613618632,
         0,
         0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (3, '简历内容3', 'https://qiniu.wizzstudio.com/back3.jpg', '微院微电子', 'name3', false, 2019, 1, true, 3, 1, 1613618632,
+VALUES (3, '简历内容3', 'https://qiniu.wizzstudio.com/back3.jpg', '微院微电子', 'name3', false, 2019, 1, true, '110', '120',
+        '12306', 3, 1, 1613618632,
         0,
         0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (4, '简历内容4', 'https://qiniu.wizzstudio.com/back4.jpg', '电院电子工程', 'name4', true, 2019, 1, true, 3, 1, 1613618632,
+VALUES (4, '简历内容4', 'https://qiniu.wizzstudio.com/back4.jpg', '电院电子工程', 'name4', true, 2019, 1, true, '110', '120',
+        '12306', 3, 1, 1613618632,
         0, 0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (5, '简历内容5', 'https://qiniu.wizzstudio.com/back5.jpg', '通信工程学院通信工程专业', 'name5', true, 2019, 1, true, 3, 1,
+VALUES (5, '简历内容5', 'https://qiniu.wizzstudio.com/back5.jpg', '通信工程学院通信工程专业', 'name5', true, 2019, 1, true, '110',
+        '120', '12306', 3, 1,
         1613618632, 0, 0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (6, '简历内容6', 'https://qiniu.wizzstudio.com/back6.jpg', '通信工程学院信息工程专业', 'name6', true, 2019, 1, true, 3, 1,
+VALUES (6, '简历内容6', 'https://qiniu.wizzstudio.com/back6.jpg', '通信工程学院信息工程专业', 'name6', true, 2019, 1, true, '110',
+        '120', '12306', 3, 1,
         1613618632, 0, 0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (7, '简历内容7', 'https://qiniu.wizzstudio.com/back7.jpg', '通信工程学院空间信息与数字技术专业', 'name7', false, 2019, 1, true, 3, 1,
+VALUES (7, '简历内容7', 'https://qiniu.wizzstudio.com/back7.jpg', '通信工程学院空间信息与数字技术专业', 'name7', false, 2019, 1, true, '110',
+        '120', '12306', 3, 1,
         1613618632, 0, 0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (8, '简历内容8', 'https://qiniu.wizzstudio.com/back8.jpg', '网信院信息安全', 'name8', false, 2019, 1, true, 3, 1,
+VALUES (8, '简历内容8', 'https://qiniu.wizzstudio.com/back8.jpg', '网信院信息安全', 'name8', false, 2019, 1, true, '110', '120',
+        '12306', 3, 1,
         1613618632,
         0, 0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (9, '简历内容9', 'https://qiniu.wizzstudio.com/back9.jpg', '网信院网络安全', 'name9', true, 2019, 1, true, 3, 1, 1613618632,
+VALUES (9, '简历内容9', 'https://qiniu.wizzstudio.com/back9.jpg', '网信院网络安全', 'name9', true, 2019, 1, true, '110', '120',
+        '12306', 3, 1, 1613618632,
         0, 0, 0, '', 0);
 INSERT INTO `resumes`
-VALUES (10, '简历内容10', 'https://qiniu.wizzstudio.com/back10.jpg', '网信院网络工程', 'name10', false, 2019, 1, true, 3, 1,
+VALUES (10, '简历内容10', 'https://qiniu.wizzstudio.com/back10.jpg', '网信院网络工程', 'name10', false, 2019, 1, true, '110',
+        '120', '12306', 3, 1,
         1613618632, 0, 0, 0, '',
         0);
 INSERT INTO `resumes`
-VALUES (11, '简历内容11', 'https://qiniu.wizzstudio.com/back11.jpg', '计科院软件工程', 'name11', true, 2019, 1, true, 3, 1,
+VALUES (11, '简历内容11', 'https://qiniu.wizzstudio.com/back11.jpg', '计科院软件工程', 'name11', true, 2019, 1, true, '110', '120',
+        '12306', 3, 1,
         1613618632, 0, 0, 0, '',
         0);
 

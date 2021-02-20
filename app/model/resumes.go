@@ -21,6 +21,9 @@ type ResumeApiCreateReq struct {
 	Grade                  int    `orm:"grade"                    json:"Grade"`                  //
 	DepartmentType         int    `orm:"department_type"          json:"DepartmentType"`         //
 	Experience             int    `orm:"experience"               json:"Experience"`             //
+	TelephoneNumber        string `orm:"telephone_number"         json:"TelephoneNumber"`        //
+	QqNumber               string `orm:"qq_number"                json:"QQNumber"`               //
+	WechatNumber           string `orm:"wechat_number"            json:"WechatNumber"`           //
 	InterviewId            int    `orm:"interview_id"             json:"InterviewId"`            //
 	InterviewerId          int    `orm:"interviewer_id"           json:"InterviewerId"`          //
 	SendTime               int64  `orm:"send_time"                json:"SendTime"`               //
@@ -32,17 +35,20 @@ type ResumeApiCreateReq struct {
 }
 
 type ResumesApiRep struct {
-	Id                     int    `orm:"id,primary"               json:"id"`             //
-	Describe               string `orm:"describe"                 json:"Describe"`       //
-	FileUrl                string `orm:"file_url"                 json:"FileUrl"`        //
-	CollegeMajor           string `orm:"college_major"            json:"CollegeMajor"`   //
-	Name                   string `orm:"name"                     json:"Name"`           //
-	Gender                 int    `orm:"gender"                   json:"Gender"`         //
-	Grade                  int    `orm:"grade"                    json:"Grade"`          //
-	DepartmentType         int    `orm:"department_type"          json:"DepartmentType"` //
-	Experience             int    `orm:"experience"               json:"Experience"`     //
-	InterviewId            int    `orm:"interview_id"             json:"InterviewId"`    //
-	InterviewerId          int    `orm:"interviewer_id"           json:"InterviewerId"`  //
+	Id                     int    `orm:"id,primary"               json:"id"`              //
+	Describe               string `orm:"describe"                 json:"Describe"`        //
+	FileUrl                string `orm:"file_url"                 json:"FileUrl"`         //
+	CollegeMajor           string `orm:"college_major"            json:"CollegeMajor"`    //
+	Name                   string `orm:"name"                     json:"Name"`            //
+	Gender                 int    `orm:"gender"                   json:"Gender"`          //
+	Grade                  int    `orm:"grade"                    json:"Grade"`           //
+	DepartmentType         int    `orm:"department_type"          json:"DepartmentType"`  //
+	Experience             int    `orm:"experience"               json:"Experience"`      //
+	TelephoneNumber        string `orm:"telephone_number"         json:"TelephoneNumber"` //
+	QqNumber               string `orm:"qq_number"                json:"QQNumber"`        //
+	WechatNumber           string `orm:"wechat_number"            json:"WechatNumber"`    //
+	InterviewId            int    `orm:"interview_id"             json:"InterviewId"`     //
+	InterviewerId          int    `orm:"interviewer_id"           json:"InterviewerId"`   //
 	InterviewerName        string `json:"InterviewerName"`
 	SendTime               int64  `orm:"send_time"                json:"SendTime"`               //
 	InitialScreeningResult int    `orm:"initial_screening_result" json:"InitialScreeningResult"` //
