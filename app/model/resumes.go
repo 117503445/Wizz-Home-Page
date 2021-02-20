@@ -15,9 +15,11 @@ type Resumes internal.Resumes
 type ResumeApiCreateReq struct {
 	ProjectDescribe        string `orm:"project_describe"         json:"ProjectDescribe"`        //
 	FileUrl                string `orm:"file_url"                 json:"FileUrl"`                //
-	Name                   string `orm:"name"                     json:"Name"`                   //
+	College                string `orm:"college"                  json:"College"`                //
+	Name                   string `orm:"name"                     json:"Came"`                   //
+	Major                  string `orm:"major"                    json:"Major"`                  //
+	Gender                 int    `orm:"gender"                   json:"Gender"`                 //
 	Grade                  int    `orm:"grade"                    json:"Grade"`                  //
-	Age                    int    `orm:"age"                      json:"Age"`                    //
 	DepartmentType         int    `orm:"department_type"          json:"DepartmentType"`         //
 	InterviewId            int    `orm:"interview_id"             json:"InterviewId"`            //
 	InterviewerId          int    `orm:"interviewer_id"           json:"InterviewerId"`          //
@@ -33,9 +35,11 @@ type ResumesApiRep struct {
 	Id                     int    `orm:"id,primary"               json:"id"`              //
 	ProjectDescribe        string `orm:"project_describe"         json:"ProjectDescribe"` //
 	FileUrl                string `orm:"file_url"                 json:"FileUrl"`         //
-	Name                   string `orm:"name"                     json:"Name"`            //
+	College                string `orm:"college"                  json:"College"`         //
+	Name                   string `orm:"name"                     json:"Came"`            //
+	Major                  string `orm:"major"                    json:"Major"`           //
+	Gender                 int    `orm:"gender"                   json:"Gender"`          //
 	Grade                  int    `orm:"grade"                    json:"Grade"`           //
-	Age                    int    `orm:"age"                      json:"Age"`             //
 	DepartmentType         int    `orm:"department_type"          json:"DepartmentType"`  //
 	InterviewId            int    `orm:"interview_id"             json:"InterviewId"`     //
 	InterviewerId          int    `orm:"interviewer_id"           json:"InterviewerId"`   //

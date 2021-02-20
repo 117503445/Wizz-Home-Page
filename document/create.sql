@@ -157,9 +157,11 @@ CREATE TABLE `resumes`(
                           `id`                       int                                                           NOT NULL AUTO_INCREMENT,
                           `project_describe`         longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci     NULL,              -- 简历内容文字
                           `file_url`                 varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL, -- 附件url
+                          `college`                  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL, -- 面试者院系
                           `name`                     varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL, -- 面试者姓名
-                          `age`                      int                                                           NULL DEFAULT NULL, -- 面试者年纪
-                          `grade`                    int                                                           NULL DEFAULT NULL, -- 面试者姓名
+                          `major`                    varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL, -- 面试者专业
+                          `gender`                   boolean                                                       NULL default null, -- 面试者性别
+                          `grade`                    int                                                           NULL DEFAULT NULL, -- 面试者年级
                           `department_type`          int                                                           NULL DEFAULT NULL, -- 部门类型
                           `interview_id`             int                                                           NULL DEFAULT NULL, -- 面试项目id
                           `interviewer_id`           int                                                           NULL DEFAULT NULL, -- 面试官id

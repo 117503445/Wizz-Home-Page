@@ -11,7 +11,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.4.7"
+        "version": "1.4.8"
     },
     "paths": {
         "/": {
@@ -2480,14 +2480,20 @@
         "model.ResumeApiCreateReq": {
             "type": "object",
             "properties": {
-                "Age": {
-                    "type": "integer"
+                "Came": {
+                    "type": "string"
+                },
+                "College": {
+                    "type": "string"
                 },
                 "DepartmentType": {
                     "type": "integer"
                 },
                 "FileUrl": {
                     "type": "string"
+                },
+                "Gender": {
+                    "type": "integer"
                 },
                 "Grade": {
                     "type": "integer"
@@ -2513,7 +2519,7 @@
                 "InterviewerId": {
                     "type": "integer"
                 },
-                "Name": {
+                "Major": {
                     "type": "string"
                 },
                 "ProjectDescribe": {
@@ -2527,14 +2533,20 @@
         "model.ResumesApiRep": {
             "type": "object",
             "properties": {
-                "Age": {
-                    "type": "integer"
+                "Came": {
+                    "type": "string"
+                },
+                "College": {
+                    "type": "string"
                 },
                 "DepartmentType": {
                     "type": "integer"
                 },
                 "FileUrl": {
                     "type": "string"
+                },
+                "Gender": {
+                    "type": "integer"
                 },
                 "Grade": {
                     "type": "integer"
@@ -2563,7 +2575,7 @@
                 "InterviewerName": {
                     "type": "string"
                 },
-                "Name": {
+                "Major": {
                     "type": "string"
                 },
                 "ProjectDescribe": {
