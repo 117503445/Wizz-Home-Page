@@ -201,11 +201,11 @@ func (*resumesApi) ResultUpdate(r *ghttp.Request) {
 	} else {
 		if apiReq.Type == 0 {
 			resume.InitialScreeningResult = apiReq.Result
-			resume.InitialScreeningTime = gtime.Timestamp()
+			resume.InitialScreeningTime = gtime.TimestampMilli()
 		} else {
 			resume.InterviewResult = apiReq.Result
 			resume.InterviewEvaluation = apiReq.InterviewEvaluation
-			resume.InterviewTime = gtime.Timestamp()
+			resume.InterviewTime = gtime.TimestampMilli()
 		}
 
 		if _, err := dao.Resumes.Data(resume).Where("id", id).Update(); err != nil {
