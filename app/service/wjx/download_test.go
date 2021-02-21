@@ -7,7 +7,7 @@ import (
 
 func TestDownload(t *testing.T) {
 	gtest.C(t, func(t *gtest.T) {
-		Download()
+		DownloadExcel()
 		ParseExcel()
 	})
 }

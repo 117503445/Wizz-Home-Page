@@ -13,16 +13,18 @@ import (
 	"wizz-home-page/app/model"
 )
 
-// PullResume 拉起简历
+// PullResume 拉取简历
 func PullResume() {
-	isNew := Download() // 下载 Excel
-	if isNew {          // 如果有新简历
-		ParseExcel() // 解析简历,放入数据库
-	}
+	//isNew := DownloadExcel() // 下载 Excel
+	//if isNew {          // 如果有新简历
+	//	ParseExcel() // 解析简历,放入数据库
+	//}
+	DownloadExcel()
+	ParseExcel()
 }
 
-// Download 从问卷星下载 Excel 后与磁盘文件比较，如果有更新则写入磁盘并返回 True
-func Download() bool {
+// DownloadExcel 从问卷星下载 Excel 后与磁盘文件比较，如果有更新则写入磁盘并返回 True
+func DownloadExcel() bool {
 	cookie := g.MapStrStr{"SojumpSurvey": g.Cfg().GetString("wjx.SojumpSurvey")}
 
 	header := g.MapStrStr{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"}
@@ -37,7 +39,7 @@ func Download() bool {
 	} else {
 		defer r.Close()
 
-		downloadExcel := r.ReadAll() // Todo 检测是否因为 SojumpSurvey 过期，导致下载的不是 Excel
+		downloadExcel := r.ReadAll()
 
 		isNew := false
 
@@ -50,6 +52,8 @@ func Download() bool {
 				isNew = true
 			}
 		}
+
+		// todo 可以不检测旧内容,直接写入,反正到时候根据ID判断是否重复
 
 		// g.Log().Line().Info(fmt.Sprintf("isNew: %v", isNew))
 
@@ -65,6 +69,7 @@ func Download() bool {
 func ParseExcel() {
 	f, err := excelize.OpenFile("./tmp/wjx.xlsx")
 	if err != nil {
+		//Todo 检测是否因为 SojumpSurvey 过期，导致下载的不是 Excel
 		return
 	}
 	rows, err := f.GetRows("Sheet1")
@@ -76,7 +81,8 @@ func ParseExcel() {
 	for _, row := range rows[1:] {
 		id, _ := strconv.Atoi(row[mapPropertyIndex["序号"]])
 
-		if count, err := dao.Resumes.Where("id", id).Count(); err != nil {
+		g.DB().GetLogger().SetStdoutPrint(false)                           // 禁用 Count SQL 的 Std 输出
+		if count, err := dao.Resumes.Where("id", id).Count(); err != nil { // todo 一次 查出所有 ID 放进列表里供判断
 			g.Log().Line().Debug(err)
 		} else {
 			//g.Log().Line().Debug(count)
@@ -84,6 +90,7 @@ func ParseExcel() {
 				continue // id 存在,不插入
 			}
 		}
+		g.DB().GetLogger().SetStdoutPrint(g.Cfg().GetBool("database.logger.Stdout"))
 
 		name := row[mapPropertyIndex["姓名："]]
 
