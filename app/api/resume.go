@@ -199,13 +199,19 @@ func (*resumesApi) ResultUpdate(r *ghttp.Request) {
 	if err := dao.Resumes.Where("id", id).Struct(&resume); err != nil {
 		response.Json(r, response.Error, "", nil)
 	} else {
+		result, err := service.ResultChange(apiReq.Result)
+		if err != nil {
+			response.Json(r, response.Error, "the result wrong", nil)
+		}
 		if apiReq.Type == 0 {
-			resume.InitialScreeningResult = apiReq.Result
+			resume.InitialScreeningResult = result
 			resume.InitialScreeningTime = gtime.TimestampMilli()
-		} else {
-			resume.InterviewResult = apiReq.Result
+		} else if apiReq.Type == 1 {
+			resume.InterviewResult = result
 			resume.InterviewEvaluation = apiReq.InterviewEvaluation
 			resume.InterviewTime = gtime.TimestampMilli()
+		} else {
+			response.Json(r, response.Error, "the type wrong", nil)
 		}
 
 		if _, err := dao.Resumes.Data(resume).Where("id", id).Update(); err != nil {

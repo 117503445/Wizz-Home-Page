@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"wizz-home-page/app/dao"
 	"wizz-home-page/app/model"
 	"wizz-home-page/library/response"
@@ -40,4 +41,16 @@ func GetInterviewerName(id int) (string, error) {
 	}
 	name := value.String()
 	return name, nil
+}
+
+func ResultChange(result int) (int, error) {
+	if result == 0 {
+		return 2, nil
+	} else if result == 1 {
+		return 1, nil
+	} else {
+		err := fmt.Errorf("%s", "The resume result wrong")
+		return 0, err
+	}
+
 }
