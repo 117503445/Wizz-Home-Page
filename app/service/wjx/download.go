@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/360EntSecGroup-Skylar/excelize/v2"
 	"github.com/araddon/dateparse"
+	"github.com/gogf/gf/container/gset"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gfile"
 	"strconv"
@@ -75,9 +76,12 @@ func ParseExcel() {
 	rows, err := f.GetRows("Sheet1")
 	titleRow := rows[0]
 	mapPropertyIndex := g.MapStrInt{}
+	mapIndexProperty := g.MapIntStr{}
 	for index, Property := range titleRow {
 		mapPropertyIndex[Property] = index
+		mapIndexProperty[index] = Property
 	}
+
 	for _, row := range rows[1:] {
 		id, _ := strconv.Atoi(row[mapPropertyIndex["序号"]])
 
@@ -128,16 +132,45 @@ func ParseExcel() {
 		}
 		// g.Log().Line().Debug(MapContact)
 
+		experience := -1
+		setExperienceProperty := gset.New(true)
+		setExperienceProperty.Add("是否有开发项目的经历？", "是否有过互联网产品经历/项目经历/项目负责人经历/实习经历？（任一都可）", "是否有互联网运营经历/团队管理经历/新媒体运营或排版经历？（任一都可）", "是否有UI设计/海报设计经验？") // P V Z AD
+		setExperienceProperty.Iterator(func(property interface{}) bool {
+			value := row[mapPropertyIndex[property.(string)]]
+			if strings.Contains(value, "跳过") {
+				return true
+			} else {
+				if strings.Contains(value, "没有") {
+					experience = 0
+				} else {
+					experience = 1
+				}
+				return false
+			}
+		})
+
+		describe := "describe NOT FOUND"
+		setDescribeProperty := gset.New(true)
+		setDescribeProperty.Add("请描述一下你的过往经历", "请描述一下你的过往经历", "请描述一下你的过往经历", "请描述一下你的过往经历", "请介绍一下你的技能点/能力吧：）", "请描述一下你的项目开发经历", "请描述一下你的项目开发经历", "请描述一下你的项目/负责人/实习经历", "请描述一下你的运营/管理/新媒体运营经历") // T U Y AC AF R S W AA
+		g.Log().Line().Debug(setDescribeProperty)
+		for index, property := range row {
+			if setDescribeProperty.Contains(mapIndexProperty[index]) {
+				if !strings.Contains(property, "跳过") {
+					describe = property
+				}
+			}
+		}
+
 		resume := &model.Resumes{
 			Id:                     id,
-			Describe:               "等会再写Describe", //todo
+			Describe:               describe,
 			FileUrl:                fileUrl,
 			CollegeMajor:           collegeMajor,
 			Name:                   name,
 			Gender:                 gender,
 			Grade:                  grade,
 			DepartmentType:         departmentType,
-			Experience:             0,
+			Experience:             experience,
 			TelephoneNumber:        MapContact["电话"],
 			QqNumber:               MapContact["QQ"],
 			WechatNumber:           MapContact["微信"],
