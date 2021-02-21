@@ -11,7 +11,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.5.4"
+        "version": "1.5.5"
     },
     "paths": {
         "/": {
@@ -1798,6 +1798,58 @@
                 }
             }
         },
+        "/api/resumes/result/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "简历"
+                ],
+                "summary": "简历结果提交",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "简历id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "结果",
+                        "name": "resumes",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.ResumeResultApiReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResumesApiRep"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"message\": \"not a resume's result\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/api/resumes/{id}": {
             "get": {
                 "consumes": [
@@ -2533,6 +2585,23 @@
                 },
                 "WechatNumber": {
                     "type": "string"
+                }
+            }
+        },
+        "model.ResumeResultApiReq": {
+            "type": "object",
+            "properties": {
+                "InterviewEvaluation": {
+                    "description": "面评，初筛应为空",
+                    "type": "string"
+                },
+                "Result": {
+                    "description": "0:不通过 1：通过",
+                    "type": "integer"
+                },
+                "Type": {
+                    "description": "0:初筛 1:面试",
+                    "type": "integer"
                 }
             }
         },

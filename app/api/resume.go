@@ -1,6 +1,7 @@
 package api
 
 import (
+	"github.com/gogf/gf/os/gtime"
 	"wizz-home-page/app/dao"
 	"wizz-home-page/app/model"
 	"wizz-home-page/app/service"
@@ -171,5 +172,52 @@ func (*resumesApi) Update(r *ghttp.Request) {
 			g.Log().Line().Error(err)
 		}
 		response.JsonOld(r, 200, resumeRsp)
+	}
+}
+
+// @Summary 简历结果提交
+// @Tags 简历
+// @Accept  json
+// @Produce  json
+// @Param   id      path int true  "简历id" default(1)
+// @Param   resumes      body model.ResumeResultApiReq true  "结果"
+// @Success 200 {object} model.ResumesApiRep
+// @Failure 400 {string} string "{"message": "not a resume's result"}"
+// @Router /api/resumes/result/{id} [PUT]
+// @Security JWT
+func (*resumesApi) ResultUpdate(r *ghttp.Request) {
+	id := r.GetInt("id")
+	var (
+		apiReq model.ResumeResultApiReq
+		resume model.Resumes
+	)
+
+	if err := r.Parse(&apiReq); err != nil {
+		response.Json(r, 400, "not a resume's result", "")
+	}
+	resume.Id = id
+	if err := dao.Resumes.Where("id", id).Struct(&resume); err != nil {
+		response.Json(r, response.Error, "", nil)
+	} else {
+		if apiReq.Type == 0 {
+			resume.InitialScreeningResult = apiReq.Result
+			resume.InitialScreeningTime = gtime.Timestamp()
+		} else {
+			resume.InterviewResult = apiReq.Result
+			resume.InterviewEvaluation = apiReq.InterviewEvaluation
+			resume.InterviewTime = gtime.Timestamp()
+		}
+
+		if _, err := dao.Resumes.Data(resume).Where("id", id).Update(); err != nil {
+			response.Json(r, response.ErrorNotExist, "", nil)
+		}
+		var resumeRsp model.ResumesApiRep
+		if err := gconv.Struct(resume, &resumeRsp); err != nil {
+			g.Log().Line().Error(err)
+		}
+		if resumeRsp.InterviewerName, err = service.GetInterviewerName(resumeRsp.InterviewerId); err != nil {
+			g.Log().Line().Error(err)
+		}
+		response.Json(r, response.Success, "", resumeRsp)
 	}
 }

@@ -57,3 +57,12 @@ type ResumesApiRep struct {
 	InterviewEvaluation    string `orm:"interview_evaluation"     json:"InterviewEvaluation"`    //
 	InterviewTime          int64  `orm:"interview_time"           json:"InterviewTime"`          //
 }
+
+type ResumeResultApiReq struct {
+	//0:初筛 1:面试
+	Type int `json:"Type"`
+	//0:不通过 1：通过
+	Result int `json:"Result"`
+	//面评，初筛应为空
+	InterviewEvaluation string `json:"InterviewEvaluation"`
+}
