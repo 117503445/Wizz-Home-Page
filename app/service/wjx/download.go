@@ -110,7 +110,7 @@ func ParseExcel() {
 		fileUrl := row[mapPropertyIndex["请在这里上传你的简历/过往项目或作品（大大加分项）"]]
 		collegeMajor := row[mapPropertyIndex["学院及专业"]]
 
-		MapDepartment := g.MapStrInt{"技术部-前端开发": 1, "技术部-后端开发": 2, "产品部": 3, "运营部-运营组": 4, "运营部-UI组": 4}
+		MapDepartment := g.MapStrInt{"技术部-前端开发": 1, "技术部-后端开发": 3, "产品部": 2, "运营部-运营组": 4, "运营部-UI组": 4}
 		departmentType := MapDepartment[row[mapPropertyIndex["意向加入的部门"]]]
 
 		MapGender := g.MapStrInt{"男": 1, "女": 0}
