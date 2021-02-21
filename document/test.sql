@@ -67,10 +67,6 @@ INSERT INTO `interviewers`
 VALUES (7, '运营面试官1', 3, 'serverchan_id', 'webhook_url', 4, 1);
 INSERT INTO `interviewers`
 VALUES (8, '运营面试官2', 3, 'serverchan_id', 'webhook_url', 4, 1);
-INSERT INTO `interviewers`
-VALUES (9, 'UI面试官1', 3, 'serverchan_id', 'webhook_url', 5, 1);
-INSERT INTO `interviewers`
-VALUES (10, 'UI面试官2', 3, 'serverchan_id', 'webhook_url', 5, 1);
 
 INSERT INTO `resumes`
 VALUES (101, '简历内容1', 'https://qiniu.wizzstudio.com/back1.jpg', '计科院计算机', 'name1', false, 2019, 1, true, '110', '120',

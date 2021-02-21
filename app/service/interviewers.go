@@ -9,7 +9,8 @@ import (
 // DistributeInterviewers 分配面试官
 func DistributeInterviewers(resume *model.Resumes) {
 	// 同部门面试官随机挑选
-	interviewer, err := dao.Interviewers.Where("department_type", resume.DepartmentType).Order("rand()").FindOne()
+	interviewer, err := dao.Interviewers.Where("department_type", resume.DepartmentType).Where("interview_id", resume.InterviewId).
+		Order("rand()").FindOne()
 	if err != nil {
 		g.Log().Line().Error(err)
 		return
