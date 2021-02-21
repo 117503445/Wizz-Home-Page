@@ -103,7 +103,7 @@ func ParseExcel() {
 		if err != nil {
 			g.Log().Line().Debug(err)
 		}
-		sendTimeStamp := sendTime.Unix()
+		sendTimeStamp := sendTime.UnixNano() / 1e6 // ms timestamp
 
 		//experience :=  row[mapPropertyIndex["请在这里上传你的简历/过往项目或作品（大大加分项）"]]
 
