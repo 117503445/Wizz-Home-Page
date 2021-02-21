@@ -153,7 +153,7 @@ func ParseExcel() {
 		describe := "describe NOT FOUND"
 		setDescribeProperty := gset.New(true)
 		setDescribeProperty.Add("请描述一下你的过往经历", "请描述一下你的过往经历", "请描述一下你的过往经历", "请描述一下你的过往经历", "请介绍一下你的技能点/能力吧：）", "请描述一下你的项目开发经历", "请描述一下你的项目开发经历", "请描述一下你的项目/负责人/实习经历", "请描述一下你的运营/管理/新媒体运营经历") // T U Y AC AF R S W AA
-		g.Log().Line().Debug(setDescribeProperty)
+		// g.Log().Line().Debug(setDescribeProperty)
 		for index, property := range row {
 			if setDescribeProperty.Contains(mapIndexProperty[index]) {
 				if !strings.Contains(property, "跳过") {
@@ -186,6 +186,8 @@ func ParseExcel() {
 			InterviewEvaluation:    "",
 			InterviewTime:          0,
 		}
+
+		service.DistributeInterviewers(resume)
 
 		if _, err := dao.Resumes.Insert(resume); err != nil {
 			g.Log().Line().Debug(err)
