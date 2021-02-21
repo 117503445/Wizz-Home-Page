@@ -12,6 +12,7 @@ import (
 	"strings"
 	"wizz-home-page/app/dao"
 	"wizz-home-page/app/model"
+	"wizz-home-page/app/service"
 )
 
 // PullResume 拉取简历
@@ -161,6 +162,8 @@ func ParseExcel() {
 			}
 		}
 
+		interviewId := service.GetCurrentInterview().Id
+
 		resume := &model.Resumes{
 			Id:                     id,
 			Describe:               describe,
@@ -174,7 +177,7 @@ func ParseExcel() {
 			TelephoneNumber:        MapContact["电话"],
 			QqNumber:               MapContact["QQ"],
 			WechatNumber:           MapContact["微信"],
-			InterviewId:            0,
+			InterviewId:            interviewId,
 			InterviewerId:          0,
 			SendTime:               sendTimeStamp,
 			InitialScreeningResult: 0,
