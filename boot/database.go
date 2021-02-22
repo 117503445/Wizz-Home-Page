@@ -76,11 +76,11 @@ func InitDatabase() {
 				g.Log().Line().Error(err)
 			}
 
-			_, _ = g.DB().Table("role").Data(g.List{{"name": "admin"}, {"name": "user"}}).Save()
+			_, _ = g.DB().Table("role").Data(g.List{{"name": "admin"}, {"name": "user"}, {"name": "interviewer"}}).Save()
 
-			_, _ = g.DB().Table("user").Data(g.List{{"username": "admin", "password": cipher}}).Save()
+			_, _ = g.DB().Table("user").Data(g.List{{"username": "admin", "password": cipher}, {"username": "interviewer", "password": cipher}}).Save()
 
-			_, _ = g.DB().Table("user_role").Data(g.List{{"user_id": "1", "role_id": "1"}, {"user_id": "1", "role_id": "2"}}).Save()
+			_, _ = g.DB().Table("user_role").Data(g.List{{"user_id": "1", "role_id": "1"}, {"user_id": "1", "role_id": "2"}, {"user_id": "2", "role_id": "3"}}).Save()
 		}
 
 		if isForceCreate && g.Cfg().GetBool("database.runTestSql") {
