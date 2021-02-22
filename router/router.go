@@ -122,8 +122,10 @@ func init() {
 					group.POST("/", api.Resume.Create)
 					group.DELETE("/{id}", api.Resume.Delete)
 					group.PUT("/{id}", api.Resume.Update)
-					group.PUT("/result/{id}", api.Resume.ResultUpdate)
 				})
+				group.Middleware(middleware.JWTLogin, middleware.NeedRole("interviewer"))
+				group.PUT("/result/{id}", api.Resume.ResultUpdate)
+
 			})
 
 			group.Group("/messages", func(group *ghttp.RouterGroup) {
