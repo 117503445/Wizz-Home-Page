@@ -10,7 +10,7 @@ import (
 func init() {
 	g.Log().Line().Debug("cron load")
 	// 0 * * * * * every minutes
-	if _, err := gcron.Add("* * * * * *", func() { wjx.PullResume() }, "wjx-PullResume"); err != nil {
+	if _, err := gcron.Add("@every 10s", func() { wjx.PullResume() }, "wjx-PullResume"); err != nil {
 		g.Log().Line().Error(err)
 	}
 }
