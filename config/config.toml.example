@@ -50,3 +50,9 @@ sk = ""
 bucket =  "wizzhomepage"
 place = "华东"
 domain = "https://qiniu.wizzstudio.com"
+
+[alarm]
+serverChans = [
+    "",
+    ""
+] # 服务器报警,通过 ServerChan
