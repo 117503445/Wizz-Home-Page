@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="gf" type="GoApplicationRunConfiguration" factoryName="Go Application">
-    <module name="goframe_learn" />
+    <module name="Wizz-Home-Page" />
     <working_directory value="$PROJECT_DIR$" />
-    <kind value="FILE" />
+    <kind value="PACKAGE" />
     <filePath value="$PROJECT_DIR$/main.go" />
-    <package value="goframe_learn" />
+    <package value="wizz-home-page" />
     <directory value="$PROJECT_DIR$" />
     <method v="2" />
   </configuration>
