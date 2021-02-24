@@ -15,7 +15,10 @@ Stdout = true
 link = "mysql:${user}:${pass}@tcp(localhost:3306)/wizz_home_page"
 debug = true
 forceCreate = true # 强制创建,启用后强制删除旧数据库后再创建新的,常用于开发
-runTestSql = true # only enabled when forceCreate == true
+sqlOnCreate = [
+    "./document/create.sql",
+    "./document/test.sql"
+] # 创建数据库时启用,按顺序执行指定路径的 SQL
 
 # Database logger.
 [database.logger]
@@ -38,7 +41,7 @@ password = "changeme"
 index = "wizz-home-page"
 
 [wjx]
-SojumpSurvey = ""
+SojumpSurvey = "" # 登录问卷星,抓包
 activity = "105939446"
 
 [qiniu]

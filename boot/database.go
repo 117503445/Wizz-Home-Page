@@ -9,7 +9,6 @@ import (
 
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gfile"
-	"github.com/gogf/gf/os/gres"
 )
 
 //InitDatabase Create database if not exists
@@ -52,20 +51,22 @@ func InitDatabase() {
 	// g.Log().Debug(isDbExists)
 	if !isDbExists {
 		g.Log().Line().Info(fmt.Sprintf("create database %v", dbName))
-
 		if _, err = sqlDB.Exec(fmt.Sprintf("CREATE DATABASE IF NOT EXISTS %v", dbName)); err != nil {
 			g.Log().Line().Panic(err)
 		}
 
-		createSQL := string(gres.Get("create.sql./create.sql").Content())
-		//g.Log().Line().Debug(createSQL)
 		sqlMyDB, err := sql.Open("mysql", linkWithoutDbName+dbName+"?multiStatements=true")
 		if err != nil {
 			g.Log().Line().Panic(err)
 		}
 
-		if _, err = sqlMyDB.Exec(createSQL); err != nil {
-			g.Log().Line().Panic(err)
+		arraySqlPath := g.Cfg().GetArray("database.sqlOnCreate")
+		for _, path := range arraySqlPath {
+			g.Log().Line().Debug("run ", path)
+			sqlText := gfile.GetContents(path.(string))
+			if _, err = sqlMyDB.Exec(sqlText); err != nil {
+				g.Log().Line().Panic(err)
+			}
 		}
 
 		adminPassword := library.RandStringRunes(12)
@@ -75,22 +76,9 @@ func InitDatabase() {
 			if err = gfile.PutContents("./tmp/password/admin.txt", adminPassword); err != nil {
 				g.Log().Line().Error(err)
 			}
-
 			_, _ = g.DB().Table("role").Data(g.List{{"name": "admin"}, {"name": "user"}, {"name": "interviewer"}}).Save()
-
 			_, _ = g.DB().Table("user").Data(g.List{{"username": "admin", "password": cipher}, {"username": "interviewer", "password": cipher}}).Save()
-
 			_, _ = g.DB().Table("user_role").Data(g.List{{"user_id": "1", "role_id": "1"}, {"user_id": "1", "role_id": "2"}, {"user_id": "2", "role_id": "3"}}).Save()
-		}
-
-		if isForceCreate && g.Cfg().GetBool("database.runTestSql") {
-			g.Log().Line().Info("run test sql")
-			// gres.Dump()
-			testSQL := string(gres.Get("test.sql./test.sql").Content())
-			// g.Log().Line().Debug(testSQL)
-			if _, err = sqlMyDB.Exec(testSQL); err != nil {
-				g.Log().Line().Panic(err)
-			}
 		}
 
 	}
