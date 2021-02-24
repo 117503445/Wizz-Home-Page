@@ -67,7 +67,7 @@ func InitDatabase() {
 			if _, err = sqlMyDB.Exec(sqlText); err != nil {
 				g.Log().Line().Panic(err)
 			}
-			if i == 1 { // 在 第一条create.sql 建表以后插入数据
+			if i == 0 { // 在 第一条create.sql 建表以后插入数据
 				// todo 实现的不好,需要重构
 				adminPassword := library.RandStringRunes(12)
 				if cipher, err := model.EncryptPassword(adminPassword); err != nil {
