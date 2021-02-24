@@ -52,7 +52,7 @@ INSERT INTO `interviews`
 VALUES (3, '2021 2月面试', 1613618632);
 
 INSERT INTO `interviewers`
-VALUES (1, '前端面试官1', 3, 'serverchan_id', 'webhook_url', 1, 1);
+VALUES (1, '前端面试官1', 3, '', 'webhook_url', 1, 1);
 INSERT INTO `interviewers`
 VALUES (2, '前端面试官2', 3, 'serverchan_id', 'webhook_url', 1, 1);
 INSERT INTO `interviewers`
@@ -70,16 +70,16 @@ VALUES (8, '运营面试官2', 3, 'serverchan_id', 'webhook_url', 4, 1);
 
 INSERT INTO `resumes`
 VALUES (101, '简历内容1', 'https://qiniu.wizzstudio.com/back1.jpg', '计科院计算机', 'name1', false, 2019, 1, true, '110', '120',
-        '12306', 3, 1, 1613141178000,
+        '12306', 3, 1, 1614005178000,
         0, 0, 0, '', 0);
 INSERT INTO `resumes`
 VALUES (102, '简历内容2', 'https://qiniu.wizzstudio.com/back2.jpg', '计科院物联网', 'name2', true, 2019, 1, true, '110', '120',
-        '12306', 3, 1, 1614005178000,
+        '12306', 3, 1, 1613141178000,
         0,
         0, 0, '', 0);
 INSERT INTO `resumes`
 VALUES (103, '简历内容3', 'https://qiniu.wizzstudio.com/back3.jpg', '微院微电子', 'name3', false, 2019, 1, true, '110', '120',
-        '12306', 3, 1, 1613141178000,
+        '12306', 3, 1, 1614005178000,
         0,
         0, 0, '', 0);
 INSERT INTO `resumes`
@@ -121,4 +121,4 @@ VALUES (111, '简历内容11', 'https://qiniu.wizzstudio.com/back11.jpg', '计�
         0);
 
 INSERT INTO `messages`
-VALUES (1, 'Content', 0, 1613618632000);
+VALUES (1, 'Content', 0, 1, 1613618632000);

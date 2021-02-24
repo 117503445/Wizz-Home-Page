@@ -9,5 +9,6 @@ type Messages struct {
 	Id         int    `orm:"id,primary"  json:"id"`         //
 	Content    string `orm:"content"     json:"content"`    //
 	ReadStatus int    `orm:"read_status" json:"readStatus"` //
+	ResumeId   int    `orm:"resume_id"   json:"resumeId"`   //
 	CreateTime int64  `orm:"create_time" json:"createTime"` //
 }

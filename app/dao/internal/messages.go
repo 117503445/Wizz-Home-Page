@@ -29,6 +29,7 @@ type messagesColumns struct {
 	Id         string //
 	Content    string //
 	ReadStatus string //
+	ResumeId   string //
 	CreateTime string //
 }
 
@@ -42,6 +43,7 @@ var (
 			Id:         "id",
 			Content:    "content",
 			ReadStatus: "read_status",
+			ResumeId:   "resume_id",
 			CreateTime: "create_time",
 		},
 	}

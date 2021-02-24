@@ -6,7 +6,6 @@ import (
 	"github.com/gogf/gf/os/gtime"
 	"github.com/gogf/gf/test/gtest"
 	"testing"
-	"wizz-home-page/boot"
 )
 
 func TestPush(t *testing.T) {
@@ -21,12 +20,5 @@ func TestPush(t *testing.T) {
 		time := gtime.Now().Format("His") // ServerChan 不能连续发送相同的消息,所以加上时间字符串 时时分分秒秒
 		g.Log().Line().Info(chanId)
 		Push(chanId, "text"+time, "desp")
-	})
-}
-
-func TestResumeRemind(t *testing.T) {
-	gtest.C(t, func(t *gtest.T) {
-		boot.InitDatabase()
-		ResumeRemind()
 	})
 }
