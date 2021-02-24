@@ -23,7 +23,7 @@ func ResumeRemind() {
 		if err != nil {
 			g.Log().Line().Error(err)
 		}
-		push(value.String(), "test", gconv.String(i)) //to do 内容待完善
+		Push(value.String(), "test", gconv.String(i)) //to do 内容待完善
 		time.Sleep(3 * time.Second)
 	}
 

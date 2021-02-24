@@ -7,6 +7,7 @@ import (
 	"github.com/gogf/gf/os/gfile"
 	"wizz-home-page/app/dao"
 	"wizz-home-page/app/model"
+	"wizz-home-page/app/service/serverchan"
 )
 
 // DistributeInterviewers 分配面试官
@@ -42,5 +43,14 @@ func DistributeInterviewers(resume *model.Resumes) {
 	url := fmt.Sprintf("https://wizzstudio.com/#/pass?id=%v&jwt=%v", resume.Id, token)
 	g.Log().Line().Debug(url)
 
-	// todo 通知面试官
+	experienceStr := ""
+	if resume.Experience == 0 {
+		experienceStr = "无"
+	} else {
+		experienceStr = "有"
+	}
+
+	title := fmt.Sprintf("%v的简历", resume.Name)
+	content := fmt.Sprintf("%v %v %v\n（联系电话：%v）（微信：%v）（qq：%v）\n\n%v\n\n%v\n\n简历下载链接%v\n\n---\n\n请及时联系投递者安排面试，或者告知他初筛未通过哦\n\n面试结束后须返回该页面，点击链接填写面评，建议将该页面添加至浮窗\n\n不需要面试也需要点击链接填写理由哦\n\n---\n\n[点我前往面评填写页面](%v)", resume.Name, resume.Grade, resume.CollegeMajor, resume.TelephoneNumber, resume.WechatNumber, resume.QqNumber, experienceStr, resume.Describe, resume.FileUrl, url)
+	serverchan.Push(interviewer.ServerchanId, title, content)
 }

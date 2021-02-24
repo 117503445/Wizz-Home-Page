@@ -56,9 +56,9 @@ VALUES (1, '前端面试官1', 3, 'serverchan_id', 'webhook_url', 1, 1);
 INSERT INTO `interviewers`
 VALUES (2, '前端面试官2', 3, 'serverchan_id', 'webhook_url', 1, 1);
 INSERT INTO `interviewers`
-VALUES (3, '后端面试官1', 3, 'serverchan_id', 'webhook_url', 3, 1);
+VALUES (3, '后端面试官1', 3, 'SCU93001T2bbef4ff2f5d923df221fc4fc760aa1c5e8d408ce2f77', 'webhook_url', 3, 1);
 INSERT INTO `interviewers`
-VALUES (4, '后端面试官2', 3, 'serverchan_id', 'webhook_url', 3, 1);
+VALUES (4, '后端面试官2', 3, 'SCU93001T2bbef4ff2f5d923df221fc4fc760aa1c5e8d408ce2f77', 'webhook_url', 3, 1);
 INSERT INTO `interviewers`
 VALUES (5, '产品面试官1', 3, 'serverchan_id', 'webhook_url', 2, 1);
 INSERT INTO `interviewers`

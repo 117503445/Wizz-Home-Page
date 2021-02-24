@@ -6,6 +6,8 @@
     <filePath value="$PROJECT_DIR$/main.go" />
     <package value="wizz-home-page" />
     <directory value="$PROJECT_DIR$" />
-    <method v="2" />
+    <method v="2">
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="preprocess" run_configuration_type="ShConfigurationType" />
+    </method>
   </configuration>
 </component>
