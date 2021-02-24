@@ -61,24 +61,27 @@ func InitDatabase() {
 		}
 
 		arraySqlPath := g.Cfg().GetArray("database.sqlOnCreate")
-		for _, path := range arraySqlPath {
+		for i, path := range arraySqlPath {
 			g.Log().Line().Debug("run ", path)
 			sqlText := gfile.GetContents(path.(string))
 			if _, err = sqlMyDB.Exec(sqlText); err != nil {
 				g.Log().Line().Panic(err)
 			}
-		}
-
-		adminPassword := library.RandStringRunes(12)
-		if cipher, err := model.EncryptPassword(adminPassword); err != nil {
-			g.Log().Line().Panic(err)
-		} else {
-			if err = gfile.PutContents("./tmp/password/admin.txt", adminPassword); err != nil {
-				g.Log().Line().Error(err)
+			if i == 1 { // 在 第一条create.sql 建表以后插入数据
+				// todo 实现的不好,需要重构
+				adminPassword := library.RandStringRunes(12)
+				if cipher, err := model.EncryptPassword(adminPassword); err != nil {
+					g.Log().Line().Panic(err)
+				} else {
+					if err = gfile.PutContents("./tmp/password/admin.txt", adminPassword); err != nil {
+						g.Log().Line().Error(err)
+					}
+					_, _ = g.DB().Table("role").Data(g.List{{"name": "admin"}, {"name": "user"}, {"name": "interviewer"}}).Save()
+					_, _ = g.DB().Table("user").Data(g.List{{"username": "admin", "password": cipher}, {"username": "interviewer", "password": cipher}}).Save()
+					_, _ = g.DB().Table("user_role").Data(g.List{{"user_id": "1", "role_id": "1"}, {"user_id": "1", "role_id": "2"}, {"user_id": "2", "role_id": "3"}}).Save()
+				}
 			}
-			_, _ = g.DB().Table("role").Data(g.List{{"name": "admin"}, {"name": "user"}, {"name": "interviewer"}}).Save()
-			_, _ = g.DB().Table("user").Data(g.List{{"username": "admin", "password": cipher}, {"username": "interviewer", "password": cipher}}).Save()
-			_, _ = g.DB().Table("user_role").Data(g.List{{"user_id": "1", "role_id": "1"}, {"user_id": "1", "role_id": "2"}, {"user_id": "2", "role_id": "3"}}).Save()
+
 		}
 
 	}
