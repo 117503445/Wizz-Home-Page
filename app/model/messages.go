@@ -15,6 +15,7 @@ type Messages internal.Messages
 type MessageApiCreateReq struct {
 	Content    string `orm:"content"     json:"Content"`    //
 	ReadStatus int    `orm:"read_status" json:"ReadStatus"` //
+	ResumeId   int    `orm:"resume_id"   json:"ResumeId"`   //
 	CreateTime int64  `orm:"create_time" json:"CreateTime"` //
 }
 
@@ -22,5 +23,6 @@ type MessagesApiRep struct {
 	Id         int    `orm:"id,primary"  json:"id"`         //
 	Content    string `orm:"content"     json:"Content"`    //
 	ReadStatus int    `orm:"read_status" json:"ReadStatus"` //
+	ResumeId   int    `orm:"resume_id"   json:"ResumeId"`   //
 	CreateTime int64  `orm:"create_time" json:"CreateTime"` //
 }

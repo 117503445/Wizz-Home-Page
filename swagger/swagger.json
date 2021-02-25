@@ -11,7 +11,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.7.8"
+        "version": "1.7.9"
     },
     "paths": {
         "/": {
@@ -2422,6 +2422,9 @@
                 },
                 "ReadStatus": {
                     "type": "integer"
+                },
+                "ResumeId": {
+                    "type": "integer"
                 }
             }
         },
@@ -2435,6 +2438,9 @@
                     "type": "integer"
                 },
                 "ReadStatus": {
+                    "type": "integer"
+                },
+                "ResumeId": {
                     "type": "integer"
                 },
                 "id": {
