@@ -7,20 +7,21 @@ import (
 	"github.com/araddon/dateparse"
 	"github.com/gogf/gf/container/gset"
 	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/os/gcache"
 	"github.com/gogf/gf/os/gfile"
 	"strconv"
 	"strings"
 	"wizz-home-page/app/dao"
 	"wizz-home-page/app/model"
 	"wizz-home-page/app/service"
+	"wizz-home-page/app/service/serverchan"
 )
+
+var SojumpSurveyCache = gcache.New()
 
 // PullResume 拉取简历
 func PullResume() {
-	//isNew := DownloadExcel() // 下载 Excel
-	//if isNew {          // 如果有新简历
-	//	ParseExcel() // 解析简历,放入数据库
-	//}
+	// g.Log().Line().Debug("PullResume")
 	DownloadExcel()
 	ParseExcel()
 }
@@ -67,12 +68,29 @@ func DownloadExcel() bool {
 	}
 }
 
-// ParseExcel 解析简历,根据姓名确定简历,如果简历不在数据库中,就插入简历
+// ParseExcel 解析简历,根据姓名确定简历,如果简历不在数据库中,就插入简历.如果 SojumpSurvey 失效就进行通知,每个 SojumpSurvey 失效只通知一次.
 func ParseExcel() {
 	f, err := excelize.OpenFile("./tmp/wjx.xlsx")
 	if err != nil {
-		//Todo 检测是否因为 SojumpSurvey 过期，导致下载的不是 Excel
-		return
+		sojumpSurvey := g.Cfg().GetString("wjx.SojumpSurvey")
+		//SojumpSurvey 过期
+
+		isContains, err := SojumpSurveyCache.Contains(sojumpSurvey)
+		// 缓存中不存在
+		if err != nil {
+			g.Log().Line().Error(err)
+			return
+		}
+		if isContains {
+			return // 如果已经通知过了,就不再通知
+		}
+
+		if err := SojumpSurveyCache.Set(sojumpSurvey, 0, 0); err != nil { // 设置缓存
+			g.Log().Line().Error(err)
+		}
+
+		serverchan.Alarm("问卷星Token失效", ":(")
+		return // 不进行下一步操作
 	}
 	rows, err := f.GetRows("Sheet1")
 	titleRow := rows[0]
