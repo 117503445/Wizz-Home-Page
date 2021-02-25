@@ -74,7 +74,7 @@ VALUES (101, '简历内容1', 'https://qiniu.wizzstudio.com/back1.jpg', '计科�
         0, 0, 0, '', 0);
 INSERT INTO `resumes`
 VALUES (102, '简历内容2', 'https://qiniu.wizzstudio.com/back2.jpg', '计科院物联网', 'name2', true, 2019, 1, true, '110', '120',
-        '12306', 3, 1, 1613141178000,
+        '12306', 3, 1, 1614005178000,
         0,
         0, 0, '', 0);
 INSERT INTO `resumes`
