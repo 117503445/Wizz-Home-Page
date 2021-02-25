@@ -199,6 +199,9 @@ func (*resumesApi) ResultUpdate(r *ghttp.Request) {
 	if err := dao.Resumes.Where("id", id).Struct(&resume); err != nil {
 		response.Json(r, response.Error, "", nil)
 	} else {
+		if resume.InterviewResult != 0 {
+			response.Json(r, response.ErrorExist, "result have existed", nil)
+		}
 		result, err := service.ResultChange(apiReq.Result)
 		if err != nil {
 			response.Json(r, response.Error, "the result wrong", nil)
@@ -217,6 +220,15 @@ func (*resumesApi) ResultUpdate(r *ghttp.Request) {
 		if _, err := dao.Resumes.Data(resume).Where("id", id).Update(); err != nil {
 			response.Json(r, response.ErrorNotExist, "", nil)
 		}
+		var message model.Messages
+		err = dao.Messages.Where("resume_id", resume.Id).Struct(&message)
+		if err == nil {
+			message.ReadStatus = 1
+			if _, err = dao.Messages.Data(message).Where("id", message.Id).Update(); err != nil {
+				g.Log().Line().Error(err)
+			}
+		}
+
 		var resumeRsp model.ResumesApiRep
 		if err := gconv.Struct(resume, &resumeRsp); err != nil {
 			g.Log().Line().Error(err)
