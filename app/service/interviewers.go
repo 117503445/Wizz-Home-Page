@@ -21,7 +21,10 @@ func DistributeInterviewers(resume *model.Resumes) {
 	}
 
 	if interviewer == nil {
-		g.Log().Line().Error("interviewer NOT FOUND") // todo 通知管理员
+		g.Log().Line().Error("interviewer NOT FOUND")
+		title := fmt.Sprintf("%v 部门 还未设置管理员", resume.DepartmentType)
+		content := fmt.Sprintf("%v 部门 还未设置管理员\n %v 的简历处理失败", resume.DepartmentType, resume.Name)
+		serverchan.Alarm(title, content)
 		return
 	}
 	resume.InterviewerId = interviewer.Id
