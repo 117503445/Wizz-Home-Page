@@ -41,7 +41,8 @@ password = "changeme"
 index = "wizz-home-page"
 
 [wjx]
-SojumpSurvey = "" # 登录问卷星,抓包
+username = ""
+password = ""
 activity = "105939446"
 
 [qiniu]

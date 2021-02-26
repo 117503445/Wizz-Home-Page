@@ -1,7 +1,6 @@
 package wjx
 
 import (
-	"bytes"
 	"fmt"
 	"github.com/360EntSecGroup-Skylar/excelize/v2"
 	"github.com/araddon/dateparse"
@@ -14,7 +13,6 @@ import (
 	"wizz-home-page/app/dao"
 	"wizz-home-page/app/model"
 	"wizz-home-page/app/service"
-	"wizz-home-page/app/service/serverchan"
 )
 
 var SojumpSurveyCache = gcache.New()
@@ -22,13 +20,22 @@ var SojumpSurveyCache = gcache.New()
 // PullResume 拉取简历
 func PullResume() {
 	// g.Log().Line().Debug("PullResume")
-	DownloadExcel()
-	ParseExcel()
+	if DownloadExcel() {
+		ParseExcel()
+	}
 }
 
-// DownloadExcel 从问卷星下载 Excel 后与磁盘文件比较，如果有更新则写入磁盘并返回 True
+// DownloadExcel 从问卷星下载 Excel , 返回是否下载成功.可能因SojumpSurvey过期导致下载成错误的文件,但也返回True.
 func DownloadExcel() bool {
-	cookie := g.MapStrStr{"SojumpSurvey": g.Cfg().GetString("wjx.SojumpSurvey")}
+	SojumpSurvey, err := gcache.Get("SojumpSurvey")
+
+	if err != nil || SojumpSurvey == nil {
+		g.Log().Line().Debug("Login WJX")
+		GetSojumpSurvey()
+		return false
+	}
+
+	cookie := g.MapStrStr{"SojumpSurvey": SojumpSurvey.(string)}
 
 	header := g.MapStrStr{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"}
 
@@ -41,30 +48,14 @@ func DownloadExcel() bool {
 		return false
 	} else {
 		defer r.Close()
-
 		downloadExcel := r.ReadAll()
-
-		isNew := false
-
 		excelPath := "./tmp/wjx.xlsx"
-		if !gfile.Exists(excelPath) {
-			isNew = true
-		} else {
-			diskExcel := gfile.GetBytes(excelPath)
-			if !bytes.Equal(diskExcel, downloadExcel) {
-				isNew = true
-			}
-		}
-
-		// todo 可以不检测旧内容,直接写入,反正到时候根据ID判断是否重复
-
-		// g.Log().Line().Info(fmt.Sprintf("isNew: %v", isNew))
 
 		if err := gfile.PutBytes(excelPath, downloadExcel); err != nil {
 			g.Log().Line().Error(err)
 		}
 
-		return isNew
+		return true
 	}
 }
 
@@ -72,25 +63,9 @@ func DownloadExcel() bool {
 func ParseExcel() {
 	f, err := excelize.OpenFile("./tmp/wjx.xlsx")
 	if err != nil {
-		sojumpSurvey := g.Cfg().GetString("wjx.SojumpSurvey")
-		//SojumpSurvey 过期
-
-		isContains, err := SojumpSurveyCache.Contains(sojumpSurvey)
-		// 缓存中不存在
-		if err != nil {
-			g.Log().Line().Error(err)
-			return
-		}
-		if isContains {
-			return // 如果已经通知过了,就不再通知
-		}
-
-		if err := SojumpSurveyCache.Set(sojumpSurvey, 0, 0); err != nil { // 设置缓存
-			g.Log().Line().Error(err)
-		}
-
-		serverchan.Alarm("问卷星Token失效", ":(")
-		return // 不进行下一步操作
+		g.Log().Line().Debug("Login WJX")
+		GetSojumpSurvey()
+		return
 	}
 	rows, err := f.GetRows("Sheet1")
 	titleRow := rows[0]
