@@ -46,10 +46,12 @@ func (*resumesApi) ReadAll(r *ghttp.Request) {
 		g.Log().Line().Error(err)
 	}
 	for i, resumeRsp := range resumesRsp {
+		g.Log().Line().Debug(resumeRsp.InterviewerId)
 		resumesRsp[i].InterviewerName, err = service.GetInterviewerName(resumeRsp.InterviewerId)
 		if err != nil {
 			g.Log().Line().Error(err)
 		}
+		g.Log().Line().Debug(resumesRsp[i].InterviewerName)
 	}
 	resumes.Content = resumesRsp
 
