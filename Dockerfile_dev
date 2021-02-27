@@ -13,4 +13,6 @@ FROM alpine as prod
 EXPOSE 80
 COPY --from=build /root/project/server_bin /root/server_bin
 WORKDIR /root
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN echo 'Asia/Shanghai' >/etc/timezone
 ENTRYPOINT /root/server_bin
