@@ -11,6 +11,6 @@ type Logs struct {
 	RequestMethod string `orm:"request_method" json:"requestMethod"` //
 	Username      string `orm:"username"       json:"username"`      //
 	RequestUrl    string `orm:"request_url"    json:"requestUrl"`    //
-	ResponseName  string `orm:"response_name"  json:"responseName"`  //
+	ResponseCode  string `orm:"response_code"  json:"responseCode"`  //
 	ModelName     string `orm:"model_name"     json:"modelName"`     //
 }

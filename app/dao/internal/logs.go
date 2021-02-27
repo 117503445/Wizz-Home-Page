@@ -31,7 +31,7 @@ type logsColumns struct {
 	RequestMethod string //
 	Username      string //
 	RequestUrl    string //
-	ResponseName  string //
+	ResponseCode  string //
 	ModelName     string //
 }
 
@@ -47,7 +47,7 @@ var (
 			RequestMethod: "request_method",
 			Username:      "username",
 			RequestUrl:    "request_url",
-			ResponseName:  "response_name",
+			ResponseCode:  "response_code",
 			ModelName:     "model_name",
 		},
 	}

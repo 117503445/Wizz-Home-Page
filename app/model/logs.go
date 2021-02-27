@@ -18,6 +18,6 @@ type LogsApiRep struct {
 	RequestMethod string `orm:"request_method" json:"RequestMethod"` //
 	Username      string `orm:"username"       json:"Username"`      //
 	RequestUrl    string `orm:"request_url"    json:"RequestUrl"`    //
-	ResponseName  string `orm:"response_name"  json:"ResponseName"`  //
+	ResponseCode  string `orm:"response_code"  json:"ResponseCode"`  //
 	ModelName     string `orm:"model_name"     json:"ModelName"`     //
 }
