@@ -43,5 +43,5 @@ func DownloadFile(fileUrl string) (string, error) {
 		return "", err
 	}
 
-	return "/" + fileName, nil
+	return "https://homepage.backend.wizzstudio.com/" + fileName, nil
 }
