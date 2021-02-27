@@ -8,7 +8,7 @@ import (
 )
 
 // @title       wizz-home-page API
-// @version     1.8.11
+// @version     1.8.12
 // @description `wizz-home-page` 企业官网
 
 // @contact.name 117503445
@@ -24,5 +24,7 @@ import (
 func main() {
 	s := g.Server()
 	s.SetDumpRouterMap(false)
+	s.SetIndexFolder(true)
+	s.SetServerRoot("./tmp/file")
 	s.Run()
 }

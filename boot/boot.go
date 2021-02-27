@@ -1,7 +1,7 @@
 package boot
 
 import (
-	"wizz-home-page/app/model"
+	"github.com/gogf/gf/os/gfile"
 	_ "wizz-home-page/library/cron"
 	_ "wizz-home-page/packed"
 
@@ -10,9 +10,8 @@ import (
 )
 
 func init() {
-	str, _ := model.EncryptPassword("admin")
-	g.Log().Line().Debug(str)
-	//middleware.NeedRole("123")
+	_ = gfile.Mkdir("./tmp/file")
+
 	LogBindEs()
 
 	s := g.Server()
