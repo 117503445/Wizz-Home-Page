@@ -32,7 +32,7 @@ func (*resumesApi) ReadAll(r *ghttp.Request) {
 	InterviewId := r.GetInt("InterviewId")
 	InterviewResult := r.GetInt("InterviewResult")
 	Page := r.GetInt("Page")
-	resumes, err := service.SortResumes(Page, InterviewId, DepartmentType, InterviewResult)
+	resumes, err := service.PageResumes(Page, InterviewId, DepartmentType, InterviewResult)
 	if err != nil {
 		g.Log().Line().Error(err)
 		response.Json(r, response.Error, "", nil)

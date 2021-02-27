@@ -7,7 +7,7 @@ import (
 	"wizz-home-page/library/response"
 )
 
-func SortResumes(Page int, InterviewId int, DepartmentType int, InterviewResult int) (*response.Page, error) {
+func PageResumes(Page int, InterviewId int, DepartmentType int, InterviewResult int) (*response.Page, error) {
 
 	pageSize := 10
 	n1 := (Page - 1) * pageSize
