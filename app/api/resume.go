@@ -27,7 +27,6 @@ type resumesApi struct{}
 // @Success 200 {object} response.Page
 // @Router /api/resumes [get]
 func (*resumesApi) ReadAll(r *ghttp.Request) {
-	g.Log().Debug("GetAll")
 	DepartmentType := r.GetInt("DepartmentType")
 	InterviewId := r.GetInt("InterviewId")
 	InterviewResult := r.GetInt("InterviewResult")
@@ -46,12 +45,10 @@ func (*resumesApi) ReadAll(r *ghttp.Request) {
 		g.Log().Line().Error(err)
 	}
 	for i, resumeRsp := range resumesRsp {
-		g.Log().Line().Debug(resumeRsp.InterviewerId)
 		resumesRsp[i].InterviewerName, err = service.GetInterviewerName(resumeRsp.InterviewerId)
 		if err != nil {
 			g.Log().Line().Error(err)
 		}
-		g.Log().Line().Debug(resumesRsp[i].InterviewerName)
 	}
 	resumes.Content = resumesRsp
 

@@ -930,6 +930,22 @@
                     "日志"
                 ],
                 "summary": "获取所有日志",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "一页几条",
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "页数",
+                        "name": "pageIndex",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
