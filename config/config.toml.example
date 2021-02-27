@@ -57,3 +57,6 @@ serverChans = [
     "",
     ""
 ] # 服务器报警,通过 ServerChan
+
+[remind]
+overtime = 7 #超时时间，以天为单位，超过多少天提醒

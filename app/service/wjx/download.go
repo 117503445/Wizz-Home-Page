@@ -179,11 +179,11 @@ func ParseExcel() {
 			InterviewEvaluation:    "",
 			InterviewTime:          0,
 		}
-
-		service.DistributeInterviewers(resume)
-
-		if _, err := dao.Resumes.Insert(resume); err != nil {
-			g.Log().Line().Debug(err)
+		if service.DistributeInterviewers(resume) {
+			// 成功分配简历后才插入数据
+			if _, err := dao.Resumes.Insert(resume); err != nil {
+				g.Log().Line().Debug(err)
+			}
 		}
 	}
 }
