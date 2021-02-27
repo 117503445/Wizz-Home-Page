@@ -15,7 +15,9 @@ func init() {
 		group.ALL("/", api.Hello)
 
 		group.Group("/api", func(group *ghttp.RouterGroup) {
-
+			group.Group("/logs", func(group *ghttp.RouterGroup) {
+				group.GET("/", api.Log.ReadAll)
+			})
 			group.Group("/articles", func(group *ghttp.RouterGroup) {
 				group.GET("/", api.Article.ReadAll)
 				group.GET("/{id}", api.Article.ReadOne)

@@ -11,7 +11,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.8.5"
+        "version": "1.8.6"
     },
     "paths": {
         "/": {
@@ -913,6 +913,31 @@
                         "description": "{\"message\": \"Interview not found\"}",
                         "schema": {
                             "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/logs": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "日志"
+                ],
+                "summary": "获取所有日志",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.LogsApiRep"
+                            }
                         }
                     }
                 }
@@ -2356,6 +2381,32 @@
                 },
                 "SentNumber": {
                     "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.LogsApiRep": {
+            "type": "object",
+            "properties": {
+                "ModelName": {
+                    "type": "string"
+                },
+                "RequestMethod": {
+                    "type": "string"
+                },
+                "RequestUrl": {
+                    "type": "string"
+                },
+                "ResponseName": {
+                    "type": "string"
+                },
+                "TimeStamp": {
+                    "type": "integer"
+                },
+                "Username": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "integer"
