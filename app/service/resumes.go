@@ -9,7 +9,7 @@ import (
 
 func PageResumes(Page int, InterviewId int, DepartmentType int, InterviewResult int) (*response.Page, error) {
 
-	pageSize := 10
+	pageSize := 6
 	n1 := (Page - 1) * pageSize
 	n2 := Page * pageSize
 
