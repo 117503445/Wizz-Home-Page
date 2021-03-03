@@ -11,7 +11,6 @@ func PageResumes(Page int, InterviewId int, DepartmentType int, InterviewResult 
 
 	pageSize := 6
 	n1 := (Page - 1) * pageSize
-	n2 := Page * pageSize
 
 	totalSize, err := dao.Resumes.Where("interview_id", InterviewId).Where("department_type", DepartmentType).Where("interview_result", InterviewResult).Count()
 	if err != nil {
@@ -19,7 +18,7 @@ func PageResumes(Page int, InterviewId int, DepartmentType int, InterviewResult 
 	}
 
 	var resumes []model.Resumes
-	err = dao.Resumes.Where("interview_id", InterviewId).Where("department_type", DepartmentType).Where("interview_result", InterviewResult).Limit(n1, n2).Structs(&resumes)
+	err = dao.Resumes.Where("interview_id", InterviewId).Where("department_type", DepartmentType).Where("interview_result", InterviewResult).Limit(n1, pageSize).Structs(&resumes)
 	if err != nil {
 		return nil, err
 	}
