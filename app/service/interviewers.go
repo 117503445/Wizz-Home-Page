@@ -60,3 +60,23 @@ func DistributeInterviewers(resume *model.Resumes) bool {
 	serverchan.Push(interviewer.ServerchanId, title, content)
 	return true
 }
+
+// 添加面试官后进行检索看面试项目的每个部门是否有面试官了
+func SearchInterviewer(InterviewId int) {
+	if search(InterviewId, 1) && search(InterviewId, 2) && search(InterviewId, 3) && search(InterviewId, 4) {
+		var message *model.Messages
+		_ = dao.Messages.Where("resume_id", 0).Where("read_status", 0).Struct(&message)
+		message.ReadStatus = 1
+		if _, err := dao.Messages.Data(message).Where("id", message.Id).Update(); err != nil {
+			g.Log().Line().Error(err)
+		}
+	}
+}
+
+func search(InterviewId int, Type int) bool {
+	n, err := dao.Interviewers.Where("interview_id", InterviewId).Where("department_type", Type).Count()
+	if err != nil {
+		g.Log().Line().Error(err)
+	}
+	return n != 0
+}

@@ -89,7 +89,7 @@ func (*interviewsApi) Create(r *ghttp.Request) {
 	} else {
 		id, _ := result.LastInsertId()
 		interviews.Id = gconv.Int(id)
-
+		service.CreateMessage()
 		var interviewRsp model.InterviewsApiRep
 		if err := gconv.Struct(interviews, &interviewRsp); err != nil {
 			g.Log().Line().Error(err)

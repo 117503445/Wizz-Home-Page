@@ -6,6 +6,7 @@ import (
 	"github.com/gogf/gf/util/gconv"
 	"wizz-home-page/app/dao"
 	"wizz-home-page/app/model"
+	"wizz-home-page/app/service"
 	"wizz-home-page/library/response"
 )
 
@@ -86,6 +87,8 @@ func (*interviewersApi) Create(r *ghttp.Request) {
 	} else {
 		id, _ := result.LastInsertId()
 		interviewers.Id = gconv.Int(id)
+
+		service.SearchInterviewer(interviewers.InterviewId)
 
 		var interviewerRsp model.InterviewersApiRep
 		if err := gconv.Struct(interviewers, &interviewerRsp); err != nil {
