@@ -14,19 +14,30 @@ import (
 // 返回是否成功分配
 func DistributeInterviewers(resume *model.Resumes) bool {
 	// 同部门面试官随机挑选
-	interviewer, err := dao.Interviewers.Where("department_type", resume.DepartmentType).Where("interview_id", resume.InterviewId).
-		Order("rand()").FindOne()
+	interviewers, err := dao.Interviewers.Where("department_type", resume.DepartmentType).Where("interview_id", resume.InterviewId).FindAll()
 	if err != nil {
 		g.Log().Line().Error(err)
 		return false
 	}
-
-	if interviewer == nil {
+	if interviewers == nil || len(interviewers) == 0 {
 		//g.Log().Line().Error("interviewer NOT FOUND")
 		//title := fmt.Sprintf("%v 部门 还未设置管理员", resume.DepartmentType)
 		//content := fmt.Sprintf("%v 部门 还未设置管理员\n %v 的简历处理失败", resume.DepartmentType, resume.Name)
 		//serverchan.Alarm(title, content)
+		g.Log().Line().Error(fmt.Sprintf("%v 部门 还未设置管理员", resume.DepartmentType))
 		return false
+	}
+
+	//此部门面试官中,寻找正在处理简历数最少的面试官
+	minCount := 9999
+	interviewer := &model.Interviewers{}
+
+	for _, _interviewer := range interviewers {
+		count, _ := dao.Resumes.Where("interviewer_id", _interviewer.Id).Where("interview_result", 0).Count()
+		if count < minCount {
+			minCount = count
+			interviewer = _interviewer
+		}
 	}
 
 	resume.InterviewerId = interviewer.Id

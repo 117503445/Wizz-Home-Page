@@ -14,7 +14,7 @@ def run_shell_script(script: str):
 def text_to_lf():
     for path in Path('.').glob('**/*'):
         print(path)
-        if str(path)[0] != '.' and not path.is_dir():
+        if str(path)[0] != '.' and not path.is_dir() and '.xlsx' not in str(path) and '.pdf' not in str(path):
             with open(path, 'r', encoding='utf-8')as f:
                 lines = f.readlines()
                 text = ''.join(lines)
