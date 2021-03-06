@@ -76,11 +76,14 @@ func DistributeInterviewers(resume *model.Resumes) bool {
 func SearchInterviewer(InterviewId int) {
 	if search(InterviewId, 1) && search(InterviewId, 2) && search(InterviewId, 3) && search(InterviewId, 4) {
 		var message *model.Messages
-		_ = dao.Messages.Where("resume_id", 0).Where("read_status", 0).Struct(&message)
-		message.ReadStatus = 1
-		if _, err := dao.Messages.Data(message).Where("id", message.Id).Update(); err != nil {
-			g.Log().Line().Error(err)
+		err := dao.Messages.Where("resume_id", 0).Where("read_status", 0).Struct(&message)
+		if err == nil {
+			message.ReadStatus = 1
+			if _, err = dao.Messages.Data(message).Where("id", message.Id).Update(); err != nil {
+				g.Log().Line().Error(err)
+			}
 		}
+
 	}
 }
 
