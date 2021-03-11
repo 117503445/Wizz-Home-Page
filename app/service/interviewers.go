@@ -66,8 +66,13 @@ func DistributeInterviewers(resume *model.Resumes) bool {
 		experienceStr = "有"
 	}
 
+	strFileUrl := fmt.Sprintf("[简历下载链接](%v)\n\n", resume.FileUrl)
+	if resume.FileUrl == "" {
+		strFileUrl = "" // 如果不存在简历,那么隐藏下载链接
+	}
+
 	title := fmt.Sprintf("%v的简历", resume.Name)
-	content := fmt.Sprintf("%v %v %v\n（联系电话：%v）（微信：%v）（qq：%v）\n\n%v项目经历\n\n%v\n\n[简历下载链接](%v)\n\n---\n\n请及时联系投递者安排面试，或者告知他初筛未通过哦\n\n面试结束后须返回该页面，点击链接填写面评，建议将该页面添加至浮窗\n\n不需要面试也需要点击链接填写理由哦\n\n---\n\n[点我前往面评填写页面](%v)", resume.Name, resume.Grade, resume.CollegeMajor, resume.TelephoneNumber, resume.WechatNumber, resume.QqNumber, experienceStr, resume.Describe, resume.FileUrl, url)
+	content := fmt.Sprintf("%v %v %v\n（联系电话：%v）（微信：%v）（qq：%v）\n\n%v项目经历\n\n%v\n\n%v---\n\n请及时联系投递者安排面试，或者告知他初筛未通过哦\n\n面试结束后须返回该页面，点击链接填写面评，建议将该页面添加至浮窗\n\n不需要面试也需要点击链接填写理由哦\n\n---\n\n[点我前往面评填写页面](%v)", resume.Name, resume.Grade, resume.CollegeMajor, resume.TelephoneNumber, resume.WechatNumber, resume.QqNumber, experienceStr, resume.Describe, strFileUrl, url)
 	serverchan.Push(interviewer.ServerchanId, title, content)
 	return true
 }
