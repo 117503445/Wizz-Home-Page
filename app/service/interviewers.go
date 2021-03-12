@@ -33,7 +33,7 @@ func DistributeInterviewers(resume *model.Resumes) bool {
 	interviewer := &model.Interviewers{}
 
 	for _, _interviewer := range interviewers {
-		count, _ := dao.Resumes.Where("interviewer_id", _interviewer.Id).Where("interview_result", 0).Count()
+		count, _ := dao.Resumes.Where("interviewer_id", _interviewer.Id).Count()
 		if count < minCount {
 			minCount = count
 			interviewer = _interviewer
