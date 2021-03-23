@@ -71,7 +71,21 @@ func DistributeInterviewers(resume *model.Resumes) bool {
 		strFileUrl = "" // 如果不存在简历,那么隐藏下载链接
 	}
 
-	title := fmt.Sprintf("%v的简历", resume.Name)
+	departmentStr := ""
+
+	switch {
+	case resume.DepartmentType == 1:
+		departmentStr = "前端"
+	case resume.DepartmentType == 2:
+		departmentStr = "产品"
+	case resume.DepartmentType == 3:
+		departmentStr = "后端"
+	case resume.DepartmentType == 4:
+		departmentStr = "运营/UI"
+	default:
+		g.Log().Line().Error(resume.DepartmentType)
+	}
+	title := fmt.Sprintf("%v丨%v的简历", departmentStr, resume.Name)
 	content := fmt.Sprintf("%v %v %v\n（联系电话：%v）（微信：%v）（qq：%v）\n\n%v项目经历\n\n%v\n\n%v---\n\n请及时联系投递者安排面试，或者告知他初筛未通过哦\n\n面试结束后须返回该页面，点击链接填写面评，建议将该页面添加至浮窗\n\n不需要面试也需要点击链接填写理由哦\n\n---\n\n[点我前往面评填写页面](%v)", resume.Name, resume.Grade, resume.CollegeMajor, resume.TelephoneNumber, resume.WechatNumber, resume.QqNumber, experienceStr, resume.Describe, strFileUrl, url)
 	serverchan.Push(interviewer.ServerchanId, title, content)
 	return true
