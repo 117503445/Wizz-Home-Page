@@ -20,7 +20,6 @@ type ${复数小写}Api struct{}
 // @Success 200 {array} model.${复数大写}ApiRep
 // @Router /api/${复数小写} [get]
 func (*${复数小写}Api) ReadAll(r *ghttp.Request) {
-	g.Log().Debug("GetAll")
 	var ${复数小写} []model.${复数大写}
 	if err := dao.${复数大写}.Structs(&${复数小写}); err != nil {
 		response.JsonOld(r, 500, "")

@@ -20,7 +20,6 @@ type productsApi struct{}
 // @Success 200 {array} model.ProductsApiRep
 // @Router /api/products [get]
 func (*productsApi) ReadAll(r *ghttp.Request) {
-	g.Log().Debug("GetAll")
 	var products []model.Products
 	if err := dao.Products.Structs(&products); err != nil {
 		response.JsonOld(r, 500, "")

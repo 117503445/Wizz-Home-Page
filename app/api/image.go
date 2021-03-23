@@ -21,7 +21,6 @@ type imagesApi struct{}
 // @Success 200 {array} model.ImagesApiRep
 // @Router /api/images [get]
 func (*imagesApi) ReadAll(r *ghttp.Request) {
-	g.Log().Debug("GetAll")
 	var images []model.Images
 	if err := dao.Images.Structs(&images); err != nil {
 		response.JsonOld(r, 500, "")

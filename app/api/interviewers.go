@@ -22,7 +22,6 @@ type interviewersApi struct{}
 // @Success 200 {array} model.InterviewersApiRep
 // @Router /api/interviewers/all/{id} [get]
 func (*interviewersApi) ReadAll(r *ghttp.Request) {
-	g.Log().Debug("GetAll")
 	id := r.GetInt("id")
 	var interviewers []model.Interviewers
 	if err := dao.Interviewers.Where("interview_id = ", id).Structs(&interviewers); err != nil {

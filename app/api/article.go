@@ -20,7 +20,6 @@ type articlesApi struct{}
 // @Success 200 {array} model.ArticlesApiRep
 // @Router /api/articles [get]
 func (*articlesApi) ReadAll(r *ghttp.Request) {
-	g.Log().Debug("GetAll")
 	var articles []model.Articles
 	if err := dao.Articles.Structs(&articles); err != nil {
 		response.JsonOld(r, 500, "")

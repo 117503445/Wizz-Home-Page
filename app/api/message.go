@@ -20,7 +20,6 @@ type messagesApi struct{}
 // @Success 200 {array} model.MessagesApiRep
 // @Router /api/messages [get]
 func (*messagesApi) ReadAll(r *ghttp.Request) {
-	g.Log().Debug("GetAll")
 	var messages []model.Messages
 	if err := dao.Messages.Structs(&messages); err != nil {
 		response.JsonOld(r, 500, "")

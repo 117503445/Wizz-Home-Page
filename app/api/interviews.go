@@ -21,7 +21,6 @@ type interviewsApi struct{}
 // @Success 200 {array} model.InterviewsApiRep
 // @Router /api/interviews [get]
 func (*interviewsApi) ReadAll(r *ghttp.Request) {
-	g.Log().Debug("GetAll")
 	var interviews []model.Interviews
 	if err := dao.Interviews.Structs(&interviews); err != nil {
 		response.JsonOld(r, 500, "")

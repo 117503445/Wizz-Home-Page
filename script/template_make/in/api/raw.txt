@@ -20,7 +20,6 @@ type membersApi struct{}
 // @Success 200 {array} model.MembersApiRep
 // @Router /api/members [get]
 func (*membersApi) ReadAll(r *ghttp.Request) {
-	g.Log().Debug("GetAll")
 	var members []model.Members
 	if err := dao.Members.Structs(&members); err != nil {
 		response.JsonOld(r, 500, "")
