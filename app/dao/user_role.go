@@ -5,7 +5,6 @@
 package dao
 
 import (
-	"reflect"
 	"wizz-home-page/app/dao/internal"
 	"wizz-home-page/app/model"
 
@@ -30,7 +29,6 @@ var (
 
 func GetRolesByUser(user *model.User) []model.Role {
 	var roles []model.Role
-	g.Log().Line().Debug(reflect.TypeOf(roles))
 
 	if roleIds, err := g.DB().Table("user_role").Array("role_id", "user_id = ", user.Id); err != nil {
 		g.Log().Line().Error(err)
