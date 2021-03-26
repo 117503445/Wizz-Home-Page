@@ -222,7 +222,7 @@ CREATE TABLE `resumes`
     `initial_screening_result` int                                                           NULL DEFAULT NULL, -- 初筛结果
     `initial_screening_time`   bigint                                                        NULL DEFAULT NULL,-- 初筛结果提交时间
     `interview_result`         int                                                           NULL DEFAULT NULL, -- 面试结果
-    `interview_evaluation`     varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL, -- 面试评价
+    `interview_evaluation`     varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL, -- 面试评价
     `interview_time`           bigint                                                        NULL DEFAULT NULL, -- 面试时间
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB
