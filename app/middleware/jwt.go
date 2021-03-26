@@ -43,7 +43,7 @@ func init() {
 	authMiddleware, err := jwt.New(&jwt.GfJWTMiddleware{
 		Realm:           "wizz-home-page",
 		Key:             []byte(key),
-		Timeout:         time.Hour * 24 * 7,
+		Timeout:         time.Hour * 24 * 30,
 		MaxRefresh:      time.Minute * 5,
 		IdentityKey:     "jwtid",
 		TokenLookup:     "header: Authorization, query: token, cookie: jwt",
