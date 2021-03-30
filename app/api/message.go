@@ -21,7 +21,7 @@ type messagesApi struct{}
 // @Router /api/messages [get]
 func (*messagesApi) ReadAll(r *ghttp.Request) {
 	var messages []model.Messages
-	if err := dao.Messages.Structs(&messages); err != nil {
+	if err := dao.Messages.Where("read_status = ", 0).Structs(&messages); err != nil {
 		response.JsonOld(r, 500, "")
 	}
 	if len(messages) == 0 {
