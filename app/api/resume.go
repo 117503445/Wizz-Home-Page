@@ -219,16 +219,9 @@ func (*resumesApi) ResultUpdate(r *ghttp.Request) {
 	if _, err := dao.Resumes.Data(resume).Where("id", id).Update(); err != nil {
 		response.Json(r, response.ErrorNotExist, "", err)
 	}
-	var messages []model.Messages
-	err = dao.Messages.Where("resume_id", resume.Id).Where("read_status", 0).Structs(&messages)
+	_, err = dao.Messages.Where("resume_id", resume.Id).Where("read_status", 0).Data("read_status = 1").Update()
 	if err != nil {
 		response.Json(r, response.Error, "", err)
-	}
-	for _, message := range messages {
-		message.ReadStatus = 1
-		if _, err = dao.Messages.Data(message).Where("id", message.Id).Update(); err != nil {
-			response.Json(r, response.Error, "", err)
-		}
 	}
 	var resumeRsp model.ResumesApiRep
 	if err := gconv.Struct(resume, &resumeRsp); err != nil {
