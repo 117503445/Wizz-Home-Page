@@ -197,44 +197,45 @@ func (*resumesApi) ResultUpdate(r *ghttp.Request) {
 	resume.Id = id
 	if err := dao.Resumes.Where("id", id).Struct(&resume); err != nil {
 		response.Json(r, response.Error, "", err)
-	} else {
-		if resume.InterviewResult != 0 {
-			response.Json(r, response.ErrorExist, "result have existed", nil)
-		}
-		result, err := service.ResultChange(apiReq.Result)
-		if err != nil {
-			response.Json(r, response.Error, "the result wrong", err)
-		}
-		if apiReq.Type == 0 {
-			resume.InitialScreeningResult = result
-			resume.InitialScreeningTime = gtime.TimestampMilli()
-		} else if apiReq.Type == 1 {
-			resume.InterviewResult = result
-			resume.InterviewEvaluation = apiReq.InterviewEvaluation
-			resume.InterviewTime = gtime.TimestampMilli()
-		} else {
-			response.Json(r, response.Error, "the type is wrong", nil)
-		}
-
-		if _, err := dao.Resumes.Data(resume).Where("id", id).Update(); err != nil {
-			response.Json(r, response.ErrorNotExist, "", err)
-		}
-		var message model.Messages
-		err = dao.Messages.Where("resume_id", resume.Id).Struct(&message)
-		if err == nil {
-			message.ReadStatus = 1
-			if _, err = dao.Messages.Data(message).Where("id", message.Id).Update(); err != nil {
-				response.Json(r, response.Error, "", err)
-			}
-		}
-
-		var resumeRsp model.ResumesApiRep
-		if err := gconv.Struct(resume, &resumeRsp); err != nil {
-			response.Json(r, response.Error, "", err)
-		}
-		if resumeRsp.InterviewerName, err = service.GetInterviewerName(resumeRsp.InterviewerId); err != nil {
-			response.Json(r, response.Error, "", err)
-		}
-		response.Json(r, response.Success, "", resumeRsp)
 	}
+	if resume.InterviewResult != 0 {
+		response.Json(r, response.ErrorExist, "result have existed", nil)
+	}
+	result, err := service.ResultChange(apiReq.Result)
+	if err != nil {
+		response.Json(r, response.Error, "the result wrong", err)
+	}
+	if apiReq.Type == 0 {
+		resume.InitialScreeningResult = result
+		resume.InitialScreeningTime = gtime.TimestampMilli()
+	} else if apiReq.Type == 1 {
+		resume.InterviewResult = result
+		resume.InterviewEvaluation = apiReq.InterviewEvaluation
+		resume.InterviewTime = gtime.TimestampMilli()
+	} else {
+		response.Json(r, response.Error, "the type is wrong", nil)
+	}
+
+	if _, err := dao.Resumes.Data(resume).Where("id", id).Update(); err != nil {
+		response.Json(r, response.ErrorNotExist, "", err)
+	}
+	var messages []model.Messages
+	err = dao.Messages.Where("resume_id", resume.Id).Where("read_status", 0).Structs(&messages)
+	if err != nil {
+		response.Json(r, response.Error, "", err)
+	}
+	for _, message := range messages {
+		message.ReadStatus = 1
+		if _, err = dao.Messages.Data(message).Where("id", message.Id).Update(); err != nil {
+			response.Json(r, response.Error, "", err)
+		}
+	}
+	var resumeRsp model.ResumesApiRep
+	if err := gconv.Struct(resume, &resumeRsp); err != nil {
+		response.Json(r, response.Error, "", err)
+	}
+	if resumeRsp.InterviewerName, err = service.GetInterviewerName(resumeRsp.InterviewerId); err != nil {
+		response.Json(r, response.Error, "", err)
+	}
+	response.Json(r, response.Success, "", resumeRsp)
 }
