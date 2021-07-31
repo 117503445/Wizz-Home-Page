@@ -59,14 +59,14 @@ func DistributeInterviewers(resume *model.Resumes) bool {
 	url := fmt.Sprintf("https://wizzstudio.com/#/pass?id=%v&jwt=%v", resume.Id, token) // todo load from config
 	g.Log().Line().Debug(url)
 
-	experienceStr := ""
+	/*experienceStr := ""
 	if resume.Experience == 0 {
 		experienceStr = "无"
 	} else {
 		experienceStr = "有"
-	}
+	}*/
 
-	strFileUrl := fmt.Sprintf("[简历下载链接](%v)\n\n", resume.FileUrl)
+	strFileUrl := fmt.Sprintf("<a href=\"%v\">简历下载链接</a>\n\n", resume.FileUrl)
 	if resume.FileUrl == "" {
 		strFileUrl = "" // 如果不存在简历,那么隐藏下载链接
 	}
@@ -85,8 +85,8 @@ func DistributeInterviewers(resume *model.Resumes) bool {
 	default:
 		g.Log().Line().Error(resume.DepartmentType)
 	}
-	title := fmt.Sprintf("%v丨%v的简历", departmentStr, resume.Name)
-	content := fmt.Sprintf("%v %v %v\n（联系电话：%v）（微信：%v）（qq：%v）\n\n%v项目经历\n\n%v\n\n%v---\n\n请及时联系投递者安排面试，或者告知他初筛未通过哦\n\n面试结束后须返回该页面，点击链接填写面评，建议将该页面添加至浮窗\n\n不需要面试也需要点击链接填写理由哦\n\n---\n\n[点我前往面评填写页面](%v)", resume.Name, resume.Grade, resume.CollegeMajor, resume.TelephoneNumber, resume.WechatNumber, resume.QqNumber, experienceStr, resume.Describe, strFileUrl, url)
+	title := fmt.Sprintf("%v简历", departmentStr)
+	content := fmt.Sprintf("%v %v %v\n联系电话：%v\n微信：%v\nqq：%v\n\n%v\n\n%v---\n\n请7天内联系投递者安排面试，或者告知他初筛未通过，7天内未填写则会触发重复提醒\n\n不需要面试也需要点击链接填写理由哦\n\n---\n\n<a href=\"%v\">点我前往面评填写页面</a>", resume.Name, resume.Grade, resume.CollegeMajor, resume.TelephoneNumber, resume.WechatNumber, resume.QqNumber, resume.Describe, strFileUrl, url)
 	serverchan.Push(interviewer.ServerchanId, title, content)
 	return true
 }
