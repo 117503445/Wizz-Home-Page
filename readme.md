@@ -6,6 +6,14 @@
 
 借助 Goland 等 IDE,在 go run main.go 前先执行 preprocess.bat
 
+## 本地打包
+
+```sh
+docker build -t 117503445/wizzhomepage -f Dockerfile_dev .
+docker login
+docker push 117503445/wizzhomepage
+```
+
 ## Docker生产环境部署
 
 docker run --name wizz-home-page --restart=always -d -p 80:80 -v  ~/docker_volume/wizz-home-page/config:/root/config -v ~/docker_volume/wizz-home-page/tmp:/root/tmp 117503445/wizzhomepage
