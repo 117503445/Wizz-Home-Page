@@ -7,6 +7,10 @@ import (
 )
 
 func Push(name string, title string, content string) {
+	g.Log().Line().Info("push")
+	g.Log().Line().Info(name)
+	g.Log().Line().Info(title)
+	g.Log().Line().Info(content)
 
 	encodeText := url2.QueryEscape(title + "\n----\n" + content) // URL 编码
 	url := fmt.Sprintf("https://push.gh.117503445.top:20000/push/text/v1?name=%v&text=%v", name, encodeText)
