@@ -24,7 +24,7 @@ func DistributeInterviewers(resume *model.Resumes) bool {
 		//title := fmt.Sprintf("%v 部门 还未设置管理员", resume.DepartmentType)
 		//content := fmt.Sprintf("%v 部门 还未设置管理员\n %v 的简历处理失败", resume.DepartmentType, resume.Name)
 		//serverchan.Alarm(title, content)
-		g.Log().Line().Error(fmt.Sprintf("%v 部门 还未设置管理员", resume.DepartmentType))
+		g.Log().Line().Error(fmt.Sprintf("%v 简历, %v 部门 还未设置管理员", resume.Id, resume.DepartmentType))
 		return false
 	}
 
