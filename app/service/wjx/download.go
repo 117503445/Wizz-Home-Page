@@ -59,7 +59,7 @@ func DownloadExcel() bool {
 	}
 }
 
-// ParseExcel 解析简历,根据姓名确定简历,如果简历不在数据库中,就插入简历.如果 SojumpSurvey 失效就进行通知,每个 SojumpSurvey 失效只通知一次.
+// ParseExcel 解析简历,根据 id 确定简历,如果简历不在数据库中,就插入简历.如果 SojumpSurvey 失效就进行通知,每个 SojumpSurvey 失效只通知一次.
 func ParseExcel() {
 	f, err := excelize.OpenFile("./tmp/wjx.xlsx")
 	if err != nil {
@@ -80,7 +80,7 @@ func ParseExcel() {
 		id, _ := strconv.Atoi(row[mapPropertyIndex["序号"]])
 
 		g.DB().GetLogger().SetStdoutPrint(false)                           // 禁用 Count SQL 的 Std 输出
-		if count, err := dao.Resumes.Where("id", id).Count(); err != nil { // todo 一次 查出所有 ID 放进列表里供判断
+		if count, err := dao.Resumes.Where("id", id).Count(); err != nil {
 			g.Log().Line().Debug(err)
 		} else {
 			//g.Log().Line().Debug(count)

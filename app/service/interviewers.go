@@ -91,7 +91,7 @@ func DistributeInterviewers(resume *model.Resumes) bool {
 	return true
 }
 
-// 添加面试官后进行检索看面试项目的每个部门是否有面试官了
+// SearchInterviewer 添加面试官后进行检索看面试项目的每个部门是否有面试官了
 func SearchInterviewer(InterviewId int) {
 	if search(InterviewId, 1) && search(InterviewId, 2) && search(InterviewId, 3) && search(InterviewId, 4) {
 		var message *model.Messages
