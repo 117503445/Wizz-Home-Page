@@ -117,7 +117,7 @@ func ParseExcel() {
 
 		collegeMajor := row[mapPropertyIndex["学院及专业"]]
 
-		MapDepartment := g.MapStrInt{"技术部-前端开发": 1, "技术部-后端开发": 3, "产品部": 2, "运营部-运营组": 4, "运营部-UI组": 4}
+		MapDepartment := g.MapStrInt{"技术部-前端开发": 1, "技术部-后端开发": 3, "产品部": 2, "运营部": 4, "设计部": 4}
 		departmentType := MapDepartment[row[mapPropertyIndex["意向加入的部门"]]]
 
 		MapGender := g.MapStrInt{"男": 1, "女": 0}
@@ -193,6 +193,7 @@ func ParseExcel() {
 			InterviewEvaluation:    "",
 			InterviewTime:          0,
 		}
+		g.Log().Line().Println(resume)
 		if service.DistributeInterviewers(resume) {
 			// 成功分配简历后才插入数据
 			if _, err := dao.Resumes.Insert(resume); err != nil {
