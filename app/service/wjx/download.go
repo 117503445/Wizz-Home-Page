@@ -79,11 +79,13 @@ func ParseExcel() {
 	for _, row := range rows[1:] {
 		id, _ := strconv.Atoi(row[mapPropertyIndex["序号"]])
 
-		g.DB().GetLogger().SetStdoutPrint(false)                           // 禁用 Count SQL 的 Std 输出
+		g.DB().GetLogger().SetStdoutPrint(false) // 禁用 Count SQL 的 Std 输出
 		if count, err := dao.Resumes.Where("id", id).Count(); err != nil {
 			g.Log().Line().Debug(err)
 		} else {
-			g.Log().Line().Debug("ID Count ",count)
+			g.Log().Line().Debug("Resume ID ", id)
+			g.Log().Line().Debug("ID Count ", count)
+
 			if count > 0 {
 				continue // id 存在,不插入
 			}
