@@ -83,11 +83,11 @@ func ParseExcel() {
 		if count, err := dao.Resumes.Where("id", id).Count(); err != nil {
 			g.Log().Line().Debug(err)
 		} else {
-			g.Log().Line().Debug("Resume ID ", id)
-			g.Log().Line().Debug("ID Count ", count)
-
 			if count > 0 {
 				continue // id 存在,不插入
+			}else {
+				g.Log().Line().Debug("Resume ID ", id)
+				g.Log().Line().Debug("ID Count ", count)
 			}
 		}
 		g.DB().GetLogger().SetStdoutPrint(g.Cfg().GetBool("database.logger.Stdout"))
