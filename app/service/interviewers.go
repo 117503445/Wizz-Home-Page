@@ -14,7 +14,7 @@ import (
 // 返回是否成功分配
 func DistributeInterviewers(resume *model.Resumes) bool {
 	// 同部门面试官随机挑选
-	interviewers, err := dao.Interviewers.Where("department_type", resume.DepartmentType).Where("interview_id", resume.InterviewId).FindAll()
+	interviewers, err := dao.Interviewers.Where("interview_id", resume.InterviewId).Where("department_type", resume.DepartmentType).Where("status", 0).FindAll()
 	if err != nil {
 		g.Log().Line().Error(err)
 		return false
@@ -24,7 +24,7 @@ func DistributeInterviewers(resume *model.Resumes) bool {
 		//title := fmt.Sprintf("%v 部门 还未设置管理员", resume.DepartmentType)
 		//content := fmt.Sprintf("%v 部门 还未设置管理员\n %v 的简历处理失败", resume.DepartmentType, resume.Name)
 		//serverchan.Alarm(title, content)
-		g.Log().Line().Error(fmt.Sprintf("%v 简历, %v 部门 还未设置管理员", resume.Id, resume.DepartmentType))
+		g.Log().Line().Error(fmt.Sprintf("%v 简历, %v 部门 没有可用的面试官", resume.Id, resume.DepartmentType))
 		return false
 	}
 
