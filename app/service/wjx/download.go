@@ -19,7 +19,7 @@ var SojumpSurveyCache = gcache.New()
 
 // PullResume 拉取简历
 func PullResume() {
-	g.Log().Line().Debug("PullResume")
+	//g.Log().Line().Debug("PullResume")
 	if DownloadExcel() {
 		ParseExcel()
 	}
