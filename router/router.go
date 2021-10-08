@@ -125,6 +125,7 @@ func init() {
 					group.POST("/", api.Resume.Create)
 					group.DELETE("/{id}", api.Resume.Delete)
 					group.PUT("/{id}", api.Resume.Update)
+					group.POST("/{id}/push", api.Resume.Push)
 				})
 				group.Middleware(middleware.JWTLogin, middleware.NeedRole("interviewer"))
 				group.PUT("/result/{id}", api.Resume.ResultUpdate)

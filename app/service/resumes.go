@@ -2,6 +2,9 @@ package service
 
 import (
 	"fmt"
+	"github.com/gogf/gf/encoding/gjson"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/os/gfile"
 	"wizz-home-page/app/dao"
 	"wizz-home-page/app/model"
 	"wizz-home-page/library/response"
@@ -51,5 +54,25 @@ func ResultChange(result int) (int, error) {
 		err := fmt.Errorf("%s", "The resume result wrong")
 		return 0, err
 	}
+}
 
+// GetEvaluationURL 获取面评填写 URL
+func GetEvaluationURL(resumeID int) string {
+	username := "interviewer"
+	password := gfile.GetContents("./tmp/password/admin.txt")
+
+	loginURL := fmt.Sprintf("http://localhost%v/api/auth/login", g.Cfg().GetString("server.Address"))
+	g.Log().Line().Debug(loginURL)
+	content := g.Client().ContentJson().PostContent(loginURL, g.Map{
+		"username": username,
+		"password": password,
+	})
+	token := ""
+	if js, err := gjson.DecodeToJson(content); err != nil {
+		g.Log().Line().Error(err)
+	} else {
+		token = js.GetString("token")
+	}
+	url := fmt.Sprintf("https://wizzstudio.com/#/pass?id=%v&jwt=%v", resumeID, token) // todo load from config
+	return url
 }

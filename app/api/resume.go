@@ -232,3 +232,16 @@ func (*resumesApi) ResultUpdate(r *ghttp.Request) {
 	}
 	response.Json(r, response.Success, "", resumeRsp)
 }
+
+// @Summary 推送简历通知
+// @Tags 简历
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} model.ResumesApiRep
+// @Router /api/resumes/{id}/push [POST]
+// @Security JWT
+func (*resumesApi) Push(r *ghttp.Request) {
+	s := service.GetEvaluationURL(1)
+	// todo coding
+	response.Json(r, response.Success, s, nil)
+}

@@ -2,9 +2,7 @@ package service
 
 import (
 	"fmt"
-	"github.com/gogf/gf/encoding/gjson"
 	"github.com/gogf/gf/frame/g"
-	"github.com/gogf/gf/os/gfile"
 	"wizz-home-page/app/dao"
 	"wizz-home-page/app/model"
 	"wizz-home-page/app/service/serverchan"
@@ -42,21 +40,7 @@ func DistributeInterviewers(resume *model.Resumes) bool {
 
 	resume.InterviewerId = interviewer.Id
 
-	username := "interviewer"
-	password := gfile.GetContents("./tmp/password/admin.txt")
-	//todo read port in config
-	response := g.Client().ContentJson().PostContent("http://localhost:80/api/auth/login", g.Map{
-		"username": username,
-		"password": password,
-	})
-	token := ""
-	if js, err := gjson.DecodeToJson(response); err != nil {
-		g.Log().Line().Error(err)
-	} else {
-		token = js.GetString("token")
-	}
-
-	url := fmt.Sprintf("https://wizzstudio.com/#/pass?id=%v&jwt=%v", resume.Id, token) // todo load from config
+	url := GetEvaluationURL(resume.Id)
 	g.Log().Line().Debug(url)
 
 	/*experienceStr := ""
