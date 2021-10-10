@@ -11,6 +11,8 @@ import (
 // DistributeInterviewers 分配面试官
 // 返回是否成功分配
 func DistributeInterviewers(resume *model.Resumes) bool {
+	// todo 根据学号判断重名
+
 	// 同部门面试官随机挑选
 	interviewers, err := dao.Interviewers.Where("interview_id", resume.InterviewId).Where("department_type", resume.DepartmentType).Where("status", 0).FindAll()
 	if err != nil {

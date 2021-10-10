@@ -1,11 +1,15 @@
 package api
 
 import (
-	"github.com/gogf/gf/os/gtime"
+	"fmt"
 	"wizz-home-page/app/dao"
 	"wizz-home-page/app/model"
 	"wizz-home-page/app/service"
+	"wizz-home-page/app/service/serverchan"
 	"wizz-home-page/library/response"
+
+	"github.com/gogf/gf/os/glog"
+	"github.com/gogf/gf/os/gtime"
 
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
@@ -241,7 +245,28 @@ func (*resumesApi) ResultUpdate(r *ghttp.Request) {
 // @Router /api/resumes/{id}/push [POST]
 // @Security JWT
 func (*resumesApi) Push(r *ghttp.Request) {
-	s := service.GetEvaluationURL(1)
+	id := r.GetInt("id")
+
+	var resume model.Resumes
+	err := dao.Resumes.Where("id", id).Struct(&resume)
+	if err != nil {
+		response.Json(r, response.Error, "", err)
+	}
+
+	var interviewer model.Interviewers
+	err = dao.Interviewers.Where("id", resume.InterviewerId).Struct(&interviewer)
+	if err != nil {
+		response.Json(r, response.Error, "", err)
+	}
+
+	glog.Line().Debug(interviewer.Name)
+
+	s := service.GetEvaluationURL(id)
+
+	content := fmt.Sprintf("来自管理员的推送 \n\n<a href=\"%v\">点我填写面评</a>\n\n---\n\n【快速回顾%v的简历】\n\n%v %v级 %v\n\n联系电话：%v\n微信：%v\nqq：%v\n\n%v", s, resume.Name, resume.Name, resume.Grade, resume.CollegeMajor, resume.TelephoneNumber, resume.WechatNumber, resume.QqNumber, resume.Describe)
+
+	serverchan.Push(interviewer.ServerchanId, "为之简历", content)
+
 	// todo coding
 	response.Json(r, response.Success, s, nil)
 }
