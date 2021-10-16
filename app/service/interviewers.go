@@ -12,36 +12,46 @@ import (
 // 返回是否成功分配
 func DistributeInterviewers(resume *model.Resumes) bool {
 	// todo 根据学号判断重名
-
-	// 同部门面试官随机挑选
-	interviewers, err := dao.Interviewers.Where("interview_id", resume.InterviewId).Where("department_type", resume.DepartmentType).Where("status", 0).FindAll()
-	if err != nil {
-		g.Log().Line().Error(err)
-		return false
-	}
-	if interviewers == nil || len(interviewers) == 0 {
-		//g.Log().Line().Error("interviewer NOT FOUND")
-		//title := fmt.Sprintf("%v 部门 还未设置管理员", resume.DepartmentType)
-		//content := fmt.Sprintf("%v 部门 还未设置管理员\n %v 的简历处理失败", resume.DepartmentType, resume.Name)
-		//serverchan.Alarm(title, content)
-		g.Log().Line().Error(fmt.Sprintf("%v 简历, %v 部门 没有可用的面试官", resume.Id, resume.DepartmentType))
-		return false
-	}
-
-	//此部门面试官中,寻找正在处理简历数最少的面试官
-	minCount := 9999
 	interviewer := &model.Interviewers{}
 
-	for _, _interviewer := range interviewers {
-		count, _ := dao.Resumes.Where("interviewer_id", _interviewer.Id).Count()
-		if count < minCount {
-			minCount = count
-			interviewer = _interviewer
+	Repeated, OldInterviewerId := RepeatResume(resume)
+
+	// 同部门面试官随机挑选
+	if Repeated {
+		resume.InterviewerId = OldInterviewerId
+		if err := dao.Interviewers.Where("id", OldInterviewerId).Struct(&interviewer); err != nil {
+			g.Log().Line().Error(err)
+			return false
 		}
+	} else {
+		// 同部门面试官随机挑选
+		interviewers, err := dao.Interviewers.Where("interview_id", resume.InterviewId).Where("department_type", resume.DepartmentType).Where("status", 0).FindAll()
+		if err != nil {
+			g.Log().Line().Error(err)
+			return false
+		}
+		if interviewers == nil || len(interviewers) == 0 {
+			//g.Log().Line().Error("interviewer NOT FOUND")
+			//title := fmt.Sprintf("%v 部门 还未设置管理员", resume.DepartmentType)
+			//content := fmt.Sprintf("%v 部门 还未设置管理员\n %v 的简历处理失败", resume.DepartmentType, resume.Name)
+			//serverchan.Alarm(title, content)
+			g.Log().Line().Error(fmt.Sprintf("%v 简历, %v 部门 没有可用的面试官", resume.Id, resume.DepartmentType))
+			return false
+		}
+
+		//此部门面试官中,寻找正在处理简历数最少的面试官
+		minCount := 9999
+
+		for _, _interviewer := range interviewers {
+			count, _ := dao.Resumes.Where("interviewer_id", _interviewer.Id).Count()
+			if count < minCount {
+				minCount = count
+				interviewer = _interviewer
+			}
+		}
+
+		resume.InterviewerId = interviewer.Id
 	}
-
-	resume.InterviewerId = interviewer.Id
-
 	url := GetEvaluationURL(resume.Id)
 	g.Log().Line().Debug(url)
 
@@ -71,7 +81,13 @@ func DistributeInterviewers(resume *model.Resumes) bool {
 	default:
 		g.Log().Line().Error(resume.DepartmentType)
 	}
-	title := fmt.Sprintf("%v简历", departmentStr)
+	var title string
+	if Repeated {
+		title = fmt.Sprintf("%v的%v提交了新的简历，以后请以本条消息的面评填写链接为准。", departmentStr, resume.Name)
+	} else {
+		title = fmt.Sprintf("%v简历", departmentStr)
+	}
+
 	content := fmt.Sprintf("%v %v %v\n联系电话：%v\n微信：%v\nqq：%v\n\n%v\n\n%v---\n\n请7天内联系投递者安排面试，或者告知他初筛未通过，7天内未填写则会触发重复提醒\n\n不需要面试也需要点击链接填写理由哦\n\n---\n\n<a href=\"%v\">点我前往面评填写页面</a>", resume.Name, resume.Grade, resume.CollegeMajor, resume.TelephoneNumber, resume.WechatNumber, resume.QqNumber, resume.Describe, strFileUrl, url)
 	serverchan.Push(interviewer.ServerchanId, title, content)
 	return true

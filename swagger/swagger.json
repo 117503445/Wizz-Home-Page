@@ -11,7 +11,7 @@
         "license": {
             "name": "GNU GPL 3.0"
         },
-        "version": "1.9.7"
+        "version": "1.9.17"
     },
     "paths": {
         "/": {
@@ -2020,6 +2020,33 @@
                 }
             }
         },
+        "/api/resumes/{id}/push": {
+            "post": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "简历"
+                ],
+                "summary": "推送简历通知",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ResumesApiRep"
+                        }
+                    }
+                }
+            }
+        },
         "/api/stories": {
             "get": {
                 "consumes": [
@@ -2807,8 +2834,7 @@
                     "type": "integer"
                 },
                 "data": {
-                    "description": "返回数据(业务接口定义具体数据结构)",
-                    "type": "object"
+                    "description": "返回数据(业务接口定义具体数据结构)"
                 },
                 "msg": {
                     "description": "提示信息",
@@ -2820,8 +2846,7 @@
             "type": "object",
             "properties": {
                 "content": {
-                    "description": "这页的对象数组",
-                    "type": "object"
+                    "description": "这页的对象数组"
                 },
                 "pageNum": {
                     "description": "现在是第几页",
